@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>LifeHit</title>
+  
+  <subtitle>LifeHit</subtitle>
+  <link href="https://lifehit.github.io/atom.xml" rel="self"/>
+  
+  <link href="https://lifehit.github.io/"/>
+  <updated>2021-11-13T15:57:46.526Z</updated>
+  <id>https://lifehit.github.io/</id>
+  
+  <author>
+    <name>alex Li</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>《美国陷阱》中阿尔斯通被肢解背后的经济战</title>
+    <link href="https://lifehit.github.io/2021/11/13/mei-guo-xian-jing-zhong-a-er-si-tong-bei-zhi-jie-bei-hou-de-jing-ji-zhan/"/>
+    <id>https://lifehit.github.io/2021/11/13/mei-guo-xian-jing-zhong-a-er-si-tong-bei-zhi-jie-bei-hou-de-jing-ji-zhan/</id>
+    <published>2021-11-13T15:42:00.000Z</published>
+    <updated>2021-11-13T15:57:46.526Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;疫情在家，除了完成正常的工作学习外，由于没啥好的娱乐项目，读书是一种廉价的消遣方式。正巧遇到一本书《美国陷阱》，其中的情节和阴谋论恐怕电影都拍不出来，甚至可以当成悬疑小说来读。&lt;/p&gt;
+&lt;p&gt;&lt;img</summary>
+        
+      
+    
+    
+    
+    <category term="读书" scheme="https://lifehit.github.io/categories/%E8%AF%BB%E4%B9%A6/"/>
+    
+    
+    <category term="经济" scheme="https://lifehit.github.io/tags/%E7%BB%8F%E6%B5%8E/"/>
+    
+    <category term="政治" scheme="https://lifehit.github.io/tags/%E6%94%BF%E6%B2%BB/"/>
+    
+  </entry>
+  
+</feed>
