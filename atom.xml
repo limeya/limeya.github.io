@@ -6,7 +6,7 @@
   <link href="https://lifehit.github.io/atom.xml" rel="self"/>
   
   <link href="https://lifehit.github.io/"/>
-  <updated>2021-11-14T10:29:57.778Z</updated>
+  <updated>2021-11-17T13:08:17.071Z</updated>
   <id>https://lifehit.github.io/</id>
   
   <author>
@@ -15,6 +15,60 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>知识图谱表示学习：评估方法</title>
+    <link href="https://lifehit.github.io/2021/11/17/zhi-shi-tu-pu-biao-shi-xue-xi-ping-gu-fang-fa/"/>
+    <id>https://lifehit.github.io/2021/11/17/zhi-shi-tu-pu-biao-shi-xue-xi-ping-gu-fang-fa/</id>
+    <published>2021-11-17T12:03:00.000Z</published>
+    <updated>2021-11-17T13:08:17.071Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;背景介绍&quot;&gt;&lt;a href=&quot;#背景介绍&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="算法研究" scheme="https://lifehit.github.io/categories/%E7%AE%97%E6%B3%95%E7%A0%94%E7%A9%B6/"/>
+    
+    
+    <category term="知识图谱" scheme="https://lifehit.github.io/tags/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/"/>
+    
+    <category term="表示学习" scheme="https://lifehit.github.io/tags/%E8%A1%A8%E7%A4%BA%E5%AD%A6%E4%B9%A0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>知识图谱表示学习：训练方法</title>
+    <link href="https://lifehit.github.io/2021/11/17/zhi-shi-tu-pu-biao-shi-xue-xi-xun-lian-fang-fa/"/>
+    <id>https://lifehit.github.io/2021/11/17/zhi-shi-tu-pu-biao-shi-xue-xi-xun-lian-fang-fa/</id>
+    <published>2021-11-17T09:30:00.000Z</published>
+    <updated>2021-11-17T12:56:17.037Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;前提假设&quot;&gt;&lt;a href=&quot;#前提假设&quot; class=&quot;headerlink&quot; title=&quot;前提假设&quot;&gt;&lt;/a&gt;前提假设&lt;/h1&gt;&lt;h2 id=&quot;Open-World-Assumption-OWA&quot;&gt;&lt;a</summary>
+        
+      
+    
+    
+    
+    <category term="算法研究" scheme="https://lifehit.github.io/categories/%E7%AE%97%E6%B3%95%E7%A0%94%E7%A9%B6/"/>
+    
+    
+    <category term="知识图谱" scheme="https://lifehit.github.io/tags/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/"/>
+    
+    <category term="表示学习" scheme="https://lifehit.github.io/tags/%E8%A1%A8%E7%A4%BA%E5%AD%A6%E4%B9%A0/"/>
+    
+  </entry>
   
   <entry>
     <title>论文阅读 - Convolutional 2D Knowledge Graph Embeddings</title>
