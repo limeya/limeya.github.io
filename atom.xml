@@ -6,7 +6,7 @@
   <link href="https://lifehit.github.io/atom.xml" rel="self"/>
   
   <link href="https://lifehit.github.io/"/>
-  <updated>2021-11-17T13:08:17.071Z</updated>
+  <updated>2021-11-18T12:37:46.445Z</updated>
   <id>https://lifehit.github.io/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>我还是重启了博客写作</title>
+    <link href="https://lifehit.github.io/2021/11/18/wo-huan-shi-chong-qi-liao-bo-ke-xie-zuo/"/>
+    <id>https://lifehit.github.io/2021/11/18/wo-huan-shi-chong-qi-liao-bo-ke-xie-zuo/</id>
+    <published>2021-11-18T12:35:00.000Z</published>
+    <updated>2021-11-18T12:37:46.445Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;以前的博客&quot;&gt;&lt;a href=&quot;#以前的博客&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="博客" scheme="https://lifehit.github.io/categories/%E5%8D%9A%E5%AE%A2/"/>
+    
+    
+    <category term="博客" scheme="https://lifehit.github.io/tags/%E5%8D%9A%E5%AE%A2/"/>
+    
+    <category term="写作" scheme="https://lifehit.github.io/tags/%E5%86%99%E4%BD%9C/"/>
+    
+  </entry>
   
   <entry>
     <title>知识图谱表示学习：评估方法</title>
