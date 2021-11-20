@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="RotatE - 建模复杂关系的利器, LifeHit">
-    <meta name="description" content="虽然数学上的建模方法很简单，但是从评估结果上看效果不错。">
+    <meta name="description" content="数学上的方法与TransE一样简单，但想法独特，可以建模复杂的实体关系。">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -373,14 +373,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    2.6k
+                    2.8k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    11 分
+                    12 分
                 </div>
                 
 
@@ -587,8 +587,11 @@
 <p>$$e^{i{\Theta}_h} e^{i{\Theta}_r} = e^{i{\Theta}_t}$$</p>
 <p>用极坐标表示，就是将$e^{i{\Theta}_h}$ 逆时针方向旋转了角度 $\Theta_r$，变成了 $e^{i{\Theta}_t}$ 。</p>
 <p>当将关系写成极坐标形式时，</p>
+<p>$$<br>\begin{pmatrix}<br>  \text{cos}\theta &amp; -\text{sin}\theta \<br>  \text{sin}\theta &amp; \text{cos}\theta<br>\end{pmatrix}<br>$$</p>
 <p><img src="/images/rotate/math_1.png"></p>
 <p>也就是如下所示：</p>
+<p>$$<br>\begin{pmatrix}<br>  a &amp; -b \<br>  b &amp; a<br>\end{pmatrix}</p>
+<p>\begin{pmatrix}<br>  \text{cos}\theta &amp; -\text{sin}\theta \<br>  \text{sin}\theta &amp; \text{cos}\theta<br>\end{pmatrix}<br>$$</p>
 <p><img src="/images/rotate/math_2.png"></p>
 <p>这不就是线性变换里的旋转吗，也就是本文的名称的由来！</p>
 <p>不明白的可以回顾一下<a target="_blank" rel="noopener" href="https://blog.csdn.net/huangguohui_123/article/details/106000355">以前的知识</a>。</p>
@@ -596,7 +599,8 @@
 <p>因此，在旋转过程中，head实体的模长不会受到影响，只是每一个维度下的复数的相位受到了影响。</p>
 <h1 id="训练"><a href="#训练" class="headerlink" title="训练"></a>训练</h1><p>For each triple $(h, r, t)$ , we deﬁne the <code>distance function</code> of RotatE as:</p>
 <p>$$d_r (\mathbf{h}, \mathbf{t}) = \Vert \mathbf{h} \circ \mathbf{r} − \mathbf{t} \Vert$$</p>
-<h2 id="Loss函数"><a href="#Loss函数" class="headerlink" title="Loss函数"></a>Loss函数</h2><p><img src="/images/rotate/math_3.png"></p>
+<h2 id="Loss函数"><a href="#Loss函数" class="headerlink" title="Loss函数"></a>Loss函数</h2><p>$$<br>L=-\log \sigma \left( \gamma-d_r (\mathbf{h}, \mathbf{t}) \right) - \sum_{i=1}^{n} \frac{1}{k} \log \sigma\left (d_r \left( \mathbf{h}<em>{i}^{\prime}, \mathbf{t}</em>{i}^{\prime}\right)-\gamma\right)<br>$$</p>
+<p><img src="/images/rotate/math_3.png"></p>
 <ul>
 <li>$\gamma$ : 和<code>TransE</code>中一样，是<code>margin</code>，视为超参数；</li>
 <li>$\sigma$ : <code>sigmoid function</code></li>
@@ -613,11 +617,13 @@
 </li>
 </ul>
 <p>文中提出<code>self-adversarial negative sampling</code>，具体而言就是按照以下方式进行采样，</p>
+<p>$$<br>p\left(h_{j}^{\prime}, r, t_{j}^{\prime} \mid\left{\left(h_{i}, r_{i}, t_{i}\right)\right}\right)=\frac{\exp \alpha f_{r}\left(\mathbf{h}<em>{j}^{\prime}, \mathbf{t}</em>{j}^{\prime}\right)}{\sum_{i} \exp \alpha f_{r}\left(\mathbf{h}<em>{i}^{\prime}, \mathbf{t}</em>{i}^{\prime}\right)}<br>$$</p>
 <p><img src="/images/rotate/math_4.png"></p>
 <ul>
 <li>$\alpha$ : temperature of sampling. </li>
 </ul>
 <p>Moreover, since the sampling procedure <strong>may be costly</strong>, we treat the above probability as the <strong>weight of the negative sample</strong>. Therefore, the ﬁnal negative sampling loss with self-adversarial training takes the following form:</p>
+<p>$$<br>L=-\log \sigma\left(\gamma-d_{r}(\mathbf{h}, \mathbf{t})\right)-\sum_{i=1}^{n} p\left(h_{i}^{\prime}, r, t_{i}^{\prime}\right) \log \sigma\left(d_{r}\left(\mathbf{h}<em>{i}^{\prime}, \mathbf{t}</em>{i}^{\prime}\right)-\gamma\right)<br>$$</p>
 <p><img src="/images/rotate/math_5.png"></p>
 <h1 id="评估"><a href="#评估" class="headerlink" title="评估"></a>评估</h1><h2 id="数据集"><a href="#数据集" class="headerlink" title="数据集"></a>数据集</h2><p><img src="/images/rotate/1.png" alt="数据集"></p>
 <h2 id="实验设置"><a href="#实验设置" class="headerlink" title="实验设置"></a>实验设置</h2><ul>
@@ -776,7 +782,7 @@
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            虽然数学上的建模方法很简单，但是从评估结果上看效果不错。
+                            数学上的方法与TransE一样简单，但想法独特，可以建模复杂的实体关系。
                         
                     </div>
                     <div class="publish-info">
@@ -1067,7 +1073,7 @@
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">14.7k</span>
+                        class="white-color">14.9k</span>
             
             
             
