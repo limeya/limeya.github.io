@@ -6,7 +6,7 @@
   <link href="https://lifehit.github.io/atom.xml" rel="self"/>
   
   <link href="https://lifehit.github.io/"/>
-  <updated>2021-11-20T09:33:13.388Z</updated>
+  <updated>2022-02-09T06:45:36.165Z</updated>
   <id>https://lifehit.github.io/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>2021年度总结：黎明前夜</title>
+    <link href="https://lifehit.github.io/2022/02/01/2021-nian-du-zong-jie-li-ming-qian-ye/"/>
+    <id>https://lifehit.github.io/2022/02/01/2021-nian-du-zong-jie-li-ming-qian-ye/</id>
+    <published>2022-02-01T12:03:00.000Z</published>
+    <updated>2022-02-09T06:45:36.165Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="年度总结" scheme="https://lifehit.github.io/categories/%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93/"/>
+    
+    
+    <category term="年度总结" scheme="https://lifehit.github.io/tags/%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93/"/>
+    
+  </entry>
   
   <entry>
     <title>RotatE - 建模复杂关系的利器</title>
