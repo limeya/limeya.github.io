@@ -373,14 +373,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    2.8k
+                    2.6k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    12 分
+                    11 分
                 </div>
                 
 
@@ -417,7 +417,7 @@
 <h1 id="想法"><a href="#想法" class="headerlink" title="想法"></a>想法</h1><blockquote>
 <p>Motivation is from Euler’s identity: a unitary complex number can be regarded as a rotation in the complex plane.</p>
 </blockquote>
-<p>$$<br>e^{i\theta} = \text{cos}\theta + i\text{sin} \ \theta<br>$$</p>
+<p>$$<br>e^{i\theta} = \text{cos}\theta + i\text{sin}\theta<br>$$</p>
 <p>即，任何一个复数都可以看作复平面上的一个旋转向量。</p>
 <p><strong>RotatE model maps the entities and relations to the complex vector space and deﬁnes each relation as a rotation from the source entity to the target entity.</strong></p>
 <p>形式化表达：</p>
@@ -581,17 +581,43 @@
 </ul>
 <p>还有一件事情，复平面中embedding的相乘和欧拉公式有啥关系？</p>
 <p>我们使用了<code>Hadmard product</code>将一个head实体变成了tail实体，其中的一个操作用来衡量关系，在复空间中将一个实体变成另一个实体，使用的是乘法的方式，那就是指数了，而指数与复空间建立关系的途径，就是欧拉公式。</p>
-<p>$$<br>e^{i\theta} = \text{cos}\theta + i\text{sin} \ \theta<br>$$</p>
+<p>$$<br>e^{i\theta} = \text{cos}\theta + i\text{sin}\theta<br>$$</p>
 <p>复空间中的每个数有指数形式和极坐标形式，这两者之间的关系也是欧拉公式。</p>
 <p>从指数形式来看，将一个复数的embedding变换成另一个复数的embedding如下：</p>
 <p>$$e^{i{\Theta}_h} e^{i{\Theta}_r} = e^{i{\Theta}_t}$$</p>
 <p>用极坐标表示，就是将$e^{i{\Theta}_h}$ 逆时针方向旋转了角度 $\Theta_r$，变成了 $e^{i{\Theta}_t}$ 。</p>
 <p>当将关系写成极坐标形式时，</p>
-<p>$$<br>\begin{pmatrix}<br>  \text{cos}\theta &amp; -\text{sin}\theta \<br>  \text{sin}\theta &amp; \text{cos}\theta<br>\end{pmatrix}<br>$$</p>
+<!--
+
+$$
+\begin{pmatrix}  
+  \text{cos}\theta & -\text{sin}\theta \\
+  \text{sin}\theta & \text{cos}\theta 
+\end{pmatrix} 
+$$
+
+-->
+
 <p><img src="/images/rotate/math_1.png"></p>
 <p>也就是如下所示：</p>
-<p>$$<br>\begin{pmatrix}<br>  a &amp; -b \<br>  b &amp; a<br>\end{pmatrix}</p>
-<p>\begin{pmatrix}<br>  \text{cos}\theta &amp; -\text{sin}\theta \<br>  \text{sin}\theta &amp; \text{cos}\theta<br>\end{pmatrix}<br>$$</p>
+<!--
+
+$$
+\begin{pmatrix}  
+  a & -b \\  
+  b & a 
+\end{pmatrix}
+
+\begin{pmatrix}  
+  \text{cos}\theta & -\text{sin}\theta \\  
+  \text{sin}\theta & \text{cos}\theta 
+\end{pmatrix}
+$$
+
+ -->
+
+
+
 <p><img src="/images/rotate/math_2.png"></p>
 <p>这不就是线性变换里的旋转吗，也就是本文的名称的由来！</p>
 <p>不明白的可以回顾一下<a target="_blank" rel="noopener" href="https://blog.csdn.net/huangguohui_123/article/details/106000355">以前的知识</a>。</p>
@@ -599,7 +625,16 @@
 <p>因此，在旋转过程中，head实体的模长不会受到影响，只是每一个维度下的复数的相位受到了影响。</p>
 <h1 id="训练"><a href="#训练" class="headerlink" title="训练"></a>训练</h1><p>For each triple $(h, r, t)$ , we deﬁne the <code>distance function</code> of RotatE as:</p>
 <p>$$d_r (\mathbf{h}, \mathbf{t}) = \Vert \mathbf{h} \circ \mathbf{r} − \mathbf{t} \Vert$$</p>
-<h2 id="Loss函数"><a href="#Loss函数" class="headerlink" title="Loss函数"></a>Loss函数</h2><p>$$<br>L=-\log \sigma \left( \gamma-d_r (\mathbf{h}, \mathbf{t}) \right) - \sum_{i=1}^{n} \frac{1}{k} \log \sigma\left (d_r \left( \mathbf{h}<em>{i}^{\prime}, \mathbf{t}</em>{i}^{\prime}\right)-\gamma\right)<br>$$</p>
+<h2 id="Loss函数"><a href="#Loss函数" class="headerlink" title="Loss函数"></a>Loss函数</h2><!--
+
+$$
+L=-\log \sigma \left( \gamma-d_r (\mathbf{h}, \mathbf{t}) \right) - \sum_{i=1}^{n} \frac{1}{k} \log \sigma\left (d_r \left( \mathbf{h}_{i}^{\prime}, \mathbf{t}_{i}^{\prime}\right)-\gamma\right)
+$$
+
+-->
+
+
+
 <p><img src="/images/rotate/math_3.png"></p>
 <ul>
 <li>$\gamma$ : 和<code>TransE</code>中一样，是<code>margin</code>，视为超参数；</li>
@@ -617,14 +652,35 @@
 </li>
 </ul>
 <p>文中提出<code>self-adversarial negative sampling</code>，具体而言就是按照以下方式进行采样，</p>
-<p>$$<br>p\left(h_{j}^{\prime}, r, t_{j}^{\prime} \mid\left{\left(h_{i}, r_{i}, t_{i}\right)\right}\right)=\frac{\exp \alpha f_{r}\left(\mathbf{h}<em>{j}^{\prime}, \mathbf{t}</em>{j}^{\prime}\right)}{\sum_{i} \exp \alpha f_{r}\left(\mathbf{h}<em>{i}^{\prime}, \mathbf{t}</em>{i}^{\prime}\right)}<br>$$</p>
+<!--
+
+$$
+p\left(h_{j}^{\prime}, r, t_{j}^{\prime} \mid\left\{\left(h_{i}, r_{i}, t_{i}\right)\right\}\right)=\frac{\exp \alpha f_{r}\left(\mathbf{h}_{j}^{\prime}, \mathbf{t}_{j}^{\prime}\right)}{\sum_{i} \exp \alpha f_{r}\left(\mathbf{h}_{i}^{\prime}, \mathbf{t}_{i}^{\prime}\right)}
+$$
+
+-->
+
+
+
 <p><img src="/images/rotate/math_4.png"></p>
 <ul>
-<li>$\alpha$ : temperature of sampling. </li>
-</ul>
+<li><p>$\alpha$ : temperature of sampling. </p>
+<blockquote>
 <p>Moreover, since the sampling procedure <strong>may be costly</strong>, we treat the above probability as the <strong>weight of the negative sample</strong>. Therefore, the ﬁnal negative sampling loss with self-adversarial training takes the following form:</p>
-<p>$$<br>L=-\log \sigma\left(\gamma-d_{r}(\mathbf{h}, \mathbf{t})\right)-\sum_{i=1}^{n} p\left(h_{i}^{\prime}, r, t_{i}^{\prime}\right) \log \sigma\left(d_{r}\left(\mathbf{h}<em>{i}^{\prime}, \mathbf{t}</em>{i}^{\prime}\right)-\gamma\right)<br>$$</p>
-<p><img src="/images/rotate/math_5.png"></p>
+</blockquote>
+<p>  <img src="/images/rotate/math_5.png"></p>
+</li>
+</ul>
+<!--
+
+$$
+L=-\log \sigma\left(\gamma-d_{r}(\mathbf{h}, \mathbf{t})\right)-\sum_{i=1}^{n} p\left(h_{i}^{\prime}, r, t_{i}^{\prime}\right) \log \sigma\left(d_{r}\left(\mathbf{h}_{i}^{\prime}, \mathbf{t}_{i}^{\prime}\right)-\gamma\right)
+$$
+
+-->
+
+
+
 <h1 id="评估"><a href="#评估" class="headerlink" title="评估"></a>评估</h1><h2 id="数据集"><a href="#数据集" class="headerlink" title="数据集"></a>数据集</h2><p><img src="/images/rotate/1.png" alt="数据集"></p>
 <h2 id="实验设置"><a href="#实验设置" class="headerlink" title="实验设置"></a>实验设置</h2><ul>
 <li><p><code>Filtered setting</code>: we rank test triples against all other candidate triples not appearing in the training, validation, or test set, where candidates are generated by corrupting subjects or objects: $(h^{‘} , r, t)$ or $(h, r, t^{‘} )$. </p>
@@ -1067,7 +1123,7 @@
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">18.8k</span>
+                        class="white-color">18.6k</span>
             
             
             
