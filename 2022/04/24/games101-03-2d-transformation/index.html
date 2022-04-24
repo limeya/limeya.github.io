@@ -4,8 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="2022年开年返校被隔离了, LifeHit">
-    <meta name="description" content="开学返校之后被隔离了，在面对因疫情隔离时的一些思考和反省。">
+    <meta name="keywords" content="GAMES101-03：2D Transformation, LifeHit">
+    <meta name="description" content="GAMES101-第3节，用矩阵表示2D下的变换操作。">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -28,7 +28,7 @@
 </script>
 
 
-    <title>2022年开年返校被隔离了 | LifeHit</title>
+    <title>GAMES101-03：2D Transformation | LifeHit</title>
     <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/limeya/limeya.github.io/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/limeya/limeya.github.io/libs/awesome/css/all.min.css">
@@ -214,12 +214,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/images/%E9%9A%94%E7%A6%BB/get-over-it.png')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://cdn.jsdelivr.net/gh/limeya/limeya.github.io/medias/featureimages/4.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">2022年开年返校被隔离了</h1>
+                    <h1 class="description center-align post-title">GAMES101-03：2D Transformation</h1>
                 </div>
             </div>
         </div>
@@ -335,8 +335,12 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/%E6%80%9D%E8%80%83/">
-                                <span class="chip bg-color">思考</span>
+                            <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/">
+                                <span class="chip bg-color">计算机图形学</span>
+                            </a>
+                        
+                            <a href="/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/">
+                                <span class="chip bg-color">线性代数</span>
                             </a>
                         
                     </div>
@@ -347,8 +351,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E6%80%9D%E8%80%83/" class="post-category">
-                                思考
+                            <a href="/categories/%E5%8D%9A%E5%AE%A2/" class="post-category">
+                                博客
                             </a>
                         
                     </div>
@@ -360,7 +364,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-02-09
+                    2022-04-24
                 </div>
                 
 
@@ -376,7 +380,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    4 分
+                    7 分
                 </div>
                 
 
@@ -396,66 +400,96 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>昨天返校了，本来有一个论文意见需要回复一下，今天一上午在回复论文的意见，准备今天完成意见回复后，就继续自己的毕业论文撰写，但是，天有不测风云，生活总是会跟你开一个玩笑。总是怕你太无聊，给你加入一些调味品，让你的生活充满丰富的色彩。</p>
-<h1 id="诧异"><a href="#诧异" class="headerlink" title="诧异"></a>诧异</h1><p>中午收到一个短信，说我的杭州健康码变成了黄色，当时我一度有点懵，觉得是不是出现错误了，但是又是确实的信息，</p>
-<p><img src="/images/%E9%9A%94%E7%A6%BB/message.png" alt="收到短信。。。"></p>
-<p>虽然看到这个信息，但是仍然觉得不相信，此时想到的后果是：</p>
+                <h1 id="Linear-Transforms-Matrices"><a href="#Linear-Transforms-Matrices" class="headerlink" title="Linear Transforms = Matrices"></a>Linear Transforms = Matrices</h1><h2 id="Scale-Transform"><a href="#Scale-Transform" class="headerlink" title="Scale Transform"></a>Scale Transform</h2><p>变换操作为：</p>
+<p>$$<br>\text{scale}(s_x, s_y) = \left(\begin{array}{ll}s_x &amp; 0 \\ 0 &amp; s_y \end{array}\right)<br>$$</p>
+<p>在点$(x, y)$经过变换后变为$(x^{\prime}, y^{\prime})$，如下：</p>
+<p>$$<br>\left(\begin{array}{l}<br>x^{\prime} \\<br>y^{\prime}<br>\end{array}\right)=\left(\begin{array}{ll}<br>s_x &amp; 0 \\<br>0 &amp; s_y<br>\end{array}\right) \left(\begin{array}{l}<br>x \\<br>y<br>\end{array}\right) = \left(\begin{array}{l}<br>s_xx \\<br>s_yy<br>\end{array}\right)<br>$$</p>
+<h2 id="Reflection-Transform"><a href="#Reflection-Transform" class="headerlink" title="Reflection Transform"></a>Reflection Transform</h2><p>在水平方向上，其实是沿y轴翻转。</p>
+<p>$$<br>x^{\prime} = -x \\<br>y^{\prime} = y<br>$$</p>
+<p>$$<br>\left(\begin{array}{l}<br>x^{\prime} \\<br>y^{\prime}<br>\end{array}\right)=\left(\begin{array}{ll}<br>-1 &amp; 0 \\<br>0 &amp; 1<br>\end{array}\right) \left(\begin{array}{l}<br>x \\<br>y<br>\end{array}\right) = \left(\begin{array}{l}<br>-x \\<br>y<br>\end{array}\right)<br>$$</p>
+<p>在竖直方向上，其实是沿x轴翻转。</p>
+<p>$$<br>x^{\prime} = x \\<br>y^{\prime} = -y<br>$$</p>
+<p>$$<br>\left(\begin{array}{l}<br>x^{\prime} \\<br>y^{\prime}<br>\end{array}\right)=\left(\begin{array}{ll}<br>1 &amp; 0 \\<br>0 &amp; -1<br>\end{array}\right) \left(\begin{array}{l}<br>x \\<br>y<br>\end{array}\right) = \left(\begin{array}{l}<br>x \\<br>-y<br>\end{array}\right)<br>$$</p>
+<h2 id="Shear-Transform"><a href="#Shear-Transform" class="headerlink" title="Shear Transform"></a>Shear Transform</h2><p><img src="/images/games101/03/shear.png" alt="Shear Transform"></p>
+<p>在水平方向上，纵坐标不变化。</p>
+<p>$$<br>x^{\prime} = x + ay \\<br>y^{\prime} = y<br>$$</p>
+<p>$$<br>\left(\begin{array}{l}<br>x^{\prime} \\<br>y^{\prime}<br>\end{array}\right)=\left(\begin{array}{ll}<br>1 &amp; a \\<br>0 &amp; 1<br>\end{array}\right) \left(\begin{array}{l}<br>x \\<br>y<br>\end{array}\right) = \left(\begin{array}{l}<br>x + ay \\<br>y<br>\end{array}\right)<br>$$</p>
+<p>在竖直方向上，横坐标不变化。</p>
+<p>$$<br>x^{\prime} = x \\<br>y^{\prime} = y + ax<br>$$</p>
+<p>$$<br>\left(\begin{array}{l}<br>x^{\prime} \\<br>y^{\prime}<br>\end{array}\right)=<br>\left(\begin{array}{ll}<br>1 &amp; 0 \\<br>a &amp; 1<br>\end{array}\right) \left(\begin{array}{l}<br>x \\<br>y<br>\end{array}\right) = \left(\begin{array}{l}<br>x \\<br>y + ax<br>\end{array}\right)<br>$$</p>
+<h2 id="Rotate-Transform"><a href="#Rotate-Transform" class="headerlink" title="Rotate Transform"></a>Rotate Transform</h2><p>默认规则：</p>
 <ul>
-<li>完了，可能要隔离；</li>
-<li>信息要求报告，因此想能不能不报告，但是好像不行，会带来风险；</li>
+<li>about the origin (0, 0)：围绕原点旋转；</li>
+<li>CCW by default：默认是逆时针旋转；</li>
 </ul>
-<p>总之，此时，就是上述两种心理的博弈，但是理性占据了上风，必须地报告，不然后果可能很大，不出事则已，一出事就是大事。</p>
-<h1 id="懊悔"><a href="#懊悔" class="headerlink" title="懊悔"></a>懊悔</h1><p>想到上述的结果，第一时间就跟学校的负责人联系了，但是没有得到立即的反馈，可能他们也需要确定一下信息，于是我就等着。</p>
-<p>但是，怎么想自己也不会是黄码，虽然从北京丰台区回来，但是不是中高风险的街道，想来也不会有问题，因此我还申诉了一下，结果还成功了，下午的时候，绿码回来了，但是行程码仍然有北京的痕迹，我后来想了一下，可能是因为在北京等车的时间超过了4个小时，有了痕迹，所以才被打上了黄码标签，真是充满了偶然性。</p>
-<p>本来，我以为健康码变成了绿码，应该不会隔离了吧，但是下午得到的回复是去隔离，而且是14天，我天。。。，突然有一种自己没法按时毕业了的感觉，学院的老师的催促可能，在我看来就是让我延期毕业，那种对抗的心理很强烈，但是我忍住了，想用一个拖字诀。慢慢地，我觉得这样可能不对，因为无法解决问题，而且是躲避问题。要么立即隔离，要么承担后果，可能是无法活动，甚至学院可能有相应的惩罚措施等等，不管躲多久，迟早要面对这两个结果。</p>
-<p>但是，我仍然不明白的是，国家已经公布了中低风险区，已经具体到街道，我觉得国家做的很好了，为什么地方仍要以严格管控为理由，扩大中高险地区范围呢？</p>
-<p>同时也有一种懊悔的心情，如果自己不马上告诉老师，自己的健康码情况，等到健康码变绿，可能就不用报告和隔离了。</p>
-<h1 id="反思"><a href="#反思" class="headerlink" title="反思"></a>反思</h1><p>今天面对的问题是个决策问题，其实是要找出一个最优的决策。</p>
-<p>决策的目标是什么？通俗的说，早回来是为了抓紧时间赶论文毕业，这是我的目标。</p>
-<p>本来一切顺利的话，就按照预定计划执行即可，但是突然有了意外情况——健康码变黄了，这个时候如何调整计划以适应预定的目标，有两个解决方案：</p>
+<p><img src="/images/games101/03/rotate.png" alt="Rotate Transform"></p>
+<p>取图中两个特殊点计算旋转矩阵，得到：</p>
+<p>$$<br>\mathbf{R}_{\theta} = \left(\begin{array}{ll}<br>\cos\theta &amp; -\sin\theta \\<br>\sin\theta &amp; \cos\theta<br>\end{array}\right)<br>$$</p>
+<h2 id="Linear-Transform总结"><a href="#Linear-Transform总结" class="headerlink" title="Linear Transform总结"></a>Linear Transform总结</h2><p>其中对应矩阵的维度与点的维度保持一致。</p>
+<p>$$<br>x^{\prime} = ax + by \\<br>y^{\prime} = cx + dy<br>$$</p>
+<p>$$<br>\left(\begin{array}{l}<br>x^{\prime} \\<br>y^{\prime}<br>\end{array}\right)=\left(\begin{array}{ll}<br>a &amp; b \\<br>c &amp; d<br>\end{array}\right) \left(\begin{array}{l}<br>x \\<br>y<br>\end{array}\right) = \left(\begin{array}{l}<br>ax + by \\<br>cx + dy<br>\end{array}\right)<br>$$</p>
+<p>$$<br>x^{\prime} = Mx<br>$$</p>
+<h1 id="Homogeneous-coordinates"><a href="#Homogeneous-coordinates" class="headerlink" title="Homogeneous coordinates"></a>Homogeneous coordinates</h1><h2 id="为啥要用齐次坐标？"><a href="#为啥要用齐次坐标？" class="headerlink" title="为啥要用齐次坐标？"></a>为啥要用齐次坐标？</h2><p>要解决平移变换的问题，将之与之前的变换统一表示，因为不能将平移变换写成矩阵乘法的形式。</p>
+<h2 id="Translation-Transform"><a href="#Translation-Transform" class="headerlink" title="Translation Transform"></a>Translation Transform</h2><p><img src="/images/games101/03/translation.png" alt="Translation Transform"></p>
+<p>$$<br>x^{\prime} = x + t_x \\<br>y^{\prime} = y + t_y<br>$$</p>
+<p>Translation cannot be represented in matrix form. 不是线性变换。</p>
+<p>$$<br>\left(\begin{array}{l}<br>x^{\prime} \\<br>y^{\prime}<br>\end{array}\right)=<br>\left(\begin{array}{ll}<br>a &amp; b \\<br>c &amp; d<br>\end{array}\right)<br>\left(\begin{array}{l}<br>x \\<br>y<br>\end{array}\right)<br>+<br>\left(\begin{array}{l}<br>t_x \\<br>t_y<br>\end{array}\right)<br>$$</p>
+<p>由于不想将该变换特殊处理，为了统一表示，因此需要齐次坐标。</p>
+<h2 id="Solution-Homogenous-Coordinates"><a href="#Solution-Homogenous-Coordinates" class="headerlink" title="Solution: Homogenous Coordinates"></a>Solution: Homogenous Coordinates</h2><p>Add a third coordinate (w-coordinate)</p>
 <ul>
-<li>瞒报<ul>
-<li>最优的结果是谁都不知道，按照预定计划执行；</li>
-<li>最坏的结果是，自己出现问题，被发现，然后被追溯信息，按原计划毕业时不可能了，甚至还会有额外的麻烦，甚至会影响为了的职业发展和规划。</li>
+<li>2D point = $(x, y, 1)^T$</li>
+<li>2D vector = $(x, y, 0)^T$</li>
 </ul>
-</li>
-<li>主动报告<ul>
-<li>马上报告<ul>
-<li>最坏的结果是集中隔离14天，在隔离场所写论文；</li>
-<li>最好的结果，不用隔离，按照原计划执行；</li>
-</ul>
-</li>
-<li>延迟报告<ul>
-<li>最坏的结果，集中隔离14天，在隔离场所写论文；</li>
-<li>最好的结果，不用隔离，按照原计划执行；</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<p>从上述的分析中，发现瞒报肯定是不行的，最坏的结果是我无法承受的（在没有足够信息支撑的情况下做出这种决策）。</p>
-<p>在主动报告中，马上和延迟报告的最好结果和最坏结果都是一样的，既然如此，但是延迟报告中，其发现最好结果的权重肯定要比马上报告大一些，因此这种情况下，目前信息的支撑下，延迟报告可能要好一些，因为得到的结果都是相同的。</p>
-<p>总结来看，<strong>从决策角度来看，延迟报告更好一些，因为事态是在不断变化的，但是这种变化，并没有改变结果，只是改变了结果的分布。</strong></p>
-<p>因此，应了那句话，</p>
+<blockquote>
+<p>为啥点和向量在增加的坐标上的表示分别为1和0，而不是相同呢？因为向量具有平移不变性，而点经过平移则会发生变化。</p>
+</blockquote>
+<p>Valid operation if w-coordinate of result is 1 or 0：</p>
 <ul>
-<li><strong>好事晚说不如早说</strong></li>
-<li><strong>坏事早说不如晚说</strong></li>
+<li>vector + vector = vector</li>
+<li>point – point = vector</li>
+<li>point + vector = point</li>
+<li>point + point = ??</li>
 </ul>
-<h1 id="应对"><a href="#应对" class="headerlink" title="应对"></a>应对</h1><p>面对这种情况，可能有各种“如果”：</p>
-<ul>
-<li>如果，我当初没有从北京南回来。。。</li>
-<li>如果，我当初没有停留超过4个小时。。。</li>
-<li>如果，学校不是一刀切。。。</li>
-<li>如果，我延迟报告。。。</li>
-</ul>
-<p><strong>没有那么多如果，事情已经发生了，原地懊悔3秒钟，就要想怎么应对的问题了，过去的事情永远无法改变。</strong></p>
-<p><strong>你无法预测未来，就像你也无法预测股市一样，只能去应对。</strong>面对这种情况，可能需要：</p>
-<ul>
-<li>提前准备工作所需材料，做好准备；</li>
-<li>合理安排自己的工作时间；</li>
-<li>提前进行心理按摩，要在隔离点待14天；</li>
-<li>保持身体健康，毕竟只在一个屋行动；</li>
-</ul>
+<p>In homogeneous coordinates,</p>
+<p>$$<br>\left(\begin{array}{l}<br>x \\<br>y \\<br>w<br>\end{array}\right)<br>$$<br>is the 2D point<br>$$<br>\left(\begin{array}{l}<br>x/w \\<br>y/w \\<br>1<br>\end{array}\right)<br>$$</p>
+<p>$$w \ne 0. $$</p>
+<p>在该扩充定义下，齐次坐标中，两点之间的加和结果是两个点的中点，还是一个点。</p>
+<blockquote>
+<p>齐次坐标的代价：引入了多余的数字，理论上会增加存储，但是实际中可以不管。</p>
+</blockquote>
+<h2 id="Translation在齐次坐标下的表示"><a href="#Translation在齐次坐标下的表示" class="headerlink" title="Translation在齐次坐标下的表示"></a>Translation在齐次坐标下的表示</h2><p>使用该方法表示Translation得到：</p>
+<p>$$<br>\left(\begin{array}{l}<br>x^{\prime} \\<br>y^{\prime} \\<br>w^{\prime}<br>\end{array}\right)=<br>\left(\begin{array}{lll}<br>1 &amp; 0 &amp; t_x \\<br>0 &amp; 1 &amp; t_y \\<br>0 &amp; 0 &amp; 1<br>\end{array}\right) \left(\begin{array}{l}<br>x \\<br>y \\<br>1<br>\end{array}\right)<br>= \left(\begin{array}{l}<br>x + t_x \\<br>y + t_y \\<br>1<br>\end{array}\right)<br>$$</p>
+<p>从而实现转化为矩阵乘法的形式。</p>
+<h2 id="Affine-Transform仿射变换"><a href="#Affine-Transform仿射变换" class="headerlink" title="Affine Transform仿射变换"></a>Affine Transform仿射变换</h2><p>Affine map = linear map + translation</p>
+<p>$$<br>\left(\begin{array}{l}<br>x^{\prime} \\<br>y^{\prime}<br>\end{array}\right)<br>=<br>\left(\begin{array}{ll}<br>a &amp; b \\<br>c &amp; d<br>\end{array}\right)<br>\left(\begin{array}{l}<br>x \\<br>y<br>\end{array}\right)<br>+<br>\left(\begin{array}{l}<br>t_x \\<br>t_y<br>\end{array}\right)<br>$$</p>
+<p>在齐次坐标下表示如下：</p>
+<p>$$<br>\left(\begin{array}{l}<br>x^{\prime} \\<br>y^{\prime} \\<br>1<br>\end{array}\right)<br>=<br>\left(\begin{array}{lll}<br>a &amp; b &amp; t_x \\<br>c &amp; d &amp; t_y \\<br>0 &amp; 0 &amp; 1<br>\end{array}\right) \cdot<br>\left(\begin{array}{l}<br>x \\<br>y \\<br>1<br>\end{array}\right)<br>$$</p>
+<h2 id="齐次坐标下统一表示"><a href="#齐次坐标下统一表示" class="headerlink" title="齐次坐标下统一表示"></a>齐次坐标下统一表示</h2><h3 id="Scale"><a href="#Scale" class="headerlink" title="Scale"></a>Scale</h3><p>$$<br>\mathbf{S}(s_x, s_y) =<br>\left(\begin{array}{ll}<br>s_x &amp; 0 &amp; 0 \\<br>0 &amp; s_y &amp; 0 \\<br>0&amp;0&amp; 1<br>\end{array}\right)<br>$$</p>
+<h3 id="Rotation"><a href="#Rotation" class="headerlink" title="Rotation"></a>Rotation</h3><p>$$<br>\mathbf{R}(\theta) = \left(\begin{array}{ll}<br>\cos\theta &amp; -\sin\theta &amp; 0 \\<br>\sin\theta &amp; \cos\theta &amp; 0 \\<br>0 &amp; 0 &amp; 1<br>\end{array}\right)<br>$$</p>
+<h3 id="Translation"><a href="#Translation" class="headerlink" title="Translation"></a>Translation</h3><p>$$<br>\mathbf{T}(t_x, t_y) =<br>\left(\begin{array}{lll}<br>1 &amp; 0 &amp; t_x \\<br>0 &amp; 1 &amp; t_y \\<br>0 &amp; 0 &amp; 1<br>\end{array}\right)<br>$$</p>
+<h1 id="Inverse-Transform"><a href="#Inverse-Transform" class="headerlink" title="Inverse Transform"></a>Inverse Transform</h1><p>逆变换 $M$ 在数学上等价于乘上逆矩阵。$M^{-1}$ is the inverse of transform in both a matrix and geometric sense。</p>
+<p><img src="/images/games101/03/inverse.png" alt="Inverse Transform"></p>
+<h1 id="Composite-Transform"><a href="#Composite-Transform" class="headerlink" title="Composite Transform"></a>Composite Transform</h1><h2 id="具体实践"><a href="#具体实践" class="headerlink" title="具体实践"></a>具体实践</h2><p>在组合不同的变换时，注意：Transform Ordering Matters。</p>
+<p><img src="/images/games101/03/compose_ex.png" alt="Composite Example"></p>
+<p>如何理解？</p>
+<p>Matrix multiplication is not commutative.</p>
+<p>$$<br>R_{45} \cdot T_{(1,0)} \ne T_{(1,0)} \cdot  R_{45}<br>$$</p>
+<p>Note that matrices are applied right to left:</p>
+<p>$$<br>T_{(1,0)} \cdot R_{45}<br>\left(\begin{array}{l}x \\ y<br>\\<br>1<br>\end{array}<br>\right)<br>=<br>\left(\begin{array}{lll}1 &amp; 0 &amp; 1 \\ 0 &amp; 1 &amp; 0 \\ 0 &amp; 0 &amp; 1\end{array}<br>\right)<br>\left(<br>\begin{array}{ccc}\cos 45^{\circ} &amp; -\sin 45^{\circ} &amp; 0<br>\\<br>\sin 45^{\circ} &amp; \cos 45^{\circ} &amp; 0 \\<br>0 &amp; 0 &amp; 1\end{array}<br>\right)<br>\left(\begin{array}{l}x \\ y \\ 1<br>\end{array}\right)<br>$$</p>
+<p>对于矩阵乘法来说，当考虑到变换时，是<strong>从右到左</strong>依次起作用的。</p>
+<h2 id="推广"><a href="#推广" class="headerlink" title="推广"></a>推广</h2><p>Sequence of affine transforms $A_1, A_2, A_3,$ </p>
+<p>Compose by matrix multiplication将所有的变换结合起来形成一个变换矩阵然后再统一与原始点相乘。</p>
+<p><img src="/images/games101/03/compose.png" alt="Compose Transform"></p>
+<p>这一技巧对于性能计算很重要，Very important for performance。</p>
+<h1 id="Decomposing-Complex-Transforms"><a href="#Decomposing-Complex-Transforms" class="headerlink" title="Decomposing Complex Transforms"></a>Decomposing Complex Transforms</h1><h2 id="例子：沿着特定点旋转"><a href="#例子：沿着特定点旋转" class="headerlink" title="例子：沿着特定点旋转"></a>例子：沿着特定点旋转</h2><p>How to rotate around a given point c?</p>
+<ol>
+<li>Translate center to origin</li>
+<li>Rotate</li>
+<li>Translate back</li>
+</ol>
+<p><img src="/images/games101/03/decompose.png" alt="Decompose Transforms"></p>
+<p>矩阵形式如下：（从右到左依次写）</p>
+<p>$$<br>\mathbf{T}(c) \cdot \mathbf{R}(\alpha) \cdot \mathbf{T}(-c)<br>$$</p>
 
                 
             </div>
@@ -482,7 +516,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://limeya.github.io/2022/02/09/2022-nian-kai-nian-fan-xiao-bei-ge-chi-liao/">https://limeya.github.io/2022/02/09/2022-nian-kai-nian-fan-xiao-bei-ge-chi-liao/</a>
+                    <a href="https://limeya.github.io/2022/04/24/games101-03-2d-transformation/">https://limeya.github.io/2022/04/24/games101-03-2d-transformation/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -520,8 +554,12 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/%E6%80%9D%E8%80%83/">
-                                    <span class="chip bg-color">思考</span>
+                                <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/">
+                                    <span class="chip bg-color">计算机图形学</span>
+                                </a>
+                            
+                                <a href="/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/">
+                                    <span class="chip bg-color">线性代数</span>
                                 </a>
                             
                         </div>
@@ -567,29 +605,84 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2022/04/24/ru-he-ru-men-ji-suan-ji-tu-xing-xue-yi-fen-checklist/">
+                <a href="/2022/04/24/games101-03-2d-transformation/">
                     <div class="card-image">
                         
                         
-                        <img src="https://cdn.jsdelivr.net/gh/limeya/limeya.github.io/medias/featureimages/21.jpg" class="responsive-img" alt="如何入门计算机图形学：一份checklist">
+                        <img src="https://cdn.jsdelivr.net/gh/limeya/limeya.github.io/medias/featureimages/4.jpg" class="responsive-img" alt="GAMES101-03：2D Transformation">
                         
-                        <span class="card-title">如何入门计算机图形学：一份checklist</span>
+                        <span class="card-title">GAMES101-03：2D Transformation</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            该checklist中包含入门计算机图形学中的基本内容和资源信息，可以作为初学者的指导材料。
+                            GAMES101-第3节，用矩阵表示2D下的变换操作。
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-04-24
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-04-24
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E5%8D%9A%E5%AE%A2/" class="post-category">
+                                    博客
+                                </a>
+                            
+                            
                         </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/">
+                        <span class="chip bg-color">计算机图形学</span>
+                    </a>
+                    
+                    <a href="/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/">
+                        <span class="chip bg-color">线性代数</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2022/04/24/games101-02-review-of-linear-algebra/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="https://cdn.jsdelivr.net/gh/limeya/limeya.github.io/medias/featureimages/18.jpg" class="responsive-img" alt="GAMES101-02：Review of Linear Algebra">
+                        
+                        <span class="card-title">GAMES101-02：Review of Linear Algebra</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            GAMES101-第2节，介绍计算机图形学中需要的线性代数基本知识。
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-04-24
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -609,52 +702,8 @@
                         <span class="chip bg-color">计算机图形学</span>
                     </a>
                     
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/2022/02/01/2021-nian-du-zong-jie-li-ming-qian-ye/">
-                    <div class="card-image">
-                        
-                        <img src="/images/2021-review/2021-review.jpg" class="responsive-img" alt="2021年度总结：黎明前夜">
-                        
-                        <span class="card-title">2021年度总结：黎明前夜</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            对2021年的过往进行年度总结，并定下2022年的目标。
-                        
-                    </div>
-                    <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-02-01
-                            </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93/" class="post-category">
-                                    年度总结
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93/">
-                        <span class="chip bg-color">年度总结</span>
+                    <a href="/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/">
+                        <span class="chip bg-color">线性代数</span>
                     </a>
                     
                 </div>
@@ -785,6 +834,13 @@
 
 </main>
 
+
+<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+    MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+    });
+</script>
 
 
 

@@ -6,7 +6,7 @@
   <link href="https://limeya.github.io/atom.xml" rel="self"/>
   
   <link href="https://limeya.github.io/"/>
-  <updated>2022-04-24T08:53:55.243Z</updated>
+  <updated>2022-04-24T12:33:53.129Z</updated>
   <id>https://limeya.github.io/</id>
   
   <author>
@@ -17,11 +17,38 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>GAMES101-03：2D Transformation</title>
+    <link href="https://limeya.github.io/2022/04/24/games101-03-2d-transformation/"/>
+    <id>https://limeya.github.io/2022/04/24/games101-03-2d-transformation/</id>
+    <published>2022-04-24T11:50:00.000Z</published>
+    <updated>2022-04-24T12:33:53.129Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;Linear-Transforms-Matrices&quot;&gt;&lt;a href=&quot;#Linear-Transforms-Matrices&quot; class=&quot;headerlink&quot; title=&quot;Linear Transforms =</summary>
+        
+      
+    
+    
+    
+    <category term="博客" scheme="https://limeya.github.io/categories/%E5%8D%9A%E5%AE%A2/"/>
+    
+    
+    <category term="计算机图形学" scheme="https://limeya.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/"/>
+    
+    <category term="线性代数" scheme="https://limeya.github.io/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/"/>
+    
+  </entry>
+  
+  <entry>
     <title>GAMES101-02：Review of Linear Algebra</title>
     <link href="https://limeya.github.io/2022/04/24/games101-02-review-of-linear-algebra/"/>
     <id>https://limeya.github.io/2022/04/24/games101-02-review-of-linear-algebra/</id>
     <published>2022-04-24T07:50:00.000Z</published>
-    <updated>2022-04-24T08:53:55.243Z</updated>
+    <updated>2022-04-24T12:11:28.386Z</updated>
     
     
       
@@ -48,7 +75,7 @@
     <link href="https://limeya.github.io/2022/04/24/games101-01-overview-of-computer-graphics/"/>
     <id>https://limeya.github.io/2022/04/24/games101-01-overview-of-computer-graphics/</id>
     <published>2022-04-24T03:50:00.000Z</published>
-    <updated>2022-04-24T03:44:06.284Z</updated>
+    <updated>2022-04-24T12:11:31.446Z</updated>
     
     
       
