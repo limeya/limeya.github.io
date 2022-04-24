@@ -4,8 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="知识图谱表示学习：训练方法, LifeHit">
-    <meta name="description" content="对知识图谱表示学习模型进行训练前如何进行准备的总结，着重在于负样本的生成。">
+    <meta name="keywords" content="GAMES101-02：Review of Linear Algebra, LifeHit">
+    <meta name="description" content="GAMES102-第一节，介绍计算机图形学中需要的线性代数基本知识。">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -28,7 +28,7 @@
 </script>
 
 
-    <title>知识图谱表示学习：训练方法 | LifeHit</title>
+    <title>GAMES101-02：Review of Linear Algebra | LifeHit</title>
     <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/limeya/limeya.github.io/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/limeya/limeya.github.io/libs/awesome/css/all.min.css">
@@ -214,12 +214,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/images/kg/train/0.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://cdn.jsdelivr.net/gh/limeya/limeya.github.io/medias/featureimages/18.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">知识图谱表示学习：训练方法</h1>
+                    <h1 class="description center-align post-title">GAMES101-02：Review of Linear Algebra</h1>
                 </div>
             </div>
         </div>
@@ -335,12 +335,12 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/">
-                                <span class="chip bg-color">知识图谱</span>
+                            <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/">
+                                <span class="chip bg-color">计算机图形学</span>
                             </a>
                         
-                            <a href="/tags/%E8%A1%A8%E7%A4%BA%E5%AD%A6%E4%B9%A0/">
-                                <span class="chip bg-color">表示学习</span>
+                            <a href="/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/">
+                                <span class="chip bg-color">线性代数</span>
                             </a>
                         
                     </div>
@@ -351,8 +351,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E7%AE%97%E6%B3%95%E7%A0%94%E7%A9%B6/" class="post-category">
-                                算法研究
+                            <a href="/categories/%E5%8D%9A%E5%AE%A2/" class="post-category">
+                                博客
                             </a>
                         
                     </div>
@@ -364,7 +364,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-11-17
+                    2022-04-24
                 </div>
                 
 
@@ -373,7 +373,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.8k
+                    1.3k
                 </div>
                 
 
@@ -400,127 +400,125 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="前提假设"><a href="#前提假设" class="headerlink" title="前提假设"></a>前提假设</h1><h2 id="Open-World-Assumption-OWA"><a href="#Open-World-Assumption-OWA" class="headerlink" title="Open World Assumption(OWA)"></a>Open World Assumption(OWA)</h2><p>开放世界假设，其含义在于暗含的假定为是未知的事实而不是假的，这也是“开放”这个词的含义，这么理解起来有点抽象，一个例子：宇宙内有除了人类的外星人，这个描述在Open World Assumption条件下，不是假的，你只能说它是未知的，这个问题的答案是“开放”的。</p>
-<h2 id="Closed-World-Assumption-CWA"><a href="#Closed-World-Assumption-CWA" class="headerlink" title="Closed World Assumption(CWA)"></a>Closed World Assumption(CWA)</h2><p>封闭世界假设，与开放对立，即：所有未知的都是假的。同样上述的例子：宇宙内有除了人类的外星人，这个描述在Closed World Assumption条件下，我们均认为它是错误的。</p>
-<h2 id="Local-Closed-World-Assumption-LCWA"><a href="#Local-Closed-World-Assumption-LCWA" class="headerlink" title="Local Closed World Assumption(LCWA)"></a>Local Closed World Assumption(LCWA)</h2><p>这个是什么意思呢？与Closed World Assumption相关，这涉及到局部的情况。同样上述的例子：宇宙内有除了人类的外星人，比如：对于不同的人类，这个描述在Local Closed World Assumption条件下，不同的人可能有不同的回答，对于NASA或者国家航天局来说，他们可能知道但是不说，因此他们对这个的回答可能是正确的，而对于我们来说，一般来说是错误的，因为你肯定不知道。这种情况导致不同的人群对于同样的问题出现认知的不同，所以Closed World Assumption假设过于绝对了，因此引入了Local Closed World Assumption，即：对于所有未知的知识中的一部分认为是错误的（因为有人认为那是对的）。</p>
-<h2 id="Stochastic-Local-Closed-World-Assumption-sLCWA"><a href="#Stochastic-Local-Closed-World-Assumption-sLCWA" class="headerlink" title="Stochastic Local Closed World Assumption(sLCWA)"></a>Stochastic Local Closed World Assumption(sLCWA)</h2><p>这个假设，是在Local Closed World Assumption基础之上构建的。其实这个词相比于上述三者使用的较少，<strong>它需要和具体的采样策略结合来看</strong>。因为人类的知识没有办法具体的统计出来，因此日常接触到的知识均可以视为Local Knowledge, 而基于Local Closed World Assumption，所有不属于Local Knowledge的知识都是错误的。Stochastic Local Closed World Assumption则告诉我们，如果在这些“错误”的知识中进行采样，来帮助训练。</p>
-<h1 id="不同假设对于训练的影响"><a href="#不同假设对于训练的影响" class="headerlink" title="不同假设对于训练的影响"></a>不同假设对于训练的影响</h1><p>这种假设条件对于知识图谱嵌入的影响如下：</p>
-<table>
-<thead>
-<tr>
-<th>Assumptions</th>
-<th>影响</th>
-<th>采用情况</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Open World Assumption</td>
-<td>会导致欠拟合under-fitting，也即over-generalization)</td>
-<td>一般不用</td>
-<td>直观理解，当一个模型对于一个自己认知之外事务，不明确表达态度时，其实是一种“缺乏自信”的表现，也会对所有已知和未知的事务同样保持“中庸”。</td>
-</tr>
-<tr>
-<td>Closed World Assumption</td>
-<td>会导致over-fitting，即泛化程度很低</td>
-<td>一般不用</td>
-<td>这种假设太过绝对，只要我不知道，就是错误的，有点过于“自负”，这种模型除了自己知道的事务，对其他均不认可。</td>
-</tr>
-<tr>
-<td>Local Closed World Assumption</td>
-<td>根据已有的知识，生成一部分“假”知识</td>
-<td>可用</td>
-<td></td>
-</tr>
-<tr>
-<td>Stochastic Local Closed World Assumption</td>
-<td>根据已有的知识，生成一部分“假”知识，从这些假知识中进行采样</td>
-<td>可用</td>
-<td></td>
-</tr>
-</tbody></table>
-<h1 id="如何生成“假”知识？"><a href="#如何生成“假”知识？" class="headerlink" title="如何生成“假”知识？"></a>如何生成“假”知识？</h1><h2 id="问题定义"><a href="#问题定义" class="headerlink" title="问题定义"></a>问题定义</h2><p>来自于 <a target="_blank" rel="noopener" href="https://pykeen.readthedocs.io/en/stable/reference/training.html">source</a>。</p>
-<blockquote>
-<p>Throughout the following explanations of training loops, we will assume the set of entities $\mathcal{E}$ , set of relations $\mathcal{R}$ , set of possible triples $\mathcal{T} = \mathcal{E} \times \mathcal{R} \times \mathcal{E}$. We stratify $\mathcal{T}$ into the disjoint union of positive triples $\mathcal{T^{+}} \subseteq \mathcal{T}$ and negative triples $\mathcal{T^{-}} \subseteq \mathcal{T}$ such that $\mathcal{T^{+}} \cap \mathcal{T^{-}} = \emptyset$ and $\mathcal{T^{+}} \cup \mathcal{T^{-}} = \mathcal{T}$ .</p>
-</blockquote>
-<h2 id="“朴素”的方法"><a href="#“朴素”的方法" class="headerlink" title="“朴素”的方法"></a>“朴素”的方法</h2><p>对于一个已有的知识图谱而言，根据Closed World Assumption，任何不在该知识图谱内的知识或者三元组都是假知识。</p>
-<p>一种“朴素”的负样本的生成办法是：</p>
-<p>对于三元组，可能的组合有以下几种：</p>
-<ul>
-<li>N(head): 代表head实体的种类数量；</li>
-<li>N(rel): 代表relation的种类数量；</li>
-<li>N(tail)：代表tail实体的种类数量；</li>
+                <h1 id="计算机图形学的预备知识"><a href="#计算机图形学的预备知识" class="headerlink" title="计算机图形学的预备知识"></a>计算机图形学的预备知识</h1><p>本节主要是复习了计算机图形学中可能用到的线性代数知识，其实CG中也会用到其他一些知识，包括但不限于：</p>
+<h2 id="Basic-mathematics"><a href="#Basic-mathematics" class="headerlink" title="Basic mathematics"></a>Basic mathematics</h2><ul>
+<li>Linear algebra</li>
+<li>Calculus</li>
+<li>Statistics</li>
 </ul>
-<p>则可能的三元组的数量为：</p>
-<p>$$<br>N(head) \times N(rel) \times N(tail)<br>$$</p>
-<p>当删除知识图谱内的三元组时，就可以认为是所有的负样本。这种负样本的数量是巨大的。</p>
-<p>一种可以解决方法是：采样。具体的采样方法有很多种，这里不赘述了。</p>
-<p>但是有一种情况，我们的模型需要<strong>更容易地对真知识进行判断</strong>，举个例子：</p>
-<p><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTM15gYJOEGxQqr5jBsWUzpAw6RJjvCzus8MA&usqp=CAU" alt="高圆圆"></p>
-<p>对比，高圆圆比娜扎漂亮，我们假设它是对的，当出现凤姐时，模型已经认识高圆圆，它能得出高圆圆比凤姐漂亮。但是当得到的负样本为：梅根福克斯与克劳馥时，你觉得模型对：</p>
-<ul>
-<li>高圆圆与凤姐</li>
-<li>梅根福克斯与克劳馥</li>
+<h2 id="Basic-physics"><a href="#Basic-physics" class="headerlink" title="Basic physics"></a>Basic physics</h2><ul>
+<li>Optics</li>
+<li>Mechanics</li>
 </ul>
-<p>哪个容易判断。</p>
-<h2 id="LCWA下的负样本生成"><a href="#LCWA下的负样本生成" class="headerlink" title="LCWA下的负样本生成"></a>LCWA下的负样本生成</h2><p>基于上述的情况，在Local Closed World Assumption下，<strong>负样本的生成基于以下原则：任意替换三元组的任意一个位置，得到的负样本不属于知识图谱本身，即认为是负样本。</strong></p>
-<p>根据这个原则，可以有三种类型的操作：</p>
-<ul>
-<li><p>head generation: $(h, r, t)$ -&gt; $(h, r, t_i)$;</p>
-<p>   In this setting, for any triple $(h, r, t) \in \mathcal{K}$ that has been observed, a set<br>   $\mathcal{T^{-}} (h, r) $ of negative examples is created by considering all triples $(h, r, t_i) \notin \mathcal{K}$ as false.</p>
-</li>
-<li><p>relation generation: $(h, r, t)$ -&gt; $(h, r_i, t)$; </p>
-<p>   In this setting, for any triple $(h, r, t) \in \mathcal{K}$ that has been observed, a set<br>   $\mathcal{T^{-}} (h, t) $ of negative examples is created by considering all triples $(h, r_i, t) \notin \mathcal{K}$ as false.</p>
-</li>
-<li><p>tail generation: $(h, r, t)$ -&gt; $(h_i, r, t)$;</p>
-<p>   In this setting, for any triple $(h, r, t) \in \mathcal{K}$ that has been observed, a set<br>   $\mathcal{T^{-}} (r, t) $ of negative examples is created by considering all triples $(h_i, r, t) \notin \mathcal{K}$ as false.</p>
+<h2 id="Misc"><a href="#Misc" class="headerlink" title="Misc"></a>Misc</h2><ul>
+<li>Signal processing</li>
+<li>Numerical analysis</li>
+</ul>
+<h2 id="And-a-bit-of-aesthetics"><a href="#And-a-bit-of-aesthetics" class="headerlink" title="And a bit of aesthetics"></a>And a bit of aesthetics</h2><h1 id="Vector"><a href="#Vector" class="headerlink" title="Vector"></a>Vector</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><ul>
+<li>Usually written as $\vec{a}$ or in bold $\textbf{a}$</li>
+<li>Or using start and end points</li>
+<li>Direction and length</li>
+<li>No absolute starting position</li>
+</ul>
+<h2 id="Vector-Normalization"><a href="#Vector-Normalization" class="headerlink" title="Vector Normalization"></a>Vector Normalization</h2><ul>
+<li>Magnitude (length) of a vector written as $|\vec{a}|$</li>
+<li>Unit vector<ul>
+<li>A vector with magnitude of 1</li>
+<li>Finding the unit vector of a vector (normalization): $\hat{a}=\vec{a} /|\vec{a}|$</li>
+<li>Used to represent directions</li>
+</ul>
 </li>
 </ul>
-<p>一般情况下，在Local Closed World Assumption下，很多的实现都只会考虑head generation和relation generation，不会考虑tail generation。</p>
-<h2 id="sLCWA下的负样本生成"><a href="#sLCWA下的负样本生成" class="headerlink" title="sLCWA下的负样本生成"></a>sLCWA下的负样本生成</h2><p>从Local Closed World Assumption中的三种情况下进行的集合进行采样，即：</p>
-<ul>
-<li>$(h, r, t)$ -&gt; $(h, r, t_i)$</li>
-<li>$(h, r, t)$ -&gt; $(h, r_i, t)$</li>
-<li>$(h, r, t)$ -&gt; $(h_i, r, t)$</li>
+<h2 id="Vector-Addition"><a href="#Vector-Addition" class="headerlink" title="Vector Addition"></a>Vector Addition</h2><ul>
+<li>Geometrically: Parallelogram law &amp; Triangle law</li>
+<li>Algebraically: Simply add coordinates</li>
 </ul>
-<p>但从实际来看，有时候只需要$(h, r, t)$ -&gt; $(h, r, t_i)$和$(h, r, t)$ -&gt; $(h_i, r, t)$，而没有考虑关系的替换，然后从这两者的集合中进行采样。</p>
-<table>
-<thead>
-<tr>
-<th>Assumptions</th>
-<th>Local Closed World Assumption</th>
-<th>Stochastic Local Closed World Assumption</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>负样本来源</td>
-<td>$(h, r, t)$ -&gt; $(h, r, t_i)$， $(h, r, t)$ -&gt; $(h, r_i, t)$</td>
-<td>$(h, r, t)$ -&gt; $(h, r, t_i)$，$(h, r, t)$ -&gt; $(h_i, r, t)$</td>
-</tr>
-<tr>
-<td>是否要采样</td>
-<td>不需要</td>
-<td>需要</td>
-</tr>
-<tr>
-<td>过滤正样本</td>
-<td>需要</td>
-<td>需要</td>
-</tr>
-</tbody></table>
-<h2 id="例子说明"><a href="#例子说明" class="headerlink" title="例子说明"></a>例子说明</h2><p>这个具体的帮助理解的例子来自于:<br><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2006.13365">Bringing Light Into the Dark: A Large-scale Evaluation of Knowledge Graph Embedding Models Under a Unified Framework</a></p>
-<p><img src="https://pykeen.readthedocs.io/en/stable/_images/training_approaches.png"></p>
-<p>该图对比了负样本在：</p>
-<ul>
-<li>Local Closed World Assumption</li>
-<li>Stochastic Local Closed World Assumption<br>两种生成策略。</li>
+<h2 id="Cartesian-Coordinates"><a href="#Cartesian-Coordinates" class="headerlink" title="Cartesian Coordinates"></a>Cartesian Coordinates</h2><ul>
+<li>X and Y can be any (usually orthogonal unit) vectors  $$<br>  \mathbf{A}=\left(\begin{array}{l}x \\ y \end{array}\right) \quad \mathbf{A}^{T}=(x, y) \quad|\mathbf{A}|=\sqrt{x^{2}+y^{2}}<br>  $$  默认向量是列向量。  <img src="/images/games101/02/cc.png" alt="Cartesian Coordinates"></li>
 </ul>
-<p>对于同一种关系 <code>works_at</code>, 红色部分是true triples。</p>
+<h2 id="Vector-Multiplication"><a href="#Vector-Multiplication" class="headerlink" title="Vector Multiplication"></a>Vector Multiplication</h2><h3 id="Dot-scalar-Product"><a href="#Dot-scalar-Product" class="headerlink" title="Dot (scalar) Product"></a>Dot (scalar) Product</h3><p><img src="/images/games101/02/dp.png" alt="Dot Product"></p>
 <ul>
-<li>在LCWA生成的是深蓝色对应的负样本，它们都没在原始的知识图谱上。</li>
-<li>在sLCWA生成的是浅蓝色对应的负样本，并从其中采样，它们都没在原始的知识图谱上。</li>
-<li>黄色部分则不在负样本的考虑之列。</li>
+<li>定义  $$<br>  \vec{a} \cdot \vec{b}=|\vec{a}||\vec{b}| \cos \theta<br>  $$  $$<br>  \cos \theta=\frac{\vec{a} \cdot \vec{b}}{|\vec{a}||\vec{b}|}<br>  $$</li>
+<li>运算法则：  $$<br>  \begin{array}{l} \vec{a} \cdot \vec{b} = \vec{b} \cdot \vec{a} \\<br>  \vec{a} \cdot(\vec{b}+\vec{c})=\vec{a} \cdot \vec{b}+\vec{a} \cdot \vec{c} \\  (k \vec{a}) \cdot \vec{b}=\vec{a} \cdot(k \vec{b})=k(\vec{a} \cdot \vec{b})\end{array}<br>  $$</li>
+<li>Dot Product in Cartesian Coordinates  Component-wise multiplication, then adding up<ul>
+<li>In 2D  $$<br>  \vec{a} \cdot \vec{b}=\left(\begin{array}{l}x_{a} \\ y_{a}\end{array}\right) \cdot\left(\begin{array}{l}x_{b} \\ y_{b}\end{array}\right)=x_{a} x_{b}+y_{a} y_{b}<br>  $$</li>
+<li>In 3D  $$<br>  \vec{a} \cdot \vec{b}=\left(\begin{array}{c}x_{a} \\ y_{a} \\ z_{a}\end{array}\right) \cdot\left(\begin{array}{c}x_{b} \\ y_{b} \\ z_{b}\end{array}\right)=x_{a} x_{b}+y_{a} y_{b}+z_{a} z_{b}<br>  $$</li>
 </ul>
+</li>
+</ul>
+<h3 id="Dot-Product-in-Graphics"><a href="#Dot-Product-in-Graphics" class="headerlink" title="Dot Product in Graphics"></a>Dot Product in Graphics</h3><ul>
+<li>Find angle between two vectors, (e.g. cosine of angle between light source and surface)</li>
+<li>Finding projection of one vector on another  <img src="/images/games101/02/project.png" alt="投影">  $\vec{b}_{\perp}$:  projection of  $\vec{b}$  onto  $\vec{a}$<ul>
+<li>$\vec{b}_{\perp}$ must be along $\vec{a}$ (or along $\hat{a}$ )</li>
+<li>$\vec{b}_{\perp}=k \hat{a}$</li>
+<li>What’s its magnitude $k$?</li>
+<li>$k=|\vec{b}_{\perp}|=|\vec{b}| \cos \theta$</li>
+</ul>
+</li>
+<li>投影可以用来：<ul>
+<li>Measure how close two directions are</li>
+<li>Decompose a vector</li>
+<li>Determine forward / backward：明确两个向量的方向性，同向、反向、垂直；  <img src="/images/games101/02/fb.png" alt="判断forward/backward"></li>
+</ul>
+</li>
+</ul>
+<h3 id="Cross-vector-Product"><a href="#Cross-vector-Product" class="headerlink" title="Cross (vector) Product"></a>Cross (vector) Product</h3><p><img src="/images/games101/02/cp.png" alt="Cross Product"></p>
+<ul>
+<li>Cross product is orthogonal to two initial vectors：结果为向量，不是数字；</li>
+<li>Direction determined by right-hand rule</li>
+<li>Useful in constructing coordinate systems：构建的称为右手坐标系；</li>
+</ul>
+<p>$$<br>\begin{array}{l}\vec{x} \times \vec{y}=+\vec{z} \\<br>\vec{y} \times \vec{x}=-\vec{z} \\<br>\vec{y} \times \vec{z}=+\vec{x} \\<br>\vec{z} \times \vec{y}=-\vec{x} \\<br>\vec{z} \times \vec{x}=+\vec{y} \\<br>\vec{x} \times \vec{z}=-\vec{y}\end{array}<br>$$</p>
+<ul>
+<li>运算性质  $$<br>  \begin{array}{c}\vec{a} \times \vec{b}=-\vec{b} \times \vec{a} \\<br>  \vec{a} \times \vec{a}=\overrightarrow{0} \\<br>  \vec{a} \times(\vec{b}+\vec{c})=\vec{a} \times \vec{b}+\vec{a} \times \vec{c} \\<br>  \vec{a} \times(k \vec{b})=k(\vec{a} \times \vec{b})\end{array}<br>  $$</li>
+<li>Cross Product: Cartesian Formula  $$<br>  \vec{a} \times \vec{b}=\left(\begin{array}{l}y_{a} z_{b}-y_{b} z_{a} \\<br>  z_{a} x_{b}-x_{a} z_{b} \\<br>  x_{a} y_{b}-y_{a} x_{b}\end{array}\right)<br>  $$</li>
+</ul>
+<h3 id="Cross-Product-in-Graphics"><a href="#Cross-Product-in-Graphics" class="headerlink" title="Cross Product in Graphics"></a>Cross Product in Graphics</h3><ul>
+<li>Determine left / right：$\vec{a} \times \vec{b} &gt; 0$，说明 $\vec{b}$ 在 $\vec{a}$ 的左边；反之在右边；  <img src="/images/games101/02/lr.png" alt="判断左/右"></li>
+<li>Determine inside / outside：当$p$点，与三角形各个顶点的连线，$\overrightarrow{AP}$、$\overrightarrow{BP}$、$\overrightarrow{CP}$分别与$\overrightarrow{AB}$、$\overrightarrow{BC}$、$\overrightarrow{CA}$计算Cross Product，如果p点均在三个向量的左侧或者右侧，则该点在三角形内部，若落在边界上可自由处理。  <img src="/images/games101/02/io.png" alt="判断内/外"></li>
+</ul>
+<h3 id="Orthonormal-bases-and-coordinate-frames"><a href="#Orthonormal-bases-and-coordinate-frames" class="headerlink" title="Orthonormal bases and coordinate frames"></a>Orthonormal bases and coordinate frames</h3><ul>
+<li>Important for representing points, positions, locations</li>
+<li>Often, many sets of coordinate systems<ul>
+<li>Global, local, world, model, parts of model (head, hands, …)</li>
+</ul>
+</li>
+<li>Critical issue is transforming between these systems/bases</li>
+</ul>
+<p>有助于将向量进行分解，例如对于右手坐标系：</p>
+<p>Any set of 3 vectors (in 3D) that</p>
+<p>$$<br>\begin{array}{l}|\vec{u}|=|\vec{v}|=|\vec{w}|=1 \\<br>\vec{u} \cdot \vec{v}=\vec{v} \cdot \vec{w}=\vec{u} \cdot \vec{w}=0 \\<br>\vec{w}=\vec{u} \times \vec{v} \quad \text { (right-handed) } \\<br>\vec{p}=(\vec{p} \cdot \vec{u}) \vec{u}+(\vec{p} \cdot \vec{v}) \vec{v}+(\vec{p} \cdot \vec{w}) \vec{w} \\<br>\text { (projection) }\end{array}<br>$$</p>
+<h1 id="Matrices"><a href="#Matrices" class="headerlink" title="Matrices"></a>Matrices</h1><ul>
+<li>In Graphics, pervasively used to represent transformations</li>
+<li>Array of numbers (m × n = m rows, n columns)  $$<br>  \left(\begin{array}{ll}1 &amp; 3 \\ 5 &amp; 2 \\ 0 &amp; 4 \end{array}\right)<br>  $$</li>
+<li>Addition and multiplication by a scalar are trivial: element by element</li>
+</ul>
+<h2 id="Matrix-Matrix-Multiplication"><a href="#Matrix-Matrix-Multiplication" class="headerlink" title="Matrix-Matrix Multiplication"></a>Matrix-Matrix Multiplication</h2><ul>
+<li>(number of) columns in A must = # rows in B</li>
+<li>(M x N) (N x P) = (M x P)  $$<br>  \left(\begin{array}{ll}1 &amp; 3 \\ 5 &amp; 2 \\ 0 &amp; 4\end{array}\right)\left(\begin{array}{llll}3 &amp; 6 &amp; 9 &amp; 4 \\ 2 &amp; 7 &amp; 8 &amp; 3\end{array}\right)<br>  $$</li>
+<li>Element (i, j) in the product is the dot product of row i from A and column j from B</li>
+<li>运算规则<ul>
+<li>Non-commutative: (AB and BA are different in general)</li>
+<li>Associative and distributive<ul>
+<li>(AB)C=A(BC)</li>
+<li>A(B+C) = AB + AC</li>
+<li>(A+B)C = AC + BC</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="Matrix-Vector-Multiplication"><a href="#Matrix-Vector-Multiplication" class="headerlink" title="Matrix-Vector Multiplication"></a>Matrix-Vector Multiplication</h2><p>Treat vector as a column matrix (m×1)</p>
+<p>$$<br>\left(\begin{array}{cc}-1 &amp; 0 \\ 0 &amp; 1\end{array}\right)\left(\begin{array}{l}x \\ y \end{array}\right)=\left(\begin{array}{c}-x \\ y \end{array}\right)<br>$$</p>
+<h2 id="Transpose-of-a-Matrix"><a href="#Transpose-of-a-Matrix" class="headerlink" title="Transpose of a Matrix"></a>Transpose of a Matrix</h2><p>Switch rows and columns (ij -&gt; ji)</p>
+<p>$$<br>\left(\begin{array}{ll}1 &amp; 2 \\ 3 &amp; 4 \\ 5 &amp; 6\end{array}\right)^{T}=\left(\begin{array}{lll}1 &amp; 3 &amp; 5 \\ 2 &amp; 4 &amp; 6\end{array}\right)<br>$$</p>
+<p>运算性质：</p>
+<p>$$<br>(A B)^{T}=B^{T} A^{T}<br>$$</p>
+<h2 id="Identity-Matrix-and-Inverses"><a href="#Identity-Matrix-and-Inverses" class="headerlink" title="Identity Matrix and Inverses"></a>Identity Matrix and Inverses</h2><p>$$<br>I_{3 \times 3}=\left(\begin{array}{ccc}1 &amp; 0 &amp; 0 \\ 0 &amp; 1 &amp; 0 \\ 0 &amp; 0 &amp; 1\end{array}\right)<br>$$</p>
+<p>$$<br>\begin{array}{l}A A^{-1}=A^{-1} A=I \\ (A B)^{-1}=B^{-1} A^{-1}\end{array}<br>$$</p>
+<h2 id="Vector-multiplication-in-Matrix-form"><a href="#Vector-multiplication-in-Matrix-form" class="headerlink" title="Vector multiplication in Matrix form"></a>Vector multiplication in Matrix form</h2><h3 id="Dot-product"><a href="#Dot-product" class="headerlink" title="Dot product"></a>Dot product</h3><p>$$<br>\begin{aligned}\vec{a} \cdot \vec{b} \\ =&amp;\vec{a}^{T} \vec{b} \\ =&amp;\left(\begin{array}{lll}x_{a} &amp; y_{a} &amp; z_{a}\end{array}\right)\left(\begin{array}{c}x_{b} \\ y_{b} \\ z_{b}\end{array}\right)=\left(x_{a} x_{b}+y_{a} y_{b}+z_{a} z_{b}\right)\end{aligned}<br>$$</p>
+<h3 id="Cross-product"><a href="#Cross-product" class="headerlink" title="Cross product"></a>Cross product</h3><p>$$<br>\vec{a} \times \vec{b}=A^{*} b=\left(\begin{array}{ccc}0 &amp; -z_{a} &amp; y_{a} \\ z_{a} &amp; 0 &amp; -x_{a} \\ -y_{a} &amp; x_{a} &amp; 0\end{array}\right)\left(\begin{array}{l}x_{b} \\ y_{b} \\ z_{b}\end{array}\right)<br>$$</p>
+<p>A: dual matrix of vector a</p>
 
                 
             </div>
@@ -547,7 +545,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://limeya.github.io/2021/11/17/zhi-shi-tu-pu-biao-shi-xue-xi-xun-lian-fang-fa/">https://limeya.github.io/2021/11/17/zhi-shi-tu-pu-biao-shi-xue-xi-xun-lian-fang-fa/</a>
+                    <a href="https://limeya.github.io/2022/04/24/games101-02-review-of-linear-algebra/">https://limeya.github.io/2022/04/24/games101-02-review-of-linear-algebra/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -585,12 +583,12 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/">
-                                    <span class="chip bg-color">知识图谱</span>
+                                <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/">
+                                    <span class="chip bg-color">计算机图形学</span>
                                 </a>
                             
-                                <a href="/tags/%E8%A1%A8%E7%A4%BA%E5%AD%A6%E4%B9%A0/">
-                                    <span class="chip bg-color">表示学习</span>
+                                <a href="/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/">
+                                    <span class="chip bg-color">线性代数</span>
                                 </a>
                             
                         </div>
@@ -636,49 +634,52 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2021/11/17/zhi-shi-tu-pu-biao-shi-xue-xi-ping-gu-fang-fa/">
+                <a href="/2022/04/24/games101-02-review-of-linear-algebra/">
                     <div class="card-image">
                         
-                        <img src="/images/kg/evaluation/0.jpg" class="responsive-img" alt="知识图谱表示学习：评估方法">
                         
-                        <span class="card-title">知识图谱表示学习：评估方法</span>
+                        <img src="https://cdn.jsdelivr.net/gh/limeya/limeya.github.io/medias/featureimages/18.jpg" class="responsive-img" alt="GAMES101-02：Review of Linear Algebra">
+                        
+                        <span class="card-title">GAMES101-02：Review of Linear Algebra</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            对知识图谱表示学习方法进行评估的一些方法和技巧的总结。
+                            GAMES102-第一节，介绍计算机图形学中需要的线性代数基本知识。
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-11-17
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-04-24
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E7%AE%97%E6%B3%95%E7%A0%94%E7%A9%B6/" class="post-category">
-                                    算法研究
+                            <a href="/categories/%E5%8D%9A%E5%AE%A2/" class="post-category">
+                                    博客
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/">
-                        <span class="chip bg-color">知识图谱</span>
+                    <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/">
+                        <span class="chip bg-color">计算机图形学</span>
                     </a>
                     
-                    <a href="/tags/%E8%A1%A8%E7%A4%BA%E5%AD%A6%E4%B9%A0/">
-                        <span class="chip bg-color">表示学习</span>
+                    <a href="/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/">
+                        <span class="chip bg-color">线性代数</span>
                     </a>
                     
                 </div>
@@ -692,30 +693,31 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2021/11/14/convkb/">
+                <a href="/2022/04/24/games101-01-overview-of-computer-graphics/">
                     <div class="card-image">
                         
-                        <img src="/images/conve/0.jpg" class="responsive-img" alt="论文阅读 - Convolutional 2D Knowledge Graph Embeddings">
                         
-                        <span class="card-title">论文阅读 - Convolutional 2D Knowledge Graph Embeddings</span>
+                        <img src="https://cdn.jsdelivr.net/gh/limeya/limeya.github.io/medias/featureimages/23.jpg" class="responsive-img" alt="GAMES101-01：Overview of Computer Graphics">
+                        
+                        <span class="card-title">GAMES101-01：Overview of Computer Graphics</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            兼顾计算成本和预测性能的模型，对于复杂网络的表示能力相比于之前的方法有一定的提升。
+                            GAMES101-第一节，介绍计算机图形学的研究内容和应用领域。
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-11-14
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-04-24
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" class="post-category">
-                                    论文阅读
+                            <a href="/categories/%E5%8D%9A%E5%AE%A2/" class="post-category">
+                                    博客
                                 </a>
                             
                             
@@ -725,12 +727,8 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/">
-                        <span class="chip bg-color">知识图谱</span>
-                    </a>
-                    
-                    <a href="/tags/%E8%A1%A8%E7%A4%BA%E5%AD%A6%E4%B9%A0/">
-                        <span class="chip bg-color">表示学习</span>
+                    <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/">
+                        <span class="chip bg-color">计算机图形学</span>
                     </a>
                     
                 </div>
