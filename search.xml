@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>GAMES101-01：Overview of Computer Graphics</title>
+      <link href="/2022/04/24/games101-01-overview-of-computer-graphics/"/>
+      <url>/2022/04/24/games101-01-overview-of-computer-graphics/</url>
+      
+        <content type="html"><![CDATA[<h2 id="What-is-Computer-Graphics"><a href="#What-is-Computer-Graphics" class="headerlink" title="What is Computer Graphics"></a>What is Computer Graphics</h2><blockquote><p>The use of computers to <strong>synthesize</strong> and <strong>manipulate</strong> visual information.</p></blockquote><p>计算机图形学不等于openGL，openGL只是实现计算机图形学操作的API。</p><h2 id="与Computer-Vision的区别"><a href="#与Computer-Vision的区别" class="headerlink" title="与Computer Vision的区别"></a>与Computer Vision的区别</h2><p>一切涉及需要<strong>猜测</strong>的研究都属于计算机视觉的范畴，需要分析和理解。</p><p><img src="/images/games101/01/diff.png" alt="计算机图形学与计算机视觉的区别"></p><p>参考资料：</p><ul><li><a href="https://www.tutorialspoint.com/dip/computer_vision_and_graphics.htm">Computer Vision and Computer Graphics</a></li><li><a href="https://www.quora.com/What-is-the-difference-between-the-fields-of-Computer-Graphics-and-Computer-Vision">What is the difference between the fields of Computer Graphics and Computer Vision?</a></li></ul><h2 id="应用领域"><a href="#应用领域" class="headerlink" title="应用领域"></a>应用领域</h2><h3 id="Video-Games"><a href="#Video-Games" class="headerlink" title="Video Games"></a>Video Games</h3><ul><li>从技术角度来说，什么是好画面？<ul><li>画面是否足够亮——全局光照；</li></ul></li></ul><h3 id="Movies"><a href="#Movies" class="headerlink" title="Movies"></a>Movies</h3><ul><li>特效：special effects</li><li>特效是最简单的图形学应用，因为少见，或者缺乏直接的体验；</li><li>最难的是模拟真实的东西；</li></ul><h3 id="Animations"><a href="#Animations" class="headerlink" title="Animations"></a>Animations</h3><h3 id="Design"><a href="#Design" class="headerlink" title="Design"></a>Design</h3><ul><li>CAD: Computer-aided Design，宜家家居设计；</li></ul><h3 id="Visualization"><a href="#Visualization" class="headerlink" title="Visualization"></a>Visualization</h3><h3 id="Virtual-Reality"><a href="#Virtual-Reality" class="headerlink" title="Virtual Reality"></a>Virtual Reality</h3><p>经常与增强现实 Augmented Reality共同出现。</p><ul><li>两者的区别<ul><li>VR：看不到现实；</li><li>AR：看到现实东西，但是还有一些新东西加入；</li></ul></li></ul><h3 id="Digital-illustration"><a href="#Digital-illustration" class="headerlink" title="Digital illustration"></a>Digital illustration</h3><h3 id="Simulation"><a href="#Simulation" class="headerlink" title="Simulation"></a>Simulation</h3><h3 id="Graphical-User-Interfaces"><a href="#Graphical-User-Interfaces" class="headerlink" title="Graphical User Interfaces"></a>Graphical User Interfaces</h3><h3 id="Typography"><a href="#Typography" class="headerlink" title="Typography"></a>Typography</h3><h2 id="挑战"><a href="#挑战" class="headerlink" title="挑战"></a>挑战</h2><h3 id="Fundamental-intellectual-challenges"><a href="#Fundamental-intellectual-challenges" class="headerlink" title="Fundamental intellectual challenges"></a>Fundamental intellectual challenges</h3><ol><li>Creates and interacts with realistic virtual world;</li><li>Requires understanding of all aspects of physical world;</li><li>New computing methods, displays, technologies;</li></ol><h3 id="Technical-challenges"><a href="#Technical-challenges" class="headerlink" title="Technical challenges"></a>Technical challenges</h3><ol><li>Math of (perspective) projections, curves, surfaces;</li><li>Physics of lighting and shading;</li><li>Representing / operating shapes in 3D;</li><li>Animation / simulation;</li><li>3D graphics software programming and hardware;</li></ol><h2 id="主要研究内容"><a href="#主要研究内容" class="headerlink" title="主要研究内容"></a>主要研究内容</h2><h3 id="Rasterization"><a href="#Rasterization" class="headerlink" title="Rasterization"></a>Rasterization</h3><ul><li>Project geometry primitives (3D triangles / polygons) onto the screen;</li><li>Break projected primitives into fragments (pixels);</li><li>Gold standard in Video Games (Real-time Applications)  将3D形体显示在屏幕上，是所有游戏，即<strong>实时（每秒 30帧图片，30fps，否则叫离线）计算机图形学</strong>的主要应用。</li></ul><h3 id="Curves-and-Meshes"><a href="#Curves-and-Meshes" class="headerlink" title="Curves and Meshes"></a>Curves and Meshes</h3><p>How to represent geometry in Computer Graphics.</p><h3 id="Ray-Tracing"><a href="#Ray-Tracing" class="headerlink" title="Ray Tracing"></a>Ray Tracing</h3><ul><li>Shoot rays from the camera though each pixel<ul><li>Calculate intersection and shading;</li><li>Continue to bounce the rays till they hit light sources;</li></ul></li><li>Gold standard in Animations / Movies (Offline Applications)</li></ul><h3 id="Animation-Simulation"><a href="#Animation-Simulation" class="headerlink" title="Animation / Simulation"></a>Animation / Simulation</h3><ul><li>Key frame Animation</li><li>Mass-spring System</li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 博客 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 计算机图形学 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>如何入门计算机图形学：一份checklist</title>
       <link href="/2022/04/24/ru-he-ru-men-ji-suan-ji-tu-xing-xue-yi-fen-checklist/"/>
       <url>/2022/04/24/ru-he-ru-men-ji-suan-ji-tu-xing-xue-yi-fen-checklist/</url>
