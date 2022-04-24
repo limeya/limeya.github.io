@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>如何入门计算机图形学：一份checklist</title>
+      <link href="/2022/04/24/ru-he-ru-men-ji-suan-ji-tu-xing-xue-yi-fen-checklist/"/>
+      <url>/2022/04/24/ru-he-ru-men-ji-suan-ji-tu-xing-xue-yi-fen-checklist/</url>
+      
+        <content type="html"><![CDATA[<h1 id="太长不看版"><a href="#太长不看版" class="headerlink" title="太长不看版"></a>太长不看版</h1><h2 id="不要"><a href="#不要" class="headerlink" title="不要"></a>不要</h2><ul><li>不要关注图形API：OpenGL、DirectX、Vulkan等只是API，而原理相同；</li><li>不要关注GPU还是CPU：它们只是效率不同；</li><li>不要关注游戏编程类：比如UE引擎等，这些只是上层的应用；</li><li>不要关注没有代码的论文：CG偏应用，单纯入门没必要；</li></ul><h2 id="要"><a href="#要" class="headerlink" title="要"></a>要</h2><ul><li>上课以建立理论脉络：CG一般包含Rendering/Geometry/Simulation</li><li>多写代码：CG偏应用，代码蕴含细节；</li><li>要边理论边实践编程；</li></ul><h2 id="建议"><a href="#建议" class="headerlink" title="建议"></a>建议</h2><ul><li>从头造轮子：便于了解细节；</li><li>拆解小项目：明白工业级项目，学习其他人的经验；</li></ul><h1 id="技能要求"><a href="#技能要求" class="headerlink" title="技能要求"></a>技能要求</h1><h2 id="编程技能"><a href="#编程技能" class="headerlink" title="编程技能"></a>编程技能</h2><ul><li>C/C++：参考C++ Primer这本书，没有plus；</li></ul><h2 id="理论技能"><a href="#理论技能" class="headerlink" title="理论技能"></a>理论技能</h2><ul><li>微积分</li><li>线性代数<ul><li><a href="https://math.mit.edu/~gs/linearalgebra/">Introduction to Linear Algebra, 5th Edition</a></li><li><a href="http://immersivemath.com/ila/index.html">Immersive Math</a></li></ul></li></ul><h1 id="领域内容"><a href="#领域内容" class="headerlink" title="领域内容"></a>领域内容</h1><h2 id="整体结构"><a href="#整体结构" class="headerlink" title="整体结构"></a>整体结构</h2><p>主要是建立对CG的整体认识，不要求多么深入，要求结构清晰，方便快速入门。</p><ul><li>书籍<ul><li>Fundamentals of Computer Graphics, Fourth Edition</li></ul></li><li>课程<ul><li><a href="http://games-cn.org/intro-graphics/">GAMES101:现代计算机图形学入门</a></li></ul></li></ul><h2 id="实时渲染"><a href="#实时渲染" class="headerlink" title="实时渲染"></a>实时渲染</h2><ul><li>书籍：Real-Time Rendering, Fourth Edition</li><li>课程<ul><li><a href="http://games-cn.org/games202/">Games202:高质量实时渲染 - 计算机图形学与混合现实研讨会</a></li></ul></li></ul><h2 id="几何"><a href="#几何" class="headerlink" title="几何"></a>几何</h2><ul><li><a href="https://www.bilibili.com/video/BV1B54y1B7Uc">数字几何处理-中国科学技术大学-傅孝明_哔哩哔哩_bilibili</a></li></ul><h2 id="动画"><a href="#动画" class="headerlink" title="动画"></a>动画</h2><ul><li><a href="https://www.bilibili.com/video/BV1ZK411H7Hc?from=search&seid=5195290021208890151">GAMES201：高级物理引擎实战指南2020_哔哩哔哩_bilibili</a></li></ul><h1 id="拆解项目"><a href="#拆解项目" class="headerlink" title="拆解项目"></a>拆解项目</h1><p>这些项目可用于拆解练习。</p><ul><li><a href="https://github.com/ssloy/tinyrenderer">软件光栅化渲染器——tinyrenderer</a></li><li><a href="https://github.com/skywind3000/mini3d">软件光栅化渲染器——mini3d</a></li><li><a href="https://github.com/topics/box2d-lite">物理引擎——box2d-lite</a></li><li><a href="https://github.com/mitsuba-renderer/mitsuba2">渲染系统——mitsuba2渲染器</a></li></ul><h1 id="其他技术资源"><a href="#其他技术资源" class="headerlink" title="其他技术资源"></a>其他技术资源</h1><h2 id="光栅技术"><a href="#光栅技术" class="headerlink" title="光栅技术"></a>光栅技术</h2><p>Peter Shirley（Fundamentals of Computer Graphics作者）的一系列关于光线追踪的文章<a href="https://raytracing.github.io/">Ray Tracing in One Weekend Series</a>。</p><ul><li><strong>Ray Tracing in One Weekend</strong></li><li><strong>Ray Tracing: The Next Week</strong></li><li><strong>Ray Tracing: The Rest of Your Life</strong></li></ul><h2 id="参考百科全书——PBR"><a href="#参考百科全书——PBR" class="headerlink" title="参考百科全书——PBR"></a>参考百科全书——PBR</h2><p><a href="https://www.pbrt.org/">Physically Based Rendering: From Theory to Implementation</a></p><p>该参考书还配有开源的<a href="https://github.com/mmp/pbrt-v3">工业级渲染器</a>以供使用和学习。</p><h1 id="学习路线"><a href="#学习路线" class="headerlink" title="学习路线"></a>学习路线</h1><ol><li>学习GAMES-101，并学习C++实践+做作业；</li><li>利用Fundamentals of Computer Graphic作为补充内容；</li><li>在对应章节中，通过拆解项目和资源来深度理解知识；<ol><li>光追技术；</li><li>光栅化渲染；</li></ol></li></ol><h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p><a href="https://www.zhihu.com/question/41468803">零基础如何学习计算机图形学？</a></p><p><a href="https://www.scratchapixel.com/">Scratchapixel</a></p><p><a href="https://www.zhihu.com/column/game-programming">浅墨的游戏编程</a></p><p><a href="https://developer.nvidia.com/gpugems/gpugems/contributors">Contributors</a></p><p><a href="https://learnopengl.com/Introduction">Introduction</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 博客 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 计算机图形学 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>2022年开年返校被隔离了</title>
       <link href="/2022/02/09/2022-nian-kai-nian-fan-xiao-bei-ge-chi-liao/"/>
       <url>/2022/02/09/2022-nian-kai-nian-fan-xiao-bei-ge-chi-liao/</url>
