@@ -6,7 +6,7 @@
   <link href="https://limeya.github.io/atom.xml" rel="self"/>
   
   <link href="https://limeya.github.io/"/>
-  <updated>2022-04-28T06:12:41.673Z</updated>
+  <updated>2022-04-28T10:30:39.233Z</updated>
   <id>https://limeya.github.io/</id>
   
   <author>
@@ -17,11 +17,37 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>GAMES101-04：Viewing Transformation</title>
+    <link href="https://limeya.github.io/2022/04/28/games101-04-viewing-transformation/"/>
+    <id>https://limeya.github.io/2022/04/28/games101-04-viewing-transformation/</id>
+    <published>2022-04-28T09:53:00.000Z</published>
+    <updated>2022-04-28T10:30:39.233Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;Viewing Transformation指的是将3D中的物体映射到2D中的图像的过程。&lt;/p&gt;
+&lt;h1 id=&quot;例子说明&quot;&gt;&lt;a href=&quot;#例子说明&quot; class=&quot;headerlink&quot; title=&quot;例子说明&quot;&gt;&lt;/a&gt;例子说明&lt;/h1&gt;&lt;p&gt;Think</summary>
+        
+      
+    
+    
+    
+    <category term="博客" scheme="https://limeya.github.io/categories/%E5%8D%9A%E5%AE%A2/"/>
+    
+    
+    <category term="计算机图形学" scheme="https://limeya.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/"/>
+    
+  </entry>
+  
+  <entry>
     <title>GAMES101-03-02：3D Transformation</title>
     <link href="https://limeya.github.io/2022/04/28/games101-03-02-3d-transformation/"/>
     <id>https://limeya.github.io/2022/04/28/games101-03-02-3d-transformation/</id>
     <published>2022-04-28T06:00:00.000Z</published>
-    <updated>2022-04-28T06:12:41.673Z</updated>
+    <updated>2022-04-28T09:53:45.418Z</updated>
     
     
       
@@ -48,7 +74,7 @@
     <link href="https://limeya.github.io/2022/04/24/games101-03-01-2d-transformation/"/>
     <id>https://limeya.github.io/2022/04/24/games101-03-01-2d-transformation/</id>
     <published>2022-04-24T11:50:00.000Z</published>
-    <updated>2022-04-28T05:56:26.836Z</updated>
+    <updated>2022-04-28T09:53:38.394Z</updated>
     
     
       
