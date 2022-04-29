@@ -4,8 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="GAMES101-03-02：3D Transformation, LifeHit">
-    <meta name="description" content="GAMES101-第3节第二部分，用矩阵表示3D下的变换操作。">
+    <meta name="keywords" content="GAMES101-05：Rasterization - Triangles, LifeHit">
+    <meta name="description" content="GAMES101-第5节，介绍计算机图形学中三角形的光栅化。">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -28,7 +28,7 @@
 </script>
 
 
-    <title>GAMES101-03-02：3D Transformation | LifeHit</title>
+    <title>GAMES101-05：Rasterization - Triangles | LifeHit</title>
     <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/limeya/limeya.github.io/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/limeya/limeya.github.io/libs/awesome/css/all.min.css">
@@ -214,12 +214,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://cdn.jsdelivr.net/gh/limeya/limeya.github.io/medias/featureimages/18.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://cdn.jsdelivr.net/gh/limeya/limeya.github.io/medias/featureimages/2.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">GAMES101-03-02：3D Transformation</h1>
+                    <h1 class="description center-align post-title">GAMES101-05：Rasterization - Triangles</h1>
                 </div>
             </div>
         </div>
@@ -339,10 +339,6 @@
                                 <span class="chip bg-color">计算机图形学</span>
                             </a>
                         
-                            <a href="/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/">
-                                <span class="chip bg-color">线性代数</span>
-                            </a>
-                        
                     </div>
                     
                 </div>
@@ -364,7 +360,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-04-28
+                    2022-04-29
                 </div>
                 
 
@@ -373,7 +369,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    660
+                    685
                 </div>
                 
 
@@ -400,31 +396,127 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="Homogeneous-coordinates"><a href="#Homogeneous-coordinates" class="headerlink" title="Homogeneous coordinates"></a>Homogeneous coordinates</h1><ul>
-<li>3D point = $(x, y, z, 1)^T$</li>
-<li>3D vector = $(x, y, z, 0)^T$</li>
+                <h1 id="Viewing之后"><a href="#Viewing之后" class="headerlink" title="Viewing之后"></a>Viewing之后</h1><ul>
+<li>Model transformation (placing objects)</li>
+<li>View transformation (placing camera)</li>
+<li>Projection transformation<ul>
+<li>Orthographic projection (cuboid to “canonical” cube $[-1, 1]^3$)</li>
+<li>Perspective projection (frustum to “canonical” cube)</li>
 </ul>
-<p>对应的，坐标 $(x,y,z,w)(w \ne 0)$ 表示三维空间中的点$(x/w, y/w, z/w)$。</p>
-<h1 id="Affine-Transform仿射变换"><a href="#Affine-Transform仿射变换" class="headerlink" title="Affine Transform仿射变换"></a>Affine Transform仿射变换</h1><p>$$<br>\left(\begin{array}{l}<br>x^{\prime} \\<br>y^{\prime} \\<br>z^{\prime} \\<br>1<br>\end{array}\right)=<br>\left(\begin{array}{lll}<br>a &amp; b &amp; c &amp; t_x \\<br>d &amp; e &amp; f &amp; t_y \\<br>g &amp; h &amp; i &amp; t_z \\<br>0 &amp; 0 &amp; 0 &amp; 1<br>\end{array}\right) \cdot<br>\left(\begin{array}{l}<br>x \\<br>y \\<br>z \\<br>1<br>\end{array}\right)<br>$$</p>
-<p>What’s the order? Linear Transform first or Translation first.</p>
-<p>在操作变换时，首先进行线性变换，之后才进行平移变换。</p>
-<p>$$<br>\left(\begin{array}{l}<br>x^{\prime} \\<br>y^{\prime}<br>\end{array}\right)<br>=<br>\left(\begin{array}{ll}<br>a &amp; b \\<br>c &amp; d<br>\end{array}\right)<br>\left(\begin{array}{l}<br>x \\<br>y<br>\end{array}\right)<br>+<br>\left(\begin{array}{l}<br>t_x \\<br>t_y<br>\end{array}\right)<br>$$</p>
-<h1 id="3D-transformations统一表示"><a href="#3D-transformations统一表示" class="headerlink" title="3D transformations统一表示"></a>3D transformations统一表示</h1><h2 id="Scale"><a href="#Scale" class="headerlink" title="Scale"></a>Scale</h2><p>$$<br>\mathbf{S}(s_x, s_y, s_z) =<br>\left(\begin{array}{ll}<br>s_x &amp; 0 &amp; 0 &amp; 0 \\<br>0 &amp; s_y &amp; 0 &amp; 0 \\<br>0 &amp; 0 &amp; s_z &amp; 0 \\<br>0 &amp; 0 &amp; 0 &amp; 1<br>\end{array}\right)<br>$$</p>
-<h2 id="Translation"><a href="#Translation" class="headerlink" title="Translation"></a>Translation</h2><p>$$<br>\mathbf{T}(t_x, t_y) =<br>\left(\begin{array}{lll}<br>1 &amp; 0 &amp; 0 &amp; t_x \\<br>0 &amp; 1 &amp; 0 &amp; t_y \\<br>0 &amp; 0 &amp; 1 &amp; t_z \\<br>0 &amp; 0 &amp; 0 &amp; 1<br>\end{array}\right)<br>$$</p>
-<h2 id="Rotation"><a href="#Rotation" class="headerlink" title="Rotation"></a>Rotation</h2><p>Rotation around x-, y-, or z-axis.</p>
-<p>$$<br>\begin{array}{l}<br>\mathbf{R_x}(\alpha)=<br>\left(\begin{array}{cccc}1 &amp; 0 &amp; 0 &amp; 0 \\<br>0 &amp; \cos \alpha &amp; -\sin \alpha &amp; 0 \\<br>0 &amp; \sin \alpha &amp; \cos \alpha &amp; 0 \\<br>0 &amp; 0 &amp; 0 &amp; 1<br>\end{array}\right)<br>\\<br>\mathbf{R_y}(\alpha)=<br>\left(\begin{array}{cccc}\cos \alpha &amp; 0 &amp; \sin \alpha &amp; 0 \\<br>0 &amp; 1 &amp; 0 &amp; 0 \\<br>-\sin \alpha &amp; 0 &amp; \cos \alpha &amp; 0 \\<br>0 &amp; 0 &amp; 0 &amp; 1\end{array}\right)<br>\\<br>\mathbf{R_z}(\alpha)=\left(\begin{array}{cccc}\cos \alpha &amp; -\sin \alpha &amp; 0 &amp; 0 \\<br>\sin \alpha &amp; \cos \alpha &amp; 0 &amp; 0 \\<br>0 &amp; 0 &amp; 1 &amp; 0 \\<br>0 &amp; 0 &amp; 0 &amp; 1<br>\end{array}\right)<br>\end{array}<br>$$</p>
-<p>其中$\mathbf{R}_{y}(\alpha)$会有一些奇怪，因为根据右手螺旋定则，$z$ 与 $x$ 叉乘得到 $y$，$x$ 与 $z$ 叉乘得到 $-y$，这是其在$\sin \alpha$上符号与其他两个相反的原因。（使用左手螺旋也会存在特殊的轴）</p>
-<h2 id="3D-Rotations"><a href="#3D-Rotations" class="headerlink" title="3D Rotations"></a>3D Rotations</h2><p>Compose any 3D rotation from $R_x, R_y, R_z$?</p>
-<p>$$<br>\mathbf{R_{xyz}}(\alpha, \beta, \gamma) = \mathbf{R_x}(\alpha)\mathbf{R_y}(\beta)\mathbf{R_z}(\gamma)<br>$$</p>
-<p>其中，三个角度$\alpha, \beta, \gamma$ 称为Euler angles。</p>
-<p>一个典型的应用场景：Often used in flight simulators: roll, pitch, yaw。</p>
-<p><img src="/images/games101/03/2/3d-rot.png" alt="3D Rotations"></p>
-<h2 id="Rodrigues’-Rotation-Formula"><a href="#Rodrigues’-Rotation-Formula" class="headerlink" title="Rodrigues’ Rotation Formula"></a>Rodrigues’ Rotation Formula</h2><p>Rotation by angle $\alpha$ around axis $\mathbf{n}$.</p>
-<p>$$<br>\mathbf{R}(\mathbf{n}, \alpha)=<br>\cos (\alpha) \mathbf{I}+(1-\cos (\alpha)) \mathbf{n} \mathbf{n}^{T}+\sin (\alpha) \underbrace{\left(\begin{array}{ccc}0 &amp; -n_{z} &amp; n_{y} \\<br>n_{z} &amp; 0 &amp; -n_{x} \\<br>-n_{y} &amp; n_{x} &amp; 0<br>\end{array}\right)}_{\mathbf{N}}<br>$$</p>
+</li>
+<li>Canonical cube to?</li>
+</ul>
+<p>继续：将之前得到的立方体绘制到屏幕上。</p>
+<h1 id="Canonical-Cube-to-Screen"><a href="#Canonical-Cube-to-Screen" class="headerlink" title="Canonical Cube to Screen"></a>Canonical Cube to Screen</h1><h2 id="概念定义"><a href="#概念定义" class="headerlink" title="概念定义"></a>概念定义</h2><ul>
+<li>What is a screen<ul>
+<li>An array of pixels</li>
+<li>Size of the array: resolution 表示像素的多少。</li>
+<li>A typical kind of raster display</li>
+</ul>
+</li>
+<li>Raster == screen in German<ul>
+<li>Rasterize == drawing onto the screen</li>
+</ul>
+</li>
+<li>Pixel (FYI, short for “picture element”)<ul>
+<li>For now: A pixel is a little square with uniform color  简化表示</li>
+<li>Color is a mixture of (red, green, blue)</li>
+</ul>
+</li>
+</ul>
+<h2 id="Screen-space"><a href="#Screen-space" class="headerlink" title="Screen space"></a>Screen space</h2><p><img src="/images/games101/05/screen_space.png" alt="Screen space"></p>
+<p>规则：</p>
 <ul>
-<li>其中axis默认是过原点的；</li>
-<li>当轴不过原点可以利用之前的方法：将所有的东西移动到原点，再旋转，然后再移回去；</li>
-<li>其中$\mathbf{N}$是向量的叉乘，只是表示成矩阵形式。</li>
+<li>Pixels’ indices are in the form of $(x, y)$, where both x and y are integers.</li>
+<li>Pixels’ indices are from $(0, 0)$ to (width - 1, height - 1).</li>
+<li>Pixel $(x, y)$ is centered at $(x + 0.5, y + 0.5)$ . 坐标实际中心</li>
+<li>The screen covers range $(0, 0)$ to (width, height).</li>
+</ul>
+<h2 id="操作方法"><a href="#操作方法" class="headerlink" title="操作方法"></a>操作方法</h2><p><img src="/images/games101/05/vp_trans.png" alt="Viewport transform"></p>
+<ul>
+<li>Irrelevant to z</li>
+<li>Transform in xy plane: $[-1, 1]^2$ to [0, width] x [0, height]</li>
+<li>Viewport transform matrix: 视口变换</li>
+</ul>
+<p>$$<br>M_{\text {viewport}}=\left(\begin{array}{cccc}\frac{w i d t h}{2} &amp; 0 &amp; 0 &amp; \frac{\text { width }}{2} \\<br>0 &amp; \frac{\text { height }}{2} &amp; 0 &amp; \frac{\text { height }}{2} \\<br>0 &amp; 0 &amp; 1 &amp; 0 \\<br>0 &amp; 0 &amp; 0 &amp; 1<br>\end{array}\right)<br>$$</p>
+<p>到此为止得到了2D上的图片。</p>
+<h1 id="Rasterizing-Triangles-into-Pixels"><a href="#Rasterizing-Triangles-into-Pixels" class="headerlink" title="Rasterizing Triangles into Pixels"></a>Rasterizing Triangles into Pixels</h1><p>接下来，将图片分解为像素，也就是光栅化的过程。</p>
+<h2 id="Drawing-Machines"><a href="#Drawing-Machines" class="headerlink" title="Drawing Machines"></a>Drawing Machines</h2><ul>
+<li>CNC Sharpie Drawing Machine</li>
+<li>Laser Cutters</li>
+</ul>
+<h2 id="Different-Raster-Displays"><a href="#Different-Raster-Displays" class="headerlink" title="Different Raster Displays"></a>Different Raster Displays</h2><ul>
+<li>Oscilloscope 示波器</li>
+<li>Cathode Ray Tube 阴极射线管<ul>
+<li>Television - Raster Display CRT</li>
+</ul>
+</li>
+<li>Frame Buffer: Memory for a Raster Display</li>
+<li>Flat Panel Displays<ul>
+<li>LCD (Liquid Crystal Display)</li>
+<li>LED Array Display</li>
+</ul>
+</li>
+<li>Electrophoretic (Electronic Ink) Display</li>
+</ul>
+<h1 id="Rasterization-Drawing-to-Raster-Displays"><a href="#Rasterization-Drawing-to-Raster-Displays" class="headerlink" title="Rasterization: Drawing to Raster Displays"></a>Rasterization: Drawing to Raster Displays</h1><h2 id="Triangles-Fundamental-Shape-Primitives"><a href="#Triangles-Fundamental-Shape-Primitives" class="headerlink" title="Triangles - Fundamental Shape Primitives"></a>Triangles - Fundamental Shape Primitives</h2><h3 id="Why-triangles"><a href="#Why-triangles" class="headerlink" title="Why triangles?"></a>Why triangles?</h3><ul>
+<li>Most basic polygon<ul>
+<li>Break up other polygons</li>
+</ul>
+</li>
+<li>Unique properties<ul>
+<li>Guaranteed to be planar  三角形一定是平面图形</li>
+<li>Well-defined interior 内外容易区分</li>
+<li>Well-defined method for interpolating values at vertices over triangle (barycentric interpolation) 根据顶点的信息可以对其中其中任意一点进行插值。</li>
+</ul>
+</li>
+</ul>
+<h2 id="问题：What-Pixel-Values-Approximate-a-Triangle"><a href="#问题：What-Pixel-Values-Approximate-a-Triangle" class="headerlink" title="问题：What Pixel Values Approximate a Triangle?"></a>问题：What Pixel Values Approximate a Triangle?</h2><p><img src="/images/games101/05/pv_appro.png" alt="Pixel Values Approximate"></p>
+<h2 id="解决方法：Sampling"><a href="#解决方法：Sampling" class="headerlink" title="解决方法：Sampling"></a>解决方法：Sampling</h2><h3 id="含义"><a href="#含义" class="headerlink" title="含义"></a>含义</h3><ul>
+<li>Evaluating a function at a point is sampling.</li>
+<li>We can discretize a function by sampling.<pre class=" language-cpp"><code class="language-cpp"><span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> x <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> x <span class="token operator">&lt;</span> xmax<span class="token punctuation">;</span> <span class="token operator">++</span>x<span class="token punctuation">)</span>
+    output<span class="token punctuation">[</span>x<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">f</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+</li>
+<li>Sampling is a core idea in graphics.<ul>
+<li>We sample time (1D), area (2D), direction (2D), volume (3D)</li>
+</ul>
+</li>
+</ul>
+<h3 id="具体过程"><a href="#具体过程" class="headerlink" title="具体过程"></a>具体过程</h3><ul>
+<li>Sample If Each Pixel Center Is Inside Triangle</li>
+<li>Define Binary Function: $\text{inside}(t, x, y)$<ul>
+<li>x, y: not necessarily integers</li>
+</ul>
+</li>
+</ul>
+<!-- $$
+f=
+\left\\{
+\begin{array}{l}
+1\\\\
+0
+\end{array}
+\right.
+$$ -->
+
+<p>  $$<br>  \text{inside}(t, x, y)=<br>  \left\{<br>  \begin{array}{ll}<br>  1 &amp; \begin{array}{l} \text{Point (x, y) in triangle } t\end{array} \\<br>  0 &amp; \text {otherwise}<br>  \end{array}<br>  \right.<br>  $$</p>
+<p>整体过程表示如下：</p>
+<pre class=" language-cpp"><code class="language-cpp"><span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> x <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> x <span class="token operator">&lt;</span> xmax<span class="token punctuation">;</span> <span class="token operator">++</span>x<span class="token punctuation">)</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> y <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> y <span class="token operator">&lt;</span> ymax<span class="token punctuation">;</span> <span class="token operator">++</span>y<span class="token punctuation">)</span>
+        image<span class="token punctuation">[</span>x<span class="token punctuation">]</span><span class="token punctuation">[</span>y<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">inside</span><span class="token punctuation">(</span>tri<span class="token punctuation">,</span> x <span class="token operator">+</span> <span class="token number">0.5</span><span class="token punctuation">,</span> y <span class="token operator">+</span> <span class="token number">0.5</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>上述过程中要解决的一个问题是：如何判断点 $(x,y)$ 在三角形内。使用之前cross product中提到的方法。</p>
+<p>最后的结果：</p>
+<p><img src="/images/games101/05/tri_compare.png" alt="光栅化前后三角形的对比"></p>
+<p>存在锯齿问题！</p>
+<h3 id="Edge-Cases"><a href="#Edge-Cases" class="headerlink" title="Edge Cases"></a>Edge Cases</h3><p>Is this sample point covered by triangle 1, triangle 2, or both? 自己决定，不作要求。</p>
+<h3 id="优化策略"><a href="#优化策略" class="headerlink" title="优化策略"></a>优化策略</h3><ul>
+<li>普遍策略：Checking All Pixels on the Screen?  Use a Bounding Box!</li>
+</ul>
+<p><img src="/images/games101/05/box.png" alt="基本优化策略 - Use a Bounding Box"></p>
+<ul>
+<li>进一步优化：Incremental Triangle Traversal，每一行都找边界，suitable for thin and rotated triangles，但是实践起来不太容易。  <img src="/images/games101/05/itt.png" alt="Incremental Triangle Traversal"></li>
 </ul>
 
                 
@@ -452,7 +544,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://limeya.github.io/2022/04/28/games101-03-02-3d-transformation/">https://limeya.github.io/2022/04/28/games101-03-02-3d-transformation/</a>
+                    <a href="https://limeya.github.io/2022/04/29/games101-05-rasterization-triangles/">https://limeya.github.io/2022/04/29/games101-05-rasterization-triangles/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -492,10 +584,6 @@
                             
                                 <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/">
                                     <span class="chip bg-color">计算机图形学</span>
-                                </a>
-                            
-                                <a href="/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/">
-                                    <span class="chip bg-color">线性代数</span>
                                 </a>
                             
                         </div>
@@ -541,29 +629,30 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2022/04/28/games101-04-viewing-transformation/">
+                <a href="/2022/04/29/games101-05-rasterization-triangles/">
                     <div class="card-image">
                         
                         
-                        <img src="https://cdn.jsdelivr.net/gh/limeya/limeya.github.io/medias/featureimages/18.jpg" class="responsive-img" alt="GAMES101-04：Viewing Transformation">
+                        <img src="https://cdn.jsdelivr.net/gh/limeya/limeya.github.io/medias/featureimages/2.jpg" class="responsive-img" alt="GAMES101-05：Rasterization - Triangles">
                         
-                        <span class="card-title">GAMES101-04：Viewing Transformation</span>
+                        <span class="card-title">GAMES101-05：Rasterization - Triangles</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            GAMES101-第4节，介绍计算机图形学中的视图变换。
+                            GAMES101-第5节，介绍计算机图形学中三角形的光栅化。
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-04-28
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-04-29
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -576,6 +665,7 @@
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -594,24 +684,24 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2022/04/24/games101-03-01-2d-transformation/">
+                <a href="/2022/04/28/games101-04-viewing-transformation/">
                     <div class="card-image">
                         
                         
-                        <img src="https://cdn.jsdelivr.net/gh/limeya/limeya.github.io/medias/featureimages/20.jpg" class="responsive-img" alt="GAMES101-03-01：2D Transformation">
+                        <img src="https://cdn.jsdelivr.net/gh/limeya/limeya.github.io/medias/featureimages/18.jpg" class="responsive-img" alt="GAMES101-04：Viewing Transformation">
                         
-                        <span class="card-title">GAMES101-03-01：2D Transformation</span>
+                        <span class="card-title">GAMES101-04：Viewing Transformation</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            GAMES101-第3节第一部分，用矩阵表示2D下的变换操作。
+                            GAMES101-第4节，介绍计算机图形学中的视图变换。
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-04-24
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-04-28
                             </span>
                         <span class="publish-author">
                             
@@ -630,10 +720,6 @@
                     
                     <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/">
                         <span class="chip bg-color">计算机图形学</span>
-                    </a>
-                    
-                    <a href="/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/">
-                        <span class="chip bg-color">线性代数</span>
                     </a>
                     
                 </div>

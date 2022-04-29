@@ -6,7 +6,7 @@
   <link href="https://limeya.github.io/atom.xml" rel="self"/>
   
   <link href="https://limeya.github.io/"/>
-  <updated>2022-04-28T10:30:39.233Z</updated>
+  <updated>2022-04-29T04:28:57.095Z</updated>
   <id>https://limeya.github.io/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>GAMES101-05：Rasterization - Triangles</title>
+    <link href="https://limeya.github.io/2022/04/29/games101-05-rasterization-triangles/"/>
+    <id>https://limeya.github.io/2022/04/29/games101-05-rasterization-triangles/</id>
+    <published>2022-04-29T03:27:00.000Z</published>
+    <updated>2022-04-29T04:28:57.095Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;Viewing之后&quot;&gt;&lt;a href=&quot;#Viewing之后&quot; class=&quot;headerlink&quot; title=&quot;Viewing之后&quot;&gt;&lt;/a&gt;Viewing之后&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;Model transformation (placing</summary>
+        
+      
+    
+    
+    
+    <category term="博客" scheme="https://limeya.github.io/categories/%E5%8D%9A%E5%AE%A2/"/>
+    
+    
+    <category term="计算机图形学" scheme="https://limeya.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/"/>
+    
+  </entry>
   
   <entry>
     <title>GAMES101-04：Viewing Transformation</title>
