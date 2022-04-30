@@ -6,7 +6,7 @@
   <link href="https://limeya.github.io/atom.xml" rel="self"/>
   
   <link href="https://limeya.github.io/"/>
-  <updated>2022-04-29T04:28:57.095Z</updated>
+  <updated>2022-04-30T12:14:07.395Z</updated>
   <id>https://limeya.github.io/</id>
   
   <author>
@@ -17,11 +17,65 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>GAMES101-06-2：Rasterization - Z-Buffering</title>
+    <link href="https://limeya.github.io/2022/04/30/games101-06-2-rasterization-z-buffering/"/>
+    <id>https://limeya.github.io/2022/04/30/games101-06-2-rasterization-z-buffering/</id>
+    <published>2022-04-30T12:00:00.000Z</published>
+    <updated>2022-04-30T12:14:07.395Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;问题：Visibility-occlusion&quot;&gt;&lt;a href=&quot;#问题：Visibility-occlusion&quot; class=&quot;headerlink&quot; title=&quot;问题：Visibility / occlusion&quot;&gt;&lt;/a&gt;问题：Visibility</summary>
+        
+      
+    
+    
+    
+    <category term="博客" scheme="https://limeya.github.io/categories/%E5%8D%9A%E5%AE%A2/"/>
+    
+    
+    <category term="计算机图形学" scheme="https://limeya.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/"/>
+    
+    <category term="光栅化" scheme="https://limeya.github.io/tags/%E5%85%89%E6%A0%85%E5%8C%96/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>GAMES101-06-1：Rasterization - Antialiasing</title>
+    <link href="https://limeya.github.io/2022/04/30/games101-06-1-rasterization-antialiasing/"/>
+    <id>https://limeya.github.io/2022/04/30/games101-06-1-rasterization-antialiasing/</id>
+    <published>2022-04-30T11:00:00.000Z</published>
+    <updated>2022-04-30T13:06:41.455Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;Sampling&quot;&gt;&lt;a href=&quot;#Sampling&quot; class=&quot;headerlink&quot; title=&quot;Sampling&quot;&gt;&lt;/a&gt;Sampling&lt;/h1&gt;&lt;h2 id=&quot;常见的采样&quot;&gt;&lt;a href=&quot;#常见的采样&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="博客" scheme="https://limeya.github.io/categories/%E5%8D%9A%E5%AE%A2/"/>
+    
+    
+    <category term="计算机图形学" scheme="https://limeya.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/"/>
+    
+    <category term="光栅化" scheme="https://limeya.github.io/tags/%E5%85%89%E6%A0%85%E5%8C%96/"/>
+    
+  </entry>
+  
+  <entry>
     <title>GAMES101-05：Rasterization - Triangles</title>
     <link href="https://limeya.github.io/2022/04/29/games101-05-rasterization-triangles/"/>
     <id>https://limeya.github.io/2022/04/29/games101-05-rasterization-triangles/</id>
     <published>2022-04-29T03:27:00.000Z</published>
-    <updated>2022-04-29T04:28:57.095Z</updated>
+    <updated>2022-04-30T12:12:56.133Z</updated>
     
     
       
@@ -39,6 +93,8 @@
     
     
     <category term="计算机图形学" scheme="https://limeya.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/"/>
+    
+    <category term="光栅化" scheme="https://limeya.github.io/tags/%E5%85%89%E6%A0%85%E5%8C%96/"/>
     
   </entry>
   
