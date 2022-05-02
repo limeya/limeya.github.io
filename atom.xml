@@ -6,7 +6,7 @@
   <link href="https://limeya.github.io/atom.xml" rel="self"/>
   
   <link href="https://limeya.github.io/"/>
-  <updated>2022-05-02T03:38:22.514Z</updated>
+  <updated>2022-05-02T03:42:27.502Z</updated>
   <id>https://limeya.github.io/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>GAMES101-08-1：Shading - Shading Frequencies</title>
+    <link href="https://limeya.github.io/2022/05/01/games101-08-1-shading-shading-frequencies/"/>
+    <id>https://limeya.github.io/2022/05/01/games101-08-1-shading-shading-frequencies/</id>
+    <published>2022-05-01T07:00:00.000Z</published>
+    <updated>2022-05-02T03:42:27.502Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;问题&quot;&gt;&lt;a href=&quot;#问题&quot; class=&quot;headerlink&quot; title=&quot;问题&quot;&gt;&lt;/a&gt;问题&lt;/h1&gt;&lt;p&gt;前面的Blinn-Phong Model是针对单个shading</summary>
+        
+      
+    
+    
+    
+    <category term="博客" scheme="https://limeya.github.io/categories/%E5%8D%9A%E5%AE%A2/"/>
+    
+    
+    <category term="计算机图形学" scheme="https://limeya.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/"/>
+    
+    <category term="Shading" scheme="https://limeya.github.io/tags/Shading/"/>
+    
+  </entry>
   
   <entry>
     <title>GAMES101-07：Shading - Blinn-Phong Model</title>

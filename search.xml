@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>GAMES101-08-1：Shading - Shading Frequencies</title>
+      <link href="/2022/05/01/games101-08-1-shading-shading-frequencies/"/>
+      <url>/2022/05/01/games101-08-1-shading-shading-frequencies/</url>
+      
+        <content type="html"><![CDATA[<h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><p>前面的Blinn-Phong Model是针对单个shading point进行着色，下一步是针对具体的物体进行着色。</p><p>对于同样的几何物体，不同的着色频率会导致不同的结果，如下图：</p><p><img src="/images/games101/08/1/problem.png" alt="对真实物理对象着色时的问题"></p><ul><li>图1是针对一个面进行着色，即在一个面上只着色一次；</li><li>图2是针对三角形的顶点进行着色，然后三角形内部通过插值补全其他的着色区域；</li><li>图3是针对每个像素进行着色，通过计算三角形顶点的法线方向，然后对每个像素的法线方向进行插值，然后进行着色；</li></ul><p>这三种方法，效果是越来越好，但是计算量也是越来越大。</p><h1 id="Flat-shading-shade-each-triangle"><a href="#Flat-shading-shade-each-triangle" class="headerlink" title="Flat shading: shade each triangle"></a>Flat shading: shade each triangle</h1><ul><li>Triangle face is flat — one normal vector</li><li>Not good for smooth surfaces</li></ul><p><img src="/images/games101/08/1/flat.png" alt="Flat shading的效果"></p><h1 id="Gouraud-shading-shade-each-vertex"><a href="#Gouraud-shading-shade-each-vertex" class="headerlink" title="Gouraud shading: shade each vertex"></a>Gouraud shading: shade each vertex</h1><ul><li>Interpolate colors from vertices across triangle<ul><li>插值的内容在后续的课程中提供；</li></ul></li><li>Each vertex has a normal vector</li></ul><p><img src="/images/games101/08/1/gouraud.png" alt="Gouraud shading的效果"></p><h2 id="Defining-Per-Vertex-Normal-Vectors"><a href="#Defining-Per-Vertex-Normal-Vectors" class="headerlink" title="Defining Per-Vertex Normal Vectors"></a>Defining Per-Vertex Normal Vectors</h2><h3 id="From-the-underlying-geometry"><a href="#From-the-underlying-geometry" class="headerlink" title="From the underlying geometry"></a>From the underlying geometry</h3><p>Best to get vertex normals from the underlying geometry：过于理想；</p><ul><li>e.g. consider a sphere</li></ul><p><img src="/images/games101/08/1/geometry_normal.png" alt="利用平面所覆盖的图形计算法线向量"></p><h3 id="利用邻居进行平均"><a href="#利用邻居进行平均" class="headerlink" title="利用邻居进行平均"></a>利用邻居进行平均</h3><p>一般化的方法： infer vertex normals from triangle faces</p><ul><li>简单方法: average surrounding face normals；  其中 N_v是顶点的法线向量，$N_i$ 是该顶点相邻的三角形的法线向量。计算完成后，需要将得到的法线向量归一化，因为只关心方向。</li></ul><p>$$<br>N_v = \frac{\sum_{i}{}N_i}{\Vert \sum_{i}{}N_i \Vert}<br>$$</p><p><img src="/images/games101/08/1/vertex_normal.png" alt="计算Vertex的法线向量"></p><ul><li>加权平均：按照三角形面积进行法线向量的平均；</li></ul><h1 id="Phong-shading-shade-each-pixel"><a href="#Phong-shading-shade-each-pixel" class="headerlink" title="Phong shading: shade each pixel"></a>Phong shading: shade each pixel</h1><ul><li>Interpolate normal vectors across each triangle</li><li>Compute full shading model at each pixel</li><li>Not the Blinn-Phong Reflectance Model：与Phong shading均为同一个人提出的；</li></ul><p><img src="/images/games101/08/1/phong.png" alt="Phong shading的效果"></p><h2 id="Defining-Per-Pixel-Normal-Vectors"><a href="#Defining-Per-Pixel-Normal-Vectors" class="headerlink" title="Defining Per-Pixel Normal Vectors"></a>Defining Per-Pixel Normal Vectors</h2><p>根据之前得到了三角形顶点的法线向量，可以利用顶点的法线向量进一步得到每个像素的向量，这里需要利用 Barycentric interpolation of vertex normals 来完成，后续会介绍。</p><h1 id="对比"><a href="#对比" class="headerlink" title="对比"></a>对比</h1><p>这三种方法不一定是哪种一定最好，如下图：当物体的顶点很多时，或者三角形很密集时，使用简单的Face shading效果也不错。</p><p><img src="/images/games101/08/1/compare.png" alt="三种着色频率效果的对比"></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 博客 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 计算机图形学 </tag>
+            
+            <tag> Shading </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>GAMES101-07：Shading - Blinn-Phong Model</title>
       <link href="/2022/05/01/games101-07-shading-blinn-phong-model/"/>
       <url>/2022/05/01/games101-07-shading-blinn-phong-model/</url>
