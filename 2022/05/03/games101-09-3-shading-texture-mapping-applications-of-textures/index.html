@@ -4,8 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="GAMES101-07：Shading - Blinn-Phong Model, LifeHit">
-    <meta name="description" content="GAMES101-第7节，介绍计算机图形学用于着色的Blinn-Phong Model。">
+    <meta name="keywords" content="GAMES101-09-3：Shading - Texture Mapping - Applications of Textures, LifeHit">
+    <meta name="description" content="GAMES101-第9节第3部分，介绍图形学中纹理映射的泛化理解和进一步应用。">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -28,7 +28,7 @@
 </script>
 
 
-    <title>GAMES101-07：Shading - Blinn-Phong Model | LifeHit</title>
+    <title>GAMES101-09-3：Shading - Texture Mapping - Applications of Textures | LifeHit</title>
     <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/limeya/limeya.github.io/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/limeya/limeya.github.io/libs/awesome/css/all.min.css">
@@ -214,12 +214,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://cdn.jsdelivr.net/gh/limeya/limeya.github.io/medias/featureimages/13.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://cdn.jsdelivr.net/gh/limeya/limeya.github.io/medias/featureimages/2.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">GAMES101-07：Shading - Blinn-Phong Model</h1>
+                    <h1 class="description center-align post-title">GAMES101-09-3：Shading - Texture Mapping - Applications of Textures</h1>
                 </div>
             </div>
         </div>
@@ -343,8 +343,8 @@
                                 <span class="chip bg-color">Shading</span>
                             </a>
                         
-                            <a href="/tags/Blinn-Phong-Model/">
-                                <span class="chip bg-color">Blinn-Phong Model</span>
+                            <a href="/tags/Texture-Mapping/">
+                                <span class="chip bg-color">Texture Mapping</span>
                             </a>
                         
                     </div>
@@ -368,7 +368,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-05-01
+                    2022-05-03
                 </div>
                 
 
@@ -377,14 +377,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    971
+                    1k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    3 分
+                    4 分
                 </div>
                 
 
@@ -404,85 +404,82 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="Shading含义"><a href="#Shading含义" class="headerlink" title="Shading含义"></a>Shading含义</h1><ul>
-<li>Merriam-Webster Dictionary  The darkening or coloring of an illustration or diagram with parallel lines or a block of color</li>
-<li>本课定义  The process of applying a material to an object.</li>
-</ul>
-<h1 id="Blinn-Phong-Reflectance-Model"><a href="#Blinn-Phong-Reflectance-Model" class="headerlink" title="Blinn-Phong Reflectance Model"></a>Blinn-Phong Reflectance Model</h1><h2 id="Perceptual-Observations"><a href="#Perceptual-Observations" class="headerlink" title="Perceptual Observations"></a>Perceptual Observations</h2><ul>
-<li>Specular highlights 高光</li>
-<li>Diffuse reflection: 漫反射</li>
-<li>Ambient lighting：环境光照，未被光源照亮的地方应该是黑暗的，但是一些间接光照会使得该地方接收到部分光，在该模型中视为常量；</li>
-</ul>
-<p><img src="/images/games101/07/obser.png" alt="Blinn-Phong Model中的三种元素"></p>
-<h2 id="概念定义"><a href="#概念定义" class="headerlink" title="概念定义"></a>概念定义</h2><h3 id="Shading-point"><a href="#Shading-point" class="headerlink" title="Shading point"></a>Shading point</h3><blockquote>
-<p>Compute light reflected toward camera at a specific <strong>shading point</strong>.</p>
+                <h1 id="Texture的泛化理解"><a href="#Texture的泛化理解" class="headerlink" title="Texture的泛化理解"></a>Texture的泛化理解</h1><blockquote>
+<p>泛化理解texture：<strong>In modern GPUs, texture = memory + range query (filtering)</strong></p>
 </blockquote>
-<p>Inputs:</p>
-<ul>
-<li>Viewer direction, $v$</li>
-<li>Surface normal, $n$</li>
-<li>Light direction, $l$ (for each of many lights)</li>
-<li>Surface parameters (color, shininess, …)：待着色物体的一些性质；</li>
-</ul>
-<p>所有的向量都是单位向量，因为只考虑方向，不考虑大小。</p>
-<p><img src="/images/games101/07/shading_point.png" alt="Shading point"></p>
-<h3 id="Shading-is-Local"><a href="#Shading-is-Local" class="headerlink" title="Shading is Local"></a>Shading is Local</h3><p>着色是局部，怎么理解？即着色是针对shading point来说的，不考虑其他因素，例如：遮挡、背影等，即不同的点的着色过程是彼此独立的，之间没有关系。不会因为一些物体遮挡另一些物体导致无法着色。</p>
-<p><img src="/images/games101/07/local.png" alt="Shading不考虑阴影"></p>
-<h1 id="Diffuse-Reflection"><a href="#Diffuse-Reflection" class="headerlink" title="Diffuse Reflection"></a>Diffuse Reflection</h1><h2 id="假设"><a href="#假设" class="headerlink" title="假设"></a>假设</h2><p>Light is scattered uniformly in all directions</p>
-<ul>
-<li>Surface color is the same for all viewing directions</li>
-</ul>
-<p><img src="/images/games101/07/diffuse.png" alt="Diffuse Reflection"></p>
-<h2 id="Lambertian-Shading"><a href="#Lambertian-Shading" class="headerlink" title="Lambertian Shading"></a><strong>Lambertian Shading</strong></h2><h3 id="Lambert’s-cosine-law"><a href="#Lambert’s-cosine-law" class="headerlink" title="Lambert’s cosine law"></a>Lambert’s cosine law</h3><p>在光的传播中，有多少光被shading point接收了？取决于shading point的法线角度和光的传输方向。</p>
-<p><img src="/images/games101/07/lambert.png" alt="Lambert’s cosine law"></p>
-<h3 id="光的能量传递"><a href="#光的能量传递" class="headerlink" title="光的能量传递"></a>光的能量传递</h3><blockquote>
-<p>假设：光在真空中传递，没有能量损失，因此光的能量在不同的时间点，在不同的范围内是守恒的。</p>
+<p>即，纹理不仅仅用在图像上，可以是任意的内存数据和对应的范围查询方法。</p>
+<p>基于这种理解，texture其实是：</p>
+<blockquote>
+<p><strong>General method to bring data to fragment calculations.</strong></p>
 </blockquote>
-<p>设定距离光源长度为1的球面上，单位面积接收的光的能量为 $I$。在距离光源长度为 $r^2$ 的球面上单位面积上的光的能量是 $\frac{I}{r^2}$ 。</p>
-<p><img src="/images/games101/07/intensity.png" alt="假设光的能量传递没有损失"></p>
-<h3 id="漫发射的光"><a href="#漫发射的光" class="headerlink" title="漫发射的光"></a>漫发射的光</h3><p>考虑的因素：</p>
+<p>可以在很多的场景中使用：</p>
 <ul>
-<li>shading point距离光源的距离；</li>
-<li>光源入射的角度：也就是光线方向与shading point法线的夹角，这里只考虑反射，不考虑折射；</li>
-<li>shading point自身的特性：其可能吸收部分光，并不会将所有的光全部反射出去；</li>
-<li>Shading independent of view direction：即观察者从任何方向看都会得到一致的结果；</li>
+<li>Environment lighting</li>
+<li>Store microgeometry</li>
+<li>Procedural textures</li>
+<li>Solid modeling</li>
+<li>Volume rendering</li>
 </ul>
-<p><img src="/images/games101/07/diffuse_term.png" alt="Diffuse Term"></p>
-<p>注意：</p>
+<h1 id="Environment-lighting"><a href="#Environment-lighting" class="headerlink" title="Environment lighting"></a>Environment lighting</h1><p>对于在着色模型中，将环境光视为常数，与其他两项相加共同完成着色过程。通过纹理可以记录环境光，然后应用到任意的渲染物体上，这种方法比之前应用点光源的效果要好很多。</p>
+<h2 id="例子：Environment-Map"><a href="#例子：Environment-Map" class="headerlink" title="例子：Environment Map"></a>例子：Environment Map</h2><p><img src="/images/games101/09/3/environment_map.png" alt="Environment Map"></p>
+<h2 id="假设"><a href="#假设" class="headerlink" title="假设"></a>假设</h2><p>用纹理描述环境光时，假设所有光照均来自无限远处。这种假设使得光照均来自同一个方向，即光照方向的不同不会对环境光的记录产生影响。</p>
+<h2 id="记录环境光"><a href="#记录环境光" class="headerlink" title="记录环境光"></a>记录环境光</h2><h3 id="Spherical-Environment-Map"><a href="#Spherical-Environment-Map" class="headerlink" title="Spherical Environment Map"></a><strong>Spherical Environment Map</strong></h3><p>将环境光照存储在球面上，然后将其展开，之后贴到不同的物体上。但是这种方法在靠近球的极点的位置上，会出现扭曲的现象。</p>
+<p><img src="/images/games101/09/3/spherical_map.png" alt="Spherical Environment Map"></p>
+<p><img src="/images/games101/09/3/distortion.png" alt="球面展开后的扭曲现象"></p>
+<h3 id="解决方法：Cube-Map"><a href="#解决方法：Cube-Map" class="headerlink" title="解决方法：Cube Map"></a><strong>解决方法：Cube Map</strong></h3><p><img src="/images/games101/09/3/cube_map.png" alt="Cube Map"></p>
+<blockquote>
+<p>A vector maps to cube point along that direction.<br>The cube is textured with 6 square texture maps.</p>
+</blockquote>
+<p>简单来说，在球体外切一个立方体，然后将通过球体记录的信息映射到该立方体中。</p>
+<p>这种方法：</p>
 <ul>
-<li>该推导是一个经验公式，并不代表它在数学上是正确的（所有模型都是错的，但有一些有用）；</li>
-<li>其中，$k_d$ 作为漫反射系数决定了亮度和颜色；  <img src="/images/games101/07/kd.png" alt="漫反射系数的影响"></li>
-<li>$max(…)$ 决定了不考虑光从shading point底部射入的情况，即折射的情况；</li>
+<li>使得扭曲现象得到缓解；</li>
+<li>但是需要增加计算：需要找到球面上的方向信息映射到立方体的哪个面上；</li>
 </ul>
-<h1 id="Specular-Term"><a href="#Specular-Term" class="headerlink" title="Specular Term"></a>Specular Term</h1><h2 id="何时出现高光"><a href="#何时出现高光" class="headerlink" title="何时出现高光"></a>何时出现高光</h2><p>“高光”表示shading point所在的平面相对较光滑，因此可以近似为镜面反射。当观察方向与镜面反射的方向趋近时，可以看到高光，即：</p>
+<p><img src="/images/games101/09/3/tt6.png" alt="Cube Map各个面上图片展开"></p>
+<h1 id="Store-microgeometry"><a href="#Store-microgeometry" class="headerlink" title="Store microgeometry"></a>Store microgeometry</h1><p>纹理不仅可以存储颜色信息，还可以用于存储几何信息。</p>
+<h2 id="Bump-Normal-mapping"><a href="#Bump-Normal-mapping" class="headerlink" title="Bump / Normal mapping"></a>Bump / Normal mapping</h2><h3 id="Idea"><a href="#Idea" class="headerlink" title="Idea"></a>Idea</h3><p>用于定义shading surface中的shading point的相对高度，从而实现“凹凸不平”的效果，但是这种实现并没有改变原本的几何形状，而是<strong>Fake the detailed geometry</strong>。</p>
+<p>这种方法的好处在于：</p>
 <ul>
-<li>Intensity depends on view direction</li>
-<li>Bright near mirror reflection direction</li>
+<li>没有改变几何物体形状，但是通过复杂的纹理可以实现相同的目标。<blockquote>
+<p>Adding surface detail without adding more triangles</p>
+</blockquote>
+</li>
 </ul>
-<p><img src="/images/games101/07/specular.png" alt="Specular highlights"></p>
-<h2 id="如何对高光建模"><a href="#如何对高光建模" class="headerlink" title="如何对高光建模"></a>如何对高光建模</h2><p>想法转换：对于将<strong>观察方向与镜面反射的方向趋近，表示为入射和观察方向的半程向量与shading point的法线方向趋近。</strong>（因为之前的）</p>
-<p><img src="/images/games101/07/specular_term.png" alt="Specular Term"></p>
-<p>注意：</p>
+<p>其核心idea在于：</p>
 <ul>
-<li>衡量向量接近：使用dot product；</li>
-<li>这里没有考虑有多少光被吸收，类似于漫反射中需要对 $l,n$ 进行dot product，做了简化；</li>
-<li>$k_s$ 是surface的镜面反射系数，与漫反射中的 $k_d$ 含义相同；  <img src="/images/games101/07/ks_p.png" alt="镜面反射系数和p的影响"></li>
-<li>指数 $p$ 的作用：increasing p narrows the reflection lobe 限制高光的范围，即高光只在特定的范围内出现，超过这个范围则看不到，该指数使得能够快速衰减高光的值。一般取100，200等。  <img src="/images/games101/07/p.png" alt="指数p能衰减高光"></li>
+<li>Perturb surface normal per pixel (for shading computations only)</li>
+<li>“Height shift” per texel defined by a texture</li>
 </ul>
-<h1 id="Ambient-Term"><a href="#Ambient-Term" class="headerlink" title="Ambient Term"></a>Ambient Term</h1><p>Shading that does not depend on anything: </p>
+<h3 id="如何计算新的法线"><a href="#如何计算新的法线" class="headerlink" title="如何计算新的法线"></a>如何计算新的法线</h3><p>基于这种想法，一个点的高度通过纹理信息被“修改”了，从而也修改了对应的法线信息。那么一个问题是：How to modify normal vector?</p>
+<p><img src="/images/games101/09/3/normal_compute.png" alt="如何计算新的法线"></p>
+<p>根据不同的应用场景，可以分为：</p>
 <ul>
-<li>Add constant color to account for disregarded<br>illumination and fill in black shadows</li>
-<li>This is approximate / fake!</li>
+<li>in flatland (1D)<ul>
+<li>假设原始着色平面的法线向量沿着y轴方向 $n(p) = (0, 1)$；</li>
+<li>对于加入纹理信息后，一个点p的相对高度发生变化，其导数方向为：每移动1，则高度变化为 $dp = c \cdot [h(p+1) - h(p)]$，因此导数方向为 $(1, -\text{dp})$，其中 $c$ 是放缩因子。</li>
+<li>根据旋转变换，对应该点的法线向量为 $n(p) = (-dp, 1).\text{normalized}()$；</li>
 </ul>
-<p><img src="/images/games101/07/ambient_term.png" alt="Ambient Term"></p>
-<p>注意，这里的环境光：</p>
-<ul>
-<li>与光的入射方向无关；</li>
-<li>与观察方向也无关；</li>
-<li>其根本作用是保证未被光照到的地方不会黑暗；</li>
+  <img src="/images/games101/09/3/flat_normal.png" alt="Normal Compute in Flatland"></li>
+<li>in 3D  在真实的纹理中计算导数时，需要同时在纹理坐标的 $u,v$ 方向同时计算。  同样的过程：<ul>
+<li>假设原始着色平面的法线向量 $n(p) = (0,0, 1)$；</li>
+<li>p点在纹理上的导数方向：  $$<br>  \begin{array}{l}<br>  dp / du= c_1 \cdot [h(\mathbf{u}+1)-h(\mathbf{u})] \\<br>  dp / dv=c_2 \cdot [h(\mathbf{v}+1)-h(\mathbf{v})]\end{array}<br>  $$</li>
+<li>最终新的法线方向为：$n = (-dp/du, -dp/dv, 1).\text{normalized}()$</li>
 </ul>
-<h1 id="总结：Blinn-Phong-Reflection-Model"><a href="#总结：Blinn-Phong-Reflection-Model" class="headerlink" title="总结：Blinn-Phong Reflection Model"></a>总结：Blinn-Phong Reflection Model</h1><p>$$<br>\begin{aligned}L &amp;=L_{a}+L_{d}+L_{s} \\ &amp;=<br>k_{a} I_{a}+k_{d}\left( \frac{I}{r^{2}} \right) \max (0, \mathbf{n} \cdot \mathbf{l})+k_{s}\left(\frac{I}{r^2} \right) \max (0, \mathbf{n} \cdot \mathbf{h})^{p}\end{aligned}<br>$$</p>
-<p><img src="/images/games101/07/summary.png" alt="Blinn-Phong Reflection Model中不同项对应的效果"></p>
+</li>
+</ul>
+<p>在该过程中所有的向量计算均针对的是local coordinate，因此为了应用需要将该坐标变换到真实世界中的坐标中。</p>
+<h2 id="Displacement-mapping"><a href="#Displacement-mapping" class="headerlink" title="Displacement mapping"></a>Displacement mapping</h2><h3 id="Idea-1"><a href="#Idea-1" class="headerlink" title="Idea"></a>Idea</h3><ul>
+<li>a more advanced approach</li>
+<li>Uses the same texture as in bumping mapping</li>
+<li>Actually moves the vertices：相比于bumping mapping不改变几何形状，这里的方法是将shading point进行移动，而不是虚拟操作。两种方法的效果对比如下：  <img src="/images/games101/09/3/map_compare.png" alt="Bump vs Displacement mapping"></li>
+</ul>
+<h3 id="代价"><a href="#代价" class="headerlink" title="代价"></a>代价</h3><ul>
+<li>要求几何形状中的三角形足够密集、细致：这样对于不同的纹理图片中调整的高度，待渲染对象中的三角形不会因为过大出现走样问题；</li>
+</ul>
+<h3 id="一种优化方法"><a href="#一种优化方法" class="headerlink" title="一种优化方法"></a>一种优化方法</h3><ul>
+<li>当三角形不够细致时，可以动态检测三角形是否应该更小和细致？在Direct X中可以动态调整三角形的细致程度。</li>
+</ul>
 
                 
             </div>
@@ -509,7 +506,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://limeya.github.io/2022/05/01/games101-07-shading-blinn-phong-model/">https://limeya.github.io/2022/05/01/games101-07-shading-blinn-phong-model/</a>
+                    <a href="https://limeya.github.io/2022/05/03/games101-09-3-shading-texture-mapping-applications-of-textures/">https://limeya.github.io/2022/05/03/games101-09-3-shading-texture-mapping-applications-of-textures/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -555,8 +552,8 @@
                                     <span class="chip bg-color">Shading</span>
                                 </a>
                             
-                                <a href="/tags/Blinn-Phong-Model/">
-                                    <span class="chip bg-color">Blinn-Phong Model</span>
+                                <a href="/tags/Texture-Mapping/">
+                                    <span class="chip bg-color">Texture Mapping</span>
                                 </a>
                             
                         </div>
@@ -602,29 +599,88 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2022/05/01/games101-08-1-shading-shading-frequencies/">
+                <a href="/2022/05/03/games101-09-3-shading-texture-mapping-applications-of-textures/">
                     <div class="card-image">
                         
                         
-                        <img src="https://cdn.jsdelivr.net/gh/limeya/limeya.github.io/medias/featureimages/15.jpg" class="responsive-img" alt="GAMES101-08-1：Shading - Shading Frequencies">
+                        <img src="https://cdn.jsdelivr.net/gh/limeya/limeya.github.io/medias/featureimages/2.jpg" class="responsive-img" alt="GAMES101-09-3：Shading - Texture Mapping - Applications of Textures">
                         
-                        <span class="card-title">GAMES101-08-1：Shading - Shading Frequencies</span>
+                        <span class="card-title">GAMES101-09-3：Shading - Texture Mapping - Applications of Textures</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            GAMES101-第8节第1部分，介绍计算机图形学中的Shading Frequencies。
+                            GAMES101-第9节第3部分，介绍图形学中纹理映射的泛化理解和进一步应用。
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-05-01
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-05-03
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E5%8D%9A%E5%AE%A2/" class="post-category">
+                                    博客
+                                </a>
+                            
+                            
                         </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/">
+                        <span class="chip bg-color">计算机图形学</span>
+                    </a>
+                    
+                    <a href="/tags/Shading/">
+                        <span class="chip bg-color">Shading</span>
+                    </a>
+                    
+                    <a href="/tags/Texture-Mapping/">
+                        <span class="chip bg-color">Texture Mapping</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2022/05/03/games101-09-2-shading-texture-mapping-applying-textures/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="https://cdn.jsdelivr.net/gh/limeya/limeya.github.io/medias/featureimages/17.jpg" class="responsive-img" alt="GAMES101-09-2：Shading - Texture Mapping - Applying Textures">
+                        
+                        <span class="card-title">GAMES101-09-2：Shading - Texture Mapping - Applying Textures</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            GAMES101-第9节第2部分，介绍图形学中如何应用到纹理映射以及遇到的问题。
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-05-03
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -648,57 +704,8 @@
                         <span class="chip bg-color">Shading</span>
                     </a>
                     
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/2022/04/30/games101-06-2-rasterization-z-buffering/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="https://cdn.jsdelivr.net/gh/limeya/limeya.github.io/medias/featureimages/8.jpg" class="responsive-img" alt="GAMES101-06-2：Rasterization - Z-Buffering">
-                        
-                        <span class="card-title">GAMES101-06-2：Rasterization - Z-Buffering</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            GAMES101-第6节第2部分，介绍计算机图形学中，光栅化过程中遮挡使用的Z-buffering。
-                        
-                    </div>
-                    <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-04-30
-                            </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/%E5%8D%9A%E5%AE%A2/" class="post-category">
-                                    博客
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/">
-                        <span class="chip bg-color">计算机图形学</span>
-                    </a>
-                    
-                    <a href="/tags/%E5%85%89%E6%A0%85%E5%8C%96/">
-                        <span class="chip bg-color">光栅化</span>
+                    <a href="/tags/Texture-Mapping/">
+                        <span class="chip bg-color">Texture Mapping</span>
                     </a>
                     
                 </div>

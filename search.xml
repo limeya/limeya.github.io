@@ -4,6 +4,35 @@
   
     
     <entry>
+      <title>GAMES101-09-3：Shading - Texture Mapping - Applications of Textures</title>
+      <link href="/2022/05/03/games101-09-3-shading-texture-mapping-applications-of-textures/"/>
+      <url>/2022/05/03/games101-09-3-shading-texture-mapping-applications-of-textures/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Texture的泛化理解"><a href="#Texture的泛化理解" class="headerlink" title="Texture的泛化理解"></a>Texture的泛化理解</h1><blockquote><p>泛化理解texture：<strong>In modern GPUs, texture = memory + range query (filtering)</strong></p></blockquote><p>即，纹理不仅仅用在图像上，可以是任意的内存数据和对应的范围查询方法。</p><p>基于这种理解，texture其实是：</p><blockquote><p><strong>General method to bring data to fragment calculations.</strong></p></blockquote><p>可以在很多的场景中使用：</p><ul><li>Environment lighting</li><li>Store microgeometry</li><li>Procedural textures</li><li>Solid modeling</li><li>Volume rendering</li></ul><h1 id="Environment-lighting"><a href="#Environment-lighting" class="headerlink" title="Environment lighting"></a>Environment lighting</h1><p>对于在着色模型中，将环境光视为常数，与其他两项相加共同完成着色过程。通过纹理可以记录环境光，然后应用到任意的渲染物体上，这种方法比之前应用点光源的效果要好很多。</p><h2 id="例子：Environment-Map"><a href="#例子：Environment-Map" class="headerlink" title="例子：Environment Map"></a>例子：Environment Map</h2><p><img src="/images/games101/09/3/environment_map.png" alt="Environment Map"></p><h2 id="假设"><a href="#假设" class="headerlink" title="假设"></a>假设</h2><p>用纹理描述环境光时，假设所有光照均来自无限远处。这种假设使得光照均来自同一个方向，即光照方向的不同不会对环境光的记录产生影响。</p><h2 id="记录环境光"><a href="#记录环境光" class="headerlink" title="记录环境光"></a>记录环境光</h2><h3 id="Spherical-Environment-Map"><a href="#Spherical-Environment-Map" class="headerlink" title="Spherical Environment Map"></a><strong>Spherical Environment Map</strong></h3><p>将环境光照存储在球面上，然后将其展开，之后贴到不同的物体上。但是这种方法在靠近球的极点的位置上，会出现扭曲的现象。</p><p><img src="/images/games101/09/3/spherical_map.png" alt="Spherical Environment Map"></p><p><img src="/images/games101/09/3/distortion.png" alt="球面展开后的扭曲现象"></p><h3 id="解决方法：Cube-Map"><a href="#解决方法：Cube-Map" class="headerlink" title="解决方法：Cube Map"></a><strong>解决方法：Cube Map</strong></h3><p><img src="/images/games101/09/3/cube_map.png" alt="Cube Map"></p><blockquote><p>A vector maps to cube point along that direction.<br>The cube is textured with 6 square texture maps.</p></blockquote><p>简单来说，在球体外切一个立方体，然后将通过球体记录的信息映射到该立方体中。</p><p>这种方法：</p><ul><li>使得扭曲现象得到缓解；</li><li>但是需要增加计算：需要找到球面上的方向信息映射到立方体的哪个面上；</li></ul><p><img src="/images/games101/09/3/tt6.png" alt="Cube Map各个面上图片展开"></p><h1 id="Store-microgeometry"><a href="#Store-microgeometry" class="headerlink" title="Store microgeometry"></a>Store microgeometry</h1><p>纹理不仅可以存储颜色信息，还可以用于存储几何信息。</p><h2 id="Bump-Normal-mapping"><a href="#Bump-Normal-mapping" class="headerlink" title="Bump / Normal mapping"></a>Bump / Normal mapping</h2><h3 id="Idea"><a href="#Idea" class="headerlink" title="Idea"></a>Idea</h3><p>用于定义shading surface中的shading point的相对高度，从而实现“凹凸不平”的效果，但是这种实现并没有改变原本的几何形状，而是<strong>Fake the detailed geometry</strong>。</p><p>这种方法的好处在于：</p><ul><li>没有改变几何物体形状，但是通过复杂的纹理可以实现相同的目标。<blockquote><p>Adding surface detail without adding more triangles</p></blockquote></li></ul><p>其核心idea在于：</p><ul><li>Perturb surface normal per pixel (for shading computations only)</li><li>“Height shift” per texel defined by a texture</li></ul><h3 id="如何计算新的法线"><a href="#如何计算新的法线" class="headerlink" title="如何计算新的法线"></a>如何计算新的法线</h3><p>基于这种想法，一个点的高度通过纹理信息被“修改”了，从而也修改了对应的法线信息。那么一个问题是：How to modify normal vector?</p><p><img src="/images/games101/09/3/normal_compute.png" alt="如何计算新的法线"></p><p>根据不同的应用场景，可以分为：</p><ul><li>in flatland (1D)<ul><li>假设原始着色平面的法线向量沿着y轴方向 $n(p) = (0, 1)$；</li><li>对于加入纹理信息后，一个点p的相对高度发生变化，其导数方向为：每移动1，则高度变化为 $dp = c \cdot [h(p+1) - h(p)]$，因此导数方向为 $(1, -\text{dp})$，其中 $c$ 是放缩因子。</li><li>根据旋转变换，对应该点的法线向量为 $n(p) = (-dp, 1).\text{normalized}()$；</li></ul>  <img src="/images/games101/09/3/flat_normal.png" alt="Normal Compute in Flatland"></li><li>in 3D  在真实的纹理中计算导数时，需要同时在纹理坐标的 $u,v$ 方向同时计算。  同样的过程：<ul><li>假设原始着色平面的法线向量 $n(p) = (0,0, 1)$；</li><li>p点在纹理上的导数方向：  $$<br>  \begin{array}{l}<br>  dp / du= c_1 \cdot [h(\mathbf{u}+1)-h(\mathbf{u})] \\<br>  dp / dv=c_2 \cdot [h(\mathbf{v}+1)-h(\mathbf{v})]\end{array}<br>  $$</li><li>最终新的法线方向为：$n = (-dp/du, -dp/dv, 1).\text{normalized}()$</li></ul></li></ul><p>在该过程中所有的向量计算均针对的是local coordinate，因此为了应用需要将该坐标变换到真实世界中的坐标中。</p><h2 id="Displacement-mapping"><a href="#Displacement-mapping" class="headerlink" title="Displacement mapping"></a>Displacement mapping</h2><h3 id="Idea-1"><a href="#Idea-1" class="headerlink" title="Idea"></a>Idea</h3><ul><li>a more advanced approach</li><li>Uses the same texture as in bumping mapping</li><li>Actually moves the vertices：相比于bumping mapping不改变几何形状，这里的方法是将shading point进行移动，而不是虚拟操作。两种方法的效果对比如下：  <img src="/images/games101/09/3/map_compare.png" alt="Bump vs Displacement mapping"></li></ul><h3 id="代价"><a href="#代价" class="headerlink" title="代价"></a>代价</h3><ul><li>要求几何形状中的三角形足够密集、细致：这样对于不同的纹理图片中调整的高度，待渲染对象中的三角形不会因为过大出现走样问题；</li></ul><h3 id="一种优化方法"><a href="#一种优化方法" class="headerlink" title="一种优化方法"></a>一种优化方法</h3><ul><li>当三角形不够细致时，可以动态检测三角形是否应该更小和细致？在Direct X中可以动态调整三角形的细致程度。</li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 博客 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 计算机图形学 </tag>
+            
+            <tag> Shading </tag>
+            
+            <tag> Texture Mapping </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>GAMES101-09-2：Shading - Texture Mapping - Applying Textures</title>
       <link href="/2022/05/03/games101-09-2-shading-texture-mapping-applying-textures/"/>
       <url>/2022/05/03/games101-09-2-shading-texture-mapping-applying-textures/</url>

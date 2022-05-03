@@ -6,7 +6,7 @@
   <link href="https://limeya.github.io/atom.xml" rel="self"/>
   
   <link href="https://limeya.github.io/"/>
-  <updated>2022-05-03T06:28:45.389Z</updated>
+  <updated>2022-05-03T06:43:20.974Z</updated>
   <id>https://limeya.github.io/</id>
   
   <author>
@@ -15,6 +15,35 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>GAMES101-09-3：Shading - Texture Mapping - Applications of Textures</title>
+    <link href="https://limeya.github.io/2022/05/03/games101-09-3-shading-texture-mapping-applications-of-textures/"/>
+    <id>https://limeya.github.io/2022/05/03/games101-09-3-shading-texture-mapping-applications-of-textures/</id>
+    <published>2022-05-03T05:00:00.000Z</published>
+    <updated>2022-05-03T06:43:20.974Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;Texture的泛化理解&quot;&gt;&lt;a href=&quot;#Texture的泛化理解&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="博客" scheme="https://limeya.github.io/categories/%E5%8D%9A%E5%AE%A2/"/>
+    
+    
+    <category term="计算机图形学" scheme="https://limeya.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/"/>
+    
+    <category term="Shading" scheme="https://limeya.github.io/tags/Shading/"/>
+    
+    <category term="Texture Mapping" scheme="https://limeya.github.io/tags/Texture-Mapping/"/>
+    
+  </entry>
   
   <entry>
     <title>GAMES101-09-2：Shading - Texture Mapping - Applying Textures</title>
@@ -531,33 +560,6 @@
     <category term="博客" scheme="https://limeya.github.io/tags/%E5%8D%9A%E5%AE%A2/"/>
     
     <category term="写作" scheme="https://limeya.github.io/tags/%E5%86%99%E4%BD%9C/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>知识图谱表示学习：评估方法</title>
-    <link href="https://limeya.github.io/2021/11/17/zhi-shi-tu-pu-biao-shi-xue-xi-ping-gu-fang-fa/"/>
-    <id>https://limeya.github.io/2021/11/17/zhi-shi-tu-pu-biao-shi-xue-xi-ping-gu-fang-fa/</id>
-    <published>2021-11-17T12:03:00.000Z</published>
-    <updated>2021-11-17T13:08:17.071Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;背景介绍&quot;&gt;&lt;a href=&quot;#背景介绍&quot; class=&quot;headerlink&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="算法研究" scheme="https://limeya.github.io/categories/%E7%AE%97%E6%B3%95%E7%A0%94%E7%A9%B6/"/>
-    
-    
-    <category term="知识图谱" scheme="https://limeya.github.io/tags/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/"/>
-    
-    <category term="表示学习" scheme="https://limeya.github.io/tags/%E8%A1%A8%E7%A4%BA%E5%AD%A6%E4%B9%A0/"/>
     
   </entry>
   
