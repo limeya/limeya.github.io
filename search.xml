@@ -4,6 +4,37 @@
   
     
     <entry>
+      <title>GAMES101-09-1：Shading - Texture Mapping - Barycentric coordinates</title>
+      <link href="/2022/05/03/games101-09-1-shading-texture-mapping-barycentric-coordinates/"/>
+      <url>/2022/05/03/games101-09-1-shading-texture-mapping-barycentric-coordinates/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Texture-Mapping"><a href="#Texture-Mapping" class="headerlink" title="Texture Mapping"></a>Texture Mapping</h1><h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>一个物体的不同区域使用了相同的着色模型，但是不同区域的漫反射系数 $k_d$ 不同，该系数的不同会导致出现不同的纹理 texture。</p><p>之前提到的着色模型未过多考虑shading point本身的性质，只提到了漫反射系数、镜面反射系数等，但是着色区域本身存在很多不同的性质，这些性质均会影响shading的效果。因此，本质上纹理是逐shading point改变其自身的性质，使得即便在相同的着色模型下，其着色的效果也会有差异。</p><p>那么如何定义着色区域的不同性质呢？引入纹理映射。</p><h2 id="定义shading-point的基本属性"><a href="#定义shading-point的基本属性" class="headerlink" title="定义shading point的基本属性"></a>定义shading point的基本属性</h2><h3 id="Idea-Surfaces-are-2D"><a href="#Idea-Surfaces-are-2D" class="headerlink" title="Idea: Surfaces are 2D"></a>Idea: Surfaces are 2D</h3><ul><li>Surface lives in 3D world space</li><li>Every 3D surface point also has a place where it goes in the 2D image (<strong>texture</strong>).</li></ul><p><img src="/images/games101/09/1/tt_map.png" alt="Texture Mapping"></p><h2 id="纹理如何应用：Texture-Applied-to-Surface"><a href="#纹理如何应用：Texture-Applied-to-Surface" class="headerlink" title="纹理如何应用：Texture Applied to Surface"></a>纹理如何应用：Texture Applied to Surface</h2><p>需要建立三维物体中的三角形与纹理中的三角形的映射关系，保证两者一一对应，同时尽可能少地出现拉伸等情况。</p><p>这种对应关系可以由艺术家完成创造，或者自动化实现。本课中，默认两者已经建立了映射关系，即物体上的每一点均在纹理上有对应的坐标，只需利用这个关系即可。</p><p><img src="/images/games101/09/1/tt_apply.png" alt="Texture Applied to Surface"></p><h2 id="纹理坐标"><a href="#纹理坐标" class="headerlink" title="纹理坐标"></a>纹理坐标</h2><p>Each triangle vertex is assigned a texture coordinate $(u,v)$，两个方向的坐标均在$(0,1)$内，以便处理，不考虑其真实像素是多少。</p><p><img src="/images/games101/09/1/tt_location.png" alt="纹理坐标"></p><h2 id="Textures-can-be-used-multiple-times"><a href="#Textures-can-be-used-multiple-times" class="headerlink" title="Textures can be used multiple times"></a>Textures can be used multiple times</h2><p>在纹理映射中，物体上的多个区域可能对应相同的纹理区域，即纹理可以使用多次，当多次使用时，会在相同纹理之间出现不必要的界限，因此如何在多次使用中使相同的纹理之间的过度比较平滑是一个问题。</p><h1 id="Interpolation-Across-Triangles"><a href="#Interpolation-Across-Triangles" class="headerlink" title="Interpolation Across Triangles"></a>Interpolation Across Triangles</h1><h2 id="问题-1"><a href="#问题-1" class="headerlink" title="问题"></a>问题</h2><p>到目前为止，有两个应用场景需要进行插值：</p><ul><li>Specify values at vertices  shading frequencies 中的 Gouraud shading和Phong shading分别需要对顶点和像素计算法线向量，然后在三角形内部计算相应的颜色等属性；</li><li>Obtain smoothly varying values across triangles  在三维物体与纹理映射中，三角形的顶点在纹理中有相应的纹理坐标，但是三角形内的区域需要通过插值计算相应的纹理坐标，以实现纹理覆盖到物体表面时，能够自然平滑的过度。</li></ul><h2 id="插值针对的对象"><a href="#插值针对的对象" class="headerlink" title="插值针对的对象"></a>插值针对的对象</h2><blockquote><p>Texture coordinates, colors, normal vectors, …</p></blockquote><p>实际上可以对任意属性进行插值。</p><h2 id="如何插值：Barycentric-coordinates"><a href="#如何插值：Barycentric-coordinates" class="headerlink" title="如何插值：Barycentric coordinates"></a>如何插值：Barycentric coordinates</h2><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><ul><li>首先明确的是，重心坐标是定义在三角形上的，意思是每个三角形都有一个重心坐标系，当三角形不同时，其重心坐标也不同；</li><li>三角形内的任意一点 $(x, y)$ 均可以表示成三角形顶点的线性组合；  $$<br>  (x, y) = \alpha A + \beta B + \gamma C<br>  $$</li><li>其中，称 $(\alpha, \beta, \gamma)$ 为 $(x,y)$ 的重心坐标，其中三者需要满足两个条件：<ul><li>三者相加为1：保证点 $(x,y)$ 在三角形所在的平面上；  $$<br>  \alpha + \beta + \gamma = 1<br>  $$</li><li>三者均为非负值：保证点 $(x,y)$ 在三角形内部；  $$<br>  \alpha \ge 0 \wedge  \beta \ge 0 \wedge \gamma \ge 0<br>  $$</li></ul></li></ul><h3 id="Geometric-viewpoint-—-proportional-areas"><a href="#Geometric-viewpoint-—-proportional-areas" class="headerlink" title="Geometric viewpoint — proportional areas"></a>Geometric viewpoint — proportional areas</h3><p>计算三角形内任意一点的重心坐标，可以从几何面积的角度考虑。</p><p><img src="/images/games101/09/1/area_compute.png" alt="计算任意一点重心坐标"></p><p>三角形的重心的重心坐标：</p><p><img src="/images/games101/09/1/centroid.png" alt="三角形的重心的重心坐标"></p><h3 id="一般化计算公式"><a href="#一般化计算公式" class="headerlink" title="一般化计算公式"></a>一般化计算公式</h3><p><img src="/images/games101/09/1/general_compute.png" alt="重心坐标的一般化计算公式"></p><h3 id="Using-Barycentric-Coordinates"><a href="#Using-Barycentric-Coordinates" class="headerlink" title="Using Barycentric Coordinates"></a>Using Barycentric Coordinates</h3><p>当针对三角形内任意一点计算得到对应的重心坐标后，可以利用该重心坐标对任意的属性进行插值，所谓的插值，在这里指的就是通过对三角形顶点属性的线性组合得到自身的属性。</p><p><img src="/images/games101/09/1/bc_compute.png" alt="重心坐标的应用"></p><h3 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h3><blockquote><p>However, barycentric coordinates are not invariant under projection!</p></blockquote><p>在三角形完成投影后，三角形内任意一点的重心坐标可能发生变化。因此针对3D中的三角形进行插值时，需要利用3D坐标进行插值，而不是利用投影后的2D坐标进行插值，例如：在对3D物体的深度信息时进行插值时。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 博客 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 计算机图形学 </tag>
+            
+            <tag> Shading </tag>
+            
+            <tag> Texture Mapping </tag>
+            
+            <tag> Barycentric coordinates </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>GAMES101-08-2：Shading - Graphics Pipeline</title>
       <link href="/2022/05/01/games101-08-2-shading-graphics-pipeline/"/>
       <url>/2022/05/01/games101-08-2-shading-graphics-pipeline/</url>
