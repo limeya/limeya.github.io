@@ -6,7 +6,7 @@
   <link href="https://limeya.github.io/atom.xml" rel="self"/>
   
   <link href="https://limeya.github.io/"/>
-  <updated>2022-05-03T14:19:51.993Z</updated>
+  <updated>2022-05-05T05:52:40.035Z</updated>
   <id>https://limeya.github.io/</id>
   
   <author>
@@ -15,6 +15,37 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>GAMES101-11-1：Geometry - Curves</title>
+    <link href="https://limeya.github.io/2022/05/04/games101-11-1-geometry-curves/"/>
+    <id>https://limeya.github.io/2022/05/04/games101-11-1-geometry-curves/</id>
+    <published>2022-05-04T11:00:00.000Z</published>
+    <updated>2022-05-05T05:52:40.035Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;Explicit-Representations&quot;&gt;&lt;a href=&quot;#Explicit-Representations&quot; class=&quot;headerlink&quot; title=&quot;Explicit Representations&quot;&gt;&lt;/a&gt;Explicit</summary>
+        
+      
+    
+    
+    
+    <category term="博客" scheme="https://limeya.github.io/categories/%E5%8D%9A%E5%AE%A2/"/>
+    
+    
+    <category term="计算机图形学" scheme="https://limeya.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/"/>
+    
+    <category term="Geometry" scheme="https://limeya.github.io/tags/Geometry/"/>
+    
+    <category term="Curves" scheme="https://limeya.github.io/tags/Curves/"/>
+    
+    <category term="Bézier Curves" scheme="https://limeya.github.io/tags/Bezier-Curves/"/>
+    
+  </entry>
   
   <entry>
     <title>GAMES101-10：Geometry - Implicit Representations</title>
@@ -522,33 +553,6 @@
         
     <summary type="html">&lt;p&gt;文章来源: &lt;a href=&quot;https://arxiv.org/abs/1902.10197v1&quot;&gt;RotatE: Knowledge Graph Embedding by Relational Rotation in Complex Space&lt;/a&gt;&lt;/p&gt;
 &lt;h1</summary>
-        
-      
-    
-    
-    
-    <category term="论文阅读" scheme="https://limeya.github.io/categories/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/"/>
-    
-    
-    <category term="知识图谱" scheme="https://limeya.github.io/tags/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/"/>
-    
-    <category term="表示学习" scheme="https://limeya.github.io/tags/%E8%A1%A8%E7%A4%BA%E5%AD%A6%E4%B9%A0/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>TransE - 简单但有效的知识图谱表示学习方法</title>
-    <link href="https://limeya.github.io/2021/11/19/transe-jian-dan-dan-you-xiao-de-zhi-shi-tu-pu-biao-shi-xue-xi-fang-fa/"/>
-    <id>https://limeya.github.io/2021/11/19/transe-jian-dan-dan-you-xiao-de-zhi-shi-tu-pu-biao-shi-xue-xi-fang-fa/</id>
-    <published>2021-11-19T06:37:00.000Z</published>
-    <updated>2022-02-20T09:10:14.099Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h1&gt;&lt;p&gt;来自论文 NIPS 2013年的 &lt;a</summary>
         
       
     

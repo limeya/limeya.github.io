@@ -4,8 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="GAMES101-08-2：Shading - Graphics Pipeline, LifeHit">
-    <meta name="description" content="GAMES101-第8节第2部分，介绍计算机图形学中的Graphics Pipeline。">
+    <meta name="keywords" content="GAMES101-11-1：Geometry - Curves, LifeHit">
+    <meta name="description" content="GAMES101-第11节的第一部分，介绍图形学中几何的曲线，尤其是贝塞尔曲线。">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -28,7 +28,7 @@
 </script>
 
 
-    <title>GAMES101-08-2：Shading - Graphics Pipeline | LifeHit</title>
+    <title>GAMES101-11-1：Geometry - Curves | LifeHit</title>
     <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/limeya/limeya.github.io/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/limeya/limeya.github.io/libs/awesome/css/all.min.css">
@@ -214,12 +214,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://cdn.jsdelivr.net/gh/limeya/limeya.github.io/medias/featureimages/3.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://cdn.jsdelivr.net/gh/limeya/limeya.github.io/medias/featureimages/13.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">GAMES101-08-2：Shading - Graphics Pipeline</h1>
+                    <h1 class="description center-align post-title">GAMES101-11-1：Geometry - Curves</h1>
                 </div>
             </div>
         </div>
@@ -339,12 +339,16 @@
                                 <span class="chip bg-color">计算机图形学</span>
                             </a>
                         
-                            <a href="/tags/Shading/">
-                                <span class="chip bg-color">Shading</span>
+                            <a href="/tags/Geometry/">
+                                <span class="chip bg-color">Geometry</span>
                             </a>
                         
-                            <a href="/tags/Graphics-Pipeline/">
-                                <span class="chip bg-color">Graphics Pipeline</span>
+                            <a href="/tags/Curves/">
+                                <span class="chip bg-color">Curves</span>
+                            </a>
+                        
+                            <a href="/tags/Bezier-Curves/">
+                                <span class="chip bg-color">Bézier Curves</span>
                             </a>
                         
                     </div>
@@ -368,7 +372,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-05-01
+                    2022-05-04
                 </div>
                 
 
@@ -377,14 +381,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    359
+                    2k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    1 分
+                    8 分
                 </div>
                 
 
@@ -404,43 +408,166 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="Graphics-Pipeline"><a href="#Graphics-Pipeline" class="headerlink" title="Graphics Pipeline"></a>Graphics Pipeline</h1><p>从真实世界场景中的物体到最终的一张图的整个过程，其中涉及不同的操作。</p>
-<p><img src="/images/games101/08/2/pipeline.png" alt="Graphics Pipeline"></p>
+                <h1 id="Explicit-Representations"><a href="#Explicit-Representations" class="headerlink" title="Explicit Representations"></a>Explicit Representations</h1><h2 id="Point-Cloud"><a href="#Point-Cloud" class="headerlink" title="Point Cloud"></a>Point Cloud</h2><ul>
+<li>Easiest representation: list of points $(x,y,z)$<ul>
+<li>不直接对几何表面进行表示，而是对构成图形的点的集合进行表示；</li>
+</ul>
+</li>
+<li>Easily represent any kind of geometry<ul>
+<li>只要点足够多和密集，就能够表示任意的几何物体；</li>
+</ul>
+</li>
+<li>Useful for LARGE datasets (&gt;&gt;1 point/pixel)</li>
+<li>Often converted into polygon mesh</li>
+<li>Difficult to draw in undersampled regions<ul>
+<li>当点不够密集时，则无法构成平面；</li>
+</ul>
+</li>
+</ul>
+<p><img src="/images/games101/11/1/cloud.png" alt="Point Cloud"></p>
+<h2 id="Polygon-Mesh"><a href="#Polygon-Mesh" class="headerlink" title="Polygon Mesh"></a>Polygon Mesh</h2><ul>
+<li>Perhaps most common representation in graphics<ul>
+<li>最广泛的应用</li>
+</ul>
+</li>
+<li>Store vertices &amp; polygons (often triangles or quads)</li>
+<li>Easier to do processing / simulation, adaptive sampling</li>
+<li>More complicated data structures</li>
+</ul>
+<p><img src="/images/games101/11/1/mesh.png" alt="Polygon Mesh"></p>
+<h2 id="The-Wavefront-Object-File-obj-Format"><a href="#The-Wavefront-Object-File-obj-Format" class="headerlink" title="The Wavefront Object File (.obj) Format"></a>The Wavefront Object File (.obj) Format</h2><ul>
+<li>该文件格式用于表示三角形面形成的物体</li>
+<li>Just a text file that specifies vertices, normals, texture coordinates and their connectivities</li>
+<li>其中：<ul>
+<li>v：表示顶点向量；</li>
+<li>vt：表示纹理坐标；</li>
+<li>vn：表示顶点的法线向量；</li>
+<li>f：表示三角形的各个面，以及它们之间的连接关系，其中三个序号依次为：顶点向量、纹理坐标、法线向量；<ul>
+<li>例如：5/1/1    1/2/1    4/3/1 表示第5、1、4个顶点构成三角形，每个顶点对应的纹理坐标对应第1、2、3个，法线向量对应1、1、1个。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><img src="/images/games101/11/1/obj.png" alt="The Wavefront Object File"></p>
+<h1 id="Bezier-Curves"><a href="#Bezier-Curves" class="headerlink" title="Bézier Curves"></a>Bézier Curves</h1><p>这是一种对于曲线显式表示的方法。</p>
+<h2 id="Idea"><a href="#Idea" class="headerlink" title="Idea"></a>Idea</h2><p>用一系列的控制点来表示曲线，以满足其特定的性质。</p>
+<p>其中：</p>
 <ul>
-<li>Vertex Processing：其实就是MVP变换对应的过程；</li>
-<li>Triangle Processing：是将三维物体中的点全部完成投影后，根据存储的点之间的连接信息，形成三角形，这只是不同的处理方法而已，也可以在投影过程中直接连接。</li>
+<li>控制点能唯一确定一条曲线；</li>
+<li>但是不要求曲线能经过控制点，曲线只需要经过起点和终点；</li>
 </ul>
-<h1 id="具体过程"><a href="#具体过程" class="headerlink" title="具体过程"></a>具体过程</h1><p><img src="/images/games101/08/2/details.png" alt="Graphics Pipeline各个步骤"></p>
-<p>所有这些过程均已经在GPU硬件上实现，其中对于具体的shading方法可以通过对硬件编程实现，这个编程是判断如何对三角形的顶点和像素进行着色，可以通过代码实现不同的着色结果，这部分代码称之为shader。</p>
-<h1 id="Shader-Programs"><a href="#Shader-Programs" class="headerlink" title="Shader Programs"></a>Shader Programs</h1><ul>
-<li>Program vertex and fragment processing stages</li>
-<li>Describe operation on a single vertex (or fragment)  只需要针对一个顶点或者像素写shader即可；</li>
+<p><img src="/images/games101/11/1/bc.png" alt="Bézier Curves"></p>
+<h2 id="绘制Bezier-Curves"><a href="#绘制Bezier-Curves" class="headerlink" title="绘制Bézier Curves"></a>绘制Bézier Curves</h2><h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><p>如果利用任意多个控制点，绘制一条Bézier Curves？</p>
+<h3 id="解决方法：de-Casteljau-Algorithm"><a href="#解决方法：de-Casteljau-Algorithm" class="headerlink" title="解决方法：de Casteljau Algorithm"></a>解决方法：de Casteljau Algorithm</h3><p>该算法可以利用控制点生成曲线，其本质是在不同的线段上进行插值，然后将所有的插值点视为基础点，不断递归，直到最终的结果中只有一个插值点，该插值点即在生成的曲线上。</p>
+<p>为了理解这个算法的过程，下边从：</p>
+<ul>
+<li>几何角度；</li>
+<li>代数角度；</li>
 </ul>
-<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><p>openGL中实现漫反射shader。</p>
-<pre class=" language-cpp"><code class="language-cpp">uniform sampler2D myTexture<span class="token punctuation">;</span>      <span class="token comment" spellcheck="true">// program parameter</span>
-uniform vec3 lightDir<span class="token punctuation">;</span>            <span class="token comment" spellcheck="true">// program parameter</span>
-varying vec2 uv<span class="token punctuation">;</span>                  <span class="token comment" spellcheck="true">// per fragment value (interp. by rasterizer)</span>
-varying vec3 norm<span class="token punctuation">;</span>                <span class="token comment" spellcheck="true">// per fragment value (interp. by rasterizer)</span>
+<p>两个方面理解这个算法。</p>
+<h3 id="几何角度"><a href="#几何角度" class="headerlink" title="几何角度"></a>几何角度</h3><p>为了说明，考虑有三个控制点的情况（这种情况下生成的曲线称为quadratic Bezier）。</p>
+<p>在如下3个控制点中，$\bf{b}_0$、$\bf{b}_2$ 分别为起点和终点，$\bf{b}_1$ 确定曲线的弯曲方向。那么如何控制曲线的生成呢？</p>
+<p>一种方式是，为了从 $\bf{b}_0$ 到 $\bf{b}_2$ 绘制曲线，将从 $\bf{b}_0$ 开始的时间定为0，到 $\bf{b}_2$ 的时间定为1，那么曲线的绘制过程，其实就是找到在 $[0, 1]$ 时间范围内，曲线上的点的位置。因此，将绘制曲线的算法转换为定位一个点的位置的方法。</p>
+<p>具体过程如下：</p>
+<ol>
+<li>Insert a point using linear interpolation 具体来说，即在$\bf{b}_0$、$\bf{b}_1$之间插值一个点 $\mathbf{b}_0^1$ ，使得： $$<br> \mathbf{b}_0^1 = (1 - t) \mathbf{b}_0 + t \bf{b}_1<br> $$</li>
+<li>Insert on both edges 使用同样的方式在$\bf{b}_1$、$\bf{b}_2$之间插值一个点 $\mathbf{b}_1^1$ ，使得： $$<br> \mathbf{b}_1^1 = (1 - t) \mathbf{b}_1 + t \bf{b}_2<br> $$</li>
+<li>Repeat recursively 按照上述方式进行递归计算，在$\mathbf{b}_0^1$ 和 $\mathbf{b}_1^1$两个插值点之间再进行插值得到新的插值点 $\mathbf{b}_0^2$ ，使得： $$<br> \mathbf{b}_0^2 = (1 - t) \mathbf{b}_0^1 + t \mathbf{b}_1^1<br> $$ 问题是：递归的结束条件是什么？当插值点只有一个时，即完成了递归过程。如利用3个控制点生成曲线的过程中：<ul>
+<li>第1次插值：得到2个插值点 $\mathbf{b}_0^1$ 和 $\mathbf{b}_1^1$；</li>
+<li>第2次插值：得到1个插值点 $\mathbf{b}_0^2$ ；</li>
+</ul>
+</li>
+<li>Run the same algorithm for every t in $[0,1]$ 对于范围$[0,1]$ 中的每个 $t_i$，均进行上述过程，即完成了曲线的绘制。</li>
+</ol>
+<p><img src="/images/games101/11/1/casteljau.png" alt="de Casteljau Algorithm"></p>
+<p>对于4个控制点生成曲线，过程如下：</p>
+<p><img src="/images/games101/11/1/cubic_bc.png" alt="Cubic Bézier Curve"></p>
+<p><strong>动画效果如下：</strong></p>
+<blockquote>
+<p>参考资料：Animation: Steven Wittens, Making Things with Maths, <a target="_blank" rel="noopener" href="http://acko.net/">http://acko.net</a></p>
+</blockquote>
+<p><img src="/images/games101/11/1/bc_animation.gif" alt="贝塞尔曲线动画"></p>
+<h3 id="代数角度"><a href="#代数角度" class="headerlink" title="代数角度"></a>代数角度</h3><p>在该算法中，通过对控制之间的线段不断进行插值，得以得到如下的金字塔形状。</p>
+<p><img src="/images/games101/11/1/coef.png" alt="de Casteljau Algorithm系数计算"></p>
+<ul>
+<li>Every rightward arrow is multiplication by $t$ ;</li>
+<li>Every leftward arrow by $(1–t)$ ;</li>
+</ul>
+<p>对于<strong>3个控制点</strong>形成的贝塞尔曲线，可以得到：</p>
+<p>$$<br>\begin{array}{l}<br>\mathbf{b}_0^1 (t)= (1-t) \mathbf{b}_0+t \mathbf{b}_1 \\<br>\mathbf{b}_1^1 (t)= (1-t) \mathbf{b}_1+t \mathbf{b}_2<br>\end{array}<br>$$</p>
+<p>$$<br>\begin{array}{l}<br>\mathbf{b}_0^2(t) = (1 - t) \mathbf{b}_0^1 + t \mathbf{b}_1^1<br>\\<br>\mathbf{b}_0^2(t)=(1-t)^2 \mathbf{b}_0+2 t(1-t) \mathbf{b}_1+t^2 \mathbf{b}_2<br>\end{array}<br>$$</p>
+<h3 id="系数展开式"><a href="#系数展开式" class="headerlink" title="系数展开式"></a>系数展开式</h3><p>对于 $n+1$ 个控制点，可以进行 $n$ 次插值计算，其中生成的贝塞尔曲线上的任意一点均是控制点向量的线性组合，如下所示：</p>
+<p>$$<br>\mathbf{b}^{n}(t)=\mathbf{b}_{0}^{n}(t)= \sum_{j=0}^n \mathbf{b}_j B_j^n (t)<br>$$</p>
+<!-- $$
+\mathbf{b}^{n}(t)=\mathbf{b}_{0}^{n}(t)=\sum_{j=0}^{n} \mathbf{b}_{j} B_{j}^{n}(t)
+$$ -->
 
-<span class="token keyword">void</span> <span class="token function">diffuseShader</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token punctuation">{</span>
-    vec3 kd<span class="token punctuation">;</span>
-    kd <span class="token operator">=</span> <span class="token function">texture2d</span><span class="token punctuation">(</span>myTexture<span class="token punctuation">,</span> uv<span class="token punctuation">)</span><span class="token punctuation">;</span>                 <span class="token comment" spellcheck="true">// material color from texture</span>
-    kd <span class="token operator">*</span><span class="token operator">=</span> <span class="token function">clamp</span><span class="token punctuation">(</span><span class="token function">dot</span><span class="token punctuation">(</span>–lightDir<span class="token punctuation">,</span> norm<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">0.0</span><span class="token punctuation">,</span> <span class="token number">1.0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment" spellcheck="true">// Lambertian shading model</span>
-    gl_FragColor <span class="token operator">=</span> <span class="token function">vec4</span><span class="token punctuation">(</span>kd<span class="token punctuation">,</span> <span class="token number">1.0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>                  <span class="token comment" spellcheck="true">// output fragment color</span>
-<span class="token punctuation">}</span>
-</code></pre>
+<p>其中：</p>
 <ul>
-<li>Shader function executes once per fragment.</li>
-<li>Outputs color of surface at the current fragment’s screen sample position.</li>
-<li>This shader performs a texture lookup to obtain the surface’s material color at this point, then performs a diffuse lighting calculation.</li>
+<li>$\mathbf{b}^{n}(t)$ : Bézier curve order $n$ (vector polynomial of degree $n$);</li>
+<li>$\mathbf{b}_{j}$ : Bézier control points (vector in $\mathbf{R}^N$);</li>
+<li>$B_{j}^{n}(t)$ : Bernstein polynomial (scalar polynomial of degree $n$);</li>
 </ul>
-<h1 id="Graphics-Pipeline-Implementation-GPUs"><a href="#Graphics-Pipeline-Implementation-GPUs" class="headerlink" title="Graphics Pipeline Implementation: GPUs"></a>Graphics Pipeline Implementation: GPUs</h1><p>Specialized processors for executing graphics pipeline computations:</p>
+<p>该线性组合的系数 $B_{j}^{n}(t)$ 是一个与时间 $t$ 有关的多项式，称之为Bernstein polynomial，如下：</p>
+<p>$$<br>B_{i}^{n}(t)=\left(\begin{array}{l}n \\ i\end{array}\right) t^{i}(1-t)^{n-i}<br>$$</p>
+<p>整个Bernstein polynomial其实是一个二项分布，因此对于任意的n次展开式，其所有对应的系数之和为1。</p>
+<p><img src="/images/games101/11/1/bp1.png" alt="Bernstein polynomial系数和为１"></p>
+<p>其中，控制点不一定是2D的，也可以是3D空间中的，例如对于4个3D的控制点如下：</p>
+<p>$$<br>\mathbf{b}_0=(0,2,3), \mathbf{b}_1=(2,3,5), \mathbf{b}_2=(6,7,9), \mathbf{b}_3=(3,4,5)<br>$$</p>
+<p>可以得知任意时间 t 下，对应的曲线上的点为：</p>
+<p>$$<br>\mathbf{b}^n (t)=\mathbf{b}_0 (1-t)^3 +\mathbf{b}_1 3 t(1-t)^2 +\mathbf{b}_2 3 t^2 (1-t)+\mathbf{b}_3 t^3<br>$$</p>
+<h2 id="Bezier-Curves的性质"><a href="#Bezier-Curves的性质" class="headerlink" title="Bézier Curves的性质"></a>Bézier Curves的性质</h2><ol>
+<li>Interpolates endpoints 对于4个控制点（cubic Bézier），则有： $$<br> \mathbf{b}(0)=\mathbf{b}_0 ; \quad \mathbf{b}(1)=\mathbf{b}_3<br> $$</li>
+<li>Tangent to end segments 对于4个控制点（cubic Bézier），则有： $$<br> \mathbf{b}^{\prime}(0)=3\left(\mathbf{b}_1 -\mathbf{b}_0 \right) ; \quad \mathbf{b}^{\prime}(1)=3\left(\mathbf{b}_3 -\mathbf{b}_2 \right)<br> $$</li>
+<li>Affine transformation property<blockquote>
+<p>Transform curve by transforming control points.</p>
+</blockquote>
+ 对于贝塞尔曲线中的每个点进行仿射变换得到的贝塞尔曲线，与对贝塞尔曲线的控制点进行仿射变换然后再生成的贝塞尔曲线一致。因此，若要对贝塞尔曲线进行仿射变换，只需要对其控制点进行变换即可，然后再生成曲线。 这个性质只针对仿射变换，在投影等变换下不成立。</li>
+<li>Convex hull property <a target="_blank" rel="noopener" href="https://zh.wikipedia.org/zh-hans/%E5%87%B8%E5%8C%85">凸包</a>性质<blockquote>
+<p>Curve is within convex hull of control points.</p>
+</blockquote>
+</li>
+</ol>
+<h1 id="Piecewise-Bezier-Curves"><a href="#Piecewise-Bezier-Curves" class="headerlink" title="Piecewise Bézier Curves"></a>Piecewise Bézier Curves</h1><h2 id="问题-1"><a href="#问题-1" class="headerlink" title="问题"></a>问题</h2><p>Higher-Order Bézier Curves会导致一些问题：</p>
 <ul>
-<li>Discrete GPU Card</li>
-<li>Integrated GPU (Part of Intel CPU die)</li>
+<li>当控制点很多时，很难针对特定控制点操作，以控制整体曲线的形状；</li>
 </ul>
-<p><img src="/images/games101/08/2/gpu.png" alt="GPUs"></p>
+<h2 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h2><h3 id="idea"><a href="#idea" class="headerlink" title="idea"></a>idea</h3><ul>
+<li>不用控制点生成一条完整的曲线；</li>
+<li>代替，使用少量的控制点生成一段曲线，然后将所有的曲线拼接起来；<blockquote>
+<p>chain many low-order Bézier curve</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="具体方法"><a href="#具体方法" class="headerlink" title="具体方法"></a>具体方法</h3><blockquote>
+<p>Piecewise cubic Bézier the most common technique</p>
+</blockquote>
+<p>即，实践中常用4个控制点生成一段曲线。</p>
+<p><img src="/images/games101/11/1/pbc.png" alt="Piecewise Bézier Curves"></p>
+<blockquote>
+<p>参考资料：<a target="_blank" rel="noopener" href="https://math.hws.edu/eck/cs424/notes2013/canvas/bezier.html">Bezier Curve Demos</a></p>
+</blockquote>
+<h3 id="问题：如何保证曲线光滑连接"><a href="#问题：如何保证曲线光滑连接" class="headerlink" title="问题：如何保证曲线光滑连接"></a>问题：如何保证曲线光滑连接</h3><p>保证上一条曲线终点的导数与下一条曲线起点的导数相同，包括方向和大小。</p>
+<p>在这个问题上，可以有两种类型的连续（Continuity）：</p>
+<ul>
+<li>$C^0$ continuity：只要保证几何图形上连接即可；  $$<br>  \mathbf{a}_n = \mathbf{b}_0<br>  $$  <img src="/images/games101/11/1/c0.png" alt="$C^0$ continuity"></li>
+<li>$C^1$ continuity：不仅几何上连接，导数也要相同；  $$<br>  \mathbf{a}_n = \mathbf{b}_0 = \frac{1}{2} (\mathbf{a}_{n-1} + \mathbf{b}_1)<br>  $$  <img src="/images/games101/11/1/c1.png" alt="$C^1$ continuity"></li>
+</ul>
+<p>在一些更严格的场合中，还有要求 $C^2$ continuity，即二阶导数相同。</p>
+<h1 id="Splines"><a href="#Splines" class="headerlink" title="Splines"></a>Splines</h1><blockquote>
+<p>a continuous curve constructed so as to pass through a given set of points and have a certain number of continuous derivatives.</p>
+</blockquote>
+<blockquote>
+<p>In short, a curve under control.</p>
+</blockquote>
+<h2 id="B-splines"><a href="#B-splines" class="headerlink" title="B-splines"></a>B-splines</h2><ul>
+<li>Short for basis splines</li>
+<li>Require more information than Bezier curves</li>
+<li>Satisfy all important properties that Bézier curves have (i.e. superset)</li>
+</ul>
+<p>本课中未详述样条内容，具体内容可以进一步参考以下资料。</p>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/av66548502?from=search&seid=65256805876131485">清华大学-计算机图形学基础（国家级精品课）_哔哩哔哩_bilibili</a></p>
 
                 
             </div>
@@ -467,7 +594,7 @@ varying vec3 norm<span class="token punctuation">;</span>                <span c
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://limeya.github.io/2022/05/01/games101-08-2-shading-graphics-pipeline/">https://limeya.github.io/2022/05/01/games101-08-2-shading-graphics-pipeline/</a>
+                    <a href="https://limeya.github.io/2022/05/04/games101-11-1-geometry-curves/">https://limeya.github.io/2022/05/04/games101-11-1-geometry-curves/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -509,12 +636,16 @@ varying vec3 norm<span class="token punctuation">;</span>                <span c
                                     <span class="chip bg-color">计算机图形学</span>
                                 </a>
                             
-                                <a href="/tags/Shading/">
-                                    <span class="chip bg-color">Shading</span>
+                                <a href="/tags/Geometry/">
+                                    <span class="chip bg-color">Geometry</span>
                                 </a>
                             
-                                <a href="/tags/Graphics-Pipeline/">
-                                    <span class="chip bg-color">Graphics Pipeline</span>
+                                <a href="/tags/Curves/">
+                                    <span class="chip bg-color">Curves</span>
+                                </a>
+                            
+                                <a href="/tags/Bezier-Curves/">
+                                    <span class="chip bg-color">Bézier Curves</span>
                                 </a>
                             
                         </div>
@@ -560,29 +691,30 @@ varying vec3 norm<span class="token punctuation">;</span>                <span c
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2022/05/03/games101-09-1-shading-texture-mapping-barycentric-coordinates/">
+                <a href="/2022/05/04/games101-11-1-geometry-curves/">
                     <div class="card-image">
                         
                         
-                        <img src="https://cdn.jsdelivr.net/gh/limeya/limeya.github.io/medias/featureimages/5.jpg" class="responsive-img" alt="GAMES101-09-1：Shading - Texture Mapping - Barycentric coordinates">
+                        <img src="https://cdn.jsdelivr.net/gh/limeya/limeya.github.io/medias/featureimages/13.jpg" class="responsive-img" alt="GAMES101-11-1：Geometry - Curves">
                         
-                        <span class="card-title">GAMES101-09-1：Shading - Texture Mapping - Barycentric coordinates</span>
+                        <span class="card-title">GAMES101-11-1：Geometry - Curves</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            GAMES101-第9节第1部分，介绍图形学中应用到纹理映射的重心坐标。
+                            GAMES101-第11节的第一部分，介绍图形学中几何的曲线，尤其是贝塞尔曲线。
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-05-03
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-05-04
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -595,6 +727,7 @@ varying vec3 norm<span class="token punctuation">;</span>                <span c
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -602,16 +735,16 @@ varying vec3 norm<span class="token punctuation">;</span>                <span c
                         <span class="chip bg-color">计算机图形学</span>
                     </a>
                     
-                    <a href="/tags/Shading/">
-                        <span class="chip bg-color">Shading</span>
+                    <a href="/tags/Geometry/">
+                        <span class="chip bg-color">Geometry</span>
                     </a>
                     
-                    <a href="/tags/Texture-Mapping/">
-                        <span class="chip bg-color">Texture Mapping</span>
+                    <a href="/tags/Curves/">
+                        <span class="chip bg-color">Curves</span>
                     </a>
                     
-                    <a href="/tags/Barycentric-coordinates/">
-                        <span class="chip bg-color">Barycentric coordinates</span>
+                    <a href="/tags/Bezier-Curves/">
+                        <span class="chip bg-color">Bézier Curves</span>
                     </a>
                     
                 </div>
@@ -625,24 +758,24 @@ varying vec3 norm<span class="token punctuation">;</span>                <span c
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2022/05/01/games101-08-1-shading-shading-frequencies/">
+                <a href="/2022/05/03/games101-10-geometry-implicit-representations/">
                     <div class="card-image">
                         
                         
-                        <img src="https://cdn.jsdelivr.net/gh/limeya/limeya.github.io/medias/featureimages/15.jpg" class="responsive-img" alt="GAMES101-08-1：Shading - Shading Frequencies">
+                        <img src="https://cdn.jsdelivr.net/gh/limeya/limeya.github.io/medias/featureimages/5.jpg" class="responsive-img" alt="GAMES101-10：Geometry - Implicit Representations">
                         
-                        <span class="card-title">GAMES101-08-1：Shading - Shading Frequencies</span>
+                        <span class="card-title">GAMES101-10：Geometry - Implicit Representations</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            GAMES101-第8节第1部分，介绍计算机图形学中的Shading Frequencies。
+                            GAMES101-第10节，介绍图形学中几何的Implicit Representations。
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-05-01
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-05-03
                             </span>
                         <span class="publish-author">
                             
@@ -663,8 +796,8 @@ varying vec3 norm<span class="token punctuation">;</span>                <span c
                         <span class="chip bg-color">计算机图形学</span>
                     </a>
                     
-                    <a href="/tags/Shading/">
-                        <span class="chip bg-color">Shading</span>
+                    <a href="/tags/Geometry/">
+                        <span class="chip bg-color">Geometry</span>
                     </a>
                     
                 </div>
