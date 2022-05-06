@@ -4,6 +4,35 @@
   
     
     <entry>
+      <title>GAMES101-11-２：Geometry - Bézier Surfaces</title>
+      <link href="/2022/05/06/games101-11-2-geometry-bezier-surfaces/"/>
+      <url>/2022/05/06/games101-11-2-geometry-bezier-surfaces/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Bezier-Surfaces"><a href="#Bezier-Surfaces" class="headerlink" title="Bézier Surfaces"></a>Bézier Surfaces</h1><blockquote><p>Extend Bézier curves to surfaces.</p></blockquote><h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><p><img src="/images/games101/11/2/bs.png" alt="Bézier Surfaces例子"></p><h2 id="绘制Bezier-Surfaces"><a href="#绘制Bezier-Surfaces" class="headerlink" title="绘制Bézier Surfaces"></a>绘制Bézier Surfaces</h2><h3 id="例子-1"><a href="#例子-1" class="headerlink" title="例子"></a>例子</h3><blockquote><p>Bezier surface and 4 x 4 array of control points.</p></blockquote><p><img src="/images/games101/11/2/bs_patch.png" alt="Bicubic Bézier Surface Patch"></p><h3 id="具体操作"><a href="#具体操作" class="headerlink" title="具体操作"></a>具体操作</h3><p>以bi-cubic Bezier surface为例进行说明。</p><ul><li>输入：$4 \times 4$ control points；</li><li>输出：2D surface parameterized by $(u,v)$ in $[0,1]^2$；</li></ul><p>与Bézier curves同样的过程，只不过这里是在两个方向上进行双线性插值。</p><p><img src="/images/games101/11/2/step1.png" alt="步骤1"></p><p>该方法称之为——Separable 1D de Casteljau Algorithm。由于在贝塞尔曲线的生成中，需要利用一个时间 $t$ 来生成对应的曲线，泛化到三维空间中，则需要两个时间来生成曲面，这里定义为 $u, v$。 </p><p>具体过程如下：</p><ol><li>首先，在时间 $u$ 方向上生成对应的贝塞尔曲线，这里定义使用 $4 \times 4$ 的控制点构建曲面，因此这一步需要生成4条对应的贝塞尔曲线，得到的结果是任意时间 $u_i$ 下的最终的插值结果。</li><li>将第一步得到的4个插值点视为 $v$ 方向上的控制点，然后再进行同样的插值操作，然后形成曲面上的一个点；</li><li>按照上述过程，不断递归，从而形成最终所有的曲面上的点。</li></ol><p><img src="/images/games101/11/2/step2.png" alt="步骤2"></p><p>动画效果如下：</p><p><img src="/images/games101/11/2/animation_effect.gif" alt="动画效果"></p><h2 id="进一步阅读"><a href="#进一步阅读" class="headerlink" title="进一步阅读"></a>进一步阅读</h2><p>这里类似之前在曲线中讨论的问题，如：</p><ul><li>各个曲面如何拼接；</li><li>如果保证曲面拼接的“平滑”；</li></ul><p>在曲线中遇到的问题在这里均会遇到，对于进一步的学习可以参考之前在曲线中提到的参考资料。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 博客 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 计算机图形学 </tag>
+            
+            <tag> Geometry </tag>
+            
+            <tag> Bézier Surfaces </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>GAMES101-11-1：Geometry - Curves</title>
       <link href="/2022/05/04/games101-11-1-geometry-curves/"/>
       <url>/2022/05/04/games101-11-1-geometry-curves/</url>

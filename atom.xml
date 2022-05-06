@@ -6,7 +6,7 @@
   <link href="https://limeya.github.io/atom.xml" rel="self"/>
   
   <link href="https://limeya.github.io/"/>
-  <updated>2022-05-05T05:52:40.035Z</updated>
+  <updated>2022-05-06T14:13:53.192Z</updated>
   <id>https://limeya.github.io/</id>
   
   <author>
@@ -15,6 +15,35 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>GAMES101-11-２：Geometry - Bézier Surfaces</title>
+    <link href="https://limeya.github.io/2022/05/06/games101-11-2-geometry-bezier-surfaces/"/>
+    <id>https://limeya.github.io/2022/05/06/games101-11-2-geometry-bezier-surfaces/</id>
+    <published>2022-05-06T13:58:52.553Z</published>
+    <updated>2022-05-06T14:13:53.192Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;Bezier-Surfaces&quot;&gt;&lt;a href=&quot;#Bezier-Surfaces&quot; class=&quot;headerlink&quot; title=&quot;Bézier Surfaces&quot;&gt;&lt;/a&gt;Bézier</summary>
+        
+      
+    
+    
+    
+    <category term="博客" scheme="https://limeya.github.io/categories/%E5%8D%9A%E5%AE%A2/"/>
+    
+    
+    <category term="计算机图形学" scheme="https://limeya.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/"/>
+    
+    <category term="Geometry" scheme="https://limeya.github.io/tags/Geometry/"/>
+    
+    <category term="Bézier Surfaces" scheme="https://limeya.github.io/tags/Bezier-Surfaces/"/>
+    
+  </entry>
   
   <entry>
     <title>GAMES101-11-1：Geometry - Curves</title>
@@ -536,34 +565,6 @@
     
     
     <category term="年度总结" scheme="https://limeya.github.io/tags/%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>RotatE - 建模复杂关系的利器</title>
-    <link href="https://limeya.github.io/2021/11/20/rotate-jian-mo-fu-za-guan-xi-de-li-qi/"/>
-    <id>https://limeya.github.io/2021/11/20/rotate-jian-mo-fu-za-guan-xi-de-li-qi/</id>
-    <published>2021-11-19T16:37:00.000Z</published>
-    <updated>2022-02-20T12:32:14.308Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;p&gt;文章来源: &lt;a href=&quot;https://arxiv.org/abs/1902.10197v1&quot;&gt;RotatE: Knowledge Graph Embedding by Relational Rotation in Complex Space&lt;/a&gt;&lt;/p&gt;
-&lt;h1</summary>
-        
-      
-    
-    
-    
-    <category term="论文阅读" scheme="https://limeya.github.io/categories/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/"/>
-    
-    
-    <category term="知识图谱" scheme="https://limeya.github.io/tags/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/"/>
-    
-    <category term="表示学习" scheme="https://limeya.github.io/tags/%E8%A1%A8%E7%A4%BA%E5%AD%A6%E4%B9%A0/"/>
     
   </entry>
   
