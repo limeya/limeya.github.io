@@ -4,6 +4,35 @@
   
     
     <entry>
+      <title>GAMES101：Rasterization - Shadow Mapping</title>
+      <link href="/2022/05/06/shadow-mapping-924b68b1e8814ed783b783453abc7918/"/>
+      <url>/2022/05/06/shadow-mapping-924b68b1e8814ed783b783453abc7918/</url>
+      
+        <content type="html"><![CDATA[<h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><ul><li>着色是局部的，这种方便但不对；</li><li>shading中无法解决阴影问题；</li></ul><p>那么：How to draw shadows using rasterization?</p><h1 id="方法：Shadow-Mapping"><a href="#方法：Shadow-Mapping" class="headerlink" title="方法：Shadow Mapping"></a>方法：Shadow Mapping</h1><h2 id="idea"><a href="#idea" class="headerlink" title="idea"></a>idea</h2><blockquote><p>the points NOT in shadow must be seen both <strong>by the light</strong> and <strong>by the camera</strong></p></blockquote><p>在该方法中，如果点不在“阴影”中，指的是其既能被光看见，也能被人眼看见。换句话说，当一个点在阴影中时，说明其或者不能被光看见，或者不能被人眼看见。</p><h2 id="含义"><a href="#含义" class="headerlink" title="含义"></a>含义</h2><p>该方法是An Image-space Algorithm，如何理解？</p><blockquote><p>no knowledge of scene’s geometry during shadow computation</p></blockquote><p>在生成阴影的过程中不需要找到几何信息。</p><h2 id="具体过程"><a href="#具体过程" class="headerlink" title="具体过程"></a>具体过程</h2><p><img src="/images/games101/ext/1/sm_process.png" alt="Shadow Mapping具体过程"></p><p>该过程包含两个步骤：</p><ul><li>从光源看向具体的物体；</li><li>从人眼看向具体的物体；</li></ul><p>具体如上图所示：</p><ol><li>首先，从光源看向物体，可以得到光源能够看到的图，该图不进行着色，只记录看到的点的深度信息；<blockquote><p>Depth image from light source</p></blockquote></li><li>从人眼看向具体的物体，对于看到的物体上的点，将其投影回从光源角度看得到的平面，如第3部分，能够得到该点对应深度图上的哪个像素；<blockquote><p>Standard image (with depth) from eye</p></blockquote><blockquote><p>Project visible points in eye view back to light source</p></blockquote></li><li>比较投影到Depth image上的点的深度信息，与Depth image的深度信息，可以得到两个结果：<ul><li>(Reprojected) depths match for light and eye：说明该点能够被看见，不在阴影中；</li><li>depths from light and eye are not the same：该点不能被看见，在阴影中；</li></ul></li></ol><h2 id="实例操作过程"><a href="#实例操作过程" class="headerlink" title="实例操作过程"></a>实例操作过程</h2><ol><li><p>The <strong>depth buffer</strong> from the light’s point-of-view</p><p> <img src="/images/games101/ext/1/step1.png" alt="步骤1"></p></li><li><p>Comparing Dist(light, shading point) with shadow map</p><p> <img src="/images/games101/ext/1/step2.png" alt="步骤2"></p></li></ol><h2 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h2><p><img src="/images/games101/ext/1/shadow_effect.png" alt="有无阴影效果"></p><h2 id="问题-1"><a href="#问题-1" class="headerlink" title="问题"></a>问题</h2><h3 id="精度问题"><a href="#精度问题" class="headerlink" title="精度问题"></a>精度问题</h3><blockquote><p>Involves equality comparison of floating point depth values means issues of scale, bias, tolerance.</p></blockquote><p>由于需要判断深度信息是否相等，当构建阴影时，会因为浮点数难以判断相等，导致阴影非常“脏”。如上图中的绿色图片所示。</p><p>一些方法：</p><ul><li>不判断相等，判断大小；</li><li>同时，加一个小的误差范围；</li></ul><p>但这些方法不能根本解决问题。</p><h3 id="Depth-image分辨率的影响"><a href="#Depth-image分辨率的影响" class="headerlink" title="Depth image分辨率的影响"></a>Depth image分辨率的影响</h3><blockquote><p>Quality depends on shadow map resolution (general problem with image-based techniques).</p></blockquote><p>当shadow map的分辨率很低时，其对应的深度信息可以覆盖多个重投影到该图上的点，因此会出现走样的问题，因此must deal with aliasing artifacts。增加分辨率能解决问题，但是开销增加。</p><h3 id="只能用于点光源"><a href="#只能用于点光源" class="headerlink" title="只能用于点光源"></a>只能用于点光源</h3><p>该方法只能处理点光源：因此其中的阴影，非0即1，即要么在阴影中，要么不在——硬阴影。</p><ul><li>硬阴影：完全看不到光，界限明显，光源是点光源；</li><li>软阴影：能看到部分光，界限圆滑，光源有一定大小；</li></ul><p><img src="/images/games101/ext/1/hard_vs_soft.png" alt="Hard shadows vs. Soft shadows"></p><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul><li>即便有很多问题，仍然是Well known rendering technique；</li><li>Basic shadowing technique for early animations and 3D video game；</li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 博客 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 计算机图形学 </tag>
+            
+            <tag> Rasterization </tag>
+            
+            <tag> Shadow Mapping </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>GAMES101-12：Geometry - Mesh Operations</title>
       <link href="/2022/05/06/games101-12-geometry-mesh-operations/"/>
       <url>/2022/05/06/games101-12-geometry-mesh-operations/</url>
