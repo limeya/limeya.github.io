@@ -4,6 +4,37 @@
   
     
     <entry>
+      <title>GAMES101-12：Geometry - Mesh Operations</title>
+      <link href="/2022/05/06/games101-12-geometry-mesh-operations/"/>
+      <url>/2022/05/06/games101-12-geometry-mesh-operations/</url>
+      
+        <content type="html"><![CDATA[<h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>前面提到很多几何图形的Explicit Representations，包括：</p><ul><li>triangle meshes</li><li>Bezier curves &amp; surfaces</li><li>point clouds</li></ul><p>虽然之前详述了Bezier curves &amp; surfaces，但是在图形学中最常用的方式是Polygon Mesh，因为其有一些好的性质：</p><blockquote><p>Easier to do processing / simulation, adaptive sampling</p></blockquote><p>因此，Perhaps most common representation in graphics。</p><p>对于Mesh网络，其存在对应的几何操作：</p><ul><li>Mesh subdivision（upsampling）：细化三角形数量，实现了Increase resolution的效果；  <img src="/images/games101/12/subdivision.png" alt="Mesh subdivision"></li><li>Mesh simplification（downsampling）：正好与Mesh subdivision的效果相反；<blockquote><p>Decrease resolution; try to preserve shape/appearance.</p></blockquote>  <img src="/images/games101/12/simplify.png" alt="Mesh simplification"></li><li>Mesh regularization：使所有的三角形相同；<blockquote><p>Modify sample distribution to improve quality</p></blockquote>  这种方式有利于解决因三角形大小不同导致的渲染困难等问题，在改善三角形表示的同时，不能损失模型的表示效果。  <img src="/images/games101/12/regular.png" alt="Mesh regularization"></li></ul><p>这一节主要是对Mesh的几何操作（Geometry Processing）进行说明。</p><p><img src="/images/games101/12/gp.png" alt="Geometry Processing"></p><h1 id="Mesh-Subdivision"><a href="#Mesh-Subdivision" class="headerlink" title="Mesh Subdivision"></a>Mesh Subdivision</h1><h2 id="含义"><a href="#含义" class="headerlink" title="含义"></a>含义</h2><p>所谓的subdivision具体指两个操作：</p><ol><li>First, create more triangles (vertices)</li><li>Second, tune their positions：使得几何形状更平滑；</li></ol><p>这两步是 Common subdivision rule for triangle meshes。</p><h2 id="方法1：Loop-Subdivision"><a href="#方法1：Loop-Subdivision" class="headerlink" title="方法1：Loop Subdivision"></a>方法1：Loop Subdivision</h2><h3 id="划分三角形"><a href="#划分三角形" class="headerlink" title="划分三角形"></a>划分三角形</h3><p>该方法只针对三角形，将每条边的中点连接从而形成4个三角形。</p><blockquote><p>Split each triangle into four.</p></blockquote><p><img src="/images/games101/12/split_tri.png" alt="划分三角形"></p><h3 id="调整位置"><a href="#调整位置" class="headerlink" title="调整位置"></a>调整位置</h3><p>完成三角形划分后，需要调整三角形顶点的位置。</p><blockquote><p>Assign new vertex positions according to weights</p></blockquote><p>对于新的顶点和旧的顶点采用不同的方法进行调整。</p><blockquote><p>New / old vertices updated differently</p></blockquote><ul><li>对新顶点：对中心的新顶点，其新的位置取决于周围的旧节点；  <img src="/images/games101/12/loop_new_pos.png" alt="对新顶点调整位置"></li><li>对旧节点：其新的位置取决于自己原来的位置，和其周围节点的位置。  对于一个节点来说，当其度很大的时候，其自身的影响可以忽略不计；当度很小的时候，其需要更多的考虑自身之前的节点位置。  <img src="/images/games101/12/loop_old_pos.png" alt="对旧顶点调整位置"></li></ul><h3 id="方法效果"><a href="#方法效果" class="headerlink" title="方法效果"></a>方法效果</h3><p><img src="/images/games101/12/ls_effect.png" alt="Loop Subdivision的效果"></p><h2 id="方法2：Catmull-Clark-Subdivision"><a href="#方法2：Catmull-Clark-Subdivision" class="headerlink" title="方法2：Catmull-Clark Subdivision"></a>方法2：Catmull-Clark Subdivision</h2><h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><p>Loop Subdivision只能针对网格中的三角形进行细分，无法作为通用的几何图形细分方法。</p><h3 id="概念定义"><a href="#概念定义" class="headerlink" title="概念定义"></a>概念定义</h3><ul><li>Non-quad face：不是四边形构成的面；</li><li>Extraordinary vertex：顶点的度不为4(degree != 4) ；</li></ul><p><img src="/images/games101/12/concept_def.png" alt="概念定义"></p><h3 id="增加三角形"><a href="#增加三角形" class="headerlink" title="增加三角形"></a>增加三角形</h3><p>为了增加三角形，具体步骤如下：</p><ul><li>Add vertex in each face</li><li>Add midpoint on each edge</li><li>Connect all new vertices</li></ul><p><img src="/images/games101/12/ccs_add_tri.png" alt="增加三角形"></p><p>在划分形状的过程中，经过一次划分后：</p><ul><li>extraordinary vertices数量：原始extraordinary vertices数量+原始non-quad faces数量</li><li>non-quad faces数量：无</li></ul><p>经过一次划分后，之后extraordinary vertices和non-quad faces数量不再变化。</p><h3 id="调整位置-1"><a href="#调整位置-1" class="headerlink" title="调整位置"></a>调整位置</h3><p>将顶点分为三种类型：</p><p><img src="/images/games101/12/tune_pos.png" alt="根据不同类型调整顶点位置"></p><h1 id="Mesh-simplification"><a href="#Mesh-simplification" class="headerlink" title="Mesh simplification"></a>Mesh simplification</h1><h2 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h2><blockquote><p>reduce number of mesh elements while maintaining the overall shape.</p></blockquote><p><img src="/images/games101/12/simple_goal.png" alt="Mesh simplification"></p><p>不同的场景下，选择的三角形的数量也不同，主要是考虑性能、存储空间，或者不需要考虑细节。</p><h2 id="一种方法：Collapsing-An-Edge"><a href="#一种方法：Collapsing-An-Edge" class="headerlink" title="一种方法：Collapsing An Edge"></a>一种方法：Collapsing An Edge</h2><h3 id="含义-1"><a href="#含义-1" class="headerlink" title="含义"></a>含义</h3><blockquote><p>simplify a mesh using <strong>edge collapsing</strong></p></blockquote><p>即将一条边转换为一个顶点。</p><h3 id="Collapse哪条边—Quadric-Error-Metrics"><a href="#Collapse哪条边—Quadric-Error-Metrics" class="headerlink" title="Collapse哪条边—Quadric Error Metrics"></a>Collapse哪条边—Quadric Error Metrics</h3><p>在确定通过坍缩一条边来简化图形后，一个问题是：应该坍缩哪条边，能够保持原来的几何形状？或许这个问题换种说法：坍缩后的边形成的节点应该在什么位置，使得能够保持几何形状？变为这个问题后，就不用判断哪条边重要，只要能够保持原有形状，确定新节点的位置即可。</p><p>如何确定新节点的位置呢？</p><ul><li>取相邻点的平均值；</li><li>取坍缩点的平均值；</li><li>……</li></ul><p>Quadric Error Metrics（⼆次误差度量）用一种度量的方法解决这个问题，该方法问一个问题：</p><blockquote><p>How much geometric error is introduced by simplification?</p></blockquote><p>其思想在于：</p><blockquote><p>Quadric error: new vertex should minimize its <strong>sum of square distance (L2 distance) to previously related triangle planes</strong>!</p></blockquote><p><img src="/images/games101/12/qem_compare.png" alt="Quadric Error Metrics与其他方法对比"></p><p>因为 Quadric Error Metrics 能够确定新的顶点位置，因此确定坍缩哪条边，可以转换为：坍缩 Quadric Error Metrics 最小的边，这样保证能够保持原有的形状，然后再一次坍缩第二小的，等等。</p><p>那么如何坍缩几何图形呢？一种方式是对整个几何图形的所有边都进行坍缩，然后计算每次坍缩操作对应的Quadric Error，然后排序，取最小误差对应的边进行坍缩。</p><p><strong>一个问题：当坍缩一条边后，其连接的边也发生了变化，之前对应该边的Quadric Error也就发生了变化。即Quadric Error随坍缩过程会发生动态变化。</strong></p><p><img src="/images/games101/12/dynamic.png" alt="一条边坍缩会引起其他边发生变化"></p><p>因此，上述的做法是行不通的。</p><p>实际的做法是：</p><ol><li>首先对整个几何物体的每条边进行坍缩，取最小Quadric Error对应的边；</li><li>将与该边连接的其他边对应的Quadric Error更新，再计算剩余最小Quadric Error对应的边；</li><li>对上述过程不断重复；</li></ol><p>该过程需要应用有优先队列或者堆来实现。</p><p><strong>一个问题：按照上述过程的顺序得到的所有边，对应的Quadric Error也是从最小到最大吗？显然不一定，其只是局部最小，因此是通过用局部最小代替全局最小</strong>——greedy algorithm。但是在实际中，这种方法的效果得到了认可。</p><h3 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h3><p><img src="/images/games101/12/collapse_effect.png" alt="Untitled"></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 博客 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 计算机图形学 </tag>
+            
+            <tag> Geometry </tag>
+            
+            <tag> Mesh </tag>
+            
+            <tag> Mesh Operations </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>GAMES101-11-２：Geometry - Bézier Surfaces</title>
       <link href="/2022/05/06/games101-11-2-geometry-bezier-surfaces/"/>
       <url>/2022/05/06/games101-11-2-geometry-bezier-surfaces/</url>

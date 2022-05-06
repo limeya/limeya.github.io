@@ -6,7 +6,7 @@
   <link href="https://limeya.github.io/atom.xml" rel="self"/>
   
   <link href="https://limeya.github.io/"/>
-  <updated>2022-05-06T14:13:53.192Z</updated>
+  <updated>2022-05-06T14:34:41.305Z</updated>
   <id>https://limeya.github.io/</id>
   
   <author>
@@ -17,11 +17,44 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>GAMES101-12：Geometry - Mesh Operations</title>
+    <link href="https://limeya.github.io/2022/05/06/games101-12-geometry-mesh-operations/"/>
+    <id>https://limeya.github.io/2022/05/06/games101-12-geometry-mesh-operations/</id>
+    <published>2022-05-06T04:00:00.000Z</published>
+    <updated>2022-05-06T14:34:41.305Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h1&gt;&lt;p&gt;前面提到很多几何图形的Explicit Representations，包括：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;triangle</summary>
+        
+      
+    
+    
+    
+    <category term="博客" scheme="https://limeya.github.io/categories/%E5%8D%9A%E5%AE%A2/"/>
+    
+    
+    <category term="计算机图形学" scheme="https://limeya.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/"/>
+    
+    <category term="Geometry" scheme="https://limeya.github.io/tags/Geometry/"/>
+    
+    <category term="Mesh" scheme="https://limeya.github.io/tags/Mesh/"/>
+    
+    <category term="Mesh Operations" scheme="https://limeya.github.io/tags/Mesh-Operations/"/>
+    
+  </entry>
+  
+  <entry>
     <title>GAMES101-11-２：Geometry - Bézier Surfaces</title>
     <link href="https://limeya.github.io/2022/05/06/games101-11-2-geometry-bezier-surfaces/"/>
     <id>https://limeya.github.io/2022/05/06/games101-11-2-geometry-bezier-surfaces/</id>
-    <published>2022-05-06T13:58:52.553Z</published>
-    <updated>2022-05-06T14:13:53.192Z</updated>
+    <published>2022-05-06T03:00:00.000Z</published>
+    <updated>2022-05-06T14:34:21.086Z</updated>
     
     
       
@@ -540,31 +573,6 @@
     
     
     <category term="思考" scheme="https://limeya.github.io/tags/%E6%80%9D%E8%80%83/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>2021年度总结：黎明前夜</title>
-    <link href="https://limeya.github.io/2022/02/01/2021-nian-du-zong-jie-li-ming-qian-ye/"/>
-    <id>https://limeya.github.io/2022/02/01/2021-nian-du-zong-jie-li-ming-qian-ye/</id>
-    <published>2022-02-01T12:03:00.000Z</published>
-    <updated>2022-02-09T06:45:36.165Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="年度总结" scheme="https://limeya.github.io/categories/%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93/"/>
-    
-    
-    <category term="年度总结" scheme="https://limeya.github.io/tags/%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93/"/>
     
   </entry>
   
