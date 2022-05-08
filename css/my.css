@@ -1,1 +1,146 @@
 /* Here is your custom css styles. */
+
+.item-card{
+    border-radius: 10px;
+    box-shadow: 0 15px 35px rgba(50, 50, 93, .1), 0 5px 15px rgba(0, 0, 0, .07) !important;
+}
+
+#timeline {
+    /*width: 90%;*/
+    max-width: 820px;
+    position: relative;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+#timeline::before {
+    /* this is the vertical line */
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 40px;
+    height: 100%;
+    width: 4px;
+    background: #0f9d58;
+}
+
+.timeline-item {
+    position: relative;
+    margin: 1em 0;
+}
+
+
+.item-card-title {
+    font-size: 20px;
+    font-weight: 500
+}
+
+.timeline-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    box-shadow: 0 0 0 4px #ffffff, inset 0 2px 0 rgba(0, 0, 0, 0.08), 0 3px 0 4px rgba(0, 0, 0, 0.05);
+}
+
+#timeline .year {
+    position: relative;
+    width: 70px;
+    height: 70px;
+    margin: 10px 0 30px 5px;
+    padding: 21px 10px;
+    background-color: #ff5722;
+    color: #fff;
+    font-size: 1.5rem;
+    font-weight: 800;
+    box-shadow: 0 0 0 3px #ffffff, inset 0 2px 0 rgb(0 0 0 / 8%), 0 3px 0 4px rgb(0 0 0 / 5%);
+
+}
+
+#timeline .year a {
+    color: #fff;
+}
+
+#timeline .month {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    margin: 0px 0 0px 20px;
+    padding: 2px 6px;
+    background-color: #ef6c00;
+    color: #fff;
+    font-size: 1.5rem;
+    font-weight: 800;
+    box-shadow: 0 0 0 2px #ffffff, inset 0 2px 0 rgb(0 0 0 / 8%), 0 3px 0 4px rgb(0 0 0 / 5%);
+}
+
+#timeline .month a {
+    color: #fff;
+}
+
+.essay-date .icon-date {
+    padding-left: 5px;
+}
+
+
+/* .essay-date {
+    background-image: linear-gradient(to right, #ee4956 0%, #db2a50 100%);
+} */
+
+.essay {
+    margin: 10px 0 20px 50px;
+    padding: 10px 10px;
+}
+
+.essay a {
+    margin-right: 0 !important;
+    color: #525f7f;
+    text-transform: none !important;
+}
+
+.essay a:hover {
+    font-weight: bold;
+    color: #42b983;
+    text-decoration: underline;
+}
+
+.articles .row {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.essay .card {
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.essay .card-image {
+    background-color: #222;
+    border-radius: 8px;
+}
+
+.essay .card-image img {
+    height: 220px;
+    border-radius: 0.3rem;
+    opacity: .7;
+}
+
+.essay .tag-image img {
+    height: 220px;
+}
+
+.essay .card .card-content {
+    padding: 15px 15px 12px 18px;
+}
+
+.essay ..essay-content .summary {
+    padding-bottom: 2px;
+    padding-left: 0;
+    margin-bottom: 6px;
+    word-break: break-all;
+}
+
+
+
