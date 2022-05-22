@@ -6,7 +6,7 @@
   <link href="https://limeya.github.io/atom.xml" rel="self"/>
   
   <link href="https://limeya.github.io/"/>
-  <updated>2022-05-06T14:51:18.098Z</updated>
+  <updated>2022-05-22T06:00:37.133Z</updated>
   <id>https://limeya.github.io/</id>
   
   <author>
@@ -18,10 +18,10 @@
   
   <entry>
     <title>GAMES101：Rasterization - Shadow Mapping</title>
-    <link href="https://limeya.github.io/2022/05/06/shadow-mapping-924b68b1e8814ed783b783453abc7918/"/>
-    <id>https://limeya.github.io/2022/05/06/shadow-mapping-924b68b1e8814ed783b783453abc7918/</id>
+    <link href="https://limeya.github.io/2022/05/06/cg/games/games101-rasterization-shadow-mapping/"/>
+    <id>https://limeya.github.io/2022/05/06/cg/games/games101-rasterization-shadow-mapping/</id>
     <published>2022-05-06T08:00:00.000Z</published>
-    <updated>2022-05-06T14:51:18.098Z</updated>
+    <updated>2022-05-22T06:00:37.133Z</updated>
     
     
       
@@ -51,8 +51,8 @@
   
   <entry>
     <title>GAMES101-12：Geometry - Mesh Operations</title>
-    <link href="https://limeya.github.io/2022/05/06/games101-12-geometry-mesh-operations/"/>
-    <id>https://limeya.github.io/2022/05/06/games101-12-geometry-mesh-operations/</id>
+    <link href="https://limeya.github.io/2022/05/06/cg/games/games101-12-geometry-mesh-operations/"/>
+    <id>https://limeya.github.io/2022/05/06/cg/games/games101-12-geometry-mesh-operations/</id>
     <published>2022-05-06T04:00:00.000Z</published>
     <updated>2022-05-06T14:34:41.305Z</updated>
     
@@ -84,8 +84,8 @@
   
   <entry>
     <title>GAMES101-11-2：Geometry - Bézier Surfaces</title>
-    <link href="https://limeya.github.io/2022/05/06/games101-11-2-geometry-bezier-surfaces/"/>
-    <id>https://limeya.github.io/2022/05/06/games101-11-2-geometry-bezier-surfaces/</id>
+    <link href="https://limeya.github.io/2022/05/06/cg/games/games101-11-2-geometry-bezier-surfaces/"/>
+    <id>https://limeya.github.io/2022/05/06/cg/games/games101-11-2-geometry-bezier-surfaces/</id>
     <published>2022-05-06T03:00:00.000Z</published>
     <updated>2022-05-08T08:16:28.570Z</updated>
     
@@ -113,8 +113,8 @@
   
   <entry>
     <title>GAMES101-11-1：Geometry - Curves</title>
-    <link href="https://limeya.github.io/2022/05/04/games101-11-1-geometry-curves/"/>
-    <id>https://limeya.github.io/2022/05/04/games101-11-1-geometry-curves/</id>
+    <link href="https://limeya.github.io/2022/05/04/cg/games/games101-11-1-geometry-curves/"/>
+    <id>https://limeya.github.io/2022/05/04/cg/games/games101-11-1-geometry-curves/</id>
     <published>2022-05-04T11:00:00.000Z</published>
     <updated>2022-05-05T05:52:40.035Z</updated>
     
@@ -144,8 +144,8 @@
   
   <entry>
     <title>GAMES101-10：Geometry - Implicit Representations</title>
-    <link href="https://limeya.github.io/2022/05/03/games101-10-geometry-implicit-representations/"/>
-    <id>https://limeya.github.io/2022/05/03/games101-10-geometry-implicit-representations/</id>
+    <link href="https://limeya.github.io/2022/05/03/cg/games/games101-10-geometry-implicit-representations/"/>
+    <id>https://limeya.github.io/2022/05/03/cg/games/games101-10-geometry-implicit-representations/</id>
     <published>2022-05-03T11:00:00.000Z</published>
     <updated>2022-05-03T14:19:51.993Z</updated>
     
@@ -171,8 +171,8 @@
   
   <entry>
     <title>GAMES101-09-3：Shading - Texture Mapping - Applications of Textures</title>
-    <link href="https://limeya.github.io/2022/05/03/games101-09-3-shading-texture-mapping-applications-of-textures/"/>
-    <id>https://limeya.github.io/2022/05/03/games101-09-3-shading-texture-mapping-applications-of-textures/</id>
+    <link href="https://limeya.github.io/2022/05/03/cg/games/games101-09-3-shading-texture-mapping-applications-of-textures/"/>
+    <id>https://limeya.github.io/2022/05/03/cg/games/games101-09-3-shading-texture-mapping-applications-of-textures/</id>
     <published>2022-05-03T05:00:00.000Z</published>
     <updated>2022-05-03T06:43:20.974Z</updated>
     
@@ -200,8 +200,8 @@
   
   <entry>
     <title>GAMES101-09-2：Shading - Texture Mapping - Applying Textures</title>
-    <link href="https://limeya.github.io/2022/05/03/games101-09-2-shading-texture-mapping-applying-textures/"/>
-    <id>https://limeya.github.io/2022/05/03/games101-09-2-shading-texture-mapping-applying-textures/</id>
+    <link href="https://limeya.github.io/2022/05/03/cg/games/games101-09-2-shading-texture-mapping-applying-textures/"/>
+    <id>https://limeya.github.io/2022/05/03/cg/games/games101-09-2-shading-texture-mapping-applying-textures/</id>
     <published>2022-05-03T04:00:00.000Z</published>
     <updated>2022-05-03T06:31:26.171Z</updated>
     
@@ -229,8 +229,8 @@
   
   <entry>
     <title>GAMES101-09-1：Shading - Texture Mapping - Barycentric coordinates</title>
-    <link href="https://limeya.github.io/2022/05/03/games101-09-1-shading-texture-mapping-barycentric-coordinates/"/>
-    <id>https://limeya.github.io/2022/05/03/games101-09-1-shading-texture-mapping-barycentric-coordinates/</id>
+    <link href="https://limeya.github.io/2022/05/03/cg/games/games101-09-1-shading-texture-mapping-barycentric-coordinates/"/>
+    <id>https://limeya.github.io/2022/05/03/cg/games/games101-09-1-shading-texture-mapping-barycentric-coordinates/</id>
     <published>2022-05-03T03:00:00.000Z</published>
     <updated>2022-05-03T05:42:42.172Z</updated>
     
@@ -260,8 +260,8 @@
   
   <entry>
     <title>GAMES101-08-2：Shading - Graphics Pipeline</title>
-    <link href="https://limeya.github.io/2022/05/01/games101-08-2-shading-graphics-pipeline/"/>
-    <id>https://limeya.github.io/2022/05/01/games101-08-2-shading-graphics-pipeline/</id>
+    <link href="https://limeya.github.io/2022/05/01/cg/games/games101-08-2-shading-graphics-pipeline/"/>
+    <id>https://limeya.github.io/2022/05/01/cg/games/games101-08-2-shading-graphics-pipeline/</id>
     <published>2022-05-01T08:00:00.000Z</published>
     <updated>2022-05-02T06:00:30.049Z</updated>
     
@@ -289,8 +289,8 @@
   
   <entry>
     <title>GAMES101-08-1：Shading - Shading Frequencies</title>
-    <link href="https://limeya.github.io/2022/05/01/games101-08-1-shading-shading-frequencies/"/>
-    <id>https://limeya.github.io/2022/05/01/games101-08-1-shading-shading-frequencies/</id>
+    <link href="https://limeya.github.io/2022/05/01/cg/games/games101-08-1-shading-shading-frequencies/"/>
+    <id>https://limeya.github.io/2022/05/01/cg/games/games101-08-1-shading-shading-frequencies/</id>
     <published>2022-05-01T07:00:00.000Z</published>
     <updated>2022-05-02T03:42:27.502Z</updated>
     
@@ -316,8 +316,8 @@
   
   <entry>
     <title>GAMES101-07：Shading - Blinn-Phong Model</title>
-    <link href="https://limeya.github.io/2022/05/01/games101-07-shading-blinn-phong-model/"/>
-    <id>https://limeya.github.io/2022/05/01/games101-07-shading-blinn-phong-model/</id>
+    <link href="https://limeya.github.io/2022/05/01/cg/games/games101-07-shading-blinn-phong-model/"/>
+    <id>https://limeya.github.io/2022/05/01/cg/games/games101-07-shading-blinn-phong-model/</id>
     <published>2022-05-01T06:00:00.000Z</published>
     <updated>2022-05-02T03:38:22.514Z</updated>
     
@@ -346,8 +346,8 @@
   
   <entry>
     <title>GAMES101-06-2：Rasterization - Z-Buffering</title>
-    <link href="https://limeya.github.io/2022/04/30/games101-06-2-rasterization-z-buffering/"/>
-    <id>https://limeya.github.io/2022/04/30/games101-06-2-rasterization-z-buffering/</id>
+    <link href="https://limeya.github.io/2022/04/30/cg/games/games101-06-2-rasterization-z-buffering/"/>
+    <id>https://limeya.github.io/2022/04/30/cg/games/games101-06-2-rasterization-z-buffering/</id>
     <published>2022-04-30T12:00:00.000Z</published>
     <updated>2022-04-30T12:14:07.395Z</updated>
     
@@ -373,8 +373,8 @@
   
   <entry>
     <title>GAMES101-06-1：Rasterization - Antialiasing</title>
-    <link href="https://limeya.github.io/2022/04/30/games101-06-1-rasterization-antialiasing/"/>
-    <id>https://limeya.github.io/2022/04/30/games101-06-1-rasterization-antialiasing/</id>
+    <link href="https://limeya.github.io/2022/04/30/cg/games/games101-06-1-rasterization-antialiasing/"/>
+    <id>https://limeya.github.io/2022/04/30/cg/games/games101-06-1-rasterization-antialiasing/</id>
     <published>2022-04-30T11:00:00.000Z</published>
     <updated>2022-04-30T13:06:41.455Z</updated>
     
@@ -400,8 +400,8 @@
   
   <entry>
     <title>GAMES101-05：Rasterization - Triangles</title>
-    <link href="https://limeya.github.io/2022/04/29/games101-05-rasterization-triangles/"/>
-    <id>https://limeya.github.io/2022/04/29/games101-05-rasterization-triangles/</id>
+    <link href="https://limeya.github.io/2022/04/29/cg/games/games101-05-rasterization-triangles/"/>
+    <id>https://limeya.github.io/2022/04/29/cg/games/games101-05-rasterization-triangles/</id>
     <published>2022-04-29T03:27:00.000Z</published>
     <updated>2022-04-30T12:12:56.133Z</updated>
     
@@ -428,8 +428,8 @@
   
   <entry>
     <title>GAMES101-04：Viewing Transformation</title>
-    <link href="https://limeya.github.io/2022/04/28/games101-04-viewing-transformation/"/>
-    <id>https://limeya.github.io/2022/04/28/games101-04-viewing-transformation/</id>
+    <link href="https://limeya.github.io/2022/04/28/cg/games/games101-04-viewing-transformation/"/>
+    <id>https://limeya.github.io/2022/04/28/cg/games/games101-04-viewing-transformation/</id>
     <published>2022-04-28T09:53:00.000Z</published>
     <updated>2022-04-28T10:30:39.233Z</updated>
     
@@ -454,8 +454,8 @@
   
   <entry>
     <title>GAMES101-03-02：3D Transformation</title>
-    <link href="https://limeya.github.io/2022/04/28/games101-03-02-3d-transformation/"/>
-    <id>https://limeya.github.io/2022/04/28/games101-03-02-3d-transformation/</id>
+    <link href="https://limeya.github.io/2022/04/28/cg/games/games101-03-02-3d-transformation/"/>
+    <id>https://limeya.github.io/2022/04/28/cg/games/games101-03-02-3d-transformation/</id>
     <published>2022-04-28T06:00:00.000Z</published>
     <updated>2022-04-28T09:53:45.418Z</updated>
     
@@ -481,8 +481,8 @@
   
   <entry>
     <title>GAMES101-03-01：2D Transformation</title>
-    <link href="https://limeya.github.io/2022/04/24/games101-03-01-2d-transformation/"/>
-    <id>https://limeya.github.io/2022/04/24/games101-03-01-2d-transformation/</id>
+    <link href="https://limeya.github.io/2022/04/24/cg/games/games101-03-01-2d-transformation/"/>
+    <id>https://limeya.github.io/2022/04/24/cg/games/games101-03-01-2d-transformation/</id>
     <published>2022-04-24T11:50:00.000Z</published>
     <updated>2022-04-28T09:53:38.394Z</updated>
     
@@ -508,8 +508,8 @@
   
   <entry>
     <title>GAMES101-02：Review of Linear Algebra</title>
-    <link href="https://limeya.github.io/2022/04/24/games101-02-review-of-linear-algebra/"/>
-    <id>https://limeya.github.io/2022/04/24/games101-02-review-of-linear-algebra/</id>
+    <link href="https://limeya.github.io/2022/04/24/cg/games/games101-02-review-of-linear-algebra/"/>
+    <id>https://limeya.github.io/2022/04/24/cg/games/games101-02-review-of-linear-algebra/</id>
     <published>2022-04-24T07:50:00.000Z</published>
     <updated>2022-04-24T12:11:28.386Z</updated>
     
@@ -535,8 +535,8 @@
   
   <entry>
     <title>GAMES101-01：Overview of Computer Graphics</title>
-    <link href="https://limeya.github.io/2022/04/24/games101-01-overview-of-computer-graphics/"/>
-    <id>https://limeya.github.io/2022/04/24/games101-01-overview-of-computer-graphics/</id>
+    <link href="https://limeya.github.io/2022/04/24/cg/games/games101-01-overview-of-computer-graphics/"/>
+    <id>https://limeya.github.io/2022/04/24/cg/games/games101-01-overview-of-computer-graphics/</id>
     <published>2022-04-24T03:50:00.000Z</published>
     <updated>2022-04-24T12:11:31.446Z</updated>
     
@@ -560,8 +560,8 @@
   
   <entry>
     <title>如何入门计算机图形学：一份checklist</title>
-    <link href="https://limeya.github.io/2022/04/24/ru-he-ru-men-ji-suan-ji-tu-xing-xue-yi-fen-checklist/"/>
-    <id>https://limeya.github.io/2022/04/24/ru-he-ru-men-ji-suan-ji-tu-xing-xue-yi-fen-checklist/</id>
+    <link href="https://limeya.github.io/2022/04/24/cg/ru-he-ru-men-ji-suan-ji-tu-xing-xue-yi-fen-checklist/"/>
+    <id>https://limeya.github.io/2022/04/24/cg/ru-he-ru-men-ji-suan-ji-tu-xing-xue-yi-fen-checklist/</id>
     <published>2022-04-24T02:50:00.000Z</published>
     <updated>2022-04-24T03:38:38.659Z</updated>
     
