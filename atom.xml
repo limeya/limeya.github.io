@@ -6,7 +6,7 @@
   <link href="https://limeya.github.io/atom.xml" rel="self"/>
   
   <link href="https://limeya.github.io/"/>
-  <updated>2022-05-22T06:00:37.133Z</updated>
+  <updated>2022-05-22T06:19:30.531Z</updated>
   <id>https://limeya.github.io/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>利用Notion API+Github Actions回顾阅读的文章</title>
+    <link href="https://limeya.github.io/2022/05/22/efficient/li-yong-notion-api-github-actions-hui-gu-yue-du-de-wen-zhang/"/>
+    <id>https://limeya.github.io/2022/05/22/efficient/li-yong-notion-api-github-actions-hui-gu-yue-du-de-wen-zhang/</id>
+    <published>2022-05-22T06:06:51.858Z</published>
+    <updated>2022-05-22T06:19:30.531Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;每天看着不断推送的手机消息，明知道其中有价值的并不多，但是又怕错过有价值的信息，这种心态在当今是一种很普遍的心态。因此，面对这种局面，&lt;a</summary>
+        
+      
+    
+    
+    
+    <category term="效率方法" scheme="https://limeya.github.io/categories/%E6%95%88%E7%8E%87%E6%96%B9%E6%B3%95/"/>
+    
+    
+    <category term="Notion" scheme="https://limeya.github.io/tags/Notion/"/>
+    
+    <category term="Github Actions" scheme="https://limeya.github.io/tags/Github-Actions/"/>
+    
+  </entry>
   
   <entry>
     <title>GAMES101：Rasterization - Shadow Mapping</title>
@@ -546,31 +573,6 @@
         
         
     <summary type="html">&lt;h2 id=&quot;What-is-Computer-Graphics&quot;&gt;&lt;a href=&quot;#What-is-Computer-Graphics&quot; class=&quot;headerlink&quot; title=&quot;What is Computer Graphics&quot;&gt;&lt;/a&gt;What is</summary>
-        
-      
-    
-    
-    
-    <category term="博客" scheme="https://limeya.github.io/categories/%E5%8D%9A%E5%AE%A2/"/>
-    
-    
-    <category term="计算机图形学" scheme="https://limeya.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>如何入门计算机图形学：一份checklist</title>
-    <link href="https://limeya.github.io/2022/04/24/cg/ru-he-ru-men-ji-suan-ji-tu-xing-xue-yi-fen-checklist/"/>
-    <id>https://limeya.github.io/2022/04/24/cg/ru-he-ru-men-ji-suan-ji-tu-xing-xue-yi-fen-checklist/</id>
-    <published>2022-04-24T02:50:00.000Z</published>
-    <updated>2022-04-24T03:38:38.659Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;太长不看版&quot;&gt;&lt;a href=&quot;#太长不看版&quot; class=&quot;headerlink&quot; title=&quot;太长不看版&quot;&gt;&lt;/a&gt;太长不看版&lt;/h1&gt;&lt;h2 id=&quot;不要&quot;&gt;&lt;a href=&quot;#不要&quot; class=&quot;headerlink&quot;</summary>
         
       
     
