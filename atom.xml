@@ -6,7 +6,7 @@
   <link href="https://limeya.github.io/atom.xml" rel="self"/>
   
   <link href="https://limeya.github.io/"/>
-  <updated>2022-09-17T16:11:44.554Z</updated>
+  <updated>2022-09-17T16:30:41.733Z</updated>
   <id>https://limeya.github.io/</id>
   
   <author>
@@ -18,10 +18,10 @@
   
   <entry>
     <title>Reference and Pointer</title>
-    <link href="https://limeya.github.io/2022/09/18/coder/reference-he-pointer/"/>
-    <id>https://limeya.github.io/2022/09/18/coder/reference-he-pointer/</id>
+    <link href="https://limeya.github.io/2022/09/18/bian-cheng-zhi-dao/reference-he-pointer/"/>
+    <id>https://limeya.github.io/2022/09/18/bian-cheng-zhi-dao/reference-he-pointer/</id>
     <published>2022-09-17T16:00:00.000Z</published>
-    <updated>2022-09-17T16:11:44.554Z</updated>
+    <updated>2022-09-17T16:30:41.733Z</updated>
     
     
       
@@ -50,11 +50,40 @@
   </entry>
   
   <entry>
+    <title>日本出了问题：《东京贫困女子》呈现的社会现象</title>
+    <link href="https://limeya.github.io/2022/07/15/du-shu-gan-wu/ri-ben-chu-liao-wen-ti-dong-jing-pin-kun-nu-zi-cheng-xian-de-she-hui-xian-xiang/"/>
+    <id>https://limeya.github.io/2022/07/15/du-shu-gan-wu/ri-ben-chu-liao-wen-ti-dong-jing-pin-kun-nu-zi-cheng-xian-de-she-hui-xian-xiang/</id>
+    <published>2022-07-14T16:00:00.000Z</published>
+    <updated>2022-09-17T16:50:21.719Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;这本书我是去年开始读的，读这本书的契机是因为之前看过一个我个人觉得很有意思的日剧——《暗金丑岛君》。但是影视总有一些虚构的成分，所以想了解一些真实的事件，恰好发现这本书。去年刚开始读的时候，觉得有点压抑，一度读不下去，恰好又赶上毕业的事情，耽搁了，现在毕业了又重新拿起来继续</summary>
+        
+      
+    
+    
+    
+    <category term="读书感悟" scheme="https://limeya.github.io/categories/%E8%AF%BB%E4%B9%A6%E6%84%9F%E6%82%9F/"/>
+    
+    
+    <category term="经济" scheme="https://limeya.github.io/tags/%E7%BB%8F%E6%B5%8E/"/>
+    
+    <category term="社会" scheme="https://limeya.github.io/tags/%E7%A4%BE%E4%BC%9A/"/>
+    
+    <category term="贫困" scheme="https://limeya.github.io/tags/%E8%B4%AB%E5%9B%B0/"/>
+    
+  </entry>
+  
+  <entry>
     <title>利用Notion API+Github Actions回顾阅读的文章</title>
-    <link href="https://limeya.github.io/2022/05/22/efficient/li-yong-notion-api-github-actions-hui-gu-yue-du-de-wen-zhang/"/>
-    <id>https://limeya.github.io/2022/05/22/efficient/li-yong-notion-api-github-actions-hui-gu-yue-du-de-wen-zhang/</id>
-    <published>2022-05-22T06:06:51.858Z</published>
-    <updated>2022-05-22T06:19:30.531Z</updated>
+    <link href="https://limeya.github.io/2022/05/22/xiao-lu-sheng-huo/li-yong-notion-api-github-actions-hui-gu-yue-du-de-wen-zhang/"/>
+    <id>https://limeya.github.io/2022/05/22/xiao-lu-sheng-huo/li-yong-notion-api-github-actions-hui-gu-yue-du-de-wen-zhang/</id>
+    <published>2022-05-22T06:19:30.000Z</published>
+    <updated>2022-09-17T16:31:46.183Z</updated>
     
     
       
@@ -67,7 +96,7 @@
     
     
     
-    <category term="效率方法" scheme="https://limeya.github.io/categories/%E6%95%88%E7%8E%87%E6%96%B9%E6%B3%95/"/>
+    <category term="效率生活" scheme="https://limeya.github.io/categories/%E6%95%88%E7%8E%87%E7%94%9F%E6%B4%BB/"/>
     
     
     <category term="Notion" scheme="https://limeya.github.io/tags/Notion/"/>
@@ -78,10 +107,10 @@
   
   <entry>
     <title>GAMES101：Rasterization - Shadow Mapping</title>
-    <link href="https://limeya.github.io/2022/05/06/cg/games/games101-rasterization-shadow-mapping/"/>
-    <id>https://limeya.github.io/2022/05/06/cg/games/games101-rasterization-shadow-mapping/</id>
+    <link href="https://limeya.github.io/2022/05/06/ji-suan-ji-tu-xing-xue/games/games101-rasterization-shadow-mapping/"/>
+    <id>https://limeya.github.io/2022/05/06/ji-suan-ji-tu-xing-xue/games/games101-rasterization-shadow-mapping/</id>
     <published>2022-05-06T08:00:00.000Z</published>
-    <updated>2022-05-22T06:00:37.133Z</updated>
+    <updated>2022-09-17T16:36:08.551Z</updated>
     
     
       
@@ -98,10 +127,10 @@
     
     
     
-    <category term="博客" scheme="https://limeya.github.io/categories/%E5%8D%9A%E5%AE%A2/"/>
+    <category term="计算机图形学" scheme="https://limeya.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/"/>
     
     
-    <category term="计算机图形学" scheme="https://limeya.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/"/>
+    <category term="光栅化" scheme="https://limeya.github.io/tags/%E5%85%89%E6%A0%85%E5%8C%96/"/>
     
     <category term="Rasterization" scheme="https://limeya.github.io/tags/Rasterization/"/>
     
@@ -111,10 +140,10 @@
   
   <entry>
     <title>GAMES101-12：Geometry - Mesh Operations</title>
-    <link href="https://limeya.github.io/2022/05/06/cg/games/games101-12-geometry-mesh-operations/"/>
-    <id>https://limeya.github.io/2022/05/06/cg/games/games101-12-geometry-mesh-operations/</id>
+    <link href="https://limeya.github.io/2022/05/06/ji-suan-ji-tu-xing-xue/games/games101-12-geometry-mesh-operations/"/>
+    <id>https://limeya.github.io/2022/05/06/ji-suan-ji-tu-xing-xue/games/games101-12-geometry-mesh-operations/</id>
     <published>2022-05-06T04:00:00.000Z</published>
-    <updated>2022-05-06T14:34:41.305Z</updated>
+    <updated>2022-09-17T16:35:48.581Z</updated>
     
     
       
@@ -129,10 +158,8 @@
     
     
     
-    <category term="博客" scheme="https://limeya.github.io/categories/%E5%8D%9A%E5%AE%A2/"/>
+    <category term="计算机图形学" scheme="https://limeya.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/"/>
     
-    
-    <category term="计算机图形学" scheme="https://limeya.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/"/>
     
     <category term="Geometry" scheme="https://limeya.github.io/tags/Geometry/"/>
     
@@ -144,10 +171,10 @@
   
   <entry>
     <title>GAMES101-11-2：Geometry - Bézier Surfaces</title>
-    <link href="https://limeya.github.io/2022/05/06/cg/games/games101-11-2-geometry-bezier-surfaces/"/>
-    <id>https://limeya.github.io/2022/05/06/cg/games/games101-11-2-geometry-bezier-surfaces/</id>
+    <link href="https://limeya.github.io/2022/05/06/ji-suan-ji-tu-xing-xue/games/games101-11-2-geometry-bezier-surfaces/"/>
+    <id>https://limeya.github.io/2022/05/06/ji-suan-ji-tu-xing-xue/games/games101-11-2-geometry-bezier-surfaces/</id>
     <published>2022-05-06T03:00:00.000Z</published>
-    <updated>2022-05-08T08:16:28.000Z</updated>
+    <updated>2022-09-17T16:35:43.335Z</updated>
     
     
       
@@ -160,10 +187,8 @@
     
     
     
-    <category term="博客" scheme="https://limeya.github.io/categories/%E5%8D%9A%E5%AE%A2/"/>
+    <category term="计算机图形学" scheme="https://limeya.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/"/>
     
-    
-    <category term="计算机图形学" scheme="https://limeya.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/"/>
     
     <category term="Geometry" scheme="https://limeya.github.io/tags/Geometry/"/>
     
@@ -173,10 +198,10 @@
   
   <entry>
     <title>GAMES101-11-1：Geometry - Curves</title>
-    <link href="https://limeya.github.io/2022/05/04/cg/games/games101-11-1-geometry-curves/"/>
-    <id>https://limeya.github.io/2022/05/04/cg/games/games101-11-1-geometry-curves/</id>
+    <link href="https://limeya.github.io/2022/05/04/ji-suan-ji-tu-xing-xue/games/games101-11-1-geometry-curves/"/>
+    <id>https://limeya.github.io/2022/05/04/ji-suan-ji-tu-xing-xue/games/games101-11-1-geometry-curves/</id>
     <published>2022-05-04T11:00:00.000Z</published>
-    <updated>2022-05-05T05:52:40.035Z</updated>
+    <updated>2022-09-17T16:35:37.804Z</updated>
     
     
       
@@ -189,10 +214,8 @@
     
     
     
-    <category term="博客" scheme="https://limeya.github.io/categories/%E5%8D%9A%E5%AE%A2/"/>
+    <category term="计算机图形学" scheme="https://limeya.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/"/>
     
-    
-    <category term="计算机图形学" scheme="https://limeya.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/"/>
     
     <category term="Geometry" scheme="https://limeya.github.io/tags/Geometry/"/>
     
@@ -204,10 +227,10 @@
   
   <entry>
     <title>GAMES101-10：Geometry - Implicit Representations</title>
-    <link href="https://limeya.github.io/2022/05/03/cg/games/games101-10-geometry-implicit-representations/"/>
-    <id>https://limeya.github.io/2022/05/03/cg/games/games101-10-geometry-implicit-representations/</id>
+    <link href="https://limeya.github.io/2022/05/03/ji-suan-ji-tu-xing-xue/games/games101-10-geometry-implicit-representations/"/>
+    <id>https://limeya.github.io/2022/05/03/ji-suan-ji-tu-xing-xue/games/games101-10-geometry-implicit-representations/</id>
     <published>2022-05-03T11:00:00.000Z</published>
-    <updated>2022-05-03T14:19:51.993Z</updated>
+    <updated>2022-09-17T16:35:31.263Z</updated>
     
     
       
@@ -220,10 +243,8 @@
     
     
     
-    <category term="博客" scheme="https://limeya.github.io/categories/%E5%8D%9A%E5%AE%A2/"/>
+    <category term="计算机图形学" scheme="https://limeya.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/"/>
     
-    
-    <category term="计算机图形学" scheme="https://limeya.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/"/>
     
     <category term="Geometry" scheme="https://limeya.github.io/tags/Geometry/"/>
     
@@ -231,10 +252,10 @@
   
   <entry>
     <title>GAMES101-09-3：Shading - Texture Mapping - Applications of Textures</title>
-    <link href="https://limeya.github.io/2022/05/03/cg/games/games101-09-3-shading-texture-mapping-applications-of-textures/"/>
-    <id>https://limeya.github.io/2022/05/03/cg/games/games101-09-3-shading-texture-mapping-applications-of-textures/</id>
+    <link href="https://limeya.github.io/2022/05/03/ji-suan-ji-tu-xing-xue/games/games101-09-3-shading-texture-mapping-applications-of-textures/"/>
+    <id>https://limeya.github.io/2022/05/03/ji-suan-ji-tu-xing-xue/games/games101-09-3-shading-texture-mapping-applications-of-textures/</id>
     <published>2022-05-03T05:00:00.000Z</published>
-    <updated>2022-05-03T06:43:20.974Z</updated>
+    <updated>2022-09-17T16:35:26.003Z</updated>
     
     
       
@@ -247,10 +268,8 @@
     
     
     
-    <category term="博客" scheme="https://limeya.github.io/categories/%E5%8D%9A%E5%AE%A2/"/>
+    <category term="计算机图形学" scheme="https://limeya.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/"/>
     
-    
-    <category term="计算机图形学" scheme="https://limeya.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/"/>
     
     <category term="Shading" scheme="https://limeya.github.io/tags/Shading/"/>
     
@@ -260,10 +279,10 @@
   
   <entry>
     <title>GAMES101-09-2：Shading - Texture Mapping - Applying Textures</title>
-    <link href="https://limeya.github.io/2022/05/03/cg/games/games101-09-2-shading-texture-mapping-applying-textures/"/>
-    <id>https://limeya.github.io/2022/05/03/cg/games/games101-09-2-shading-texture-mapping-applying-textures/</id>
+    <link href="https://limeya.github.io/2022/05/03/ji-suan-ji-tu-xing-xue/games/games101-09-2-shading-texture-mapping-applying-textures/"/>
+    <id>https://limeya.github.io/2022/05/03/ji-suan-ji-tu-xing-xue/games/games101-09-2-shading-texture-mapping-applying-textures/</id>
     <published>2022-05-03T04:00:00.000Z</published>
-    <updated>2022-05-03T06:31:26.171Z</updated>
+    <updated>2022-09-17T16:35:20.655Z</updated>
     
     
       
@@ -276,10 +295,8 @@
     
     
     
-    <category term="博客" scheme="https://limeya.github.io/categories/%E5%8D%9A%E5%AE%A2/"/>
+    <category term="计算机图形学" scheme="https://limeya.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/"/>
     
-    
-    <category term="计算机图形学" scheme="https://limeya.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/"/>
     
     <category term="Shading" scheme="https://limeya.github.io/tags/Shading/"/>
     
@@ -289,10 +306,10 @@
   
   <entry>
     <title>GAMES101-09-1：Shading - Texture Mapping - Barycentric coordinates</title>
-    <link href="https://limeya.github.io/2022/05/03/cg/games/games101-09-1-shading-texture-mapping-barycentric-coordinates/"/>
-    <id>https://limeya.github.io/2022/05/03/cg/games/games101-09-1-shading-texture-mapping-barycentric-coordinates/</id>
+    <link href="https://limeya.github.io/2022/05/03/ji-suan-ji-tu-xing-xue/games/games101-09-1-shading-texture-mapping-barycentric-coordinates/"/>
+    <id>https://limeya.github.io/2022/05/03/ji-suan-ji-tu-xing-xue/games/games101-09-1-shading-texture-mapping-barycentric-coordinates/</id>
     <published>2022-05-03T03:00:00.000Z</published>
-    <updated>2022-05-03T05:42:42.172Z</updated>
+    <updated>2022-09-17T16:35:15.733Z</updated>
     
     
       
@@ -305,10 +322,8 @@
     
     
     
-    <category term="博客" scheme="https://limeya.github.io/categories/%E5%8D%9A%E5%AE%A2/"/>
+    <category term="计算机图形学" scheme="https://limeya.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/"/>
     
-    
-    <category term="计算机图形学" scheme="https://limeya.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/"/>
     
     <category term="Shading" scheme="https://limeya.github.io/tags/Shading/"/>
     
@@ -320,10 +335,10 @@
   
   <entry>
     <title>GAMES101-08-2：Shading - Graphics Pipeline</title>
-    <link href="https://limeya.github.io/2022/05/01/cg/games/games101-08-2-shading-graphics-pipeline/"/>
-    <id>https://limeya.github.io/2022/05/01/cg/games/games101-08-2-shading-graphics-pipeline/</id>
+    <link href="https://limeya.github.io/2022/05/01/ji-suan-ji-tu-xing-xue/games/games101-08-2-shading-graphics-pipeline/"/>
+    <id>https://limeya.github.io/2022/05/01/ji-suan-ji-tu-xing-xue/games/games101-08-2-shading-graphics-pipeline/</id>
     <published>2022-05-01T08:00:00.000Z</published>
-    <updated>2022-05-02T06:00:30.049Z</updated>
+    <updated>2022-09-17T16:35:10.027Z</updated>
     
     
       
@@ -336,10 +351,8 @@
     
     
     
-    <category term="博客" scheme="https://limeya.github.io/categories/%E5%8D%9A%E5%AE%A2/"/>
+    <category term="计算机图形学" scheme="https://limeya.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/"/>
     
-    
-    <category term="计算机图形学" scheme="https://limeya.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/"/>
     
     <category term="Shading" scheme="https://limeya.github.io/tags/Shading/"/>
     
@@ -349,10 +362,10 @@
   
   <entry>
     <title>GAMES101-08-1：Shading - Shading Frequencies</title>
-    <link href="https://limeya.github.io/2022/05/01/cg/games/games101-08-1-shading-shading-frequencies/"/>
-    <id>https://limeya.github.io/2022/05/01/cg/games/games101-08-1-shading-shading-frequencies/</id>
+    <link href="https://limeya.github.io/2022/05/01/ji-suan-ji-tu-xing-xue/games/games101-08-1-shading-shading-frequencies/"/>
+    <id>https://limeya.github.io/2022/05/01/ji-suan-ji-tu-xing-xue/games/games101-08-1-shading-shading-frequencies/</id>
     <published>2022-05-01T07:00:00.000Z</published>
-    <updated>2022-05-02T03:42:27.502Z</updated>
+    <updated>2022-09-17T16:35:04.648Z</updated>
     
     
       
@@ -365,10 +378,8 @@
     
     
     
-    <category term="博客" scheme="https://limeya.github.io/categories/%E5%8D%9A%E5%AE%A2/"/>
+    <category term="计算机图形学" scheme="https://limeya.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/"/>
     
-    
-    <category term="计算机图形学" scheme="https://limeya.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/"/>
     
     <category term="Shading" scheme="https://limeya.github.io/tags/Shading/"/>
     
@@ -376,10 +387,10 @@
   
   <entry>
     <title>GAMES101-07：Shading - Blinn-Phong Model</title>
-    <link href="https://limeya.github.io/2022/05/01/cg/games/games101-07-shading-blinn-phong-model/"/>
-    <id>https://limeya.github.io/2022/05/01/cg/games/games101-07-shading-blinn-phong-model/</id>
+    <link href="https://limeya.github.io/2022/05/01/ji-suan-ji-tu-xing-xue/games/games101-07-shading-blinn-phong-model/"/>
+    <id>https://limeya.github.io/2022/05/01/ji-suan-ji-tu-xing-xue/games/games101-07-shading-blinn-phong-model/</id>
     <published>2022-05-01T06:00:00.000Z</published>
-    <updated>2022-05-02T03:38:22.514Z</updated>
+    <updated>2022-09-17T16:34:58.695Z</updated>
     
     
       
@@ -393,10 +404,8 @@
     
     
     
-    <category term="博客" scheme="https://limeya.github.io/categories/%E5%8D%9A%E5%AE%A2/"/>
+    <category term="计算机图形学" scheme="https://limeya.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/"/>
     
-    
-    <category term="计算机图形学" scheme="https://limeya.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/"/>
     
     <category term="Shading" scheme="https://limeya.github.io/tags/Shading/"/>
     
@@ -406,10 +415,10 @@
   
   <entry>
     <title>GAMES101-06-2：Rasterization - Z-Buffering</title>
-    <link href="https://limeya.github.io/2022/04/30/cg/games/games101-06-2-rasterization-z-buffering/"/>
-    <id>https://limeya.github.io/2022/04/30/cg/games/games101-06-2-rasterization-z-buffering/</id>
+    <link href="https://limeya.github.io/2022/04/30/ji-suan-ji-tu-xing-xue/games/games101-06-2-rasterization-z-buffering/"/>
+    <id>https://limeya.github.io/2022/04/30/ji-suan-ji-tu-xing-xue/games/games101-06-2-rasterization-z-buffering/</id>
     <published>2022-04-30T12:00:00.000Z</published>
-    <updated>2022-04-30T12:14:07.395Z</updated>
+    <updated>2022-09-17T16:34:53.287Z</updated>
     
     
       
@@ -422,10 +431,8 @@
     
     
     
-    <category term="博客" scheme="https://limeya.github.io/categories/%E5%8D%9A%E5%AE%A2/"/>
+    <category term="计算机图形学" scheme="https://limeya.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/"/>
     
-    
-    <category term="计算机图形学" scheme="https://limeya.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/"/>
     
     <category term="光栅化" scheme="https://limeya.github.io/tags/%E5%85%89%E6%A0%85%E5%8C%96/"/>
     
@@ -433,10 +440,10 @@
   
   <entry>
     <title>GAMES101-06-1：Rasterization - Antialiasing</title>
-    <link href="https://limeya.github.io/2022/04/30/cg/games/games101-06-1-rasterization-antialiasing/"/>
-    <id>https://limeya.github.io/2022/04/30/cg/games/games101-06-1-rasterization-antialiasing/</id>
+    <link href="https://limeya.github.io/2022/04/30/ji-suan-ji-tu-xing-xue/games/games101-06-1-rasterization-antialiasing/"/>
+    <id>https://limeya.github.io/2022/04/30/ji-suan-ji-tu-xing-xue/games/games101-06-1-rasterization-antialiasing/</id>
     <published>2022-04-30T11:00:00.000Z</published>
-    <updated>2022-04-30T13:06:41.455Z</updated>
+    <updated>2022-09-17T16:34:47.356Z</updated>
     
     
       
@@ -449,10 +456,8 @@
     
     
     
-    <category term="博客" scheme="https://limeya.github.io/categories/%E5%8D%9A%E5%AE%A2/"/>
+    <category term="计算机图形学" scheme="https://limeya.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/"/>
     
-    
-    <category term="计算机图形学" scheme="https://limeya.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/"/>
     
     <category term="光栅化" scheme="https://limeya.github.io/tags/%E5%85%89%E6%A0%85%E5%8C%96/"/>
     
@@ -460,10 +465,10 @@
   
   <entry>
     <title>GAMES101-05：Rasterization - Triangles</title>
-    <link href="https://limeya.github.io/2022/04/29/cg/games/games101-05-rasterization-triangles/"/>
-    <id>https://limeya.github.io/2022/04/29/cg/games/games101-05-rasterization-triangles/</id>
+    <link href="https://limeya.github.io/2022/04/29/ji-suan-ji-tu-xing-xue/games/games101-05-rasterization-triangles/"/>
+    <id>https://limeya.github.io/2022/04/29/ji-suan-ji-tu-xing-xue/games/games101-05-rasterization-triangles/</id>
     <published>2022-04-29T03:27:00.000Z</published>
-    <updated>2022-04-30T12:12:56.133Z</updated>
+    <updated>2022-09-17T16:34:39.618Z</updated>
     
     
       
@@ -477,10 +482,8 @@
     
     
     
-    <category term="博客" scheme="https://limeya.github.io/categories/%E5%8D%9A%E5%AE%A2/"/>
+    <category term="计算机图形学" scheme="https://limeya.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/"/>
     
-    
-    <category term="计算机图形学" scheme="https://limeya.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/"/>
     
     <category term="光栅化" scheme="https://limeya.github.io/tags/%E5%85%89%E6%A0%85%E5%8C%96/"/>
     
@@ -488,10 +491,10 @@
   
   <entry>
     <title>GAMES101-04：Viewing Transformation</title>
-    <link href="https://limeya.github.io/2022/04/28/cg/games/games101-04-viewing-transformation/"/>
-    <id>https://limeya.github.io/2022/04/28/cg/games/games101-04-viewing-transformation/</id>
+    <link href="https://limeya.github.io/2022/04/28/ji-suan-ji-tu-xing-xue/games/games101-04-viewing-transformation/"/>
+    <id>https://limeya.github.io/2022/04/28/ji-suan-ji-tu-xing-xue/games/games101-04-viewing-transformation/</id>
     <published>2022-04-28T09:53:00.000Z</published>
-    <updated>2022-04-28T10:30:39.233Z</updated>
+    <updated>2022-09-17T16:34:25.916Z</updated>
     
     
       
@@ -505,19 +508,19 @@
     
     
     
-    <category term="博客" scheme="https://limeya.github.io/categories/%E5%8D%9A%E5%AE%A2/"/>
+    <category term="计算机图形学" scheme="https://limeya.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/"/>
     
     
-    <category term="计算机图形学" scheme="https://limeya.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/"/>
+    <category term="视图变换" scheme="https://limeya.github.io/tags/%E8%A7%86%E5%9B%BE%E5%8F%98%E6%8D%A2/"/>
     
   </entry>
   
   <entry>
     <title>GAMES101-03-02：3D Transformation</title>
-    <link href="https://limeya.github.io/2022/04/28/cg/games/games101-03-02-3d-transformation/"/>
-    <id>https://limeya.github.io/2022/04/28/cg/games/games101-03-02-3d-transformation/</id>
+    <link href="https://limeya.github.io/2022/04/28/ji-suan-ji-tu-xing-xue/games/games101-03-02-3d-transformation/"/>
+    <id>https://limeya.github.io/2022/04/28/ji-suan-ji-tu-xing-xue/games/games101-03-02-3d-transformation/</id>
     <published>2022-04-28T06:00:00.000Z</published>
-    <updated>2022-04-28T09:53:45.418Z</updated>
+    <updated>2022-09-17T16:34:12.674Z</updated>
     
     
       
@@ -530,10 +533,8 @@
     
     
     
-    <category term="博客" scheme="https://limeya.github.io/categories/%E5%8D%9A%E5%AE%A2/"/>
+    <category term="计算机图形学" scheme="https://limeya.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/"/>
     
-    
-    <category term="计算机图形学" scheme="https://limeya.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/"/>
     
     <category term="线性代数" scheme="https://limeya.github.io/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/"/>
     
@@ -541,10 +542,10 @@
   
   <entry>
     <title>GAMES101-03-01：2D Transformation</title>
-    <link href="https://limeya.github.io/2022/04/24/cg/games/games101-03-01-2d-transformation/"/>
-    <id>https://limeya.github.io/2022/04/24/cg/games/games101-03-01-2d-transformation/</id>
+    <link href="https://limeya.github.io/2022/04/24/ji-suan-ji-tu-xing-xue/games/games101-03-01-2d-transformation/"/>
+    <id>https://limeya.github.io/2022/04/24/ji-suan-ji-tu-xing-xue/games/games101-03-01-2d-transformation/</id>
     <published>2022-04-24T11:50:00.000Z</published>
-    <updated>2022-04-28T09:53:38.394Z</updated>
+    <updated>2022-09-17T16:34:07.258Z</updated>
     
     
       
@@ -557,37 +558,8 @@
     
     
     
-    <category term="博客" scheme="https://limeya.github.io/categories/%E5%8D%9A%E5%AE%A2/"/>
+    <category term="计算机图形学" scheme="https://limeya.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/"/>
     
-    
-    <category term="计算机图形学" scheme="https://limeya.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/"/>
-    
-    <category term="线性代数" scheme="https://limeya.github.io/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>GAMES101-02：Review of Linear Algebra</title>
-    <link href="https://limeya.github.io/2022/04/24/cg/games/games101-02-review-of-linear-algebra/"/>
-    <id>https://limeya.github.io/2022/04/24/cg/games/games101-02-review-of-linear-algebra/</id>
-    <published>2022-04-24T07:50:00.000Z</published>
-    <updated>2022-04-24T12:11:28.386Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;计算机图形学的预备知识&quot;&gt;&lt;a href=&quot;#计算机图形学的预备知识&quot; class=&quot;headerlink&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="博客" scheme="https://limeya.github.io/categories/%E5%8D%9A%E5%AE%A2/"/>
-    
-    
-    <category term="计算机图形学" scheme="https://limeya.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/"/>
     
     <category term="线性代数" scheme="https://limeya.github.io/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/"/>
     

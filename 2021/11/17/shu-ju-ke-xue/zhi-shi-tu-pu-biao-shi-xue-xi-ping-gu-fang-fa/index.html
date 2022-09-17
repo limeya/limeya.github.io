@@ -1,0 +1,1347 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="知识图谱表示学习：评估方法, LifeHit">
+    <meta name="description" content="对知识图谱表示学习方法进行评估的一些方法和技巧的总结。">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0V4SV7JK5F"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+    gtag('config', 'G-0V4SV7JK5F');
+</script>
+
+
+    <title>知识图谱表示学习：评估方法 | LifeHit</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="LifeHit" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">LifeHit</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">LifeHit</div>
+        <div class="logo-desc">
+            
+            世界上只有一种真正的英雄主义，就是认清了生活的真相后还依然热爱它
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/images/kg/evaluation/0.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">知识图谱表示学习：评估方法</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/">
+                                <span class="chip bg-color">知识图谱</span>
+                            </a>
+                        
+                            <a href="/tags/%E8%A1%A8%E7%A4%BA%E5%AD%A6%E4%B9%A0/">
+                                <span class="chip bg-color">表示学习</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/" class="post-category">
+                                数据科学
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2021-11-17
+                </div>
+                
+
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    2.8k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    10 分
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="背景介绍"><a href="#背景介绍" class="headerlink" title="背景介绍"></a>背景介绍</h1><p>如何对知识图谱进行评估，其实知识图谱本身并不需要评估，因为其中的实体和关系已经确定，但是考虑到应用时的效率问题等，需要将它们表示成低维向量的形式，因此这种评估是针对表示为低维向量的知识图谱，来探求：低维向量的形式是否能完美代表之前的知识图谱。</p>
+<h1 id="评估数据准备"><a href="#评估数据准备" class="headerlink" title="评估数据准备"></a>评估数据准备</h1><p>那么如何评估这种“完美程度”呢？我们知道在一些tabular数据中使用的模型，比如random forest，GBDT，来一组新的数据，因为有标记，我们预测新数据产生的输出，来与标记进行对比。模型学到的是不同类型数据之间的交互。这种情况下，是通过对新的数据进行prediction来评估模型的学习成果。</p>
+<p>那么在知识图谱表示学习中，模型学到了什么？因为本质上是换了一种表示方法，所以模型学到的是针对同一事务的不同的表示形式，那么就要求在评估时，仍然有同一事务的存在，这么说有点抽象，举个例子：</p>
+<table>
+<thead>
+<tr>
+<th>$x_1$</th>
+<th>$x_2$</th>
+<th>$…$</th>
+<th>$x_{i-1}$</th>
+<th>$x_{i}$</th>
+<th>$y$</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>3</td>
+<td>4</td>
+<td>$…$</td>
+<td>4</td>
+<td>3</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>5</td>
+<td>$…$</td>
+<td>9</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>2</td>
+<td>1</td>
+<td>$…$</td>
+<td>11</td>
+<td>7</td>
+<td>1</td>
+</tr>
+</tbody></table>
+<p> 假设这是一个tabular数据的预测问题，例如：男生能否脱单。</p>
+<p> 每个维度的向量$x_i$ 代表一种数据，比如：</p>
+<ul>
+<li>$x_1$ 代表你的学历；</li>
+<li>$x_2$ 代表你的家庭背景；</li>
+<li>等等，如此类推…</li>
+</ul>
+<p> 当进行评估时，你所需要的是再出现一个同样格式的数据，每一维的数据的意义和训练集的类似，比如：你不能说在评估时出现一个 $x_{i+1}$ 代表这个人是否会养猪，因为这种类型的数据不在训练集中。</p>
+<p> 同样的，知识图谱表示学习中学到的是一个实体或者关系的低维向量表示，当训练集中出现的是: 高圆圆和Alex, 在评估时，你让我评估 新垣结衣和小约翰(均没有出现在训练集中)的关系。</p>
+<p> 这一点是和之前的评估方法有所区别的。</p>
+<p> 那么如何准备训练集和测试集呢？<strong>在评估数据准备时的一个原则：保证测试集中出现的实体和关系均在训练集中出现。</strong></p>
+<blockquote>
+<p>不同时出现，我评估谁去？谁知道小约翰和新垣结衣合不合适？但我们能评估高圆圆和Alex合不合适… </p>
+</blockquote>
+<h1 id="评估任务"><a href="#评估任务" class="headerlink" title="评估任务"></a>评估任务</h1><p>在KGE评估时，一般采取的是<code>Link prediction</code>任务，在准备时，可以采取的策略：</p>
+<ul>
+<li>在原始的知识图谱上随机删除一些link，然后在评估时预测这些link是否存在，这种情况下，需要计算预测的准确率；</li>
+<li>还有一种方法是，将<code>link prediction</code>视为<code>learn to rank</code>任务，通<strong>过排序的指标进行评估，这种方式目前是主流的方法</strong>，下文主要阐述这种方法；</li>
+</ul>
+<p>对于这种方法，首先确定需要进行评估的数据集 $\mathcal{E}$ ，因为有时候进行评估的数据集可能并不是原始的完整的数据集，然后针对数据集中的三元组，进行两种类型的替换，如下：</p>
+<ul>
+<li><p>$(h, r, ?)$ ：取 $\mathcal{E}$ 中的所有实体，替换？，然后计算 $(h, r, t)$ 在其中的排序，越靠前越好；</p>
+</li>
+<li><p>$(?, r, t)$ ：取 $\mathcal{E}$ 中的所有实体，替换？，然后计算 $(h, r, t)$ 在其中的排序，越靠前越好；</p>
+</li>
+</ul>
+<h1 id="评估指标-Rank-based-method"><a href="#评估指标-Rank-based-method" class="headerlink" title="评估指标(Rank-based method)"></a>评估指标(Rank-based method)</h1><h2 id="Hits-K"><a href="#Hits-K" class="headerlink" title="Hits@K"></a>Hits@K</h2><p>hits@k根据出现在排序列表中的前k个实体中，真实实体排序的位置进行评估。</p>
+<p>具体计算方式如下：</p>
+<p>$$<br>\text{hits@}k = \frac{1}{|\mathcal{I}|} \sum \limits_{r \in \mathcal{I}} \mathbb{I}[r \leq k]<br>$$</p>
+<ul>
+<li>$\mathcal{I}$ 表示一组排序的结果；</li>
+<li>$|\mathcal{I}|$ 表示一组排序的结果的数量；</li>
+<li>$\mathbb{I}$ 为指示函数；</li>
+<li>$k$ 为界定的范围，常为1, 3, 5, 10</li>
+<li>该值越接近1，说明学习的效果越好；</li>
+<li>这里的<code>r</code>指的是<code>rank</code>;</li>
+</ul>
+<p>一个例子说明：</p>
+<p>当有3个正样本用于生成负样本时，同时考虑替换head和tail，可以生成6个负样本，也就可以得到6个排名结果。</p>
+<table>
+<thead>
+<tr>
+<th>正样本</th>
+<th>head负样本</th>
+<th>tail负样本</th>
+<th>head负样本排序</th>
+<th>tail负样本排序</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>$(h_1, r_1, t_1)$</td>
+<td>$(h_1, r_1, ?)$</td>
+<td>$(?, r_1, t_1)$</td>
+<td>8</td>
+<td>4</td>
+</tr>
+<tr>
+<td>$(h_2, r_2, t_2)$</td>
+<td>$(h_2, r_2, ?)$</td>
+<td>$(?, r_2, t_2)$</td>
+<td>2</td>
+<td>1</td>
+</tr>
+<tr>
+<td>$(h_3, r_3, t_3)$</td>
+<td>$(h_3, r_3, ?)$</td>
+<td>$(?, r_3, t_3)$</td>
+<td>90</td>
+<td>1</td>
+</tr>
+</tbody></table>
+<p>则计算如下：</p>
+<p>$$<br>hits@1 = \frac{1}{6} \times (0 + 0 + 0 + 1 + 0 + 1) = 0.3333<br>$$</p>
+<p>$$<br>hits@3 = \frac{1}{6} \times (0 + 0 + 1 + 1 + 0 + 1) = 0.50<br>$$</p>
+<p>$$<br>hits@5 = \frac{1}{6} \times (0 + 1 + 1 + 1 + 0 + 1) = 0.6667<br>$$</p>
+<p>如果你实际计算时会发现一个问题，比如对于 $(h_1, r_1, ?)$，它的排序为8，但是由于比1， 3， 5都大，所以仍然记为0，但是它比 $(h_3, r_3, ?)$ 的排序为90，要好很多，但是对于 $rank &gt; k$ 的，该指标一视同仁，也是一个缺陷。</p>
+<h2 id="Mean-Rank-MR"><a href="#Mean-Rank-MR" class="headerlink" title="Mean Rank(MR)"></a>Mean Rank(MR)</h2><p>正如名字体现的，是triples所有排序的算术平均值，这个值的范围是: [1, 所有负样本的数量]。</p>
+<ul>
+<li>1 表明是最理想的情况，所有的triples的排序都是1；</li>
+<li>所有负样本的数量：最坏的情况，所有的排序都是最后一个；</li>
+<li>这个指标越低越好；</li>
+</ul>
+<p>$$<br>\text{score} =\frac{1}{|\mathcal{I}|} \sum \limits_{r \in \mathcal{I}} r<br>$$</p>
+<p>根据上述的6个负样本，计算如下：</p>
+<p>$$<br>\text{MR} = \frac{1}{6} \times (8 + 4 + 2 + 1 + 90 + 1) = 17.6667<br>$$</p>
+<p>从计算方式上来看，这个评估指标比<code>Hits@K</code>好的地方在于：</p>
+<blockquote>
+<p>it is sensitive to any model performance changes, not only what occurs under a certain cutoff and therefore reflects average performance.</p>
+</blockquote>
+<p>但是它的缺陷也很明显，虽然有一定的解释性，但是由于它的边界取决于负样本的数量，但是MR=10，对于负样本为20或者200000的模型，其性能指示含义完全不同。</p>
+<h2 id="Mean-reciprocal-rank-MRR"><a href="#Mean-reciprocal-rank-MRR" class="headerlink" title="Mean reciprocal rank(MRR)"></a>Mean reciprocal rank(MRR)</h2><p>MRR是所有排名的倒数的算术平均值，具体计算如下：</p>
+<p>$$<br>\text{score} =\frac{1}{|\mathcal{I}|} \sum_{r \in \mathcal{I}} r^{-1}<br>$$</p>
+<p>根据上述的6个负样本，计算如下：</p>
+<p>$$<br>\text{MR} = \frac{1}{6} \times (\frac{1}{8} + \frac{1}{4} + \frac{1}{2} + \frac{1}{1} + \frac{1}{90} + \frac{1}{1}) = 0.4810<br>$$</p>
+<ul>
+<li>这个指标在 $[0, 1]$ 之间;</li>
+<li>是对MR的一种改进，使得可以对异常值不太敏感，这里指对高rank的异常值不敏感，但是去开始对低rank值敏感；</li>
+</ul>
+<p>同样的问题，对于一个模型，如果观察到MRR指标为0.01， 那么这个模型是好还是不好？</p>
+<p>这种结论很难直接下，这个值意味着，当去掉outliers时，平均排名为 100(1/0.01) 左右，这个结果可能是好的，也可能是坏的，这取决于使用的负样本的数量。</p>
+<ul>
+<li>当使用了100万的负样本, 那么这个结果很好，因为在100万中排名100，是很好的；</li>
+<li>当使用了负样本只有100个，说明test triples在跟corruptions一起排名时得到的结果很差；</li>
+</ul>
+<p>在真实的数据集上，应该仔细看看hits@k这个指标，之后再判断模型的好坏。</p>
+<p>其中k的选择，应该取决于针对每个test triple生成的负样本的数量。</p>
+<blockquote>
+<p>其实主要的评估指标，包括：<code>MRR</code>, <code>hits@k</code>, 已经是经常使用的了，例如在：<a target="_blank" rel="noopener" href="https://paperswithcode.com/task/link-prediction">paperswithcode</a>和<a target="_blank" rel="noopener" href="https://www.jiqizhixin.com/sota/tech-task/90c2aa81-2fb1-4363-a379-53edc69b3898">机器之心</a>的SOTA中都是以这几种组作为benchmark的。</p>
+</blockquote>
+<h2 id="其他的指标"><a href="#其他的指标" class="headerlink" title="其他的指标"></a>其他的指标</h2><p>针对上述常用的指标，也有一些改进的衡量指标，比如：</p>
+<ul>
+<li>Inverse Geometric Mean Rank</li>
+<li>Adjusted Mean Rank</li>
+<li>Adjusted Mean Rank Index</li>
+</ul>
+<p>这些指标可以参考 <a target="_blank" rel="noopener" href="https://pykeen.readthedocs.io/en/stable/tutorial/understanding_evaluation.html">其他衡量指标</a></p>
+<h1 id="深入评估细节"><a href="#深入评估细节" class="headerlink" title="深入评估细节"></a>深入评估细节</h1><h2 id="如何计算rank"><a href="#如何计算rank" class="headerlink" title="如何计算rank?"></a>如何计算rank?</h2><p>上边我们默认已经知道rank，但是rank是如何计算的，不就是排序列表的索引吗？</p>
+<p>对于一个模型，输出针对triples的分数如下：</p>
+<table>
+<thead>
+<tr>
+<th>Triples</th>
+<th>Score</th>
+<th>Rank(optimistic)</th>
+<th>Rank(pessimistic)</th>
+<th>Rank(realistic)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>(高圆圆，喜欢，XXX)</td>
+<td>0.9628</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>(高圆圆，喜欢，Alex)</td>
+<td>0.9405</td>
+<td>2</td>
+<td>3</td>
+<td>2.5</td>
+</tr>
+<tr>
+<td>(高圆圆，喜欢，赵又廷)</td>
+<td>0.9405</td>
+<td>3</td>
+<td>2</td>
+<td>2</td>
+</tr>
+<tr>
+<td>(高圆圆，喜欢，小约翰)</td>
+<td>0.0001</td>
+<td>4</td>
+<td>4</td>
+<td>4</td>
+</tr>
+</tbody></table>
+<p>但是会出现一个问题：如果模型针对不同的triples输出同样的分数时，如何计算rank？这时候有三种方式：</p>
+<ul>
+<li><code>optimistic</code>：乐观的方式，当正样本和其他的负样本有同样的分数时，则排名取第一个；</li>
+<li><code>pessimistic</code>：悲观的方式，当正样本和其他的负样本有同样的分数时，则排名取最后一个；</li>
+<li><code>realistic</code>：务实的方式，当正样本和其他的负样本有同样的分数时，则排名取<code>optimistic</code>和<code>pessimistic</code>的平均排名；</li>
+</ul>
+<h2 id="rank选边"><a href="#rank选边" class="headerlink" title="rank选边"></a>rank选边</h2><p>上述我们一直默认，当生成负样本时，是针对head和tail同时进行的，但是其实可以任选一边，即：</p>
+<ul>
+<li>只针对head生成负样本；</li>
+<li>只针对tail生成负样本；</li>
+</ul>
+<p>但是一般情况下，我们都是针对两边同时生成负样本。</p>
+<p>但是指针对以便进行负样本的生成是有意义的，因为这样可以评估模型对于head和tail的预测差异。</p>
+<h2 id="过滤已知triples"><a href="#过滤已知triples" class="headerlink" title="过滤已知triples"></a>过滤已知triples</h2><p>这个很明显，当生成负样本时，我们发现，针对(高圆圆，喜欢，Alex)，替换head，得到新的负样本的head可以任意替换，那么，恰巧生成一个负样本 (孙艺珍，喜欢，Alex)，这就尴尬了，因为这是一个正样本，当评估时必然会得到很高的分数，导致得到排名很前的rank，这就导致(高圆圆，喜欢，Alex)的排名靠后了，因此为了正确地衡量模型的性能，因此需要过滤掉这些正确的样本，因为它会忽略这些一直的triples带来的负面影响。</p>
+<p>但是这种filtering的使用时机是很重要的：<strong>一个原则是评估的结果不会影响到模型的训练过程</strong>。根据这个原则，不可以使用filtering：</p>
+<ul>
+<li>Early stopping：不使用test data进行正样本的过滤，以免泄露信息；</li>
+<li>hyperparameter optimization：不使用test data进行正样本的过滤，以免泄露信息；</li>
+</ul>
+<h2 id="实体和关系限定"><a href="#实体和关系限定" class="headerlink" title="实体和关系限定"></a>实体和关系限定</h2><p>这个问题需要阐述的是，上边根据LCWA或者sLCWA，可以生成针对所有实体或者关系的负样本，但是依赖于具体的任务，我们不想这么做，比如：在医疗知识图谱中，每个实体会有额外的实体类型，比如:</p>
+<p>(氯吡格雷，治疗，过敏)，氯吡格雷是一种药物，可以治疗过敏，但是实体中有二甲双胍，这也是一种药品，但是根据上述的假设，则可以生成负样本：(氯吡格雷，治疗，二甲双胍)，这显然是没有意义的，因为在不符合实际，因为这种情况下，当生成负样本时，我们一般希望规定，生成的负样本时符合实际的，比如：(氯吡格雷，治疗，过敏性鼻炎)。</p>
+<p>这种情况下，需要完成两步工作：</p>
+<ul>
+<li>重新生成评估数据；</li>
+<li>针对重新生成的评估数据，来计算衡量指标；</li>
+</ul>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">alex Li</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://limeya.github.io/2021/11/17/shu-ju-ke-xue/zhi-shi-tu-pu-biao-shi-xue-xi-ping-gu-fang-fa/">https://limeya.github.io/2021/11/17/shu-ju-ke-xue/zhi-shi-tu-pu-biao-shi-xue-xi-ping-gu-fang-fa/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">alex Li</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/">
+                                    <span class="chip bg-color">知识图谱</span>
+                                </a>
+                            
+                                <a href="/tags/%E8%A1%A8%E7%A4%BA%E5%AD%A6%E4%B9%A0/">
+                                    <span class="chip bg-color">表示学习</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2021/11/18/si-kao-nei-sheng/wo-huan-shi-chong-qi-liao-bo-ke-xie-zuo/">
+                    <div class="card-image">
+                        
+                        <img src="/images/restart_blog/0.jpg" class="responsive-img" alt="我还是重启了博客写作">
+                        
+                        <span class="card-title">我还是重启了博客写作</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            重启博客写作，记录和分享不限于技术的思考、阅读和经历。
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2021-11-18
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E6%80%9D%E8%80%83%E5%86%85%E7%9C%81/" class="post-category">
+                                    思考内省
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E5%8D%9A%E5%AE%A2/">
+                        <span class="chip bg-color">博客</span>
+                    </a>
+                    
+                    <a href="/tags/%E5%86%99%E4%BD%9C/">
+                        <span class="chip bg-color">写作</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2021/11/17/shu-ju-ke-xue/zhi-shi-tu-pu-biao-shi-xue-xi-xun-lian-fang-fa/">
+                    <div class="card-image">
+                        
+                        <img src="/images/kg/train/0.jpg" class="responsive-img" alt="知识图谱表示学习：训练方法">
+                        
+                        <span class="card-title">知识图谱表示学习：训练方法</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            对知识图谱表示学习模型进行训练前如何进行准备的总结，着重在于负样本的生成。
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-11-17
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/" class="post-category">
+                                    数据科学
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/">
+                        <span class="chip bg-color">知识图谱</span>
+                    </a>
+                    
+                    <a href="/tags/%E8%A1%A8%E7%A4%BA%E5%AD%A6%E4%B9%A0/">
+                        <span class="chip bg-color">表示学习</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h1, h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h1, h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script>
+    MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+    });
+</script>
+
+
+
+    <footer class="page-footer bg-color">
+    
+        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
+<style>
+    .aplayer .aplayer-lrc p {
+        
+        display: none;
+        
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
+
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        
+        display: none;
+        
+        font-size: 15px;
+        color: #42b983;
+    }
+
+    
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
+        left: -66px !important;
+    }
+
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
+        left: 0px !important;
+    }
+
+    
+</style>
+<div class="">
+    
+    <div class="row">
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="netease"
+                   type="playlist"
+                   id="503838841"
+                   fixed='true'
+                   autoplay='false'
+                   theme='#42b983'
+                   loop='all'
+                   order='random'
+                   preload='auto'
+                   volume='0.7'
+                   list-folded='true'
+        >
+        </meting-js>
+    </div>
+</div>
+
+<script src="/libs/aplayer/APlayer.min.js"></script>
+<script src="/libs/aplayer/Meting.min.js"></script>
+
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 15px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2021-2022</span>
+            
+            <a href="/about" target="_blank">alex Li</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+                &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                        class="white-color">45.7k</span>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+                <span id="sitetime"> Loading ...</span>
+                <script>
+                    var calcSiteTime = function () {
+                        var seconds = 1000;
+                        var minutes = seconds * 60;
+                        var hours = minutes * 60;
+                        var days = hours * 24;
+                        var years = days * 365;
+                        var today = new Date();
+                        var startYear = "2021";
+                        var startMonth = "11";
+                        var startDate = "13";
+                        var startHour = "20";
+                        var startMinute = "0";
+                        var startSecond = "0";
+                        var todayYear = today.getFullYear();
+                        var todayMonth = today.getMonth() + 1;
+                        var todayDate = today.getDate();
+                        var todayHour = today.getHours();
+                        var todayMinute = today.getMinutes();
+                        var todaySecond = today.getSeconds();
+                        var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                        var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                        var diff = t2 - t1;
+                        var diffYears = Math.floor(diff / years);
+                        var diffDays = Math.floor((diff / days) - diffYears * 365);
+
+                        // 区分是否有年份.
+                        var language = 'zh-CN';
+                        if (startYear === String(todayYear)) {
+                            document.getElementById("year").innerHTML = todayYear;
+                            var daysTip = 'This site has been running for ' + diffDays + ' days';
+                            if (language === 'zh-CN') {
+                                daysTip = '本站已运行 ' + diffDays + ' 天';
+                            } else if (language === 'zh-HK') {
+                                daysTip = '本站已運行 ' + diffDays + ' 天';
+                            }
+                            document.getElementById("sitetime").innerHTML = daysTip;
+                        } else {
+                            document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                            var yearsAndDaysTip = 'This site has been running for ' + diffYears + ' years and '
+                                + diffDays + ' days';
+                            if (language === 'zh-CN') {
+                                yearsAndDaysTip = '本站已运行 ' + diffYears + ' 年 ' + diffDays + ' 天';
+                            } else if (language === 'zh-HK') {
+                                yearsAndDaysTip = '本站已運行 ' + diffYears + ' 年 ' + diffDays + ' 天';
+                            }
+                            document.getElementById("sitetime").innerHTML = yearsAndDaysTip;
+                        }
+                    }
+
+                    calcSiteTime();
+                </script>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/limeya" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:lmy86263@gmail.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1215869909" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1215869909" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+
+
+    <a href="https://blog.csdn.net/lmy86263" class="tooltipped" target="_blank" data-tooltip="访问csdn" data-position="top" data-delay="50">
+		<i class="fab fa-blogger"></i>
+    </a>
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    
+
+    
+
+    <!-- 雪花特效 -->
+    
+
+    <!-- 鼠标星星特效 -->
+    
+
+     
+        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+        <script src="/libs/others/TencentCaptcha.js"></script>
+        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
+    
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>
