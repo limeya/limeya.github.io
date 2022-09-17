@@ -6,7 +6,7 @@
   <link href="https://limeya.github.io/atom.xml" rel="self"/>
   
   <link href="https://limeya.github.io/"/>
-  <updated>2022-05-22T06:19:30.531Z</updated>
+  <updated>2022-09-17T16:11:44.554Z</updated>
   <id>https://limeya.github.io/</id>
   
   <author>
@@ -15,6 +15,39 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Reference and Pointer</title>
+    <link href="https://limeya.github.io/2022/09/18/coder/reference-he-pointer/"/>
+    <id>https://limeya.github.io/2022/09/18/coder/reference-he-pointer/</id>
+    <published>2022-09-17T16:00:00.000Z</published>
+    <updated>2022-09-17T16:11:44.554Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;💡 本篇的内容来自C++ Primer中的2.3节&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;在C++中除了基本数据类型，还包括复杂数据类型，主要有2种：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;reference 引用&lt;/li&gt;
+&lt;li&gt;pointer</summary>
+        
+      
+    
+    
+    
+    <category term="编程之道" scheme="https://limeya.github.io/categories/%E7%BC%96%E7%A8%8B%E4%B9%8B%E9%81%93/"/>
+    
+    
+    <category term="引用" scheme="https://limeya.github.io/tags/%E5%BC%95%E7%94%A8/"/>
+    
+    <category term="指针" scheme="https://limeya.github.io/tags/%E6%8C%87%E9%92%88/"/>
+    
+  </entry>
   
   <entry>
     <title>利用Notion API+Github Actions回顾阅读的文章</title>
@@ -557,31 +590,6 @@
     <category term="计算机图形学" scheme="https://limeya.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/"/>
     
     <category term="线性代数" scheme="https://limeya.github.io/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>GAMES101-01：Overview of Computer Graphics</title>
-    <link href="https://limeya.github.io/2022/04/24/cg/games/games101-01-overview-of-computer-graphics/"/>
-    <id>https://limeya.github.io/2022/04/24/cg/games/games101-01-overview-of-computer-graphics/</id>
-    <published>2022-04-24T03:50:00.000Z</published>
-    <updated>2022-04-24T12:11:31.446Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;What-is-Computer-Graphics&quot;&gt;&lt;a href=&quot;#What-is-Computer-Graphics&quot; class=&quot;headerlink&quot; title=&quot;What is Computer Graphics&quot;&gt;&lt;/a&gt;What is</summary>
-        
-      
-    
-    
-    
-    <category term="博客" scheme="https://limeya.github.io/categories/%E5%8D%9A%E5%AE%A2/"/>
-    
-    
-    <category term="计算机图形学" scheme="https://limeya.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/"/>
     
   </entry>
   

@@ -1,0 +1,1345 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="Reference and Pointer, LifeHit">
+    <meta name="description" content="关于C++中引用和指针的学习总结。">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0V4SV7JK5F"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+    gtag('config', 'G-0V4SV7JK5F');
+</script>
+
+
+    <title>Reference and Pointer | LifeHit</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="LifeHit" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">LifeHit</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">LifeHit</div>
+        <div class="logo-desc">
+            
+            世界上只有一种真正的英雄主义，就是认清了生活的真相后还依然热爱它
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/15.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">Reference and Pointer</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/%E5%BC%95%E7%94%A8/">
+                                <span class="chip bg-color">引用</span>
+                            </a>
+                        
+                            <a href="/tags/%E6%8C%87%E9%92%88/">
+                                <span class="chip bg-color">指针</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E7%BC%96%E7%A8%8B%E4%B9%8B%E9%81%93/" class="post-category">
+                                编程之道
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2022-09-18
+                </div>
+                
+
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    1.9k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    9 分
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <blockquote>
+<p>💡 本篇的内容来自C++ Primer中的2.3节</p>
+</blockquote>
+<p>在C++中除了基本数据类型，还包括复杂数据类型，主要有2种：</p>
+<ul>
+<li>reference 引用</li>
+<li>pointer 指针</li>
+</ul>
+<blockquote>
+<p>A compound type is a type that is deﬁned in terms of another type.</p>
+</blockquote>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><blockquote>
+<p>Technically speaking, when we use the term reference, we mean “lvalue reference.”</p>
+</blockquote>
+<h2 id="含义"><a href="#含义" class="headerlink" title="含义"></a>含义</h2><ul>
+<li>A reference deﬁnes an <strong>alternative name</strong> for an <strong>object</strong>;</li>
+<li>A reference type “refers to” another type;</li>
+</ul>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><h3 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h3><pre class=" language-cpp"><code class="language-cpp"><span class="token keyword">int</span> ival <span class="token operator">=</span> <span class="token number">1024</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> <span class="token operator">&amp;</span>refVal <span class="token operator">=</span> ival<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// right, refVal refers to(is another name for) ival</span>
+<span class="token keyword">int</span> <span class="token operator">&amp;</span>refVal2<span class="token punctuation">;</span>       <span class="token comment" spellcheck="true">// error, 引用必须被初始化</span>
+</code></pre>
+<h3 id="定义过程"><a href="#定义过程" class="headerlink" title="定义过程"></a>定义过程</h3><ul>
+<li>引用只能是object的别名；<pre class=" language-cpp"><code class="language-cpp"><span class="token keyword">int</span> <span class="token operator">&amp;</span>refVal4 <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 10 不是变量</span>
+</code></pre>
+</li>
+<li>引用的类型与其所指向的对象的类型要匹配；<pre class=" language-cpp"><code class="language-cpp"><span class="token keyword">double</span> dval <span class="token operator">=</span> <span class="token number">3.14</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> <span class="token operator">&amp;</span>refVal5 <span class="token operator">=</span> dval<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 错误，类型不匹配</span>
+</code></pre>
+</li>
+</ul>
+<h2 id="内部机制"><a href="#内部机制" class="headerlink" title="内部机制"></a>内部机制</h2><p>对于基本类型的变量而言，当初始化一个变量时，用于初始化的对象的值被拷贝到创建的对象上。但是当创建reference时，不拷贝该值，而是将reference与该对象绑定。</p>
+<p>这一点对于需要性能的场景很重要，不希望拷贝数据，只希望引用同样的数据，这样避免了拷贝操作。</p>
+<h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><ul>
+<li>所有对象引用的声明都必须要初始化；</li>
+<li>引用一旦初始化，没有任何方式能够解绑其引用另外一个对象，即整个生命周期和初始化对象“死磕”；</li>
+<li>当引用与初始化对象绑定后，所有针对该引用操作引起的变化都会反映到初始化对象上；<pre class=" language-cpp"><code class="language-cpp">refVal2 <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 此时，ival也是2；</span>
+</code></pre>
+</li>
+<li>Reference is not an object, and it is just another name for an already existing object.  因此我们不会定义reference的reference，因为reference只能定义object的别名；</li>
+<li>一个技巧：由于reference使用的&amp;后续的获取变量的地址时也会使用，因此会让人困惑，  因此一种读法是，如下：<pre class=" language-cpp"><code class="language-cpp"><span class="token keyword">int</span> a <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> <span class="token operator">&amp;</span>val <span class="token operator">=</span> a<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//val refers to a int variable a. 从右向左读，&amp;换成refer to </span>
+</code></pre>
+</li>
+</ul>
+<h1 id="Pointer"><a href="#Pointer" class="headerlink" title="Pointer"></a>Pointer</h1><h2 id="含义说明"><a href="#含义说明" class="headerlink" title="含义说明"></a>含义说明</h2><blockquote>
+<p>A pointer is a compound type that “points to” another type.</p>
+</blockquote>
+<p>与reference对比：</p>
+<ul>
+<li>a pointer is an object in its own right.<ul>
+<li>reference is not an object;</li>
+</ul>
+</li>
+<li>Pointers can be assigned and copied;</li>
+<li>a single pointer can point to several different objects over its lifetime;</li>
+<li>a pointer need not be initialized at the time it is deﬁned;</li>
+</ul>
+<h2 id="声明和使用方式"><a href="#声明和使用方式" class="headerlink" title="声明和使用方式"></a>声明和使用方式</h2><ul>
+<li>使用<code>*</code><pre class=" language-cpp"><code class="language-cpp"><span class="token comment" spellcheck="true">// dp1是指针，dp是浮点数</span>
+<span class="token keyword">double</span> dp<span class="token punctuation">,</span> <span class="token operator">*</span>dp1<span class="token punctuation">;</span>
+</code></pre>
+</li>
+<li>the types of the pointer and the object to which it points must match;<pre class=" language-cpp"><code class="language-cpp"><span class="token keyword">double</span> dval<span class="token punctuation">;</span>
+<span class="token keyword">double</span> <span class="token operator">*</span> pd <span class="token operator">=</span> <span class="token operator">&amp;</span>dval<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// ok: initializer is the address of a double </span>
+<span class="token keyword">double</span> <span class="token operator">*</span> pd2 <span class="token operator">=</span> pd<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// ok: initializer is a pointer to double </span>
+<span class="token keyword">int</span> <span class="token operator">*</span> pi <span class="token operator">=</span> pd<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// error: types of pi and pd differ </span>
+pi <span class="token operator">=</span> <span class="token operator">&amp;</span>dval<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// error: assigning the address of a double to a pointer to int</span>
+</code></pre>
+</li>
+<li>use the dereference operator (the * operator) to access that object;<pre class=" language-cpp"><code class="language-cpp"><span class="token keyword">int</span> ival <span class="token operator">=</span> <span class="token number">42</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> <span class="token operator">*</span>p <span class="token operator">=</span> <span class="token operator">&amp;</span>ival<span class="token punctuation">;</span>
+cout <span class="token operator">&lt;&lt;</span> <span class="token operator">*</span> p<span class="token punctuation">;</span>
+</code></pre>
+</li>
+<li>同时定义多个变量时的误解<pre class=" language-cpp"><code class="language-cpp"><span class="token keyword">int</span> <span class="token operator">*</span>i<span class="token punctuation">,</span> j<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// i为指向int的指针，j为int变量，不是指针； </span>
+</code></pre>
+  这种写在一起时会引发误解，两种方法可以避免：<ol>
+<li>写成 int  <em>i, 而不是 int</em> i;</li>
+<li>写在两个声明语句中，就不会误解；</li>
+</ol>
+</li>
+</ul>
+<h2 id="Pointer指向对象地址"><a href="#Pointer指向对象地址" class="headerlink" title="Pointer指向对象地址"></a>Pointer指向对象地址</h2><ul>
+<li>A pointer holds the address of another object;</li>
+<li>Because references are not objects, they don’t have addresses. Hence, <strong>we may not deﬁne a pointer to a reference</strong>.</li>
+<li>Because a pointer is an object, we can deﬁne a reference to a pointer.<pre class=" language-cpp"><code class="language-cpp"><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> <span class="token operator">*</span>p<span class="token punctuation">;</span>
+<span class="token keyword">int</span> <span class="token operator">*</span><span class="token operator">&amp;</span>r <span class="token operator">=</span> p<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// r is a reference to the pointer p</span>
+r <span class="token operator">=</span> <span class="token operator">&amp;</span>i<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 更改r所引用对象的值</span>
+</code></pre>
+</li>
+<li>we can store the address of a pointer in another pointer as pointers are also objects.<pre class=" language-cpp"><code class="language-cpp"><span class="token keyword">int</span> val <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> <span class="token operator">*</span>p <span class="token operator">=</span> <span class="token operator">&amp;</span>val<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// p is a pointer to val;</span>
+<span class="token keyword">int</span> <span class="token operator">*</span><span class="token operator">*</span>pp <span class="token operator">=</span> <span class="token operator">&amp;</span>p<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// pp is a pointer to pointer to p.</span>
+
+cout <span class="token operator">&lt;&lt;</span> <span class="token string">"val is "</span> <span class="token operator">&lt;&lt;</span> val <span class="token operator">&lt;&lt;</span> <span class="token string">" by val"</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+cout <span class="token operator">&lt;&lt;</span> <span class="token string">"val is "</span> <span class="token operator">&lt;&lt;</span> <span class="token operator">*</span>p <span class="token operator">&lt;&lt;</span> <span class="token string">" by *p"</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+cout <span class="token operator">&lt;&lt;</span> <span class="token string">"val is "</span> <span class="token operator">&lt;&lt;</span> <span class="token operator">*</span><span class="token operator">*</span>pp <span class="token operator">&lt;&lt;</span> <span class="token string">" by **pp"</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+</code></pre>
+  对于存在多种符号，如&amp;， *等涉及reference或者pointer的声明时，遵守以下原则就不会出错；<ul>
+<li>The easiest way to understand the type of r is to read the deﬁnition right to left.</li>
+<li>The symbol closest to the name of the variable (in this case the &amp; in &amp;r) is the one that has the most immediate effect on the variable’s type.</li>
+</ul>
+  将* 称为pointer to, &amp; 称为reference to.</li>
+</ul>
+<h2 id="Pointer-Value"><a href="#Pointer-Value" class="headerlink" title="Pointer Value"></a>Pointer Value</h2><p>指针在实践中很容易出错，但是pointer的value只能是下面4种之一：</p>
+<ol>
+<li>point to an object; （正常，我们希望的状态）</li>
+<li>point to the location just immediately past the end of an object; 这种情况如何理解呢？比如在一个数组中，最后一个元素之后的位置，在循环和迭代器中，我们会有指向最后元素之后的元素的指针，可以阅读<a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/21850108/what-is-pointer-past-the-end-of-an-object-means">这篇文章</a>；</li>
+<li>null pointer: not bound to any object; （注重注意的情况）</li>
+<li>invalid: 除了上述三者之外的所有情况；（极力避免）<ul>
+<li>It is an error to copy or otherwise try to access the value of an invalid pointer.</li>
+<li>The result of accessing an invalid pointer is undeﬁned.</li>
+</ul>
+</li>
+</ol>
+<h2 id="Null-Pointers"><a href="#Null-Pointers" class="headerlink" title="Null Pointers"></a>Null Pointers</h2><h3 id="具体含义"><a href="#具体含义" class="headerlink" title="具体含义"></a>具体含义</h3><blockquote>
+<p>A null pointer does not point to any object.</p>
+</blockquote>
+<h3 id="获取null-pointers"><a href="#获取null-pointers" class="headerlink" title="获取null pointers"></a>获取null pointers</h3><pre class=" language-cpp"><code class="language-cpp"><span class="token comment" spellcheck="true">// method 1</span>
+<span class="token keyword">int</span> <span class="token operator">*</span>p1 <span class="token operator">=</span> <span class="token keyword">nullptr</span><span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">// method 2</span>
+<span class="token keyword">int</span> <span class="token operator">*</span>p2 <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">// method 3</span>
+<span class="token keyword">int</span> <span class="token operator">*</span>p3 <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 必须#include &lt;cstdlib></span>
+</code></pre>
+<p>在这三种方法中：</p>
+<ul>
+<li>法1最被推荐使用，新的标准，可以转换为任意其他的指针类型；</li>
+<li>法2是之前的方法；  一种“骚操作”：<pre class=" language-cpp"><code class="language-cpp"><span class="token keyword">int</span> <span class="token operator">*</span>p<span class="token punctuation">;</span>
+<span class="token keyword">int</span> zero <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+pi <span class="token operator">=</span> zero<span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// 错误，不允许将int赋值给pointer</span>
+</code></pre>
+</li>
+<li>法3等价于法2，继承自C语言，NULL是一个preprocessor variable，在compiler编译之前，会将其替换为0；</li>
+</ul>
+<blockquote>
+<p>💡 强烈建议：在pointer声明时，最好初始化，以免出现未定义的pointer；如果不定义，最好使用nullptr赋值。</p>
+</blockquote>
+<h2 id="Pointer的其他操作"><a href="#Pointer的其他操作" class="headerlink" title="Pointer的其他操作"></a>Pointer的其他操作</h2><h3 id="条件语句中"><a href="#条件语句中" class="headerlink" title="条件语句中"></a>条件语句中</h3><blockquote>
+<p>if the pointer is 0, then the condition is false, any nonzero pointer evaluates as true.</p>
+</blockquote>
+<p>只要pointer为null pointer, 其条件判定即为0；</p>
+<pre class=" language-cpp"><code class="language-cpp"><span class="token keyword">int</span> <span class="token operator">*</span>p1 <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> <span class="token operator">*</span>p2 <span class="token operator">=</span> <span class="token keyword">nullptr</span><span class="token punctuation">;</span>
+<span class="token keyword">if</span><span class="token punctuation">(</span>p1<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    cout <span class="token operator">&lt;&lt;</span> <span class="token string">"p is null pointer"</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">else</span><span class="token punctuation">{</span>
+    cout <span class="token operator">&lt;&lt;</span> <span class="token string">"p is not null poiner"</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token comment" spellcheck="true">// 输出：p is not null poiner</span>
+</code></pre>
+<h3 id="比较操作"><a href="#比较操作" class="headerlink" title="比较操作"></a>比较操作</h3><p>Given two valid pointers of the same type, we can compare them using the equality (==) or inequality (!=) operators.</p>
+<ul>
+<li>Two pointers are equal if they hold the same address and unequal other-wise.</li>
+<li>Two pointers hold the same address (i.e., are equal)<ul>
+<li>if they are both null,</li>
+<li>if they address the same object,</li>
+<li>or if they are both pointers one past the same object.</li>
+</ul>
+</li>
+<li>Using an invalid pointer as a condition or in a comparison is undeﬁned. 这种情况指的是，pointer values中的第四种情况。</li>
+</ul>
+<h2 id="void-Pointers"><a href="#void-Pointers" class="headerlink" title="void * Pointers"></a>void * Pointers</h2><ul>
+<li>The type void * is a special pointer type that can hold the address of any object.</li>
+<li>a void * pointer holds an address, but the type of the object at that address is unknown:</li>
+</ul>
+<blockquote>
+<p>💡 之前我一直以为这是指向一个void地址，这个起名太奇怪了。</p>
+</blockquote>
+<p>虽然这种指针类型可以指向任意类型的指针，但是其只支持有限的操作。</p>
+<ul>
+<li>We can compare it to another pointer,</li>
+<li>we can pass it to or return it from a function,</li>
+<li>and we can assign it to another void * pointer.</li>
+</ul>
+<p>但是不可以：</p>
+<ul>
+<li>use a void * to operate on the object it addresses<pre class=" language-cpp"><code class="language-cpp"><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> <span class="token operator">*</span>p <span class="token operator">=</span> <span class="token operator">&amp;</span>i<span class="token punctuation">;</span>
+<span class="token keyword">void</span> <span class="token operator">*</span>vp <span class="token operator">=</span> p<span class="token punctuation">;</span>
+cout <span class="token operator">&lt;&lt;</span> <span class="token string">"p points to "</span> <span class="token operator">&lt;&lt;</span> <span class="token operator">*</span>p <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+cout <span class="token operator">&lt;&lt;</span> <span class="token string">"vp points to "</span> <span class="token operator">&lt;&lt;</span> <span class="token operator">*</span>vp <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 错误</span>
+</code></pre>
+</li>
+</ul>
+<h1 id="对比Reference和Pointer"><a href="#对比Reference和Pointer" class="headerlink" title="对比Reference和Pointer"></a>对比Reference和Pointer</h1><h2 id="相同点"><a href="#相同点" class="headerlink" title="相同点"></a>相同点</h2><ul>
+<li>Both pointers and references give indirect access to other objects.</li>
+</ul>
+<blockquote>
+<p>💡 在Reference和Pointer中，&amp;和*出现的频率很高，但是在不同context中代表的含义不同，这一点尤其需要注意。</p>
+</blockquote>
+<pre class=" language-cpp"><code class="language-cpp"><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">42</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> <span class="token operator">&amp;</span>r <span class="token operator">=</span> i<span class="token punctuation">;</span>   <span class="token comment" spellcheck="true">// &amp;代表r refers to i</span>
+<span class="token keyword">int</span> <span class="token operator">*</span>p <span class="token operator">=</span> <span class="token operator">&amp;</span>i<span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// *代表p points to i, &amp;代表取i的地址</span>
+<span class="token keyword">int</span> <span class="token operator">&amp;</span>r2 <span class="token operator">=</span> <span class="token operator">*</span>p<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// &amp;代表r2 refers to the object which p points to.</span>
+</code></pre>
+<h2 id="不同点"><a href="#不同点" class="headerlink" title="不同点"></a>不同点</h2><table>
+<thead>
+<tr>
+<th></th>
+<th>Reference</th>
+<th>Pointer</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>内存地址</td>
+<td>不是独立对象，也就没有独立的内存地址，而是附属在特定的对象上。</td>
+<td>作为独立的对象，像基本类型的对象一样存在内存地址。</td>
+</tr>
+<tr>
+<td>可变性</td>
+<td>作为引用本身，无法改变成针对另一个对象的引用；但是可以改变引用对象本身的值。</td>
+<td>可以改变指向对象的值，也可以改变指向的对象。</td>
+</tr>
+<tr>
+<td>初始化</td>
+<td>声明时，必须初始化。</td>
+<td>声明时，不必初始化，但是如果不初始化，则会有一个undefined的值。</td>
+</tr>
+</tbody></table>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">alex Li</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://limeya.github.io/2022/09/18/coder/reference-he-pointer/">https://limeya.github.io/2022/09/18/coder/reference-he-pointer/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">alex Li</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/%E5%BC%95%E7%94%A8/">
+                                    <span class="chip bg-color">引用</span>
+                                </a>
+                            
+                                <a href="/tags/%E6%8C%87%E9%92%88/">
+                                    <span class="chip bg-color">指针</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
+            <div class="card">
+                <a href="/2022/09/18/coder/reference-he-pointer/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/15.jpg" class="responsive-img" alt="Reference and Pointer">
+                        
+                        <span class="card-title">Reference and Pointer</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            关于C++中引用和指针的学习总结。
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-09-18
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E7%BC%96%E7%A8%8B%E4%B9%8B%E9%81%93/" class="post-category">
+                                    编程之道
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E5%BC%95%E7%94%A8/">
+                        <span class="chip bg-color">引用</span>
+                    </a>
+                    
+                    <a href="/tags/%E6%8C%87%E9%92%88/">
+                        <span class="chip bg-color">指针</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2022/05/22/efficient/li-yong-notion-api-github-actions-hui-gu-yue-du-de-wen-zhang/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/14.jpg" class="responsive-img" alt="利用Notion API+Github Actions回顾阅读的文章">
+                        
+                        <span class="card-title">利用Notion API+Github Actions回顾阅读的文章</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            结合Notion和Github Actions实现自动化回顾过去阅读的文章和思考笔记．
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-05-22
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E6%95%88%E7%8E%87%E6%96%B9%E6%B3%95/" class="post-category">
+                                    效率方法
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Notion/">
+                        <span class="chip bg-color">Notion</span>
+                    </a>
+                    
+                    <a href="/tags/Github-Actions/">
+                        <span class="chip bg-color">Github Actions</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h1, h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h1, h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
+<style>
+    .aplayer .aplayer-lrc p {
+        
+        display: none;
+        
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
+
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        
+        display: none;
+        
+        font-size: 15px;
+        color: #42b983;
+    }
+
+    
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
+        left: -66px !important;
+    }
+
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
+        left: 0px !important;
+    }
+
+    
+</style>
+<div class="">
+    
+    <div class="row">
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="netease"
+                   type="playlist"
+                   id="503838841"
+                   fixed='true'
+                   autoplay='false'
+                   theme='#42b983'
+                   loop='all'
+                   order='random'
+                   preload='auto'
+                   volume='0.7'
+                   list-folded='true'
+        >
+        </meting-js>
+    </div>
+</div>
+
+<script src="/libs/aplayer/APlayer.min.js"></script>
+<script src="/libs/aplayer/Meting.min.js"></script>
+
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 15px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2021-2022</span>
+            
+            <a href="/about" target="_blank">alex Li</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+                &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                        class="white-color">42.6k</span>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+                <span id="sitetime"> Loading ...</span>
+                <script>
+                    var calcSiteTime = function () {
+                        var seconds = 1000;
+                        var minutes = seconds * 60;
+                        var hours = minutes * 60;
+                        var days = hours * 24;
+                        var years = days * 365;
+                        var today = new Date();
+                        var startYear = "2021";
+                        var startMonth = "11";
+                        var startDate = "13";
+                        var startHour = "20";
+                        var startMinute = "0";
+                        var startSecond = "0";
+                        var todayYear = today.getFullYear();
+                        var todayMonth = today.getMonth() + 1;
+                        var todayDate = today.getDate();
+                        var todayHour = today.getHours();
+                        var todayMinute = today.getMinutes();
+                        var todaySecond = today.getSeconds();
+                        var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                        var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                        var diff = t2 - t1;
+                        var diffYears = Math.floor(diff / years);
+                        var diffDays = Math.floor((diff / days) - diffYears * 365);
+
+                        // 区分是否有年份.
+                        var language = 'zh-CN';
+                        if (startYear === String(todayYear)) {
+                            document.getElementById("year").innerHTML = todayYear;
+                            var daysTip = 'This site has been running for ' + diffDays + ' days';
+                            if (language === 'zh-CN') {
+                                daysTip = '本站已运行 ' + diffDays + ' 天';
+                            } else if (language === 'zh-HK') {
+                                daysTip = '本站已運行 ' + diffDays + ' 天';
+                            }
+                            document.getElementById("sitetime").innerHTML = daysTip;
+                        } else {
+                            document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                            var yearsAndDaysTip = 'This site has been running for ' + diffYears + ' years and '
+                                + diffDays + ' days';
+                            if (language === 'zh-CN') {
+                                yearsAndDaysTip = '本站已运行 ' + diffYears + ' 年 ' + diffDays + ' 天';
+                            } else if (language === 'zh-HK') {
+                                yearsAndDaysTip = '本站已運行 ' + diffYears + ' 年 ' + diffDays + ' 天';
+                            }
+                            document.getElementById("sitetime").innerHTML = yearsAndDaysTip;
+                        }
+                    }
+
+                    calcSiteTime();
+                </script>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/limeya" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:lmy86263@gmail.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1215869909" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1215869909" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+
+
+    <a href="https://blog.csdn.net/lmy86263" class="tooltipped" target="_blank" data-tooltip="访问csdn" data-position="top" data-delay="50">
+		<i class="fab fa-blogger"></i>
+    </a>
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    
+
+    
+
+    <!-- 雪花特效 -->
+    
+
+    <!-- 鼠标星星特效 -->
+    
+
+     
+        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+        <script src="/libs/others/TencentCaptcha.js"></script>
+        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
+    
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>
