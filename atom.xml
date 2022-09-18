@@ -50,6 +50,34 @@
   </entry>
   
   <entry>
+    <title>GAMES101-13-01-Ray Tracing - Basics &amp; Methods</title>
+    <link href="https://limeya.github.io/2022/09/18/ji-suan-ji-tu-xing-xue/games/games101-13-01-ray-tracing-basics-methods/"/>
+    <id>https://limeya.github.io/2022/09/18/ji-suan-ji-tu-xing-xue/games/games101-13-01-ray-tracing-basics-methods/</id>
+    <published>2022-09-17T16:00:00.000Z</published>
+    <updated>2022-09-18T15:30:24.991Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;光线追踪和光珊化是两个不同的成像方法。&lt;/p&gt;
+&lt;h1 id=&quot;为什么用Ray-Tracing&quot;&gt;&lt;a href=&quot;#为什么用Ray-Tracing&quot; class=&quot;headerlink&quot; title=&quot;为什么用Ray Tracing&quot;&gt;&lt;/a&gt;为什么用Ray</summary>
+        
+      
+    
+    
+    
+    <category term="计算机图形学" scheme="https://limeya.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/"/>
+    
+    
+    <category term="Ray Tracing" scheme="https://limeya.github.io/tags/Ray-Tracing/"/>
+    
+    <category term="Recursive Ray Tracing" scheme="https://limeya.github.io/tags/Recursive-Ray-Tracing/"/>
+    
+  </entry>
+  
+  <entry>
     <title>日本出了问题：《东京贫困女子》呈现的社会现象</title>
     <link href="https://limeya.github.io/2022/07/15/du-shu-gan-wu/ri-ben-chu-liao-wen-ti-dong-jing-pin-kun-nu-zi-cheng-xian-de-she-hui-xian-xiang/"/>
     <id>https://limeya.github.io/2022/07/15/du-shu-gan-wu/ri-ben-chu-liao-wen-ti-dong-jing-pin-kun-nu-zi-cheng-xian-de-she-hui-xian-xiang/</id>
@@ -528,31 +556,6 @@
         
         
     <summary type="html">&lt;h1 id=&quot;Homogeneous-coordinates&quot;&gt;&lt;a href=&quot;#Homogeneous-coordinates&quot; class=&quot;headerlink&quot; title=&quot;Homogeneous coordinates&quot;&gt;&lt;/a&gt;Homogeneous</summary>
-        
-      
-    
-    
-    
-    <category term="计算机图形学" scheme="https://limeya.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/"/>
-    
-    
-    <category term="线性代数" scheme="https://limeya.github.io/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>GAMES101-03-01：2D Transformation</title>
-    <link href="https://limeya.github.io/2022/04/24/ji-suan-ji-tu-xing-xue/games/games101-03-01-2d-transformation/"/>
-    <id>https://limeya.github.io/2022/04/24/ji-suan-ji-tu-xing-xue/games/games101-03-01-2d-transformation/</id>
-    <published>2022-04-24T11:50:00.000Z</published>
-    <updated>2022-09-17T16:34:07.258Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;Linear-Transforms-Matrices&quot;&gt;&lt;a href=&quot;#Linear-Transforms-Matrices&quot; class=&quot;headerlink&quot; title=&quot;Linear Transforms =</summary>
         
       
     
