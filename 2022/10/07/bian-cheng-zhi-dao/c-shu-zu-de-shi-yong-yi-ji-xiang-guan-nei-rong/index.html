@@ -1,0 +1,1450 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="C++:数组的使用以及相关内容, LifeHit">
+    <meta name="description" content="关于C++中数组的学习总结。">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0V4SV7JK5F"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+    gtag('config', 'G-0V4SV7JK5F');
+</script>
+
+
+    <title>C++:数组的使用以及相关内容 | LifeHit</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="LifeHit" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">LifeHit</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">LifeHit</div>
+        <div class="logo-desc">
+            
+            世界上只有一种真正的英雄主义，就是认清了生活的真相后还依然热爱它
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/10.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">C++:数组的使用以及相关内容</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/%E6%8C%87%E9%92%88/">
+                                <span class="chip bg-color">指针</span>
+                            </a>
+                        
+                            <a href="/tags/%E6%95%B0%E7%BB%84/">
+                                <span class="chip bg-color">数组</span>
+                            </a>
+                        
+                            <a href="/tags/array/">
+                                <span class="chip bg-color">array</span>
+                            </a>
+                        
+                            <a href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/">
+                                <span class="chip bg-color">字符串</span>
+                            </a>
+                        
+                            <a href="/tags/string/">
+                                <span class="chip bg-color">string</span>
+                            </a>
+                        
+                            <a href="/tags/pointer/">
+                                <span class="chip bg-color">pointer</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E7%BC%96%E7%A8%8B%E4%B9%8B%E9%81%93/" class="post-category">
+                                编程之道
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2022-10-07
+                </div>
+                
+
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    2.6k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    11 分
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <aside>
+💡 本篇的内容来自C++ Primer中的3.5节
+
+</aside>
+
+<h1 id="Define-amp-Initialize"><a href="#Define-amp-Initialize" class="headerlink" title="Define &amp; Initialize"></a>Define &amp; Initialize</h1><h2 id="声明"><a href="#声明" class="headerlink" title="声明"></a>声明</h2><p>数组像指针和引用一样是复杂类型，数组的形式<code>a[d]</code>,</p>
+<ul>
+<li>其中 a为name；</li>
+<li>d为dimension，必须大于0。<blockquote>
+<p>The number of elements in an array is part of the array’s type.</p>
+</blockquote>
+  因此，dimension必须<strong>在编译时已知</strong>，因此它必须是一个constant。<pre class=" language-cpp"><code class="language-cpp"><span class="token keyword">unsigned</span> cnt <span class="token operator">=</span> <span class="token number">42</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// not a constant expression </span>
+<span class="token keyword">constexpr</span> <span class="token keyword">unsigned</span> sz <span class="token operator">=</span> <span class="token number">42</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// constant expression</span>
+</code></pre>
+  <aside>
+  📌 但是，这种问题在g++和clang++编译时可能不会报错，这是因为这些**编译器提供了扩展**，将这种写法视为正确，但是建议禁止这些特性，因为会导致无法在别的compiler中成功运行，在g++和clang++对应的选项是-pedantic-errors。
+  
+  </aside>
+  </li>
+</ul>
+<h2 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h2><h3 id="隐式"><a href="#隐式" class="headerlink" title="隐式"></a>隐式</h3><p>数组的初始化与数据元素的类型（内置类型、复合类型）、变量作用域（全局变量、局部变量）有关。</p>
+<ul>
+<li>string类型数组全部初始化为空串，无论全局还是局部；</li>
+<li>int类型在全局则全部初始化为0，在函数内部则undefined，如果尝试拷贝或者输出这些变量，会有奇怪的事情发生；</li>
+</ul>
+<p>因此，<strong>千万要显示初始化，不要留有悬疑空间</strong>。</p>
+<h3 id="显式"><a href="#显式" class="headerlink" title="显式"></a>显式</h3><ul>
+<li>将初始化元素全部列出，此时可以忽略dimension；<ul>
+<li>compiler会自动推导；</li>
+</ul>
+<pre class=" language-cpp"><code class="language-cpp"><span class="token keyword">int</span> a2<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre>
+</li>
+<li>如果给定dimension，初始化元素不能超过它；<pre class=" language-cpp"><code class="language-cpp"><span class="token keyword">int</span> a5<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">}</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// error: too many initializers</span>
+</code></pre>
+</li>
+<li>如果初始化元素数量小于dimension，使用默认初始化；<pre class=" language-cpp"><code class="language-cpp"><span class="token keyword">int</span> a3<span class="token punctuation">[</span><span class="token number">5</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">}</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// equivalent to a3[] = {0, 1, 2, 0, 0} </span>
+string a4<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token string">"hi"</span><span class="token punctuation">,</span> <span class="token string">"bye"</span><span class="token punctuation">}</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// same as a4[] = {"hi", "bye", ""} </span>
+</code></pre>
+</li>
+</ul>
+<h2 id="Access"><a href="#Access" class="headerlink" title="Access"></a>Access</h2><p>通过对数组遍历可以访问其中的元素，在C++中遍历数组，除了经典的for循环和while循环外，在C++11中还可以使用类似Java中for…each循环。</p>
+<pre class=" language-cpp"><code class="language-cpp"><span class="token keyword">int</span> a<span class="token punctuation">[</span><span class="token number">5</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">auto</span> ai<span class="token operator">:</span> a<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    cout <span class="token operator">&lt;&lt;</span> ai <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>在数组的访问中，<strong>当出现数组越界等问题时，会出现buffer overflow等bug</strong>，而且这些bug在编译时往往难以检查出来，只能在运行时出现异常。</p>
+<h1 id="Array-vs-Vector"><a href="#Array-vs-Vector" class="headerlink" title="Array vs Vector"></a>Array vs Vector</h1><table>
+<thead>
+<tr>
+<th></th>
+<th>array</th>
+<th>vector</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>存放数据类型</td>
+<td>必须是相同类型</td>
+<td>必须是相同类型</td>
+</tr>
+<tr>
+<td>访问存放元素</td>
+<td>无名字，必须通过位置访问</td>
+<td>无名字，必须通过位置访问</td>
+</tr>
+<tr>
+<td>容量</td>
+<td>固定，不能扩展，性能较好</td>
+<td>不固定，能扩展，但是损害性能</td>
+</tr>
+<tr>
+<td>数组维度获取</td>
+<td>无size函数：</td>
+<td></td>
+</tr>
+</tbody></table>
+<ol>
+<li>对于字符数组，可以用strlen;</li>
+<li>其他数组，只能用sizeof(array)/sizeof(array[0]) 计算长度；</li>
+<li>end(array) - begin(array)(c++11) | 有size函数 |<br>| 下标类型 | 可以为负值，设计指针的算数运算，即便为负值，也需要指向原始数组中的元素。 | 必须为非负值 |</li>
+</ol>
+<p>两者之间的转换：</p>
+<pre class=" language-cpp"><code class="language-cpp"><span class="token keyword">int</span> int_arr<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">}</span><span class="token punctuation">;</span> 
+<span class="token comment" spellcheck="true">// ivec has six elements; each is a copy of the corresponding element in int_arr </span>
+vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> <span class="token function">ivec</span><span class="token punctuation">(</span><span class="token function">begin</span><span class="token punctuation">(</span>int_arr<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">end</span><span class="token punctuation">(</span>int_arr<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">// subset</span>
+vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> <span class="token function">subVec</span><span class="token punctuation">(</span>int_arr <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">,</span> int_arr <span class="token operator">+</span> <span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<h1 id="Array-amp-Pointer"><a href="#Array-amp-Pointer" class="headerlink" title="Array &amp; Pointer"></a>Array &amp; Pointer</h1><ul>
+<li><strong>arrays hold objects, 因此可以存储pointers，但是references不是objects, 因此不能存储references。</strong></li>
+</ul>
+<h2 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h2><ul>
+<li>数组中的元素均为objects（因此有地址，对比reference不是objects, 因此没有地址）, 因此可以将这些元素的地址赋值给指针；<pre class=" language-cpp"><code class="language-cpp">string nums<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token string">"one"</span><span class="token punctuation">,</span> <span class="token string">"two"</span><span class="token punctuation">,</span> <span class="token string">"three"</span><span class="token punctuation">}</span><span class="token punctuation">;</span> 
+string <span class="token operator">*</span>p <span class="token operator">=</span> <span class="token operator">&amp;</span>nums<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// p points to the ﬁrst element in nums</span>
+</code></pre>
+</li>
+<li>存储指针的数组<pre class=" language-cpp"><code class="language-cpp"><span class="token keyword">int</span> <span class="token operator">*</span>parr<span class="token punctuation">[</span>sz<span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// array of 42 pointers to int</span>
+<span class="token comment" spellcheck="true">// -----</span>
+<span class="token comment" spellcheck="true">// parr[sz] stores pointers to int. </span>
+</code></pre>
+  这里容易混乱.<blockquote>
+<p>By default, <em><strong>type modiﬁors bind right to left</strong></em>.</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="特殊性质"><a href="#特殊性质" class="headerlink" title="特殊性质"></a>特殊性质</h2><ul>
+<li>特殊性质：<strong>多数情况下，编译器将数组名称视为第一个元素的指针</strong>；<pre class=" language-cpp"><code class="language-cpp">string <span class="token operator">*</span>p2 <span class="token operator">=</span> nums<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//equivalent to p2 = &amp;nums[0]</span>
+</code></pre>
+</li>
+<li>数组的操作经常可以认为是指针的操作；<ul>
+<li>when we use an array as an initializer for a variable deﬁned using <strong>auto</strong>, the deduced type is a pointer, not an array.<pre class=" language-cpp"><code class="language-cpp"><span class="token keyword">int</span> ia<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">,</span><span class="token number">6</span><span class="token punctuation">,</span><span class="token number">7</span><span class="token punctuation">,</span><span class="token number">8</span><span class="token punctuation">,</span><span class="token number">9</span><span class="token punctuation">}</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// ia is an array of ten ints </span>
+<span class="token keyword">auto</span> <span class="token function">ia2</span><span class="token punctuation">(</span>ia<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// ia2 is an int * that points to the ﬁrst element in ia </span>
+ia2 <span class="token operator">=</span> <span class="token number">42</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// error: ia2 is a pointer, and we can’t assign an int to a pointer</span>
+</code></pre>
+</li>
+<li>when we use <strong>decltype</strong>. The type returned by decltype(ia) is array of ten ints.<pre class=" language-cpp"><code class="language-cpp"><span class="token comment" spellcheck="true">// ia3 is an array of ten ints </span>
+<span class="token keyword">decltype</span><span class="token punctuation">(</span>ia<span class="token punctuation">)</span> ia3 <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">,</span><span class="token number">6</span><span class="token punctuation">,</span><span class="token number">7</span><span class="token punctuation">,</span><span class="token number">8</span><span class="token punctuation">,</span><span class="token number">9</span><span class="token punctuation">}</span><span class="token punctuation">;</span> 
+ia3 <span class="token operator">=</span> p<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// error: can’t assign an int * to an array </span>
+ia3<span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span> <span class="token operator">=</span> i<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// ok: assigns the value of i to an element in ia3</span>
+</code></pre>
+</li>
+</ul>
+  <aside>
+  📌 建议：这里容易混乱的，就不要在实践中使用。
+  
+  </aside>
+  </li>
+</ul>
+<h2 id="Pointers-are-Iterators"><a href="#Pointers-are-Iterators" class="headerlink" title="Pointers are Iterators"></a>Pointers are Iterators</h2><h3 id="off-the-end-pointer"><a href="#off-the-end-pointer" class="headerlink" title="off-the-end pointer"></a>off-the-end pointer</h3><p> 前面提到数组的名字可以视为指向其中第一个元素的指针，因此可以通过对名称进行加减操作，来移动指向地址的位置，如下：</p>
+<pre class=" language-cpp"><code class="language-cpp"><span class="token keyword">int</span> arr<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">,</span><span class="token number">6</span><span class="token punctuation">,</span><span class="token number">7</span><span class="token punctuation">,</span><span class="token number">8</span><span class="token punctuation">,</span><span class="token number">9</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> <span class="token operator">*</span>p <span class="token operator">=</span> arr<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// p points to the first element in arr </span>
+<span class="token operator">++</span>p<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// p points to arr[1]</span>
+</code></pre>
+<p>基于这种特性，可以使用point对array中的元素进行遍历。</p>
+<pre class=" language-cpp"><code class="language-cpp"><span class="token keyword">int</span> <span class="token operator">*</span>e <span class="token operator">=</span> <span class="token operator">&amp;</span>arr<span class="token punctuation">[</span><span class="token number">10</span><span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//pointer just past the last element in arr</span>
+
+<span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> <span class="token operator">*</span> b <span class="token operator">=</span> arr<span class="token punctuation">;</span> b <span class="token operator">!=</span> e<span class="token punctuation">;</span> <span class="token operator">++</span>b<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    cout <span class="token operator">&lt;&lt;</span> <span class="token operator">*</span> b <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// print the elements in arr</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>其中，<code>&amp;arr[10]</code>是4种有效的指针数据之一，在<a target="_blank" rel="noopener" href="https://lifehit.cn/2022/09/18/bian-cheng-zhi-dao/reference-he-pointer/">指针知识部分</a>有说明, 这是一种off-the-end pointer, 非常易于出错。</p>
+<h3 id="begin-amp-end"><a href="#begin-amp-end" class="headerlink" title="begin &amp; end"></a>begin &amp; end</h3><p>在c++11种提出，begin和end函数：</p>
+<ul>
+<li>begin returns a pointer to the ﬁrst;</li>
+<li>end returns a pointer one past the last element in the given array:</li>
+<li>These functions are deﬁned in the iterator header.</li>
+</ul>
+<p>使用如下：</p>
+<pre class=" language-cpp"><code class="language-cpp"><span class="token keyword">int</span> arr<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">,</span><span class="token number">6</span><span class="token punctuation">,</span><span class="token number">7</span><span class="token punctuation">,</span><span class="token number">8</span><span class="token punctuation">,</span><span class="token number">9</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> <span class="token operator">*</span>pbeg <span class="token operator">=</span> <span class="token function">begin</span><span class="token punctuation">(</span>arr<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> <span class="token operator">*</span>pend <span class="token operator">=</span> <span class="token function">end</span><span class="token punctuation">(</span>arr<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">while</span><span class="token punctuation">(</span>pbeg <span class="token operator">!=</span> pend<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    cout <span class="token operator">&lt;&lt;</span> <span class="token operator">*</span>pbeg <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+    pbeg<span class="token operator">++</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>这种方法，本质上与off-the-end pointer的做法相同，end函数得到的还是末端之外的指针，但是不用显式操作指针计算，更加安全。</p>
+<h3 id="pointer算数运算"><a href="#pointer算数运算" class="headerlink" title="pointer算数运算"></a>pointer算数运算</h3><p>Pointers that address array elements can use all the iterator operations listed in  the following tables.</p>
+<p><img src="/images/%E7%BC%96%E7%A8%8B%E4%B9%8B%E9%81%93/C++:%E6%95%B0%E7%BB%84%E7%9A%84%E4%BD%BF%E7%94%A8%E4%BB%A5%E5%8F%8A%E7%9B%B8%E5%85%B3%E5%86%85%E5%AE%B9/table1.png" alt="pointer算数运算1"></p>
+<p><img src="/images/%E7%BC%96%E7%A8%8B%E4%B9%8B%E9%81%93/C++:%E6%95%B0%E7%BB%84%E7%9A%84%E4%BD%BF%E7%94%A8%E4%BB%A5%E5%8F%8A%E7%9B%B8%E5%85%B3%E5%86%85%E5%AE%B9/table2.png" alt="pointer算数运算2"></p>
+<p>几个典型的使用如下：</p>
+<ul>
+<li>指针偏移形成新的指针；<pre class=" language-cpp"><code class="language-cpp"><span class="token keyword">int</span> arr<span class="token punctuation">[</span><span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> <span class="token operator">*</span>ip <span class="token operator">=</span> arr<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// equivalent to int * ip = &amp;arr[0] </span>
+<span class="token keyword">int</span> <span class="token operator">*</span>ip2 <span class="token operator">=</span> ip <span class="token operator">+</span> <span class="token number">4</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// ip2 points to arr[4]</span>
+
+<span class="token comment" spellcheck="true">// 注意：这两种写法，意义完全不同</span>
+<span class="token keyword">int</span> last <span class="token operator">=</span> <span class="token operator">*</span><span class="token punctuation">(</span>arr <span class="token operator">+</span> <span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// == arr[4]</span>
+last <span class="token operator">=</span> <span class="token operator">*</span>arr <span class="token operator">+</span> <span class="token number">4</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// == arr[0] + 4</span>
+</code></pre>
+  此时要保证，新的指针ip2必须指向ip所指向的数组，否则出错。<pre class=" language-cpp"><code class="language-cpp"><span class="token keyword">int</span> <span class="token operator">*</span>p3 <span class="token operator">=</span> arr <span class="token operator">+</span> <span class="token number">5</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 正确，但是使用*p3取数据出错，因为是off-the-end pointer</span>
+<span class="token keyword">int</span> <span class="token operator">*</span>p4 <span class="token operator">=</span> arr <span class="token operator">+</span> <span class="token number">10</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 错误，超出范围</span>
+</code></pre>
+</li>
+<li>指针之间相减<pre class=" language-cpp"><code class="language-cpp"><span class="token keyword">auto</span> n <span class="token operator">=</span> <span class="token function">end</span><span class="token punctuation">(</span>arr<span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token function">begin</span><span class="token punctuation">(</span>arr<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//n is 5, the number of elements in arr</span>
+</code></pre>
+<ul>
+<li>The result of subtracting two pointers is a library type named <code>ptrdiff_t</code>.</li>
+<li>Like <code>size_t</code>, the <code>ptrdiff_t</code> type is a machine-speciﬁc type and is deﬁned in the <code>cstddef</code> header.</li>
+<li><code>ptrdiff_t</code> is a signed integral type.</li>
+</ul>
+  相减的结果，可以为负数，因此，指针不同于vector，其下标可以为负值，但是必须指向原始数组中的元素。</li>
+<li>指针相比较<pre class=" language-cpp"><code class="language-cpp"><span class="token keyword">int</span> <span class="token operator">*</span> b <span class="token operator">=</span> arr<span class="token punctuation">,</span> <span class="token operator">*</span>e <span class="token operator">=</span> arr <span class="token operator">+</span> sz<span class="token punctuation">;</span> 
+<span class="token keyword">while</span> <span class="token punctuation">(</span>b <span class="token operator">&lt;</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// use *b</span>
+    <span class="token operator">++</span>b<span class="token punctuation">;</span> 
+<span class="token punctuation">}</span>
+</code></pre>
+  此时，进行的比较的指针必须均对应相同的数组（或者off-the-end元素），否则没有意义。  <aside>
+  📌 对于null pointer 也是可以比较的。
+  
+  </aside>
+  
+<pre class=" language-cpp"><code class="language-cpp"><span class="token keyword">int</span> <span class="token operator">*</span>p <span class="token operator">=</span> <span class="token keyword">nullptr</span><span class="token punctuation">;</span>
+cout <span class="token operator">&lt;&lt;</span> p <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+cout <span class="token operator">&lt;&lt;</span> <span class="token operator">++</span>p <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+<span class="token keyword">int</span> <span class="token operator">*</span>a <span class="token operator">=</span> <span class="token keyword">nullptr</span><span class="token punctuation">;</span>
+cout <span class="token operator">&lt;&lt;</span> p <span class="token operator">-</span> a <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+
+<span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> <span class="token operator">*</span>ia <span class="token operator">=</span> <span class="token operator">&amp;</span>i<span class="token punctuation">;</span>
+cout <span class="token operator">&lt;&lt;</span> i <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+cout <span class="token operator">&lt;&lt;</span> <span class="token operator">*</span>ia <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+cout <span class="token operator">&lt;&lt;</span> ia <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">// --- output ---</span>
+<span class="token number">0x0</span>
+<span class="token number">0x4</span>
+<span class="token number">1</span>
+<span class="token number">10</span>
+<span class="token number">10</span>
+<span class="token number">0x7ffee03e32fc</span>
+</code></pre>
+</li>
+</ul>
+<h1 id="Array-amp-String"><a href="#Array-amp-String" class="headerlink" title="Array &amp; String"></a>Array &amp; String</h1><h2 id="C-Style-Character-Strings"><a href="#C-Style-Character-Strings" class="headerlink" title="C-Style Character Strings"></a>C-Style Character Strings</h2><p>因为C++继承了C语言，因此C语言中关于字符串的使用方式也被继承下来。</p>
+<aside>
+📌 但是，C语言中的字符串很难使用，而且是很多安全问题的根源，容易引入各种bugs，因此在C++语言中应该强烈避免使用这种风格的字符串形式，而应该使用<strings>代替，不仅安全，而且效率更高。
+
+</aside>
+
+<h3 id="初始化-1"><a href="#初始化-1" class="headerlink" title="初始化"></a>初始化</h3><p>C语言中的字符串，是使用char[]表示的，一个重要的地方是，这些字符数组必须均以null charactor <code>\0</code>结尾。</p>
+<ul>
+<li>C-style strings are not a type.<ul>
+<li>they are a convention for how to represent and use character strings.</li>
+<li>Strings that follow this convention are stored in character arrays and are null terminated.</li>
+<li>By null-terminated we mean that the last character in the string is followed by a null character (’\0’).</li>
+</ul>
+</li>
+<li>Ordinarily we use pointers to manipulate these strings.</li>
+</ul>
+<p>在C语言，操作字符串，更多是使用pointer完成，这也是此处将pointer和string放到一起的原因之一。</p>
+<p>这种使用方式中，字符串的初始化可以有以下几种：</p>
+<pre class=" language-cpp"><code class="language-cpp"><span class="token keyword">char</span> a1<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token string">'C'</span><span class="token punctuation">,</span> <span class="token string">'+'</span><span class="token punctuation">,</span> <span class="token string">'+'</span><span class="token punctuation">}</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// 声明没有问题，但是未使用\0结尾，只能当做字符数组使用，当做字符串使用或相关函数中会出现问题</span>
+<span class="token keyword">char</span> a2<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token string">'C'</span><span class="token punctuation">,</span> <span class="token string">'+'</span><span class="token punctuation">,</span> <span class="token string">'+'</span><span class="token punctuation">,</span> <span class="token string">'\0'</span><span class="token punctuation">}</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 正确方式</span>
+<span class="token keyword">char</span> a3<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">"C++"</span><span class="token punctuation">;</span>   <span class="token comment" spellcheck="true">// 正确方式，结尾自动添加了\0</span>
+<span class="token keyword">const</span> <span class="token keyword">char</span> a4<span class="token punctuation">[</span><span class="token number">6</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">"Daniel"</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 编译时错误，该字符串包括\0占据7个，空间不够</span>
+<span class="token comment" spellcheck="true">// 查看长度</span>
+cout <span class="token operator">&lt;&lt;</span> <span class="token function">end</span><span class="token punctuation">(</span>a1<span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token function">begin</span><span class="token punctuation">(</span>a1<span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// 输出3</span>
+cout <span class="token operator">&lt;&lt;</span> <span class="token function">end</span><span class="token punctuation">(</span>a2<span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token function">begin</span><span class="token punctuation">(</span>a2<span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// 输出4</span>
+cout <span class="token operator">&lt;&lt;</span> <span class="token function">end</span><span class="token punctuation">(</span>a3<span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token function">begin</span><span class="token punctuation">(</span>a3<span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// 输出4</span>
+<span class="token comment" spellcheck="true">// 输出字符串</span>
+cout <span class="token operator">&lt;&lt;</span> a1 <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+cout <span class="token operator">&lt;&lt;</span> a2 <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+cout <span class="token operator">&lt;&lt;</span> a3 <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">// --- output ---</span>
+<span class="token comment" spellcheck="true">// C++PSj��: 因为a1没有使用\0结尾。</span>
+<span class="token comment" spellcheck="true">// C++: 正确输出，找到第一个\0作为结尾。</span>
+<span class="token comment" spellcheck="true">// C++: 正确输出</span>
+</code></pre>
+<h3 id="字符串函数"><a href="#字符串函数" class="headerlink" title="字符串函数"></a>字符串函数</h3><p>C语言中，有很多字符串函数，如下：</p>
+<p><img src="/images/%E7%BC%96%E7%A8%8B%E4%B9%8B%E9%81%93/C++:%E6%95%B0%E7%BB%84%E7%9A%84%E4%BD%BF%E7%94%A8%E4%BB%A5%E5%8F%8A%E7%9B%B8%E5%85%B3%E5%86%85%E5%AE%B9/strfunc.png" alt="C语言中的字符串函数"></p>
+<p>当这些函数用在char[]中时，也会受到\0的影响, 接上例。</p>
+<pre class=" language-cpp"><code class="language-cpp">cout <span class="token operator">&lt;&lt;</span> <span class="token function">strlen</span><span class="token punctuation">(</span>a1<span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+cout <span class="token operator">&lt;&lt;</span> <span class="token function">strlen</span><span class="token punctuation">(</span>a2<span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+cout <span class="token operator">&lt;&lt;</span> <span class="token function">strlen</span><span class="token punctuation">(</span>a3<span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">// --- output ---</span>
+<span class="token number">9</span>
+<span class="token number">3</span>
+<span class="token number">3</span>
+</code></pre>
+<p>第一个为什么输出9？因为字符串函数strlen()会寻找第一个\0, 然后计算长度，但是a1中没有\0, 因此结果undefined, 也可能是别的。</p>
+<h3 id="比较字符串"><a href="#比较字符串" class="headerlink" title="比较字符串"></a>比较字符串</h3><p>C语言中字符串的比较与C++中strings中不同, 字符串的比较有两个角度，比较数组地址，和比较数组内容。</p>
+<pre class=" language-cpp"><code class="language-cpp"><span class="token comment" spellcheck="true">// 比较不同数组的地址，无意义</span>
+<span class="token keyword">const</span> <span class="token keyword">char</span> ca1<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">"A string example"</span><span class="token punctuation">;</span> <span class="token keyword">const</span> <span class="token keyword">char</span> ca2<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">"A different string"</span><span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">// undeﬁned: compares two unrelated addresses</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span>ca1 <span class="token operator">&lt;</span> ca2<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// ...</span>
+<span class="token punctuation">}</span>
+<span class="token comment" spellcheck="true">// 比较数组的数据，使用strcmp</span>
+<span class="token comment" spellcheck="true">// same effect as string comparison s1 &lt; s2</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">strcmp</span><span class="token punctuation">(</span>ca1<span class="token punctuation">,</span> ca2<span class="token punctuation">)</span> <span class="token operator">&lt;</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// ...</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>C语言风格下，只能使用strcmp来比较字符串，结果为0，字符串相同。</p>
+<p>在C++中，字符串可以简单的使用 ca1 &lt; cal2 完成。</p>
+<h3 id="字符串拼接和复制"><a href="#字符串拼接和复制" class="headerlink" title="字符串拼接和复制"></a>字符串拼接和复制</h3><p>在C语言风格中，也不能使用如下风格的写法：</p>
+<pre class=" language-cpp"><code class="language-cpp">string largeStr <span class="token operator">=</span> s1 <span class="token operator">+</span> <span class="token string">" "</span> <span class="token operator">+</span> s2<span class="token punctuation">;</span>
+</code></pre>
+<p>而是通过<code>strcpy</code>和<code>strcat</code>完成字符串的拼接和复制。</p>
+<pre class=" language-cpp"><code class="language-cpp"><span class="token function">strcpy</span><span class="token punctuation">(</span>largeStr<span class="token punctuation">,</span> ca1<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// copies ca1 into largeStr </span>
+<span class="token function">strcat</span><span class="token punctuation">(</span>largeStr<span class="token punctuation">,</span> <span class="token string">" "</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// adds a space at the end of largeStr </span>
+<span class="token function">strcat</span><span class="token punctuation">(</span>largeStr<span class="token punctuation">,</span> ca2<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// concatenates ca2 onto largeStr</span>
+</code></pre>
+<p>这种使用，必须事先计算好largeStr是否能够容纳最终的结果，否则就会出错。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><aside>
+📌 Modern C++ programs should use vectors and iterators instead of built-in arrays and pointers, and use strings rather than C-style array-based character strings.
+
+</aside>
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">alex Li</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://limeya.github.io/2022/10/07/bian-cheng-zhi-dao/c-shu-zu-de-shi-yong-yi-ji-xiang-guan-nei-rong/">https://limeya.github.io/2022/10/07/bian-cheng-zhi-dao/c-shu-zu-de-shi-yong-yi-ji-xiang-guan-nei-rong/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">alex Li</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/%E6%8C%87%E9%92%88/">
+                                    <span class="chip bg-color">指针</span>
+                                </a>
+                            
+                                <a href="/tags/%E6%95%B0%E7%BB%84/">
+                                    <span class="chip bg-color">数组</span>
+                                </a>
+                            
+                                <a href="/tags/array/">
+                                    <span class="chip bg-color">array</span>
+                                </a>
+                            
+                                <a href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/">
+                                    <span class="chip bg-color">字符串</span>
+                                </a>
+                            
+                                <a href="/tags/string/">
+                                    <span class="chip bg-color">string</span>
+                                </a>
+                            
+                                <a href="/tags/pointer/">
+                                    <span class="chip bg-color">pointer</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2022/10/07/bian-cheng-zhi-dao/c-const-guan-jian-zi/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="C++:const关键字">
+                        
+                        <span class="card-title">C++:const关键字</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            关于C++中const关键字学习总结。
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2022-10-07
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E7%BC%96%E7%A8%8B%E4%B9%8B%E9%81%93/" class="post-category">
+                                    编程之道
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E5%B8%B8%E9%87%8F/">
+                        <span class="chip bg-color">常量</span>
+                    </a>
+                    
+                    <a href="/tags/const/">
+                        <span class="chip bg-color">const</span>
+                    </a>
+                    
+                    <a href="/tags/constexpr/">
+                        <span class="chip bg-color">constexpr</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2022/09/25/du-shu-gan-wu/lin-jia-de-bai-wan-fu-weng-ru-he-sheng-huo/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="《邻家的百万富翁》如何生活？">
+                        
+                        <span class="card-title">《邻家的百万富翁》如何生活？</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            本书通过调查研究，剖析了百万富翁们的特点，和致富原因。
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-09-25
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E8%AF%BB%E4%B9%A6/" class="post-category">
+                                    读书
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E8%87%B4%E5%AF%8C/">
+                        <span class="chip bg-color">致富</span>
+                    </a>
+                    
+                    <a href="/tags/%E6%8A%95%E8%B5%84/">
+                        <span class="chip bg-color">投资</span>
+                    </a>
+                    
+                    <a href="/tags/%E8%AE%A1%E5%88%92/">
+                        <span class="chip bg-color">计划</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h1, h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h1, h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
+<style>
+    .aplayer .aplayer-lrc p {
+        
+        display: none;
+        
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
+
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        
+        display: none;
+        
+        font-size: 15px;
+        color: #42b983;
+    }
+
+    
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
+        left: -66px !important;
+    }
+
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
+        left: 0px !important;
+    }
+
+    
+</style>
+<div class="">
+    
+    <div class="row">
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="netease"
+                   type="playlist"
+                   id="503838841"
+                   fixed='true'
+                   autoplay='false'
+                   theme='#42b983'
+                   loop='all'
+                   order='random'
+                   preload='auto'
+                   volume='0.7'
+                   list-folded='true'
+        >
+        </meting-js>
+    </div>
+</div>
+
+<script src="/libs/aplayer/APlayer.min.js"></script>
+<script src="/libs/aplayer/Meting.min.js"></script>
+
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 15px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2021-2022</span>
+            
+            <a href="/about" target="_blank">alex Li</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+                &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                        class="white-color">56.4k</span>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+                <span id="sitetime"> Loading ...</span>
+                <script>
+                    var calcSiteTime = function () {
+                        var seconds = 1000;
+                        var minutes = seconds * 60;
+                        var hours = minutes * 60;
+                        var days = hours * 24;
+                        var years = days * 365;
+                        var today = new Date();
+                        var startYear = "2021";
+                        var startMonth = "11";
+                        var startDate = "13";
+                        var startHour = "20";
+                        var startMinute = "0";
+                        var startSecond = "0";
+                        var todayYear = today.getFullYear();
+                        var todayMonth = today.getMonth() + 1;
+                        var todayDate = today.getDate();
+                        var todayHour = today.getHours();
+                        var todayMinute = today.getMinutes();
+                        var todaySecond = today.getSeconds();
+                        var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                        var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                        var diff = t2 - t1;
+                        var diffYears = Math.floor(diff / years);
+                        var diffDays = Math.floor((diff / days) - diffYears * 365);
+
+                        // 区分是否有年份.
+                        var language = 'zh-CN';
+                        if (startYear === String(todayYear)) {
+                            document.getElementById("year").innerHTML = todayYear;
+                            var daysTip = 'This site has been running for ' + diffDays + ' days';
+                            if (language === 'zh-CN') {
+                                daysTip = '本站已运行 ' + diffDays + ' 天';
+                            } else if (language === 'zh-HK') {
+                                daysTip = '本站已運行 ' + diffDays + ' 天';
+                            }
+                            document.getElementById("sitetime").innerHTML = daysTip;
+                        } else {
+                            document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                            var yearsAndDaysTip = 'This site has been running for ' + diffYears + ' years and '
+                                + diffDays + ' days';
+                            if (language === 'zh-CN') {
+                                yearsAndDaysTip = '本站已运行 ' + diffYears + ' 年 ' + diffDays + ' 天';
+                            } else if (language === 'zh-HK') {
+                                yearsAndDaysTip = '本站已運行 ' + diffYears + ' 年 ' + diffDays + ' 天';
+                            }
+                            document.getElementById("sitetime").innerHTML = yearsAndDaysTip;
+                        }
+                    }
+
+                    calcSiteTime();
+                </script>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/limeya" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:lmy86263@gmail.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1215869909" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1215869909" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+
+
+    <a href="https://blog.csdn.net/lmy86263" class="tooltipped" target="_blank" data-tooltip="访问csdn" data-position="top" data-delay="50">
+		<i class="fab fa-blogger"></i>
+    </a>
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    
+
+    
+
+    <!-- 雪花特效 -->
+    
+
+    <!-- 鼠标星星特效 -->
+    
+
+     
+        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+        <script src="/libs/others/TencentCaptcha.js"></script>
+        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
+    
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>
