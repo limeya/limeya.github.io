@@ -6,7 +6,7 @@
   <link href="https://limeya.github.io/atom.xml" rel="self"/>
   
   <link href="https://limeya.github.io/"/>
-  <updated>2022-09-25T07:26:17.119Z</updated>
+  <updated>2022-10-07T05:02:39.673Z</updated>
   <id>https://limeya.github.io/</id>
   
   <author>
@@ -15,6 +15,39 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>C++:const关键字</title>
+    <link href="https://limeya.github.io/2022/10/07/bian-cheng-zhi-dao/c-const-guan-jian-zi/"/>
+    <id>https://limeya.github.io/2022/10/07/bian-cheng-zhi-dao/c-const-guan-jian-zi/</id>
+    <published>2022-10-06T16:00:00.000Z</published>
+    <updated>2022-10-07T05:02:39.673Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;aside&gt;
+💡 本篇的内容来自C++ Primer中的2.4节
+&lt;/aside&gt;
+
+&lt;h1 id=&quot;基本内容&quot;&gt;&lt;a href=&quot;#基本内容&quot; class=&quot;headerlink&quot; title=&quot;基本内容&quot;&gt;&lt;/a&gt;基本内容&lt;/h1&gt;&lt;h2 id=&quot;定义与初始化&quot;&gt;&lt;a</summary>
+        
+      
+    
+    
+    
+    <category term="编程之道" scheme="https://limeya.github.io/categories/%E7%BC%96%E7%A8%8B%E4%B9%8B%E9%81%93/"/>
+    
+    
+    <category term="常量" scheme="https://limeya.github.io/tags/%E5%B8%B8%E9%87%8F/"/>
+    
+    <category term="const" scheme="https://limeya.github.io/tags/const/"/>
+    
+    <category term="constexpr" scheme="https://limeya.github.io/tags/constexpr/"/>
+    
+  </entry>
   
   <entry>
     <title>《邻家的百万富翁》如何生活？</title>
@@ -543,32 +576,6 @@
     
     
     <category term="光栅化" scheme="https://limeya.github.io/tags/%E5%85%89%E6%A0%85%E5%8C%96/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>GAMES101-04：Viewing Transformation</title>
-    <link href="https://limeya.github.io/2022/04/28/ji-suan-ji-tu-xing-xue/games/games101-04-viewing-transformation/"/>
-    <id>https://limeya.github.io/2022/04/28/ji-suan-ji-tu-xing-xue/games/games101-04-viewing-transformation/</id>
-    <published>2022-04-28T09:53:00.000Z</published>
-    <updated>2022-09-17T16:34:25.916Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;p&gt;Viewing Transformation指的是将3D中的物体映射到2D中的图像的过程。&lt;/p&gt;
-&lt;h1 id=&quot;例子说明&quot;&gt;&lt;a href=&quot;#例子说明&quot; class=&quot;headerlink&quot; title=&quot;例子说明&quot;&gt;&lt;/a&gt;例子说明&lt;/h1&gt;&lt;p&gt;Think</summary>
-        
-      
-    
-    
-    
-    <category term="计算机图形学" scheme="https://limeya.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/"/>
-    
-    
-    <category term="视图变换" scheme="https://limeya.github.io/tags/%E8%A7%86%E5%9B%BE%E5%8F%98%E6%8D%A2/"/>
     
   </entry>
   
