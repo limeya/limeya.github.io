@@ -413,11 +413,10 @@
 <span class="token keyword">int</span> b<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span> <span class="token operator">=</span> a<span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// 错误，不能用一个数组初始化另一个数据</span>
 b <span class="token operator">=</span> a<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 错误，不能数组赋值和copy</span>
 </code></pre>
-  <aside>
-  📌 有些编译器允许数组赋值，但是这种是作为compiler extension存在的，不是标准支持的语法，跨编译器时可能会存在问题。
-  
-  </aside>
-  </li>
+<blockquote>
+<p>📌 有些编译器允许数组赋值，但是这种是作为compiler extension存在的，不是标准支持的语法，跨编译器时可能会存在问题。</p>
+</blockquote>
+</li>
 </ul>
 <h1 id="数组作为函数参数"><a href="#数组作为函数参数" class="headerlink" title="数组作为函数参数"></a>数组作为函数参数</h1><p>基于数组的特性，不能复制，因此无法使用数组作为函数的形参，也就不能按值传递数组；但是，可以利用另一个特性，向函数传递数组名称作为第一个元素的指针。</p>
 <h2 id="声明数组作为函数参数"><a href="#声明数组作为函数参数" class="headerlink" title="声明数组作为函数参数"></a>声明数组作为函数参数</h2><pre class=" language-cpp"><code class="language-cpp"><span class="token comment" spellcheck="true">// 三种声明等价，忽略它们定义的样子</span>
