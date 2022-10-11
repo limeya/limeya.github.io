@@ -6,7 +6,7 @@
   <link href="https://limeya.github.io/atom.xml" rel="self"/>
   
   <link href="https://limeya.github.io/"/>
-  <updated>2022-10-07T05:02:39.673Z</updated>
+  <updated>2022-10-11T10:28:43.670Z</updated>
   <id>https://limeya.github.io/</id>
   
   <author>
@@ -15,6 +15,38 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>C++:数组作为参数进行传递</title>
+    <link href="https://limeya.github.io/2022/10/11/bian-cheng-zhi-dao/c-shu-zu-zuo-wei-can-shu-jin-xing-chuan-di/"/>
+    <id>https://limeya.github.io/2022/10/11/bian-cheng-zhi-dao/c-shu-zu-zuo-wei-can-shu-jin-xing-chuan-di/</id>
+    <published>2022-10-10T16:00:00.000Z</published>
+    <updated>2022-10-11T10:28:43.670Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;📌 来自C++ primer中的6.2.4部分&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h1 id=&quot;数组的特性&quot;&gt;&lt;a href=&quot;#数组的特性&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="编程之道" scheme="https://limeya.github.io/categories/%E7%BC%96%E7%A8%8B%E4%B9%8B%E9%81%93/"/>
+    
+    
+    <category term="数组" scheme="https://limeya.github.io/tags/%E6%95%B0%E7%BB%84/"/>
+    
+    <category term="函数" scheme="https://limeya.github.io/tags/%E5%87%BD%E6%95%B0/"/>
+    
+    <category term="参数传递" scheme="https://limeya.github.io/tags/%E5%8F%82%E6%95%B0%E4%BC%A0%E9%80%92/"/>
+    
+  </entry>
   
   <entry>
     <title>C++:const关键字</title>
@@ -556,31 +588,6 @@
         
         
     <summary type="html">&lt;h1 id=&quot;问题：Visibility-occlusion&quot;&gt;&lt;a href=&quot;#问题：Visibility-occlusion&quot; class=&quot;headerlink&quot; title=&quot;问题：Visibility / occlusion&quot;&gt;&lt;/a&gt;问题：Visibility</summary>
-        
-      
-    
-    
-    
-    <category term="计算机图形学" scheme="https://limeya.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/"/>
-    
-    
-    <category term="光栅化" scheme="https://limeya.github.io/tags/%E5%85%89%E6%A0%85%E5%8C%96/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>GAMES101-06-1：Rasterization - Antialiasing</title>
-    <link href="https://limeya.github.io/2022/04/30/ji-suan-ji-tu-xing-xue/games/games101-06-1-rasterization-antialiasing/"/>
-    <id>https://limeya.github.io/2022/04/30/ji-suan-ji-tu-xing-xue/games/games101-06-1-rasterization-antialiasing/</id>
-    <published>2022-04-30T11:00:00.000Z</published>
-    <updated>2022-09-17T16:34:47.356Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;Sampling&quot;&gt;&lt;a href=&quot;#Sampling&quot; class=&quot;headerlink&quot; title=&quot;Sampling&quot;&gt;&lt;/a&gt;Sampling&lt;/h1&gt;&lt;h2 id=&quot;常见的采样&quot;&gt;&lt;a href=&quot;#常见的采样&quot;</summary>
         
       
     
