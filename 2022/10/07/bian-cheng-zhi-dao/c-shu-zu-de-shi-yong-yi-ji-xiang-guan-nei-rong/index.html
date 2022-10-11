@@ -428,11 +428,10 @@
   因此，dimension必须<strong>在编译时已知</strong>，因此它必须是一个constant。<pre class=" language-cpp"><code class="language-cpp"><span class="token keyword">unsigned</span> cnt <span class="token operator">=</span> <span class="token number">42</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// not a constant expression </span>
 <span class="token keyword">constexpr</span> <span class="token keyword">unsigned</span> sz <span class="token operator">=</span> <span class="token number">42</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// constant expression</span>
 </code></pre>
-  <aside>
-  📌 但是，这种问题在g++和clang++编译时可能不会报错，这是因为这些**编译器提供了扩展**，将这种写法视为正确，但是建议禁止这些特性，因为会导致无法在别的compiler中成功运行，在g++和clang++对应的选项是-pedantic-errors。
-  
-  </aside>
-  </li>
+<blockquote>
+<p>📌 但是，这种问题在g++和clang++编译时可能不会报错，这是因为这些<strong>编译器提供了扩展</strong>，将这种写法视为正确，但是建议禁止这些特性，因为会导致无法在别的compiler中成功运行，在g++和clang++对应的选项是-pedantic-errors。</p>
+</blockquote>
+</li>
 </ul>
 <h2 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h2><h3 id="隐式"><a href="#隐式" class="headerlink" title="隐式"></a>隐式</h3><p>数组的初始化与数据元素的类型（内置类型、复合类型）、变量作用域（全局变量、局部变量）有关。</p>
 <ul>
