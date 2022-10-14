@@ -6,7 +6,7 @@
   <link href="https://limeya.github.io/atom.xml" rel="self"/>
   
   <link href="https://limeya.github.io/"/>
-  <updated>2022-10-12T16:01:54.360Z</updated>
+  <updated>2022-10-14T15:49:23.658Z</updated>
   <id>https://limeya.github.io/</id>
   
   <author>
@@ -15,6 +15,36 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>述说Vulkan的历史及特点</title>
+    <link href="https://limeya.github.io/2022/10/14/ji-suan-ji-tu-xing-xue/vulkan/vulkan-de-li-shi-ji-te-dian/vulkan-de-li-shi-ji-te-dian/"/>
+    <id>https://limeya.github.io/2022/10/14/ji-suan-ji-tu-xing-xue/vulkan/vulkan-de-li-shi-ji-te-dian/vulkan-de-li-shi-ji-te-dian/</id>
+    <published>2022-10-13T16:00:00.000Z</published>
+    <updated>2022-10-14T15:49:23.658Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;📌 由于工作的原因，开始进入计算机图形学的领域，开始研究Vulkan，后面会有一系列的学习总结文章，在此挖坑为证。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h1 id=&quot;Vulkan的来源&quot;&gt;&lt;a href=&quot;#Vulkan的来源&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="计算机图形学" scheme="https://limeya.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/"/>
+    
+    
+    <category term="Vulkan" scheme="https://limeya.github.io/tags/Vulkan/"/>
+    
+    <category term="OpenGL" scheme="https://limeya.github.io/tags/OpenGL/"/>
+    
+  </entry>
   
   <entry>
     <title>C++:函数指针</title>
@@ -581,31 +611,6 @@
     <category term="Shading" scheme="https://limeya.github.io/tags/Shading/"/>
     
     <category term="Graphics Pipeline" scheme="https://limeya.github.io/tags/Graphics-Pipeline/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>GAMES101-08-1：Shading - Shading Frequencies</title>
-    <link href="https://limeya.github.io/2022/05/01/ji-suan-ji-tu-xing-xue/games/games101-08-1-shading-shading-frequencies/"/>
-    <id>https://limeya.github.io/2022/05/01/ji-suan-ji-tu-xing-xue/games/games101-08-1-shading-shading-frequencies/</id>
-    <published>2022-05-01T07:00:00.000Z</published>
-    <updated>2022-09-17T16:35:04.648Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;问题&quot;&gt;&lt;a href=&quot;#问题&quot; class=&quot;headerlink&quot; title=&quot;问题&quot;&gt;&lt;/a&gt;问题&lt;/h1&gt;&lt;p&gt;前面的Blinn-Phong Model是针对单个shading</summary>
-        
-      
-    
-    
-    
-    <category term="计算机图形学" scheme="https://limeya.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/"/>
-    
-    
-    <category term="Shading" scheme="https://limeya.github.io/tags/Shading/"/>
     
   </entry>
   

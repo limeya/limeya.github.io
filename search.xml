@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>述说Vulkan的历史及特点</title>
+      <link href="/2022/10/14/ji-suan-ji-tu-xing-xue/vulkan/vulkan-de-li-shi-ji-te-dian/vulkan-de-li-shi-ji-te-dian/"/>
+      <url>/2022/10/14/ji-suan-ji-tu-xing-xue/vulkan/vulkan-de-li-shi-ji-te-dian/vulkan-de-li-shi-ji-te-dian/</url>
+      
+        <content type="html"><![CDATA[<blockquote><p>📌 由于工作的原因，开始进入计算机图形学的领域，开始研究Vulkan，后面会有一系列的学习总结文章，在此挖坑为证。</p></blockquote><h1 id="Vulkan的来源"><a href="#Vulkan的来源" class="headerlink" title="Vulkan的来源"></a>Vulkan的来源</h1><p>不管什么东西，我都喜欢了解一下历史，这样才会激起兴趣，了解它为什么出现、发展，乃至我为什么学习它。</p><p>在我最开始了解图形学时，还是本科的时候，那时候还是OpenGL的天下，因为后面也没有深入图形学领域，也就没有深究，现在开始工作了，发现虽然还是OpenGL占据主流，但是Vulkan、DirectX等API也在不断发展。</p><p>Vulkan最开始起源于AMD的Mantle，之后大家发现这个东西很不错，showcased cutting-edge capabilities，于是AMD就将它开源了，并捐给了Khronos，没错，就是那个掌握OpenGL的组织，这个Khronos是一个产业联盟，里面有很多的软硬件厂商，不包括巨硬。</p><blockquote><p>我发现，国外的企业很愿意把好东西捐给社区，一方面，建立了技术生态，为自己赚取名声，另一方面，由于是自己设计开发的，经常还可以占据主导地位，从而做大做强。</p></blockquote><p>从2016年开始，发布版本（我的mac是2015款的，不过后来发现即便是新款也需要<a href="https://github.com/KhronosGroup/MoltenVK">MoltenVK</a>, 经过一个中介才可以）。</p><h1 id="Vulkan到底是啥"><a href="#Vulkan到底是啥" class="headerlink" title="Vulkan到底是啥"></a>Vulkan到底是啥</h1><blockquote><p>Vulkan is a <strong>software interface</strong> that is capable of controlling GPU hardware settings to <strong>harness the power of paralleling computing.</strong></p></blockquote><ul><li>是一个interface，叫标准、协议也罢，就是大家约定一下，干同样的活遵循同样的步骤，别瞎干，形成了统一的规范后，有利于提高生产率，对于规范的实现，各家GPU厂商自己决定，这是竞争力的体现；</li><li>目的是啥？利用GPU并行计算的能力，说白了，让GPU好好干活，隐含地暗示，之前的API在这件事上做的不好；</li><li>怎么干？通过控制GPU的硬件设置，GPU可复杂了，如果要完全控制，那工作可繁琐了，这也是vulkan的优点，也是它的缺点。</li></ul><h1 id="Vulkan之前的API有啥问题"><a href="#Vulkan之前的API有啥问题" class="headerlink" title="Vulkan之前的API有啥问题"></a>Vulkan之前的API有啥问题</h1><p>之前最主要的是OpenGL，OpenGL本质上是一个state machine，通过控制各种状态，形成不同的组合，从而以最优的方式，达到最高的性能。但是，关键是但是，它的操作是implicit的，开发者有时候并不知道，而且OpenGL太想帮开发者做好各种工作了，但是随着各种复杂场景的出现，力有不逮，频频出错，导致各种问题。</p><p>核心是，OpenGL在之前的场景中，帮大家干得不错，管理的很高，但是现在人们群众的生活水平提高了，大家想要更好的游戏体验，但是OpenGL无法完全满足这种场景，或者说如果要满足，需要付出很大的代价。</p><p>相比于OpenGL这种，希望帮开发者多做事的设计思想，vulkan就很流氓了，老子不管了，出了问题是你们自己的事情，美其名曰开发者最了解自己的需求（当然这也没错啦），将所有的操作全部放到台面上，要干什么，让开发者自己决定，出了错也自己承担，这就是vulkan最核心的思想。</p><blockquote><p>这种思想我不止一次看到，之前在读书的时候，看到很多的设计思想也是这样的，而且，如果仔细看，有没有发现这两种思想和欧洲、美国的政治、社会文化很像，欧洲比社会主义还社会主义，就是OpenGL，太想把大家都照顾好了，可是各种出问题，福利、医疗等等，美国就是自己的事情自己负责，就是Vulkan代表的思想嘛，好处嘛：自己的事情自己负责，成功了是你的本事，上不封顶；坏处嘛：失败了你也别来找我，政府不给你兜底。</p></blockquote><h1 id="Vulkan有啥特点"><a href="#Vulkan有啥特点" class="headerlink" title="Vulkan有啥特点"></a>Vulkan有啥特点</h1><p>说起Vulkan，其实不只有他一家API，除了上面提到的OpenGL，还有巨硬家的DirectX，为了推自己的API，做的事情名声不太好。还有苹果家的Metal API，永远那么特立独行。但是后两个都是针对特定的平台的。</p><blockquote><p>这里Vulkan将跨平台作为优点说，也不是不可以，但是并不意味着针对特定平台的就不好，我觉得还是要中立看待，从商业角度看，苹果家只针对自己的平台做，软硬件融合的很好，只要对市场有足够的掌控力，这就是现金奶牛。</p></blockquote><p>由于OpenGL和Vulkan均是跨平台的，而且又都是Khronos家的，因此他俩比最合适。</p><h2 id="Vulkan减少了driver的工作"><a href="#Vulkan减少了driver的工作" class="headerlink" title="Vulkan减少了driver的工作"></a>Vulkan减少了driver的工作</h2><p>这就是前面提到的，将一些OpenGL driver做的工作放弃，全部交给开发者去做，让他们直接操纵底层硬件，这对于优秀的开发者来说就是好事，对于一些新手来说就是灾难。</p><p>这种设计，使得Vulkan的driver很thin，抛弃了很多责任，可以轻装上阵，因此可以使得GPU渲染地更快。</p><p><img src="/images/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/Vulkan/Vulkan%E7%9A%84%E5%8E%86%E5%8F%B2%E5%8F%8A%E7%89%B9%E7%82%B9/1.png" alt="Vulkan Driver的设计——thin"></p><p>Vulkan Driver的设计——thin</p><h2 id="Explicit的设计"><a href="#Explicit的设计" class="headerlink" title="Explicit的设计"></a>Explicit的设计</h2><p>之前说过OpenGL是implicit的，即悄悄地帮你把很多工作都做了，你还不知道（真是个好人）。但是呢，并不招人喜欢，因为管了太多的闲事，有时候还管不好。因此，Vulkan放弃了当这种好人的机会，把之前resource management等工作都甩给开发者，这种方式使得开发者可以看到所有的操作，也会知道哪里出现了问题。</p><h2 id="支持Multithread-scalability"><a href="#支持Multithread-scalability" class="headerlink" title="支持Multithread scalability"></a>支持Multithread scalability</h2><p>多个计算机中多CPU和多核的发展，多线程的能力决定了程序的性能。有<a href="https://www.youtube.com/watch?v=rvCD9FaTKCA">一个视频</a>对比了vulkan和OpenGL ES的能力：</p><p><img src="/images/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/Vulkan/Vulkan%E7%9A%84%E5%8E%86%E5%8F%B2%E5%8F%8A%E7%89%B9%E7%82%B9/2.png" alt="Vulkan和OpenGL多核CPU利用的对比"></p><p>对于多核CPU的利用：</p><ul><li>Vulkan是雨露均沾；</li><li>OpenGL ES是独宠一个；</li></ul><p>这是Vulkan多线程能力的一个体现。</p><h2 id="对内存的控制"><a href="#对内存的控制" class="headerlink" title="对内存的控制"></a>对内存的控制</h2><p>由于Vulkan是explicit，因此对于内存的控制，也是开放、透明的，允许开发者选择不同类型的内存来应用在资源上；相比之下，OpenGL把这部分工作也帮你做了，因为是implicit的。</p><p>这一点，还是在上面的视频中有体现，因为内存的访问不仅决定了性能，还决定了功耗：</p><p><img src="/images/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/Vulkan/Vulkan%E7%9A%84%E5%8E%86%E5%8F%B2%E5%8F%8A%E7%89%B9%E7%82%B9/3.png" alt="Vulkan和OpenGL功耗的对比"></p><p>vulkan比OpenGL ES更省电。</p><h2 id="统一的API"><a href="#统一的API" class="headerlink" title="统一的API"></a>统一的API</h2><p>我觉得可能是OpenGL被提出的太早，早期的API都是针对桌面的，后面以手机为代表的嵌入式设备不断发展，因此OpenGL中又提出了OpenGL ES，相比之下，Vulkan只有一套API，这样更统一、清晰。同时，手机等移动设备在Vulkan中是第一等公民的角色，而OpenGL中会先更新桌面版，之后再同步到ES。</p><h2 id="Error-check-amp-validation"><a href="#Error-check-amp-validation" class="headerlink" title="Error check &amp; validation"></a>Error check &amp; validation</h2><p>对于程序的错误和异常行为的检查是很重要的，尤其是在debug时，但是在release时就不需要这部分了。OpenGL ES隐式地帮所有程序都进行了错误的检查和验证，不管程序本身是否需要，一个不恰当的比喻，这就好比去西餐厅吃饭，餐厅不管你是否同意，默认帮你找了一个小提琴手演奏，但是之后你发现，这个服务不便宜，而且自己压根不需要。</p><p>相比之下，Vulkan将选择权交给了开发者本身，我们知道，Vulkan在driver中尽量少做事，因此错误的检查和验证不是标准的一部分，标准内的错误验证的功能也很弱。但是它作为了extension出现，形成validation layers，这部分不用被Vulkan的API显示调用，而是通过hook函数注入的，所以使用过程中可能会感知不到。</p><h2 id="Precompiled-shaders"><a href="#Precompiled-shaders" class="headerlink" title="Precompiled shaders"></a>Precompiled shaders</h2><p>在OpenGL ES中shader的代码通过GLSL编写，并且是动态编译的，也就是说在渲染时，OpenGL ES还要去编译shader，这显然更慢了。</p><p><img src="/images/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/Vulkan/Vulkan%E7%9A%84%E5%8E%86%E5%8F%B2%E5%8F%8A%E7%89%B9%E7%82%B9/4.png" alt="Untitled"></p><p>对比而言，Vulkan使用一种中间语言——Standard Portable Intermediate Language (SPIR-V)来表示shader程序，这个shader程序是预先编译好的，其中源代码可以是GLSL，通过Vulkan提供的工具预先编译成SPIR-V，从而减少了后续的工作时间，提升效率。</p><h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ul><li>Book —— Learning Vulkan</li><li><a href="https://vulkan-tutorial.com/Drawing_a_triangle/Graphics_pipeline_basics/Shader_modules">Shader modules</a></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 计算机图形学 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Vulkan </tag>
+            
+            <tag> OpenGL </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>C++:函数指针</title>
       <link href="/2022/10/12/bian-cheng-zhi-dao/c-han-shu-zhi-zhen/"/>
       <url>/2022/10/12/bian-cheng-zhi-dao/c-han-shu-zhi-zhen/</url>
