@@ -478,7 +478,7 @@ cout <span class="token operator">&lt;&lt;</span> <span class="token operator">*
 <li>同时定义多个变量时的误解<pre class=" language-cpp"><code class="language-cpp"><span class="token keyword">int</span> <span class="token operator">*</span>i<span class="token punctuation">,</span> j<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// i为指向int的指针，j为int变量，不是指针； </span>
 </code></pre>
   这种写在一起时会引发误解，两种方法可以避免：<ol>
-<li>写成 int  <em>i, 而不是 int</em> i;</li>
+<li>写成 <code>int *i</code>, 而不是 <code>int* i</code>;</li>
 <li>写在两个声明语句中，就不会误解；</li>
 </ol>
 </li>
@@ -500,11 +500,11 @@ cout <span class="token operator">&lt;&lt;</span> <span class="token string">"va
 cout <span class="token operator">&lt;&lt;</span> <span class="token string">"val is "</span> <span class="token operator">&lt;&lt;</span> <span class="token operator">*</span>p <span class="token operator">&lt;&lt;</span> <span class="token string">" by *p"</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
 cout <span class="token operator">&lt;&lt;</span> <span class="token string">"val is "</span> <span class="token operator">&lt;&lt;</span> <span class="token operator">*</span><span class="token operator">*</span>pp <span class="token operator">&lt;&lt;</span> <span class="token string">" by **pp"</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
 </code></pre>
-  对于存在多种符号，如&amp;， *等涉及reference或者pointer的声明时，遵守以下原则就不会出错；<ul>
+  对于存在多种符号，如<code>&amp;</code>，<code>*</code>等涉及reference或者pointer的声明时，遵守以下原则就不会出错；<ul>
 <li>The easiest way to understand the type of r is to read the deﬁnition right to left.</li>
 <li>The symbol closest to the name of the variable (in this case the &amp; in &amp;r) is the one that has the most immediate effect on the variable’s type.</li>
 </ul>
-  将* 称为pointer to, &amp; 称为reference to.</li>
+  将<code>*</code>称为pointer to, <code>&amp;</code>称为reference to.</li>
 </ul>
 <h2 id="Pointer-Value"><a href="#Pointer-Value" class="headerlink" title="Pointer Value"></a>Pointer Value</h2><p>指针在实践中很容易出错，但是pointer的value只能是下面4种之一：</p>
 <ol>
