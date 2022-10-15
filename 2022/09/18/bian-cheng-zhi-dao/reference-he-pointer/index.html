@@ -535,7 +535,7 @@ cout <span class="token operator">&lt;&lt;</span> <span class="token string">"va
 pi <span class="token operator">=</span> zero<span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// 错误，不允许将int赋值给pointer</span>
 </code></pre>
 </li>
-<li>法3等价于法2，继承自C语言，NULL是一个preprocessor variable，在compiler编译之前，会将其替换为0；</li>
+<li>法3等价于法2，继承自C语言，<code>NULL</code>是一个preprocessor variable，在compiler编译之前，会将其替换为0；</li>
 </ul>
 <blockquote>
 <p>💡 强烈建议：在pointer声明时，最好初始化，以免出现未定义的pointer；如果不定义，最好使用nullptr赋值。</p>
@@ -565,9 +565,9 @@ pi <span class="token operator">=</span> zero<span class="token punctuation">;</
 </li>
 <li>Using an invalid pointer as a condition or in a comparison is undeﬁned. 这种情况指的是，pointer values中的第四种情况。</li>
 </ul>
-<h2 id="void-Pointers"><a href="#void-Pointers" class="headerlink" title="void * Pointers"></a>void * Pointers</h2><ul>
-<li>The type void * is a special pointer type that can hold the address of any object.</li>
-<li>a void * pointer holds an address, but the type of the object at that address is unknown:</li>
+<h2 id="void-Pointers"><a href="#void-Pointers" class="headerlink" title="void * Pointers"></a><code>void *</code> Pointers</h2><ul>
+<li>The type <code>void *</code> is a special pointer type that can hold the address of any object.</li>
+<li>a <code>void *</code> pointer holds an address, but the type of the object at that address is unknown:</li>
 </ul>
 <blockquote>
 <p>💡 之前我一直以为这是指向一个void地址，这个起名太奇怪了。</p>
@@ -576,11 +576,11 @@ pi <span class="token operator">=</span> zero<span class="token punctuation">;</
 <ul>
 <li>We can compare it to another pointer,</li>
 <li>we can pass it to or return it from a function,</li>
-<li>and we can assign it to another void * pointer.</li>
+<li>and we can assign it to another <code>void *</code> pointer.</li>
 </ul>
 <p>但是不可以：</p>
 <ul>
-<li>use a void * to operate on the object it addresses<pre class=" language-cpp"><code class="language-cpp"><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
+<li>use a <code>void *</code> to operate on the object it addresses<pre class=" language-cpp"><code class="language-cpp"><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
 <span class="token keyword">int</span> <span class="token operator">*</span>p <span class="token operator">=</span> <span class="token operator">&amp;</span>i<span class="token punctuation">;</span>
 <span class="token keyword">void</span> <span class="token operator">*</span>vp <span class="token operator">=</span> p<span class="token punctuation">;</span>
 cout <span class="token operator">&lt;&lt;</span> <span class="token string">"p points to "</span> <span class="token operator">&lt;&lt;</span> <span class="token operator">*</span>p <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
