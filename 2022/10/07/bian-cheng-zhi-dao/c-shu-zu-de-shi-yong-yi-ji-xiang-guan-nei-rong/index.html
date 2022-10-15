@@ -486,15 +486,15 @@ string a4<span class="token punctuation">[</span><span class="token number">3</s
 </tr>
 <tr>
 <td>数组维度获取</td>
-<td>无size函数：</td>
-<td></td>
+<td>无size函数：(1)对于字符数组，可以用<code>strlen</code>；(2)其他数组，只能用<code>sizeof(array)/sizeof(array[0])</code>计算长度；(3)<code>end(array) - begin(array)</code>(c++11)</td>
+<td>有size函数</td>
+</tr>
+<tr>
+<td>下标类型</td>
+<td>可以为负值，涉及指针的算数运算，即便为负值，也需要指向原始数组中的元素。</td>
+<td>必须为非负值</td>
 </tr>
 </tbody></table>
-<ol>
-<li>对于字符数组，可以用strlen;</li>
-<li>其他数组，只能用sizeof(array)/sizeof(array[0]) 计算长度；</li>
-<li>end(array) - begin(array)(c++11) | 有size函数 |<br>| 下标类型 | 可以为负值，设计指针的算数运算，即便为负值，也需要指向原始数组中的元素。 | 必须为非负值 |</li>
-</ol>
 <p>两者之间的转换：</p>
 <pre class=" language-cpp"><code class="language-cpp"><span class="token keyword">int</span> int_arr<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">}</span><span class="token punctuation">;</span> 
 <span class="token comment" spellcheck="true">// ivec has six elements; each is a copy of the corresponding element in int_arr </span>
