@@ -4,8 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="利用Notion API+Github Actions回顾阅读的文章, LifeHit">
-    <meta name="description" content="结合Notion和Github Actions实现自动化回顾过去阅读的文章和思考笔记．">
+    <meta name="keywords" content="《邻家的百万富翁》们如何《财富自由》的？, LifeHit">
+    <meta name="description" content="本书继承自《邻家的百万富翁》，阐述了当今社会中过去致富的方式是否还适用的问题。">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -28,7 +28,7 @@
 </script>
 
 
-    <title>利用Notion API+Github Actions回顾阅读的文章 | LifeHit</title>
+    <title>《邻家的百万富翁》们如何《财富自由》的？ | LifeHit</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -214,12 +214,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/14.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/4.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">利用Notion API+Github Actions回顾阅读的文章</h1>
+                    <h1 class="description center-align post-title">《邻家的百万富翁》们如何《财富自由》的？</h1>
                 </div>
             </div>
         </div>
@@ -335,12 +335,20 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/Notion/">
-                                <span class="chip bg-color">Notion</span>
+                            <a href="/tags/%E8%87%B4%E5%AF%8C/">
+                                <span class="chip bg-color">致富</span>
                             </a>
                         
-                            <a href="/tags/Github-Actions/">
-                                <span class="chip bg-color">Github Actions</span>
+                            <a href="/tags/%E6%8A%95%E8%B5%84/">
+                                <span class="chip bg-color">投资</span>
+                            </a>
+                        
+                            <a href="/tags/%E8%AE%A1%E5%88%92/">
+                                <span class="chip bg-color">计划</span>
+                            </a>
+                        
+                            <a href="/tags/%E8%87%AA%E7%94%B1/">
+                                <span class="chip bg-color">自由</span>
                             </a>
                         
                     </div>
@@ -351,8 +359,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E6%95%88%E7%8E%87%E7%94%9F%E6%B4%BB/" class="post-category">
-                                效率生活
+                            <a href="/categories/%E8%AF%BB%E4%B9%A6%E6%84%9F%E6%82%9F/" class="post-category">
+                                读书感悟
                             </a>
                         
                     </div>
@@ -364,7 +372,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-05-22
+                    2022-10-16
                 </div>
                 
 
@@ -373,14 +381,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    2.4k
+                    2.7k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    9 分
+                    8 分
                 </div>
                 
 
@@ -400,193 +408,81 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>每天看着不断推送的手机消息，明知道其中有价值的并不多，但是又怕错过有价值的信息，这种心态在当今是一种很普遍的心态。因此，面对这种局面，<a target="_blank" rel="noopener" href="https://www.tmtpost.com/5947407.html">如何摆脱海量信息的冲击和无价值信息的禁锢</a>，是面对的一个艰巨的挑战。之前看到一篇文章——<a target="_blank" rel="noopener" href="https://catcoding.me/p/get-better-info/">优化自己的信息源</a>，建议主动获取信息。回想我的信息管理方法，差不多也是按照这个思路来的，一般是：</p>
-<ul>
-<li>收集：初步加上标签和分类；</li>
-<li>预处理：检视阅读，找出其中要点；</li>
-<li>深度阅读：阅读，加上摘要和思考内容；</li>
-</ul>
-<p>最后这些标注和内容都汇总到我的notion数据库中，但是逐渐发现缺乏回顾的环节，手动去获取这些积累的信息，也存在实际操作性不强的问题，<a target="_blank" rel="noopener" href="https://sspai.com/post/71518">我是如何艰难地克服「效率成瘾」的？</a>建议我们要自动化一些操作来提升效率。</p>
-<p>因此，我希望通过自动化的方法来回顾我看过和思考的内容。</p>
-<h1 id="方案"><a href="#方案" class="headerlink" title="方案"></a>方案</h1><h2 id="整体设计"><a href="#整体设计" class="headerlink" title="整体设计"></a>整体设计</h2><ol>
-<li>Notion API自动化获取信息；</li>
-<li>Github Actions提供workflow；</li>
-<li>微信接收——Notion打开；</li>
-</ol>
-<h3 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h3><ol>
-<li>信息存储在Notion中，因此使用其提供的API实现自动化的获取；</li>
-<li>具体的回顾方式：每天定时发送，因此需要事件触发机制——定时周期发送，这种实现方法有很多，本文采用Github Actions，因为免费且可用性很强；</li>
-<li>接收方式：微信接收最方面，但是其SDK存在一些麻烦，因此一种间接的方式是通过发邮件到QQ邮箱，然后在微信中接收，然后利用默认浏览器打开Notion的链接；</li>
-</ol>
-<h1 id="具体过程"><a href="#具体过程" class="headerlink" title="具体过程"></a>具体过程</h1><h2 id="Notion-API"><a href="#Notion-API" class="headerlink" title="Notion API"></a>Notion API</h2><blockquote>
-<p>本文不会介绍Notion。</p>
+                <p>这本书是《邻家的百万富翁》的作者搜集的材料，他的儿子写的，因为在刚要写这本书时，因为车祸去世了，人生总有一些遗憾，所幸这本书还出版了。</p>
+<p>当我读完了《邻家的百万富翁》后，按照作者找也发现了这本书，从名字来看，这本书显然比之前的书的鸡汤味还要浓，尤其是在当今的社会中，切中人们的要害，但是如果想从这本书中获得快速致富的秘诀，恐怕要失望了。</p>
+<p>另外，一个疑问是：既然是一个作者写的，读完《邻家的百万富翁》是否还有必要读这本书，我读完的答案是——值得读。</p>
+<h1 id="本书要回答的核心问题"><a href="#本书要回答的核心问题" class="headerlink" title="本书要回答的核心问题"></a>本书要回答的核心问题</h1><p>《邻家的百万富翁》是在1996年出版的，现在已经快要过去30年了，时代在变化，《邻家的百万富翁》中提到的那些致富的行为方式，和策略是否还有效？简单说，这些是否还能帮人们致富？</p>
+<p>作者的答案，简单明了：<strong>虽然社会在发展，但是数据显示，过去的那些行为方式：节俭、努力工作、克制欲望，仍然可以让人们踏入财富自由的大门；即便存在一些困难，但仍然是可能的。</strong></p>
+<blockquote>
+<p>我们最新的研究和参考数据表明推动财富积累的行为、习惯和生活方式在过去20年没有发生改变。它们独立于时代发展带来的经济、社会或科技问题。我们发现，即使在非富裕阶层，这些特征也会使善于将收入转换成财富者脱颖而出。</p>
 </blockquote>
-<p>这里<a target="_blank" rel="noopener" href="https://developers.notion.com/reference/post-database-query">使用Notion API来查询数据库</a>。其中注意使用的是filter和sort。其中需要考虑的问题是：</p>
+<h1 id="与《邻家的百万富翁》的关系"><a href="#与《邻家的百万富翁》的关系" class="headerlink" title="与《邻家的百万富翁》的关系"></a>与《邻家的百万富翁》的关系</h1><p>本书与《邻家的百万富翁》在时间上存在承接的关系，它们都在探讨相同的问题，区别在于：在不同的时空背景下。</p>
+<p>因此，本书中提到的很多内容在《邻家》中已经提到过，只不过是在数据上有了更新，从而回答本文开篇中提到的那个问题。因此，如果读了《邻家》，并且与作者的认知相同，如果时间有限，可以速读。</p>
+<p>但是，我在时间闲暇中，完全读完了这本书，里边的内容，相比于《邻家》，将逻辑阐述地更加清晰。书中分别从几个方面阐述了百万富翁的画像，以及他们做对了什么，让他们成为富翁。</p>
+<p>首先是，富豪们什么样：</p>
 <ul>
-<li>查询API endpoints的方法；<ul>
-<li><a target="_blank" rel="noopener" href="https://ralphjsmit.com/api-endpoint-webhook-github-actions">在workflow中使用curl</a>：简单、直接，但是不能进行复杂逻辑的操作，比如生成随机数；</li>
-<li>使用JavaScript查询：这个可以直接用原生js查询，也可以<a target="_blank" rel="noopener" href="https://github.com/makenotion/notion-sdk-js">使用Notion提供的SDK</a>。</li>
+<li>第1章：强调<strong>普通</strong>的百万富翁；</li>
 </ul>
-</li>
-<li>API响应结果的解析<ul>
-<li>这个需要进行测试，我感觉Notion给出的API文档说的不够清楚，需要自己去试，可能会出现很多问题；</li>
-<li>这里我使用postman进行接口的测试；</li>
-<li>还有一个要吐槽的是：Notion API中好像没有获取整篇文档的接口和选择，只能获取page的url；</li>
-</ul>
-</li>
-</ul>
-<h2 id="Github-Actions"><a href="#Github-Actions" class="headerlink" title="Github Actions"></a>Github Actions</h2><h3 id="1-触发事件"><a href="#1-触发事件" class="headerlink" title="1. 触发事件"></a>1. 触发事件</h3><ol>
-<li>手动出发：便于调试；</li>
-<li>定时触发：<a target="_blank" rel="noopener" href="https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#schedule">schedule</a> 其中需要crontab表达式，不太了解的可以参考<a target="_blank" rel="noopener" href="https://crontab.guru/">这里</a>。</li>
-</ol>
-<h3 id="2-设计actions"><a href="#2-设计actions" class="headerlink" title="2. 设计actions"></a>2. 设计actions</h3><p>本文设计了两个workflow，其实也不一定这样设计，主要我是为了多了解一下Github Actions的使用，如果你觉得麻烦可以放到一个workflow里，说到这里，想起之前看到的一篇文章——<a target="_blank" rel="noopener" href="https://juejin.cn/post/6898953413250252814">新技术学习不完全指北：以 Rust 为例</a>。其中有一个观点，<strong>超纲训练是巩固知识的可靠方式，</strong>我这里也算超纲训练一下。</p>
-<p>第一个workflow用来获取Notion中的信息，使用Notion提供的JavaScript SDK实现，具体包括：</p>
+<p>之后，根据调研，作者驳斥人们对富豪的固有印象：</p>
 <ul>
-<li>查询Notion database，并根据属性过滤和排序文章列表，以实现随机获取文章；</li>
-<li>生成文章摘要模板，用于后续的邮件发送；</li>
+<li>第2章：收入高，不代表财富高；</li>
+<li>第3章：积累财富的前提是，尊重金钱；</li>
 </ul>
-<p>第二个workflow主要是利用上一个workflow生成的信息并发送邮件，其中需要实现：</p>
+<p>最后，总结了富豪们的行为模式，以给读者以启发：</p>
 <ul>
-<li>编排不同的jobs；</li>
-<li>获取jobs之间共享的信息，并发送出去：这里使用<a target="_blank" rel="noopener" href="https://github.com/dawidd6/action-send-mail">已有的actions完成邮件的发送</a>；</li>
+<li>第4章：避免消费主义陷阱；</li>
+<li>第5章：守住财富的技巧；</li>
+<li>第6章：努力工作很重要；</li>
+<li>第7章：投资必不可少；</li>
 </ul>
-<h1 id="技术细节"><a href="#技术细节" class="headerlink" title="技术细节"></a>技术细节</h1><h2 id="重用workflow"><a href="#重用workflow" class="headerlink" title="重用workflow"></a>重用workflow</h2><p>由于本文设计了两个workflows，从程序设计的角度看，其实是为了解耦以实现重用已有的workflow。类似于函数的设计，需要遵从一定的规范，比如：为了安全性，有些函数通过加限定符规定只能被同一个模块下的函数调用。Github Actions中也有类似的规定，与其说这些workflow像函数，不如说它们更像RPC。每个workflow都可以包含一个或者多个jobs，也就可以视为一个或者多个进程。</p>
-<p>为了重用可共享的workflow，要求：</p>
-<ul>
-<li>需要复用的workflow支持 <code>workflow_call</code> 出发事件；<pre class=" language-yaml"><code class="language-yaml"><span class="token key atrule">name</span><span class="token punctuation">:</span> notion<span class="token punctuation">-</span>article<span class="token punctuation">-</span>query
-
-<span class="token comment" spellcheck="true"># Controls when the workflow will run</span>
-<span class="token key atrule">on</span><span class="token punctuation">:</span>
-  <span class="token key atrule">workflow_call</span><span class="token punctuation">:</span>
-</code></pre>
-</li>
-</ul>
-<p>这样，此workflow才能在别的workflow中使用，该workflow只能在别的workflow的jobs中使用，而不是steps。并且<a target="_blank" rel="noopener" href="https://docs.github.com/en/actions/using-workflows/reusing-workflows#access-to-reusable-workflows">需要满足一定的条件</a>，即如下其一：</p>
-<ul>
-<li>两个workflows需要在同一个目录下；</li>
-<li>被重用的workflow需要存储在共有仓库并且组织允许你使用这些公有仓库；</li>
-</ul>
-<pre class=" language-yaml"><code class="language-yaml"><span class="token key atrule">name</span><span class="token punctuation">:</span> notion<span class="token punctuation">-</span>article<span class="token punctuation">-</span>review
-
-<span class="token key atrule">on</span><span class="token punctuation">:</span>
-  <span class="token key atrule">schedule</span><span class="token punctuation">:</span>
-    <span class="token punctuation">-</span> <span class="token key atrule">cron</span><span class="token punctuation">:</span> <span class="token string">'0 4 * * *'</span>
-  <span class="token key atrule">workflow_dispatch</span><span class="token punctuation">:</span>
-<span class="token key atrule">jobs</span><span class="token punctuation">:</span>
-  <span class="token key atrule">article-query</span><span class="token punctuation">:</span>
-    <span class="token key atrule">uses</span><span class="token punctuation">:</span> ./.github/workflows/notion<span class="token punctuation">-</span>article<span class="token punctuation">-</span>query.yml
-    <span class="token key atrule">secrets</span><span class="token punctuation">:</span> inherit
-  <span class="token key atrule">article-review</span><span class="token punctuation">:</span>
-        <span class="token key atrule">runs-on</span><span class="token punctuation">:</span> ubuntu<span class="token punctuation">-</span>latest
-</code></pre>
-<p>更多复杂的功能可以参考<a target="_blank" rel="noopener" href="https://docs.github.com/en/actions/using-workflows/reusing-workflows">Github Actions的文档</a>。</p>
-<h2 id="jobs之间共享数据"><a href="#jobs之间共享数据" class="headerlink" title="jobs之间共享数据"></a>jobs之间共享数据</h2><p>首先从直觉上来看，不同的jobs可能在不同的虚拟机上，因此通过文件等方式是无法完成数据是共享的，这与RPC也是类似的。照着这个思路来想：</p>
-<ul>
-<li>引入第三方<ul>
-<li>使用缓存服务器：如Redis，在Github Actions可以使用<a target="_blank" rel="noopener" href="https://docs.github.com/en/actions/using-workflows/caching-dependencies-to-speed-up-workflows">Cache</a>，官方提供了可以<a target="_blank" rel="noopener" href="https://github.com/marketplace/actions/cache">直接使用的Cache Action</a>；</li>
-<li>使用文件上传和下载：在Github Actions中<a target="_blank" rel="noopener" href="https://docs.github.com/en/actions/using-workflows/storing-workflow-data-as-artifacts">使用Artifacts</a>实现；</li>
-</ul>
-  两者的区别主要是：<blockquote>
-<p><strong>Caching</strong> is used to re-use data/files between jobs or workflows while <strong>Artifacts</strong> are used to save files after workflow ended.</p>
+<p>我觉得整个脉络很清晰，比之前的《邻家的百万富翁》要清晰，首先是介绍了富翁们都是什么样的；然后引出人们印象中的2个富翁形象，并加以驳斥；然后梳理富翁们的真实情况是什么样的。</p>
+<h1 id="收入高不代表财富高"><a href="#收入高不代表财富高" class="headerlink" title="收入高不代表财富高"></a>收入高不代表财富高</h1><p>在作者看来，这是普通人对富翁最大的偏见。当然，从大样本来说，这里的富翁不包括作者提到的“闪闪发光的富人“，这些人是old money，不用预算和计划，也有花不完的财产，他们只是极其小的部分，但是可能普通人的眼里都是这些人。</p>
+<p>但是，每天朝九晚五上班的人，可能也是隐形的富豪。所以判断的标准取决于一个简单的公式：<code>收入-支出-负债=资产</code>，你的财富看的是资产，不是收入。</p>
+<blockquote>
+<p>如果想要长期积累和维持财富，你必须以一种不同于他人、更有自制力的方法来处理所有的财务管理——支出、储蓄、创收、投资。</p>
 </blockquote>
-  可以参考<a target="_blank" rel="noopener" href="https://levelup.gitconnected.com/github-actions-how-to-share-data-between-jobs-fc1547defc3e">这里</a>。</li>
-<li>workflow执行返回<ul>
-<li>使用命令行：定义jobs的输出可以使用命令行的方式，<a target="_blank" rel="noopener" href="https://docs.github.com/en/actions/using-jobs/defining-outputs-for-jobs">官方直接给出例子</a>，其中的命令是Github Actions专有的命令，可以参考文档 <a target="_blank" rel="noopener" href="https://docs.github.com/en/actions/using-workflows/workflow-commands-for-github-actions">Workflow commands for GitHub Actions</a>，告诉你怎么完成output的设置；<pre class=" language-bash"><code class="language-bash"><span class="token keyword">echo</span> <span class="token string">"::workflow-command parameter1={data},parameter2={data}::{command value}"</span>
-</code></pre>
-  这一点本文没有使用。</li>
-<li>使用JavaScript：这种适合复杂逻辑的场景，本文使用这种方式，通过引入<code>@actions/core</code> 完成输入和输出的设置，本文利用这个实现文章摘要的传递。<pre class=" language-bash"><code class="language-bash">const core <span class="token operator">=</span> require<span class="token punctuation">(</span><span class="token string">"@actions/core"</span><span class="token punctuation">)</span>
-<span class="token keyword">let</span> context <span class="token operator">=</span> `
-  <span class="token operator">&lt;</span>html<span class="token operator">></span>
-   <span class="token operator">&lt;</span>head<span class="token operator">></span>
-    <span class="token operator">&lt;</span>meta http-equiv<span class="token operator">=</span><span class="token string">"Content-Type"</span> content<span class="token operator">=</span><span class="token string">"text/html; charset=utf-8"</span><span class="token operator">></span>
-   <span class="token operator">&lt;</span>/head<span class="token operator">></span>
-    <span class="token operator">&lt;</span>body<span class="token operator">></span>
-      <span class="token operator">&lt;</span>p<span class="token operator">></span>题目：<span class="token variable">${title}</span><span class="token operator">&lt;</span>/p<span class="token operator">></span>
-      <span class="token operator">&lt;</span>p<span class="token operator">></span>标签：<span class="token variable">${tags}</span><span class="token operator">&lt;</span>/p<span class="token operator">></span>
-      <span class="token operator">&lt;</span>p<span class="token operator">></span>总结：<span class="token variable">${summary}</span><span class="token operator">&lt;</span>/p<span class="token operator">></span>
-      <span class="token operator">&lt;</span>p<span class="token operator">></span>链接：<span class="token operator">&lt;</span>a href<span class="token operator">=</span><span class="token string">"<span class="token variable">${url}</span>"</span><span class="token operator">></span>文章内容<span class="token operator">&lt;</span>/a<span class="token operator">></span><span class="token operator">&lt;</span>/p<span class="token operator">></span>
-    <span class="token operator">&lt;</span>/body<span class="token operator">></span>
-  <span class="token operator">&lt;</span>/html<span class="token operator">></span>
-`<span class="token punctuation">;</span>
-core.setOutput<span class="token punctuation">(</span><span class="token string">'article-item'</span>, context<span class="token punctuation">)</span>
-</code></pre>
-  注意，这是一个step中实现的输出，为了在重用的workflow中输出数据，需要将steps中的输出映射到jobs中，如下：<pre class=" language-yaml"><code class="language-yaml"><span class="token key atrule">on</span><span class="token punctuation">:</span>
-  <span class="token key atrule">workflow_call</span><span class="token punctuation">:</span>
-    <span class="token key atrule">outputs</span><span class="token punctuation">:</span>
-      <span class="token key atrule">article-item</span><span class="token punctuation">:</span>
-        <span class="token key atrule">description</span><span class="token punctuation">:</span> <span class="token string">"article items"</span>
-        <span class="token key atrule">value</span><span class="token punctuation">:</span> $<span class="token punctuation">{</span><span class="token punctuation">{</span> jobs.query<span class="token punctuation">-</span>article.outputs.output1 <span class="token punctuation">}</span><span class="token punctuation">}</span>
-<span class="token key atrule">jobs</span><span class="token punctuation">:</span>
-  <span class="token key atrule">query-article</span><span class="token punctuation">:</span>
-    <span class="token key atrule">outputs</span><span class="token punctuation">:</span>
-      <span class="token key atrule">output1</span><span class="token punctuation">:</span> $<span class="token punctuation">{</span><span class="token punctuation">{</span> steps.query<span class="token punctuation">-</span>step.outputs.article<span class="token punctuation">-</span>item <span class="token punctuation">}</span><span class="token punctuation">}</span>
-    <span class="token key atrule">steps</span><span class="token punctuation">:</span>
-      <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> Query Notion Articles
-        <span class="token key atrule">id</span><span class="token punctuation">:</span> query<span class="token punctuation">-</span>step
-                <span class="token comment" spellcheck="true"># 对应上述index.js的执行和输出</span>
-        <span class="token key atrule">run</span><span class="token punctuation">:</span> npm install &amp;&amp; npm run server
-</code></pre>
-  在其他的workflow中使用时，如下：<pre class=" language-yaml"><code class="language-yaml"><span class="token key atrule">jobs</span><span class="token punctuation">:</span>
-  <span class="token key atrule">article-query</span><span class="token punctuation">:</span>
-    <span class="token key atrule">uses</span><span class="token punctuation">:</span> ./.github/workflows/notion<span class="token punctuation">-</span>article<span class="token punctuation">-</span>query.yml
-    <span class="token key atrule">secrets</span><span class="token punctuation">:</span> inherit
-  <span class="token key atrule">article-review</span><span class="token punctuation">:</span>
-    <span class="token key atrule">needs</span><span class="token punctuation">:</span> article<span class="token punctuation">-</span>query
-    <span class="token key atrule">steps</span><span class="token punctuation">:</span>
-      <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> send mail
-        <span class="token key atrule">uses</span><span class="token punctuation">:</span> dawidd6/action<span class="token punctuation">-</span>send<span class="token punctuation">-</span>mail@master
-        <span class="token key atrule">with</span><span class="token punctuation">:</span>
-          <span class="token key atrule">html_body</span><span class="token punctuation">:</span> $<span class="token punctuation">{</span><span class="token punctuation">{</span> needs.article<span class="token punctuation">-</span>query.outputs.article<span class="token punctuation">-</span>item <span class="token punctuation">}</span><span class="token punctuation">}</span>
-</code></pre>
-  其中<code>needs</code> 是用于编排不同的jobs的，后续会说明，直接引用这里使用的workflow并获取对应的输出的参数即可。</li>
+<p>为了实现资产的提升，必须降低支出和负债，提高收入。我见过那些收入5万但是花费3万的人，诚然他们攒了2万（可能并没有），但是如果有合适的计划，他们可以攒下4万。为了与周围的人”合群“，去玩，买不必要的东西，进行一些娱乐活动，换来的是人脉（质疑？）、社交满足感（需要吗？）、不孤独（消除孤独有很多办法），但是牺牲的是什么？我想他们肯定有考虑过这个问题，因为他们也会投资，但是没有长期的计划。</p>
+<p>如果攒下的钱投到资本市场，以每年4%的利率计算，多2万，可以多800块，每年多24万，可以多9600元。有人说这都是小钱，我心底里对这种说法嗤之以鼻，当你有1块钱，看不起1分钱；那么你有100万，也会看不起1万块。当你有难处的时候，你会体会到1万块的价值，可以让你不用看银行工作人员的脸色，和向朋友开口的窘迫。所以，要尊重金钱。</p>
+<h1 id="尊重金钱"><a href="#尊重金钱" class="headerlink" title="尊重金钱"></a>尊重金钱</h1><p>本书中，作者提到要尊重金钱，有以下几个方面：</p>
+<ul>
+<li>为自己的财务决策负责；</li>
+<li>有良好的财务纪律和自制力来管理自己的财务；</li>
+<li>对不尊重金钱的行为表示”冷漠“；<ul>
+<li>警惕”消费主义“陷阱；</li>
 </ul>
 </li>
+<li>不要仇视富人，而是向他们学习；</li>
 </ul>
-<h2 id="编排jobs"><a href="#编排jobs" class="headerlink" title="编排jobs"></a>编排jobs</h2><p>如果没有加限制，不同的jobs之间是独立的，例如上述的两个workflow作为两个jobs使用时，如果不加限制，article-review可能无法获取article-query的article-item结果，因为它可能先执行结束，因此<a target="_blank" rel="noopener" href="https://docs.github.com/en/actions/learn-github-actions/contexts#needs-context">需要 <code>needs</code> 来保证不同的jobs的执行顺序</a>，从而构建一个dependency graph，使得不同的jobs之间可以串行、并行等。</p>
-<p>本文需要保证 article-review 在article-query之后执行，因此需要<code>needs</code>来维护依赖关系。</p>
-<h2 id="注意secrets"><a href="#注意secrets" class="headerlink" title="注意secrets"></a>注意secrets</h2><h3 id="存储secrets"><a href="#存储secrets" class="headerlink" title="存储secrets"></a>存储secrets</h3><p>敏感的信息保证不存在在代码中，Github提供一种不公开的方式，同时还定义了不同的粒度，<a target="_blank" rel="noopener" href="https://docs.github.com/en/actions/security-guides/encrypted-secrets">可以参考具体文档</a>。</p>
-<p><img src="/images/eff/not_git/secrets.png" alt="Untitled"></p>
-<h3 id="使用secrets"><a href="#使用secrets" class="headerlink" title="使用secrets"></a>使用secrets</h3><p>这些secrets可以作为环境变量在workflow中使用，这里需要使用Github Actions提供的 <code>secrets</code> context实现，<a target="_blank" rel="noopener" href="https://docs.github.com/en/actions/security-guides/encrypted-secrets#using-encrypted-secrets-in-a-workflow">具体参考文档</a>，代码如下：</p>
-<pre class=" language-yaml"><code class="language-yaml"><span class="token key atrule">name</span><span class="token punctuation">:</span> Query Notion Articles
-    <span class="token key atrule">id</span><span class="token punctuation">:</span> query<span class="token punctuation">-</span>step
-    <span class="token key atrule">run</span><span class="token punctuation">:</span> npm install &amp;&amp; npm run server
-    <span class="token key atrule">env</span><span class="token punctuation">:</span> 
-      <span class="token comment" spellcheck="true"># Required mail server address:</span>
-      <span class="token key atrule">NOTION_API_KEY</span><span class="token punctuation">:</span> $<span class="token punctuation">{</span><span class="token punctuation">{</span> secrets.NOTION_API_KEY <span class="token punctuation">}</span><span class="token punctuation">}</span>
-      <span class="token comment" spellcheck="true"># Required mail server port:</span>
-      <span class="token key atrule">DATABASE_ID</span><span class="token punctuation">:</span> $<span class="token punctuation">{</span><span class="token punctuation">{</span> secrets.ARTICLE_DATABASE_ID <span class="token punctuation">}</span><span class="token punctuation">}</span>
-</code></pre>
-<h3 id="不同workflow之间传递secrets"><a href="#不同workflow之间传递secrets" class="headerlink" title="不同workflow之间传递secrets"></a>不同workflow之间传递secrets</h3><p>这个问题可能很少有人提到，我在构建的时候遇到这个问题，在重用已有的workflow时，如果也存在secrets需要保密，需要在调用workflow中声明引用的workflow将集成本workflow下的所有secrets，操作如下：</p>
-<pre class=" language-yaml"><code class="language-yaml"><span class="token key atrule">jobs</span><span class="token punctuation">:</span>
-  <span class="token key atrule">article-query</span><span class="token punctuation">:</span>
-    <span class="token key atrule">uses</span><span class="token punctuation">:</span> ./.github/workflows/notion<span class="token punctuation">-</span>article<span class="token punctuation">-</span>query.yml
-    <span class="token key atrule">secrets</span><span class="token punctuation">:</span> inherit
- 
-  <span class="token key atrule">article-review</span><span class="token punctuation">:</span>
-        <span class="token key atrule">runs-on</span><span class="token punctuation">:</span> ubuntu<span class="token punctuation">-</span>latest
-</code></pre>
-<p>具体细节可以<a target="_blank" rel="noopener" href="https://docs.github.com/en/actions/using-workflows/reusing-workflows#passing-inputs-and-secrets-to-a-reusable-workflow">参考文档</a>。</p>
-<h2 id="邮件模板"><a href="#邮件模板" class="headerlink" title="邮件模板"></a>邮件模板</h2><p>本文只是设计了一个简单文章摘要，包括：</p>
+<p>有人说，钱不是攒出来的，而是赚出来的，如果下次有人这么说，可以给他一个白眼然后走掉，因为要不他是”闪闪发光的富人“，这样的人没有可比性；要不他账户上没有多少钱，小心跟你借钱。本书通篇都在强调一个观点——运用强大的自制力来节俭、储蓄、投资，尤其是当你是一个普通人时，储蓄是必须的，甚至是最重要的，就像松鼠为冬天储备粮食一样，才能避免被冻死。</p>
+<p>最后一点在之前的书中着墨较少，但是本书中讲了很多，甚至还提到了一个里奇先生对富人充满仇恨。我想提一下这一点，我承认这种现象的出现不是没有原因的，一些富豪确实做了一些伤害平民、社会和国家的事情，但是普通人对这一切无法改变，我想作者的意思更多的是强调，为什么不从他们身上学习那些优点呢？如果只看到别人的缺点，不仅影响心情，总是愤世嫉俗，还会停止进步。</p>
+<p>那么这些富人有什么优点？对国家来说， 他们消费多，纳税多，国内总是对各种茅台、高档消费品进行价格管制，但是也挡不住大家的购买热情，我觉得还是放开了好，这种商品的消费者也不会因为高了1000多块就不买了，不是它的消费者，也不会因为价格管制就不断消费。如果放开了，有人买，价格高，纳税多，茅台的普通工作人员的薪资也能上涨，所以价格管制了是啥，想来想去，只有普通人对富翁们的嫉妒心吧！</p>
+<p>对个人来说，人们只看到马斯克是世界首富和那些花边新闻，看不到他为了管理企业付出的努力，而这些努力更值得我们看到，因为这是与我们有关的事情，而不是那些花边新闻。</p>
+<h1 id="投资的那些事儿"><a href="#投资的那些事儿" class="headerlink" title="投资的那些事儿"></a>投资的那些事儿</h1><p>本书相比于《邻家》新增的一个主题，就是投资。</p>
+<p>作者在书中对于投资陈述了几点原则：</p>
 <ul>
-<li>题目</li>
-<li>标签</li>
-<li>总结</li>
-<li>文章内容的url；</li>
-</ul>
-<p>一种锦上添花的操作是使用HTML Email，<a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2013/06/html_email.html">阮一峰专门针对这个写了一篇文章</a>，可以参考。</p>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>整个项目的代码在<a target="_blank" rel="noopener" href="https://github.com/limeya/NotionReview">仓库</a>，最终的结果如下：</p>
-<p><img src="/images/eff/not_git/result.png" alt="Untitled"></p>
-<p>总的来看，这个过程：</p>
-<ul>
-<li>熟悉了Notion API和Github Actions的操作；</li>
-<li>打开了Github Actions的有趣的世界，有很多的项目可以借鉴：<ul>
-<li><a target="_blank" rel="noopener" href="https://blog.owenyoung.com/zh/posts/actionsflow/">Actionsflow，也可以替代Github Actions实现workflow</a><strong><strong>。</strong></strong></li>
-<li><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1909652">自动同步博客文章到Github</a>，这个后边准备加入到我的仓库中；</li>
-<li><a target="_blank" rel="noopener" href="https://sspai.com/post/73188">整理Newsletter</a>；</li>
+<li>谨慎对待投资，拿出客观的时间研究，像是对待工作一样；<ul>
+<li>了解你的目标和自己本身，因为风险是自己不知道自己不知道什么，所以会无所畏惧；</li>
 </ul>
 </li>
-<li>更大的收获，应该是让自己看过的和思考的内容不再堆在某个充满尘土的角落里，让知识和思想流动起来！</li>
+<li>分配资源时，不要随波逐流；<ul>
+<li>学习一下行为金融学；</li>
+<li>好的时候稳如泰山，不好的时候坚定不移；</li>
 </ul>
+</li>
+<li>不要轻易相信那些所谓的“理财顾问”；</li>
+<li>舍得花钱购买“有价值”的建议；</li>
+<li>多样化配置资产；</li>
+</ul>
+<p>这些原则即便是经过再长的时候也不过时，其中其他的原则我自己还坚持地不错，但是其中对于花钱购买“有价值的建议，我觉得自己做的还不够。我觉得这一点跟合理消费是一致的，合理消费不是只买便宜的东西，而是买合适的东西，我可以买3万的笔记本，也可以为了节省公交钱走回家，两者并不冲突，合适最好。</p>
+<p>同样的，不要相信“理财顾问”，也是有道理的，<strong>永远不要轻易听那些从向你提供建议的过程中获得佣金的人的意见</strong>，例如：不要向交易员询问是否要买卖，不要向理发师问是否要理发。但是，也不是所有的意见都是无价值的，但是如何判断是否有价值需要自己的知识背景，这也是需要将投资作为工作看待的原因。</p>
+<p>那么，如何花钱买“有价值”的意见呢？不要看结论，看过程，看顾问的数据分析过程，逻辑是否严谨，然后从这个过程中自己得出结论。我觉得是正确的方式。专业的人做专业的事情，当意见合理且有用，应该得到丰厚的回报，这是对知识的尊重。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>本书总的来说，是对《邻家》的进一步阐述，其中提到的很多内容在《邻家》已经提到，本文中选了我觉得比较新的部分进行了阐述：</p>
+<ul>
+<li>收入不等于财富；</li>
+<li>尊重金钱；</li>
+<li>投资要谨慎；</li>
+</ul>
+<p>书中的部分内容和我已有的知识结构有一些已经建立了联系，还有一些内容是新增的，我觉得总体看是一本好书，尤其是对那些经常看抖音快速致富秘诀的人来说。</p>
 
                 
             </div>
@@ -613,7 +509,7 @@ core.setOutput<span class="token punctuation">(</span><span class="token string"
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://limeya.github.io/2022/05/22/xiao-lu-sheng-huo/li-yong-notion-api-github-actions-hui-gu-yue-du-de-wen-zhang/">https://limeya.github.io/2022/05/22/xiao-lu-sheng-huo/li-yong-notion-api-github-actions-hui-gu-yue-du-de-wen-zhang/</a>
+                    <a href="https://limeya.github.io/2022/10/16/du-shu-gan-wu/lin-jia-de-bai-wan-fu-weng-men-ru-he-cai-fu-zi-you-de/">https://limeya.github.io/2022/10/16/du-shu-gan-wu/lin-jia-de-bai-wan-fu-weng-men-ru-he-cai-fu-zi-you-de/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -651,12 +547,20 @@ core.setOutput<span class="token punctuation">(</span><span class="token string"
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/Notion/">
-                                    <span class="chip bg-color">Notion</span>
+                                <a href="/tags/%E8%87%B4%E5%AF%8C/">
+                                    <span class="chip bg-color">致富</span>
                                 </a>
                             
-                                <a href="/tags/Github-Actions/">
-                                    <span class="chip bg-color">Github Actions</span>
+                                <a href="/tags/%E6%8A%95%E8%B5%84/">
+                                    <span class="chip bg-color">投资</span>
+                                </a>
+                            
+                                <a href="/tags/%E8%AE%A1%E5%88%92/">
+                                    <span class="chip bg-color">计划</span>
+                                </a>
+                            
+                                <a href="/tags/%E8%87%AA%E7%94%B1/">
+                                    <span class="chip bg-color">自由</span>
                                 </a>
                             
                         </div>
@@ -706,31 +610,31 @@ core.setOutput<span class="token punctuation">(</span><span class="token string"
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2022/07/15/du-shu-gan-wu/ri-ben-chu-liao-wen-ti-dong-jing-pin-kun-nu-zi-cheng-xian-de-she-hui-xian-xiang/">
+                <a href="/2022/10/16/ji-suan-ji-ji-chu/ji-suan-ji-de-cun-chu-qi-ceng-ci-jie-gou/ji-suan-ji-de-cun-chu-qi-ceng-ci-jie-gou/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="日本出了问题：《东京贫困女子》呈现的社会现象">
+                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="计算机的存储器层次结构">
                         
-                        <span class="card-title">日本出了问题：《东京贫困女子》呈现的社会现象</span>
+                        <span class="card-title">计算机的存储器层次结构</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            从日本的贫困女子经历的悲惨遭遇，管中窥豹当前日本社会的现状。
+                            介绍计算机中的不同存储设备构成的多级层次结构，从而提升访问性能。
                         
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-07-15
+                            <i class="far fa-clock fa-fw icon-date"></i>2022-10-16
                         </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E8%AF%BB%E4%B9%A6%E6%84%9F%E6%82%9F/" class="post-category">
-                                    读书感悟
+                            <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" class="post-category">
+                                    计算机基础
                                 </a>
                             
                             
@@ -740,16 +644,24 @@ core.setOutput<span class="token punctuation">(</span><span class="token string"
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E7%BB%8F%E6%B5%8E/">
-                        <span class="chip bg-color">经济</span>
+                    <a href="/tags/%E5%AD%98%E5%82%A8%E5%99%A8/">
+                        <span class="chip bg-color">存储器</span>
                     </a>
                     
-                    <a href="/tags/%E7%A4%BE%E4%BC%9A/">
-                        <span class="chip bg-color">社会</span>
+                    <a href="/tags/memory-hierarchy/">
+                        <span class="chip bg-color">memory hierarchy</span>
                     </a>
                     
-                    <a href="/tags/%E8%B4%AB%E5%9B%B0/">
-                        <span class="chip bg-color">贫困</span>
+                    <a href="/tags/memory/">
+                        <span class="chip bg-color">memory</span>
+                    </a>
+                    
+                    <a href="/tags/cache/">
+                        <span class="chip bg-color">cache</span>
+                    </a>
+                    
+                    <a href="/tags/disk/">
+                        <span class="chip bg-color">disk</span>
                     </a>
                     
                 </div>
@@ -763,24 +675,24 @@ core.setOutput<span class="token punctuation">(</span><span class="token string"
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2022/05/06/ji-suan-ji-tu-xing-xue/games/games101-rasterization-shadow-mapping/">
+                <a href="/2022/10/14/ji-suan-ji-tu-xing-xue/vulkan/vulkan-de-li-shi-ji-te-dian/vulkan-de-li-shi-ji-te-dian/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="GAMES101：Rasterization - Shadow Mapping">
+                        <img src="/medias/featureimages/23.jpg" class="responsive-img" alt="述说Vulkan的历史及特点">
                         
-                        <span class="card-title">GAMES101：Rasterization - Shadow Mapping</span>
+                        <span class="card-title">述说Vulkan的历史及特点</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            介绍使用光栅化的方法生成阴影。
+                            总结Vulkan的发展历史，以及与之前图形API的特点对比。
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-05-06
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-10-14
                             </span>
                         <span class="publish-author">
                             
@@ -797,16 +709,12 @@ core.setOutput<span class="token punctuation">(</span><span class="token string"
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E5%85%89%E6%A0%85%E5%8C%96/">
-                        <span class="chip bg-color">光栅化</span>
+                    <a href="/tags/Vulkan/">
+                        <span class="chip bg-color">Vulkan</span>
                     </a>
                     
-                    <a href="/tags/Rasterization/">
-                        <span class="chip bg-color">Rasterization</span>
-                    </a>
-                    
-                    <a href="/tags/Shadow-Mapping/">
-                        <span class="chip bg-color">Shadow Mapping</span>
+                    <a href="/tags/OpenGL/">
+                        <span class="chip bg-color">OpenGL</span>
                     </a>
                     
                 </div>
