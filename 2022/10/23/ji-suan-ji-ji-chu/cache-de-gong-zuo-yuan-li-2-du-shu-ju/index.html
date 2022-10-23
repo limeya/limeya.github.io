@@ -1,0 +1,1300 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="Cache的工作原理（2）：读数据, LifeHit">
+    <meta name="description" content="介绍对于cache的读数据过程，以及容量计算、内存对齐等一些注意事项。">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0V4SV7JK5F"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+    gtag('config', 'G-0V4SV7JK5F');
+</script>
+
+
+    <title>Cache的工作原理（2）：读数据 | LifeHit</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="LifeHit" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">LifeHit</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">LifeHit</div>
+        <div class="logo-desc">
+            
+            世界上只有一种真正的英雄主义，就是认清了生活的真相后还依然热爱它
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/14.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">Cache的工作原理（2）：读数据</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/memory/">
+                                <span class="chip bg-color">memory</span>
+                            </a>
+                        
+                            <a href="/tags/cache/">
+                                <span class="chip bg-color">cache</span>
+                            </a>
+                        
+                            <a href="/tags/%E5%86%85%E5%AD%98%E5%AF%B9%E9%BD%90/">
+                                <span class="chip bg-color">内存对齐</span>
+                            </a>
+                        
+                            <a href="/tags/cache-capacity/">
+                                <span class="chip bg-color">cache capacity</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" class="post-category">
+                                计算机基础
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2022-10-23
+                </div>
+                
+
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    2.7k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    10 分
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="Cache内部的逻辑结构"><a href="#Cache内部的逻辑结构" class="headerlink" title="Cache内部的逻辑结构"></a>Cache内部的逻辑结构</h1><p>回顾之前的内容，为了确定cache中是否有数据以及如何找到这些数据，在cache中已有存在：</p>
+<ul>
+<li>valid bit：判断cache line中是否有来自内存的数据；</li>
+<li>tag 字段：标识main memory的高位地址；</li>
+<li>index：标识cache line的序号；</li>
+</ul>
+<p>从硬件上来说cache主要是SRAM和控制逻辑电路组成，但是其内部的逻辑结构可以看成是上述3者，加上数据字段，构成一个cache line，如下所示。</p>
+<p><img src="/images/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/Cache%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%EF%BC%882%EF%BC%89%EF%BC%9A%E8%AF%BB%E6%95%B0%E6%8D%AE/1.png" alt="Cache内部的逻辑结构"></p>
+<ul>
+<li>在该图中，cache共有16个cache lines；</li>
+<li>数据段中对应一个block，也是main memory中访问得到数据的最小单位（利用了空间局部性原理），这里一个block是16个字节；</li>
+</ul>
+<h1 id="读数据的简要过程"><a href="#读数据的简要过程" class="headerlink" title="读数据的简要过程"></a>读数据的简要过程</h1><p><img src="/images/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/Cache%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%EF%BC%882%EF%BC%89%EF%BC%9A%E8%AF%BB%E6%95%B0%E6%8D%AE/2.png" alt="读数据的简要过程"></p>
+<p>Cache的简单访问过程如上图所示：</p>
+<ul>
+<li>当数据在cache中，这种情况称为hit，数据直接从cache中返回，这种是最理想的情况，也是最能发挥cache作用的场景；</li>
+<li>当访问的数据不在cache中时，称为miss，此时需要向main memory发起读请求，当得到数据后，注意，此时得到的数据不仅仅是访问的数据，而是包含访问数据的一个连续的序列，之后将cache中的数据更新，并返回读取的数据；</li>
+</ul>
+<h2 id="几个概念"><a href="#几个概念" class="headerlink" title="几个概念"></a>几个概念</h2><ul>
+<li><code>hit rate(hit ratio)</code>: The fraction of memory accesses found in the upper level of the memory hierarchy.<ul>
+<li>这个概念一般用在cache上；</li>
+<li>但是这里定义的很general，例如，理论上，main memory 对于disks也可以看作“cache”, 因此对于main memory也可以计算 hit rate;</li>
+</ul>
+</li>
+<li><code>miss rate</code>: <code>1 - hit rate</code>, the fraction of memory accesses not found in the upper level.</li>
+</ul>
+<p>由于访问速度是memory hierarchy提出的核心诉求之一，因此基于上述两个概念，有几个相关的概念：</p>
+<ul>
+<li><code>Hit time</code> is the time to access the upper level of the memory hierarchy.<ul>
+<li>including the time needed to determine whether the access is a hit or a miss. 即这部分时间也包括比较tag标签和valid bit的时间；</li>
+</ul>
+</li>
+<li><code>miss penalty</code>  is the time required to fetch a block into a level of the memory hierarchy from the lower level, including:<ul>
+<li>the time to access the block,</li>
+<li>transmit it from one level to the other,</li>
+<li>insert it in the level that experienced the miss,</li>
+<li>and then pass the block to the requestor.</li>
+</ul>
+</li>
+</ul>
+<p>相比于miss penalty，hit time很小，因此优化访问性能的主要关注点一般在减小miss penalty。</p>
+<h1 id="读数据过程的具体分析"><a href="#读数据过程的具体分析" class="headerlink" title="读数据过程的具体分析"></a>读数据过程的具体分析</h1><h2 id="举例说明"><a href="#举例说明" class="headerlink" title="举例说明"></a>举例说明</h2><p>当CPU执行如下的汇编代码时，发生了什么？</p>
+<pre class=" language-nasm"><code class="language-nasm">MOV <span class="token register variable">AL</span>, <span class="token operator">[</span><span class="token number">2011H</span><span class="token operator">]</span>
+MOV <span class="token register variable">BL</span>, <span class="token operator">[</span><span class="token number">4011H</span><span class="token operator">]</span>
+MOV <span class="token register variable">CL</span>, <span class="token operator">[</span><span class="token number">3732H</span><span class="token operator">]</span>
+MOV <span class="token register variable">DL</span>, <span class="token operator">[</span><span class="token number">401FH</span><span class="token operator">]</span>
+</code></pre>
+<ul>
+<li>首先要确定汇编指令，这些指令均是将内存地址中的数据移到通用寄存器中；</li>
+<li>确定访问的main memory的地址：<code>MOV AL, [2011H]</code>会直接访问2011H对应的内存地址吗？答案是不会的，因为，cache line在上图中，每个block为16个字节。为了利用空间局部性原理，cache一次要读取一个block——16个字节，因此需要16个字节对齐。因此虽然是将2011H地址上的数据移到AL寄存器上，但是cache发出的地址是2010H（这是16个字节对齐后的地址）。</li>
+</ul>
+<blockquote>
+<p>如何判断地址是否对齐，可以<a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/19190502/how-do-i-check-a-memory-address-is-32-bit-aligned-in-c">参考Stack Overflow中的一个回答</a>。顺便想到，在x86中，word是2个字节对齐的，MIPS中是4个字节对齐的。</p>
+</blockquote>
+<p>根据读操作的具体过程，可以分为以下几种情况。</p>
+<h2 id="miss：分配cache-line"><a href="#miss：分配cache-line" class="headerlink" title="miss：分配cache line"></a>miss：分配cache line</h2><p>在这种情况下，将[2011H]地址变为[2010H]地址，这里怎么理解？2011H地址是一个16进制的数，其中共有16位，也就是内存16位对齐。</p>
+<p>转换为10进制的过程与2进制相同：</p>
+<p>$$<br>2 \times 16^3 + 0 \times 16^2 + 1 \times 16^1 + 1 \times 16^0<br>$$</p>
+<p>要保证16bit对齐，最后一位必须是0，所以这就是[2011H]到[2020H]内存地址转换的具体含义。</p>
+<p><img src="/images/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/Cache%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%EF%BC%882%EF%BC%89%EF%BC%9A%E8%AF%BB%E6%95%B0%E6%8D%AE/3.png" alt="miss：分配cache line"></p>
+<p>cache访问内存的[2010H]地址获取数据，一共得到16bit的数据，就放在cache line的数据单元中，具体的放置规则如下：</p>
+<ol>
+<li>选取哪个cache line？根据倒数第二位，这是一个16进制的数，通过对16取余，正好是该位上对应的数字，恰好可以对应16个cache lines；</li>
+<li>得到对应的cache line后，将数据放入其中，如何获取真实地址[2011H]对应的数据，看最后一位，是当前表项从开始的偏移量位置对应的数据，也就是A1H，返回给CPU即可；</li>
+<li>填充tag：将除了末尾两位之外的其他地址数据放到标签中；</li>
+<li>置valid bit为1；</li>
+</ol>
+<h2 id="miss：替换cache-line"><a href="#miss：替换cache-line" class="headerlink" title="miss：替换cache line"></a>miss：替换cache line</h2><p>当执行<code>MOV BL, [4011H]</code>指令时，发现这个内存地址对应的cache line也是1，但是发现tag部分不同，因此对应不同的内存地址，发生miss，需要去main memory重新读取数据，填充到cache line 1中，新的数据来临，与cache line 1中的数据发生冲突，将其替换即可。</p>
+<p><img src="/images/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/Cache%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%EF%BC%882%EF%BC%89%EF%BC%9A%E8%AF%BB%E6%95%B0%E6%8D%AE/4.png" alt="miss：替换cache line"></p>
+<h2 id="miss：分配新cache-line"><a href="#miss：分配新cache-line" class="headerlink" title="miss：分配新cache line"></a>miss：分配新cache line</h2><p>当同样发生miss时，但是数据访问的内存地址在cache line 的tag中没有出现过，因此没有冲突，直接访问main memory继续访问数据即可。</p>
+<p><img src="/images/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/Cache%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%EF%BC%882%EF%BC%89%EF%BC%9A%E8%AF%BB%E6%95%B0%E6%8D%AE/5.png" alt="miss：分配新cache line"></p>
+<h2 id="hit：读取cache-line"><a href="#hit：读取cache-line" class="headerlink" title="hit：读取cache line"></a>hit：读取cache line</h2><p>最好的情况是命中，按照之前写入的规则读取对应的数据返回。访问内存地址[401FH]对应的数据时，发现在cache line 1中出现index 和tag同时匹配，因为内存地址为concat(tag, index)，然后读取[4010H]对应的数据，再加上偏移量，得到BFH。</p>
+<p><img src="/images/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/Cache%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%EF%BC%882%EF%BC%89%EF%BC%9A%E8%AF%BB%E6%95%B0%E6%8D%AE/6.png" alt="hit：读取cache line"></p>
+<h1 id="澄清：内存与cache的地址对应关系"><a href="#澄清：内存与cache的地址对应关系" class="headerlink" title="澄清：内存与cache的地址对应关系"></a>澄清：内存与cache的地址对应关系</h1><p>前面我们说到当CPU发出访问数据的请求时，直接给出的是内存地址，这些内存地址可以通过拆分对应到cache的位置上，如下：</p>
+<p><img src="/images/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/Cache%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%EF%BC%882%EF%BC%89%EF%BC%9A%E8%AF%BB%E6%95%B0%E6%8D%AE/7.png" alt="cache与内存地址的简要对应的关系"></p>
+<p>但是，因为有<strong>内存地址对齐机制</strong>的存在，上述的地址转换并不完全准确。在MIPS中，当lh读半个word（MIPS中一个word为4个字节），存储器的地址必须是2的整数倍（地址结尾必须有1个0）； lw 读一个word时，存储器的地址必须是4的整数倍（地址结尾必须有2个0）。</p>
+<p>我们以MIPS访问一个word为例进行说明，因为它也是以一个word，4个bytes实现地址对齐的。对于32位地址的情况，内存地址如下：</p>
+<p><img src="/images/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/Cache%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%EF%BC%882%EF%BC%89%EF%BC%9A%E8%AF%BB%E6%95%B0%E6%8D%AE/8.png" alt="MIPS内存地址对齐"></p>
+<p>在前面提到过，为了更好地利用空间局部性原理，cache从main memory中读取数据时，一般按照以block为单位进行读取，一个block填入cache line中，而block中一般有若干个words。</p>
+<p>基于这种情况，如何将main memory的地址对应到cache中呢？应该是分为以下几个步骤：</p>
+<ol>
+<li>确定index字段，确定具体的cache line;</li>
+<li>确定cache line的tag字段，是否一致； 到此为止已经确定了一个cache line中block；</li>
+<li>之后，需要确定是block中第几个word；</li>
+<li>更进一步，因为一个word是4个字节，如果要访问一个字节的数据，还需要确定偏移量，这个偏移量一般是固定的，与对齐的方式有关，例如MIPS中是4个字节对齐，x86是2个字节对齐；</li>
+</ol>
+<p>到此为止，算是比较完整的main memory地址映射到cache上。</p>
+<p>cache line中的block大小可以变化，扩大容量或者缩小容量，但是这种操作会影响其他字段，比如index或者tag字段。如下举几个例子：</p>
+<h2 id="例1：tag-10，index-10"><a href="#例1：tag-10，index-10" class="headerlink" title="例1：tag=10，index=10"></a>例1：tag=10，index=10</h2><p><img src="/images/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/Cache%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%EF%BC%882%EF%BC%89%EF%BC%9A%E8%AF%BB%E6%95%B0%E6%8D%AE/9.png" alt="tag=10，index=10"></p>
+<p>这种情况下，32位地址中用于决定选择哪个word的bit只有10个，即能寻址 $2^{10}$ 个words，每个word都可以通过byte offset在一个word内部确定选择哪个byte，来应对MIPS中lh等指令。</p>
+<h2 id="例2：tag-10，index-5"><a href="#例2：tag-10，index-5" class="headerlink" title="例2：tag=10，index=5"></a>例2：tag=10，index=5</h2><p><img src="/images/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/Cache%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%EF%BC%882%EF%BC%89%EF%BC%9A%E8%AF%BB%E6%95%B0%E6%8D%AE/10.png" alt="tag=10，index=5"></p>
+<p>这种情况下，32位地址中用于决定选择哪个word的bit有15个，即能寻址 $2^{15}$ 个words，但是此时index数量减少，因此这种情景下，cache line内部的block容量增加了，但是整体的cache lines数量减少了。</p>
+<h1 id="减少miss——扩充cache-capacity？"><a href="#减少miss——扩充cache-capacity？" class="headerlink" title="减少miss——扩充cache capacity？"></a>减少miss——扩充cache capacity？</h1><h2 id="如何计算cache-capacity"><a href="#如何计算cache-capacity" class="headerlink" title="如何计算cache capacity"></a>如何计算cache capacity</h2><p>计算cache的容量，需要了解如何将main memory的地址放到cache中。</p>
+<p>举例说明，如下场景中：</p>
+<ul>
+<li>32位地址；</li>
+<li>direct-mapped cache structure</li>
+<li>cache中共有 $2^n$ 个lines，也说明每个cache line中的index字段共有n个bits；</li>
+<li>每个cache line中有一个block，每个block能存储 $2^m$ 个words，说明用于寻址words的地址中的位数有m位。</li>
+</ul>
+<p>根据这些信息，我们可以计算tag字段有几个bits：</p>
+<p>$$<br>32 - ( n + m + 2)<br>$$</p>
+<ul>
+<li>n为index 的bits;</li>
+<li>m为寻址words的bits;</li>
+<li>2是byte offset的bits，MIPS中固定为2个bits；</li>
+</ul>
+<p>在一个direct-mapped cache中所有的<strong>bits</strong>如下：</p>
+<p>$$<br>2^n \times (\text{block size} + \text{tag size} + \text{valid field size})<br>$$</p>
+<ul>
+<li>block size  $$<br>  2^m \times 32<br>  $$</li>
+</ul>
+<p>因此，所有的bits为：</p>
+<p>$$<br>2^n \times (2^m \times 32 + (32 - n - m - 2) + 1)<br>$$</p>
+<p>这个计算结果是cache中所有的bits，但是一般我们只考虑用于存储数据的bits，即：</p>
+<p>$$<br>2^n \times 2^m \times 32<br>$$</p>
+<p>根据这个计算公式，可以知道上述的例1和例2中的容量（只有数据的）分别为：</p>
+<p>$$<br>2^{10} \times 2^{10} \times 32<br>$$</p>
+<p>$$<br>2^5 \times 2^{15} \times 32<br>$$</p>
+<p>均为4MiB的cache。</p>
+<h2 id="分析cache-capacity的影响"><a href="#分析cache-capacity的影响" class="headerlink" title="分析cache capacity的影响"></a>分析cache capacity的影响</h2><p>在读数据的具体过程中，发生miss的情况，非常影响访问性能，那么从硬件的角度来看，增加cache的容量，使得main memory中的多数尽可能的驻存在cache中，理论上可以降低miss rate，也是空间局部性的体现。</p>
+<p>但是，情况并不是我们理想的那样。当cache line中的block size增加后，会发生什么？</p>
+<p>一个cache line中存储的words数量增加，但是从上述的例1和例2中可以看出，block size增加（即用于寻址的bits增加），对应的cache lines的数量或者tag的位数就会减少，这导致了对于cache lines的争夺激烈，会发生当一个main memory的数据进入cache后，还未来得及被hit，就已经被新进来的main memory的数据替换，大量发生冲突。</p>
+<p>另外一个是，当block size增加后，miss时引入的性能下降也会增加。即，当发生miss时，需要cache从main memory中读取数据，这个过程在上面提到共2个部分：</p>
+<ul>
+<li>对于block数据中第一个word的定位时间延迟；</li>
+<li>将所有的数据传输到cache；</li>
+</ul>
+<p>因为block size增加，导致传输时间大幅增加，因此<code>miss penalty</code>大幅增加，因此可能会导致block size带来的性能的提升抵不上miss penalty带来的性能下降。</p>
+<p><img src="/images/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/Cache%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%EF%BC%882%EF%BC%89%EF%BC%9A%E8%AF%BB%E6%95%B0%E6%8D%AE/11.png" alt="From Computer Organization and Design"></p>
+<p>从上图看出：</p>
+<ul>
+<li>同样cache size，随着block size的增加，其miss rate先下降之后上升，就是因为上述的原因；</li>
+<li>而cache size的增加，增加的可以是cache lines的数量，这样可以减少冲突，从而减少miss rate.</li>
+</ul>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ol>
+<li><p><a target="_blank" rel="noopener" href="https://www.coursera.org/learn/jisuanji-zucheng/lecture/sYRYl/703-zhu-cun-de-gong-zuo-yuan-li">703-主存的工作原理 - 第七讲 存储层次结构 | Coursera</a></p>
+</li>
+<li><p>Computer Organization and Design : the hardware/software interface</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/20593850/cache-and-memory">Cache and memory</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1727794">一文轻松理解内存对齐</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/381244/purpose-of-memory-alignment">Purpose of memory alignment</a></p>
+</li>
+</ol>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">alex Li</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://limeya.github.io/2022/10/23/ji-suan-ji-ji-chu/cache-de-gong-zuo-yuan-li-2-du-shu-ju/">https://limeya.github.io/2022/10/23/ji-suan-ji-ji-chu/cache-de-gong-zuo-yuan-li-2-du-shu-ju/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">alex Li</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/memory/">
+                                    <span class="chip bg-color">memory</span>
+                                </a>
+                            
+                                <a href="/tags/cache/">
+                                    <span class="chip bg-color">cache</span>
+                                </a>
+                            
+                                <a href="/tags/%E5%86%85%E5%AD%98%E5%AF%B9%E9%BD%90/">
+                                    <span class="chip bg-color">内存对齐</span>
+                                </a>
+                            
+                                <a href="/tags/cache-capacity/">
+                                    <span class="chip bg-color">cache capacity</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
+            <div class="card">
+                <a href="/2022/10/23/ji-suan-ji-ji-chu/cache-de-gong-zuo-yuan-li-2-du-shu-ju/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/14.jpg" class="responsive-img" alt="Cache的工作原理（2）：读数据">
+                        
+                        <span class="card-title">Cache的工作原理（2）：读数据</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            介绍对于cache的读数据过程，以及容量计算、内存对齐等一些注意事项。
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-10-23
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" class="post-category">
+                                    计算机基础
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/memory/">
+                        <span class="chip bg-color">memory</span>
+                    </a>
+                    
+                    <a href="/tags/cache/">
+                        <span class="chip bg-color">cache</span>
+                    </a>
+                    
+                    <a href="/tags/%E5%86%85%E5%AD%98%E5%AF%B9%E9%BD%90/">
+                        <span class="chip bg-color">内存对齐</span>
+                    </a>
+                    
+                    <a href="/tags/cache-capacity/">
+                        <span class="chip bg-color">cache capacity</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2022/10/18/ji-suan-ji-ji-chu/cache-de-gong-zuo-yuan-li-1-ji-ben-jie-shao/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="Cache的工作原理（1）：基本介绍">
+                        
+                        <span class="card-title">Cache的工作原理（1）：基本介绍</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            介绍基本的cache内容和direct-mapped cache structure
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-10-18
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" class="post-category">
+                                    计算机基础
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/memory/">
+                        <span class="chip bg-color">memory</span>
+                    </a>
+                    
+                    <a href="/tags/cache/">
+                        <span class="chip bg-color">cache</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h1, h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h1, h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script>
+    MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+    });
+</script>
+
+
+
+    <footer class="page-footer bg-color">
+    
+        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
+<style>
+    .aplayer .aplayer-lrc p {
+        
+        display: none;
+        
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
+
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        
+        display: none;
+        
+        font-size: 15px;
+        color: #42b983;
+    }
+
+    
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
+        left: -66px !important;
+    }
+
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
+        left: 0px !important;
+    }
+
+    
+</style>
+<div class="">
+    
+    <div class="row">
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="netease"
+                   type="playlist"
+                   id="503838841"
+                   fixed='true'
+                   autoplay='false'
+                   theme='#42b983'
+                   loop='all'
+                   order='random'
+                   preload='auto'
+                   volume='0.7'
+                   list-folded='true'
+        >
+        </meting-js>
+    </div>
+</div>
+
+<script src="/libs/aplayer/APlayer.min.js"></script>
+<script src="/libs/aplayer/Meting.min.js"></script>
+
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 15px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2021-2022</span>
+            
+            <a href="/about" target="_blank">alex Li</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+                &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                        class="white-color">70k</span>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+                <span id="sitetime"> Loading ...</span>
+                <script>
+                    var calcSiteTime = function () {
+                        var seconds = 1000;
+                        var minutes = seconds * 60;
+                        var hours = minutes * 60;
+                        var days = hours * 24;
+                        var years = days * 365;
+                        var today = new Date();
+                        var startYear = "2021";
+                        var startMonth = "11";
+                        var startDate = "13";
+                        var startHour = "20";
+                        var startMinute = "0";
+                        var startSecond = "0";
+                        var todayYear = today.getFullYear();
+                        var todayMonth = today.getMonth() + 1;
+                        var todayDate = today.getDate();
+                        var todayHour = today.getHours();
+                        var todayMinute = today.getMinutes();
+                        var todaySecond = today.getSeconds();
+                        var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                        var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                        var diff = t2 - t1;
+                        var diffYears = Math.floor(diff / years);
+                        var diffDays = Math.floor((diff / days) - diffYears * 365);
+
+                        // 区分是否有年份.
+                        var language = 'zh-CN';
+                        if (startYear === String(todayYear)) {
+                            document.getElementById("year").innerHTML = todayYear;
+                            var daysTip = 'This site has been running for ' + diffDays + ' days';
+                            if (language === 'zh-CN') {
+                                daysTip = '本站已运行 ' + diffDays + ' 天';
+                            } else if (language === 'zh-HK') {
+                                daysTip = '本站已運行 ' + diffDays + ' 天';
+                            }
+                            document.getElementById("sitetime").innerHTML = daysTip;
+                        } else {
+                            document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                            var yearsAndDaysTip = 'This site has been running for ' + diffYears + ' years and '
+                                + diffDays + ' days';
+                            if (language === 'zh-CN') {
+                                yearsAndDaysTip = '本站已运行 ' + diffYears + ' 年 ' + diffDays + ' 天';
+                            } else if (language === 'zh-HK') {
+                                yearsAndDaysTip = '本站已運行 ' + diffYears + ' 年 ' + diffDays + ' 天';
+                            }
+                            document.getElementById("sitetime").innerHTML = yearsAndDaysTip;
+                        }
+                    }
+
+                    calcSiteTime();
+                </script>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/limeya" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:lmy86263@gmail.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1215869909" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1215869909" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+
+
+    <a href="https://blog.csdn.net/lmy86263" class="tooltipped" target="_blank" data-tooltip="访问csdn" data-position="top" data-delay="50">
+		<i class="fab fa-blogger"></i>
+    </a>
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    
+
+    
+
+    <!-- 雪花特效 -->
+    
+
+    <!-- 鼠标星星特效 -->
+    
+
+     
+        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+        <script src="/libs/others/TencentCaptcha.js"></script>
+        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
+    
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

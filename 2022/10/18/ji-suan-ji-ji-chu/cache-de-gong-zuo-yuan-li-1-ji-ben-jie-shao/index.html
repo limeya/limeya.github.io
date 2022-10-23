@@ -421,7 +421,7 @@
 <p>那么如何建立地址之间的映射关系呢？最简单的方式，是取模。</p>
 <p>$$<br>\text{Block address}  \text{  mod  } \text{Number of blocks in the cache}<br>$$</p>
 <p>如下图：</p>
-<p><img src="/images/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/Cache%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%EF%BC%881%EF%BC%89%EF%BC%9A%E5%9F%BA%E6%9C%AC%E4%BB%8B%E7%BB%8D//2.png" alt="内存地址和cache地址之间的映射"></p>
+<p><img src="/images/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/Cache%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%EF%BC%881%EF%BC%89%EF%BC%9A%E5%9F%BA%E6%9C%AC%E4%BB%8B%E7%BB%8D/2.png" alt="内存地址和cache地址之间的映射"></p>
 <ul>
 <li>cache中有8个blocks(lines);</li>
 <li>因为8个blocks，对应 $2^3$ ，因此所有main memory中的地址低3位相同的数字都会映射到相同的cache地址上；</li>
@@ -573,30 +573,29 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2022/10/18/ji-suan-ji-ji-chu/cache-de-gong-zuo-yuan-li-1-ji-ben-jie-shao/">
+                <a href="/2022/10/23/ji-suan-ji-ji-chu/cache-de-gong-zuo-yuan-li-2-du-shu-ju/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="Cache的工作原理（1）：基本介绍">
+                        <img src="/medias/featureimages/14.jpg" class="responsive-img" alt="Cache的工作原理（2）：读数据">
                         
-                        <span class="card-title">Cache的工作原理（1）：基本介绍</span>
+                        <span class="card-title">Cache的工作原理（2）：读数据</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            介绍基本的cache内容和direct-mapped cache structure
+                            介绍对于cache的读数据过程，以及容量计算、内存对齐等一些注意事项。
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-10-18
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2022-10-23
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -609,7 +608,6 @@
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
@@ -619,6 +617,14 @@
                     
                     <a href="/tags/cache/">
                         <span class="chip bg-color">cache</span>
+                    </a>
+                    
+                    <a href="/tags/%E5%86%85%E5%AD%98%E5%AF%B9%E9%BD%90/">
+                        <span class="chip bg-color">内存对齐</span>
+                    </a>
+                    
+                    <a href="/tags/cache-capacity/">
+                        <span class="chip bg-color">cache capacity</span>
                     </a>
                     
                 </div>
@@ -890,7 +896,7 @@
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">67.3k</span>
+                        class="white-color">70k</span>
             
             
             

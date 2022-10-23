@@ -6,7 +6,7 @@
   <link href="https://limeya.github.io/atom.xml" rel="self"/>
   
   <link href="https://limeya.github.io/"/>
-  <updated>2022-10-18T15:58:54.593Z</updated>
+  <updated>2022-10-23T07:36:19.426Z</updated>
   <id>https://limeya.github.io/</id>
   
   <author>
@@ -17,11 +17,42 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Cache的工作原理（2）：读数据</title>
+    <link href="https://limeya.github.io/2022/10/23/ji-suan-ji-ji-chu/cache-de-gong-zuo-yuan-li-2-du-shu-ju/"/>
+    <id>https://limeya.github.io/2022/10/23/ji-suan-ji-ji-chu/cache-de-gong-zuo-yuan-li-2-du-shu-ju/</id>
+    <published>2022-10-22T16:00:00.000Z</published>
+    <updated>2022-10-23T07:36:19.426Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;Cache内部的逻辑结构&quot;&gt;&lt;a href=&quot;#Cache内部的逻辑结构&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="计算机基础" scheme="https://limeya.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/"/>
+    
+    
+    <category term="memory" scheme="https://limeya.github.io/tags/memory/"/>
+    
+    <category term="cache" scheme="https://limeya.github.io/tags/cache/"/>
+    
+    <category term="内存对齐" scheme="https://limeya.github.io/tags/%E5%86%85%E5%AD%98%E5%AF%B9%E9%BD%90/"/>
+    
+    <category term="cache capacity" scheme="https://limeya.github.io/tags/cache-capacity/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Cache的工作原理（1）：基本介绍</title>
     <link href="https://limeya.github.io/2022/10/18/ji-suan-ji-ji-chu/cache-de-gong-zuo-yuan-li-1-ji-ben-jie-shao/"/>
     <id>https://limeya.github.io/2022/10/18/ji-suan-ji-ji-chu/cache-de-gong-zuo-yuan-li-1-ji-ben-jie-shao/</id>
     <published>2022-10-17T16:00:00.000Z</published>
-    <updated>2022-10-18T15:58:54.593Z</updated>
+    <updated>2022-10-23T07:26:21.726Z</updated>
     
     
       
@@ -593,33 +624,6 @@
     
     
     <category term="Geometry" scheme="https://limeya.github.io/tags/Geometry/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>GAMES101-09-3：Shading - Texture Mapping - Applications of Textures</title>
-    <link href="https://limeya.github.io/2022/05/03/ji-suan-ji-tu-xing-xue/games/games101-09-3-shading-texture-mapping-applications-of-textures/"/>
-    <id>https://limeya.github.io/2022/05/03/ji-suan-ji-tu-xing-xue/games/games101-09-3-shading-texture-mapping-applications-of-textures/</id>
-    <published>2022-05-03T05:00:00.000Z</published>
-    <updated>2022-09-17T16:35:26.003Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;Texture的泛化理解&quot;&gt;&lt;a href=&quot;#Texture的泛化理解&quot; class=&quot;headerlink&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="计算机图形学" scheme="https://limeya.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/"/>
-    
-    
-    <category term="Shading" scheme="https://limeya.github.io/tags/Shading/"/>
-    
-    <category term="Texture Mapping" scheme="https://limeya.github.io/tags/Texture-Mapping/"/>
     
   </entry>
   
