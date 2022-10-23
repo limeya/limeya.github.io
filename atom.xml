@@ -48,6 +48,46 @@
   </entry>
   
   <entry>
+    <title>Cache的工作原理（3）：写数据</title>
+    <link href="https://limeya.github.io/2022/10/23/ji-suan-ji-ji-chu/cache-de-gong-zuo-yuan-li-3-xie-shu-ju/"/>
+    <id>https://limeya.github.io/2022/10/23/ji-suan-ji-ji-chu/cache-de-gong-zuo-yuan-li-3-xie-shu-ju/</id>
+    <published>2022-10-22T16:00:00.000Z</published>
+    <updated>2022-10-23T09:45:48.661Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;cache在CPU读取数据时扮演着重要的角色，同样的，虽然，在CPU写数据时，没有发挥直接作用，但是可以发挥间接作用，比如将数据写的地方离自己近一点，这样有利于下次的读取。&lt;/p&gt;
+&lt;p&gt;但是，写数据与读数据不太一样，主要有两个方面的问题：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;hit</summary>
+        
+      
+    
+    
+    
+    <category term="计算机基础" scheme="https://limeya.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/"/>
+    
+    
+    <category term="memory" scheme="https://limeya.github.io/tags/memory/"/>
+    
+    <category term="cache" scheme="https://limeya.github.io/tags/cache/"/>
+    
+    <category term="write allocation" scheme="https://limeya.github.io/tags/write-allocation/"/>
+    
+    <category term="no write allocation" scheme="https://limeya.github.io/tags/no-write-allocation/"/>
+    
+    <category term="write through" scheme="https://limeya.github.io/tags/write-through/"/>
+    
+    <category term="write back" scheme="https://limeya.github.io/tags/write-back/"/>
+    
+    <category term="write policy" scheme="https://limeya.github.io/tags/write-policy/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Cache的工作原理（1）：基本介绍</title>
     <link href="https://limeya.github.io/2022/10/18/ji-suan-ji-ji-chu/cache-de-gong-zuo-yuan-li-1-ji-ben-jie-shao/"/>
     <id>https://limeya.github.io/2022/10/18/ji-suan-ji-ji-chu/cache-de-gong-zuo-yuan-li-1-ji-ben-jie-shao/</id>
@@ -599,31 +639,6 @@
     <category term="Curves" scheme="https://limeya.github.io/tags/Curves/"/>
     
     <category term="Bézier Curves" scheme="https://limeya.github.io/tags/Bezier-Curves/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>GAMES101-10：Geometry - Implicit Representations</title>
-    <link href="https://limeya.github.io/2022/05/03/ji-suan-ji-tu-xing-xue/games/games101-10-geometry-implicit-representations/"/>
-    <id>https://limeya.github.io/2022/05/03/ji-suan-ji-tu-xing-xue/games/games101-10-geometry-implicit-representations/</id>
-    <published>2022-05-03T11:00:00.000Z</published>
-    <updated>2022-09-17T16:35:31.263Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;Ways-to-Represent-Geometry&quot;&gt;&lt;a href=&quot;#Ways-to-Represent-Geometry&quot; class=&quot;headerlink&quot; title=&quot;Ways to Represent Geometry&quot;&gt;&lt;/a&gt;Ways to</summary>
-        
-      
-    
-    
-    
-    <category term="计算机图形学" scheme="https://limeya.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/"/>
-    
-    
-    <category term="Geometry" scheme="https://limeya.github.io/tags/Geometry/"/>
     
   </entry>
   

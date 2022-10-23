@@ -35,6 +35,43 @@
     
     
     <entry>
+      <title>Cache的工作原理（3）：写数据</title>
+      <link href="/2022/10/23/ji-suan-ji-ji-chu/cache-de-gong-zuo-yuan-li-3-xie-shu-ju/"/>
+      <url>/2022/10/23/ji-suan-ji-ji-chu/cache-de-gong-zuo-yuan-li-3-xie-shu-ju/</url>
+      
+        <content type="html"><![CDATA[<p>cache在CPU读取数据时扮演着重要的角色，同样的，虽然，在CPU写数据时，没有发挥直接作用，但是可以发挥间接作用，比如将数据写的地方离自己近一点，这样有利于下次的读取。</p><p>但是，写数据与读数据不太一样，主要有两个方面的问题：</p><ul><li>hit cache：因为涉及到数据的变化，可能会存在不一致的情况，例如：只写入cache，但是不写入main memory。</li><li>miss cache，此时如何处理？</li></ul><h1 id="当hit-cache时"><a href="#当hit-cache时" class="headerlink" title="当hit cache时"></a>当hit cache时</h1><p>首先要明确一点，hit cache是什么意思？之前在读数据时，如果数据在cache中，称为hit。同样的，<strong>在写操作中，hit指的是写入的内存地址在cache中能找到。</strong></p><p>在hit的情况下，cache与main memory中对写入内存地址的数据不一致的问题，发生的原因在于只写到了cache中，没有同步到memory中。针对这种情况，最简单的办法是write-through。</p><h2 id="write-through（写穿透）"><a href="#write-through（写穿透）" class="headerlink" title="write-through（写穿透）"></a>write-through（写穿透）</h2><ul><li>数据同时写入Cache和主存，保证内存和cache数据一致；</li><li>但是这种策略效率较低，因为涉及到写到memory中，优点是简单、直接；</li></ul><p>针对这种方法的缺点，有一个改进的策略——使用write buffer。</p><blockquote><p>A <strong>write buffer  as a queue</strong>, it stores the data while it is waiting to be written to memory. After writing the data into the cache and into the write buffer, <strong>the processor can continue execution.</strong></p></blockquote><ul><li>这种方法的优点在于，处理器不用等待写入memory的操作，而是写入write buffer就可以继续执行别的指令（之前基本的write-through策略需要CPU等待写入内存完成），而写入buffer显然比写入memory要快；<blockquote><p>又是，以空间换时间的策略。</p></blockquote></li><li>当write buffer中的数据被写入memory后，它就会被清空，以等待下一次使用；</li><li>当CPU需要写数据时，而write buffer已满，这时CPU也需要等待有空闲位置；</li></ul><p>这种write buffer的策略有个问题：</p><blockquote><p>当CPU发出写操作的速度，大于memory完成写操作的速度，总有时间点，write buffer会被填满，即便buffer再大，CPU也会等待。</p></blockquote><h2 id="Write-back（写回）"><a href="#Write-back（写回）" class="headerlink" title="Write-back（写回）"></a>Write-back（写回）</h2><p>对于write-through的替代策略，write-back使用不同的处理策略：</p><ul><li>第一次只向cache中写入；</li><li>当对应内存地址的cache line中的数据被更新了，才会将数据写回到memory中；</li></ul><p>相比于write-through：</p><ul><li>这种策略性能好，特别是当CPU生成写操作的速度大于memory执行写入操作的速度时，因为写到内存的次数减少；</li><li>可能对同一块cache的区域多次写入，但是只要将最后一次写回到内存即可，减少了内存访问次数；</li><li>但是要实现这个目标，要求cache具有复杂的结构；</li></ul><h1 id="当miss-cache时"><a href="#当miss-cache时" class="headerlink" title="当miss cache时"></a>当miss cache时</h1><p>此时，写指令中的内存地址在cache中没有对应的cache line。在这种情况下，如果要写入数据，有两种策略：</p><ul><li>no write allocate;</li><li>write allocate;</li></ul><h2 id="no-write-allocate"><a href="#no-write-allocate" class="headerlink" title="no write allocate"></a>no write allocate</h2><ul><li>这种策略中，写操作的对象只有main memory，不涉及cache，即数据不会写入cache中。</li><li>实现简单、直接，但是性能不好；</li></ul><h2 id="write-allocate"><a href="#write-allocate" class="headerlink" title="write allocate"></a>write allocate</h2><p>这种策略下，情况要复杂一点：</p><ol><li>首先，根据写操作指令中的内存地址，将对应的数据从main memory中得到，并将数据写到cache的cache line中的block；</li><li>将写操作中新的数据写到1中对应的block中，完成覆写；</li></ol><blockquote><p>这块我一直不太明白为啥要先从内存中将数据写到cache中，直接将数据写到cache中不就行了，这样先写的数据也会被覆盖，何必呢？</p><p>我个人理解，因为是Miss，cache中没有新数据对应的内存地址，因此处理器直接写cache，找不到对应的位置，也就无法完成操作，而先从内存中写cache旧数据的目的是，将对应内存的地址也放到cache中，这样后面写入新数据时就可以找到地址了。</p></blockquote><p>这种策略，</p><ul><li>第一次写入时麻烦，但是有利于后续的读取；</li></ul><h1 id="策略使用"><a href="#策略使用" class="headerlink" title="策略使用"></a>策略使用</h1><p>现代cache的设计和使用中：</p><ul><li>write through和write Non-allocate搭配使用；<ul><li>适用于那些性能要求不高但是希望设计简单的系统；</li></ul></li><li>Write Back 和Write Allocate搭配使用<ul><li>适用于性能较好的场景；</li></ul></li></ul><h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p><img src="/images/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/Cache%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%EF%BC%883%EF%BC%89%EF%BC%9A%E5%86%99%E6%95%B0%E6%8D%AE/1.png" alt="总结write policy"></p><h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ol><li><p><a href="https://www.coursera.org/learn/jisuanji-zucheng/lecture/sYRYl/703-zhu-cun-de-gong-zuo-yuan-li">703-主存的工作原理 - 第七讲 存储层次结构 | Coursera</a></p></li><li><p>Computer Organization and Design - 5.3 - handling writes</p></li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> 计算机基础 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> memory </tag>
+            
+            <tag> cache </tag>
+            
+            <tag> write allocation </tag>
+            
+            <tag> no write allocation </tag>
+            
+            <tag> write through </tag>
+            
+            <tag> write back </tag>
+            
+            <tag> write policy </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Cache的工作原理（1）：基本介绍</title>
       <link href="/2022/10/18/ji-suan-ji-ji-chu/cache-de-gong-zuo-yuan-li-1-ji-ben-jie-shao/"/>
       <url>/2022/10/18/ji-suan-ji-ji-chu/cache-de-gong-zuo-yuan-li-1-ji-ben-jie-shao/</url>
