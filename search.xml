@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>Cache的性能调优（1）：性能量化</title>
+      <link href="/2022/10/24/ji-suan-ji-ji-chu/cache-de-xing-neng-diao-you-1-xing-neng-liang-hua/"/>
+      <url>/2022/10/24/ji-suan-ji-ji-chu/cache-de-xing-neng-diao-you-1-xing-neng-liang-hua/</url>
+      
+        <content type="html"><![CDATA[<p>cache能够有效提升对存储器的访问速度，因此利用好这一组件，能够大大提升系统的整体性能，但是对cache的性能调优的第一步是如何量化对cache的访问性能。只有给出量化的方法，才能提出不同的策略，来改进策略。</p><h1 id="Review：Cache访问过程"><a href="#Review：Cache访问过程" class="headerlink" title="Review：Cache访问过程"></a>Review：Cache访问过程</h1><p>4个性能指标：</p><ul><li><code>hit rate</code>: 访存请求中发生cache Hit的请求所占比例；</li><li><code>hit time</code>: 从cache将命中数据返回的时间；<ul><li>L1 Cache约1~3个时钟周期；</li><li>L2 Cache约5~20个时钟周期；</li></ul></li><li><code>miss rate</code>: 1 - hit rate；</li><li><code>miss penalty</code>: 从主存读取数据并返回的时间，约100~300个周期；</li></ul><p><img src="/images/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/Cache%E7%9A%84%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98%EF%BC%881%EF%BC%89%EF%BC%9A%E6%80%A7%E8%83%BD%E9%87%8F%E5%8C%96/1.png" alt="Cache访问过程"></p><h1 id="内存访问的时间衡量"><a href="#内存访问的时间衡量" class="headerlink" title="内存访问的时间衡量"></a>内存访问的时间衡量</h1><p>在CPU运行过程中，CPU的时间可以具体分为两个部分：</p><ul><li>真实执行具体指令花费的时钟周期；</li><li>等待内存系统花费的时钟周期；</li></ul><blockquote><p>这里将访问cache的时间算在了执行指令的时间中。</p></blockquote><p>因此，得到如下计算公式：</p><p>$$<br>\text{CPU time = (CPU execution clock cycles + Memory-stall clock cycles)} \times \text{Clock cycle time}<br>$$</p><p>当CPU执行指令的时间越短，内存访问的瓶颈就越严重。</p><p>其中：</p><ul><li><p><code>Memory-stall clock cycles</code>主要是由于cache miss 导致，因此需要去读取main memory。而<code>Memory-stall clock cycles</code>又具体分为读和写两个部分：</p><p>  $$<br>  \text{Memory-stall clock cycles =  (Read-stall cycles + Write-stall cycles)}<br>  $$</p></li><li><p><code>Read-stall cycles</code>可以进一步分解为以下形式：</p><p>  $$<br>  \text{Read-stall cycles} = \frac{\text{Reads}}{\text{Program}} \times<br>  \text{Read miss rate} \times<br>  \text{Read miss pennalty}<br>  $$</p><p>  简单来说，读操作造成的停顿时间，由指令中读操作的数量，这些读操作导致的miss rate，每个miss rate需要的miss penalty组成。</p></li><li><p>相比于读操作，写操作的过程更复杂，这个过程中涉及不同的策略。</p><ul><li><p>当使用write through策略时，需要同时写入cache和memory。</p><blockquote><p>这里有个疑问，之前提到在hit cache时才会有write through，但是这里还会发生miss，是不是与之前的冲突？这里我是这么理解的，对于write through的理解，以同时写到cache和memory为核心，至于写到cache是否miss，不是关注重点。</p></blockquote><ul><li>当hit cache时，写入cache的时间可以忽略，但是write buffer stalls，则是写入memory造成的。</li><li>当miss cache时，此时需要将main memory中的数据先读到cache中，然后再写。</li></ul><p>  综上所示，使用write through时的write-stall cycles如下：</p><p>  $$<br>  \text{write-stall cycles} = \frac{\text{Writes}}{\text{Program}} \times<br>  \text{Write miss rate} \times<br>  \text{Write miss pennalty} + \text{Write buffer stalls}<br>  $$</p><p>  这里，因为memory处理写的速度超过CPU产生写操作的速度，因此<code>write buffer stalls</code>可以忽略。</p><p>  综合来看，假设：</p><p>  $$<br>  \begin{align}<br>  \text{write miss rate = read miss rate} \<br>  \text{write miss penalty = read miss penalty}<br>  \end{align}<br>  $$</p><p>  得到：</p><p>  $$<br>  \text{Memory-stall clock cycles} =<br>  \frac{\text{Memory accesses}}{\text{Program}} \times<br>  \text{Misses} \times<br>  \text{Miss penalty}<br>  $$</p><p>  进一步拆解得到：</p><p>  $$<br>  \text{Memory-stall clock cycles} =<br>  \frac{\text{Instructions}}{\text{Program}} \times<br>  \frac{\text{Misses}}{\text{Instructions}} \times<br>  \text{Miss penalty}<br>  $$</p></li><li><p>当使用write back策略时，对于从cache中将数据写到memory也需要时间</p></li></ul></li></ul><h1 id="评价访存性能——平均访存时间"><a href="#评价访存性能——平均访存时间" class="headerlink" title="评价访存性能——平均访存时间"></a>评价访存性能——平均访存时间</h1><p>为了评价访问数据的性能表现，综合考虑hit和miss两种情况，人们想出了——平均访存时间，这个指标可以辅助cache性能的优化。</p><p>$$<br>\text{Average Memory Access Time} = \text{Hit Time} + \text{Miss Penalty} \times \text{Miss Rate}<br>$$</p><p>既然由3个因素决定，如果减少平均访存时间，就是分别减少这3项。</p><ol><li>降低hit time 要求将cache做得小一些，结构不要太复杂。 但是小容量的cache容易失效，导致miss rate提升。</li><li>减少miss penalty 可以通过提高主存性能；或者在当前的cache和主存之间再增加一层cache。但是新增的cache也会遇到相同的问题。</li><li>减少miss rate 提升cache的容量，但是这样hit time就会增加，因此也不一定可行。</li></ol><p>因此，这3个因素不是相互独立的，需要综合考虑才行。</p><h2 id="实例分析"><a href="#实例分析" class="headerlink" title="实例分析"></a>实例分析</h2><p><img src="/images/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/Cache%E7%9A%84%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98%EF%BC%881%EF%BC%89%EF%BC%9A%E6%80%A7%E8%83%BD%E9%87%8F%E5%8C%96/2.png" alt="实例分析"></p><p>命中率提高了2%，但是平均访存时间提升了1倍，因此提升命中率带来的性能提升非常明显。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 计算机基础 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> cache </tag>
+            
+            <tag> 平均访存时间 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Cache的工作原理（2）：读数据</title>
       <link href="/2022/10/23/ji-suan-ji-ji-chu/cache-de-gong-zuo-yuan-li-2-du-shu-ju/"/>
       <url>/2022/10/23/ji-suan-ji-ji-chu/cache-de-gong-zuo-yuan-li-2-du-shu-ju/</url>
