@@ -6,7 +6,7 @@
   <link href="https://limeya.github.io/atom.xml" rel="self"/>
   
   <link href="https://limeya.github.io/"/>
-  <updated>2022-10-24T16:55:31.829Z</updated>
+  <updated>2022-10-27T15:44:52.964Z</updated>
   <id>https://limeya.github.io/</id>
   
   <author>
@@ -17,11 +17,70 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Cache的性能调优（3）：减少miss penalty-multilevel cache</title>
+    <link href="https://limeya.github.io/2022/10/27/ji-suan-ji-ji-chu/cache-de-xing-neng-diao-you-3-multilevel-cache/"/>
+    <id>https://limeya.github.io/2022/10/27/ji-suan-ji-ji-chu/cache-de-xing-neng-diao-you-3-multilevel-cache/</id>
+    <published>2022-10-26T16:00:00.000Z</published>
+    <updated>2022-10-27T15:44:52.964Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;Multilevel-cache&quot;&gt;&lt;a href=&quot;#Multilevel-cache&quot; class=&quot;headerlink&quot; title=&quot;Multilevel cache&quot;&gt;&lt;/a&gt;Multilevel cache&lt;/h1&gt;&lt;h2 id=&quot;介绍&quot;&gt;&lt;a</summary>
+        
+      
+    
+    
+    
+    <category term="计算机基础" scheme="https://limeya.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/"/>
+    
+    
+    <category term="multilevel cache" scheme="https://limeya.github.io/tags/multilevel-cache/"/>
+    
+    <category term="L1 cache" scheme="https://limeya.github.io/tags/L1-cache/"/>
+    
+    <category term="L2 cache" scheme="https://limeya.github.io/tags/L2-cache/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Cache的性能调优（2）：减少miss rate-set associative</title>
+    <link href="https://limeya.github.io/2022/10/26/ji-suan-ji-ji-chu/cache-de-xing-neng-diao-you-2-set-associative/"/>
+    <id>https://limeya.github.io/2022/10/26/ji-suan-ji-ji-chu/cache-de-xing-neng-diao-you-2-set-associative/</id>
+    <published>2022-10-25T16:00:00.000Z</published>
+    <updated>2022-10-27T15:46:07.336Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;在cache性能量化的文章中，提到使用平均访存时间在衡量cache的性能。由于miss cache是cache 访问的核心瓶颈之一，因此为了提升性能，可以通过有效减少miss rate来实现。&lt;/p&gt;
+&lt;h1 id=&quot;不同的miss类型&quot;&gt;&lt;a</summary>
+        
+      
+    
+    
+    
+    <category term="计算机基础" scheme="https://limeya.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/"/>
+    
+    
+    <category term="set associative" scheme="https://limeya.github.io/tags/set-associative/"/>
+    
+    <category term="fully associative" scheme="https://limeya.github.io/tags/fully-associative/"/>
+    
+    <category term="direct mapped cache" scheme="https://limeya.github.io/tags/direct-mapped-cache/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Cache的性能调优（1）：性能量化</title>
     <link href="https://limeya.github.io/2022/10/24/ji-suan-ji-ji-chu/cache-de-xing-neng-diao-you-1-xing-neng-liang-hua/"/>
     <id>https://limeya.github.io/2022/10/24/ji-suan-ji-ji-chu/cache-de-xing-neng-diao-you-1-xing-neng-liang-hua/</id>
     <published>2022-10-23T16:00:00.000Z</published>
-    <updated>2022-10-24T16:55:31.829Z</updated>
+    <updated>2022-10-24T16:56:58.373Z</updated>
     
     
       
@@ -580,64 +639,6 @@
     <category term="Rasterization" scheme="https://limeya.github.io/tags/Rasterization/"/>
     
     <category term="Shadow Mapping" scheme="https://limeya.github.io/tags/Shadow-Mapping/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>GAMES101-12：Geometry - Mesh Operations</title>
-    <link href="https://limeya.github.io/2022/05/06/ji-suan-ji-tu-xing-xue/games/games101-12-geometry-mesh-operations/"/>
-    <id>https://limeya.github.io/2022/05/06/ji-suan-ji-tu-xing-xue/games/games101-12-geometry-mesh-operations/</id>
-    <published>2022-05-06T04:00:00.000Z</published>
-    <updated>2022-09-17T16:35:48.581Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h1&gt;&lt;p&gt;前面提到很多几何图形的Explicit Representations，包括：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;triangle</summary>
-        
-      
-    
-    
-    
-    <category term="计算机图形学" scheme="https://limeya.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/"/>
-    
-    
-    <category term="Geometry" scheme="https://limeya.github.io/tags/Geometry/"/>
-    
-    <category term="Mesh" scheme="https://limeya.github.io/tags/Mesh/"/>
-    
-    <category term="Mesh Operations" scheme="https://limeya.github.io/tags/Mesh-Operations/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>GAMES101-11-2：Geometry - Bézier Surfaces</title>
-    <link href="https://limeya.github.io/2022/05/06/ji-suan-ji-tu-xing-xue/games/games101-11-2-geometry-bezier-surfaces/"/>
-    <id>https://limeya.github.io/2022/05/06/ji-suan-ji-tu-xing-xue/games/games101-11-2-geometry-bezier-surfaces/</id>
-    <published>2022-05-06T03:00:00.000Z</published>
-    <updated>2022-09-17T16:35:43.335Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;Bezier-Surfaces&quot;&gt;&lt;a href=&quot;#Bezier-Surfaces&quot; class=&quot;headerlink&quot; title=&quot;Bézier Surfaces&quot;&gt;&lt;/a&gt;Bézier</summary>
-        
-      
-    
-    
-    
-    <category term="计算机图形学" scheme="https://limeya.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/"/>
-    
-    
-    <category term="Geometry" scheme="https://limeya.github.io/tags/Geometry/"/>
-    
-    <category term="Bézier Surfaces" scheme="https://limeya.github.io/tags/Bezier-Surfaces/"/>
     
   </entry>
   
