@@ -4,6 +4,39 @@
   
     
     <entry>
+      <title>Virtual Memory（1）：简介</title>
+      <link href="/2022/10/29/ji-suan-ji-ji-chu/virtual-memory-1-jian-jie/"/>
+      <url>/2022/10/29/ji-suan-ji-ji-chu/virtual-memory-1-jian-jie/</url>
+      
+        <content type="html"><![CDATA[<h1 id="解决什么问题"><a href="#解决什么问题" class="headerlink" title="解决什么问题"></a>解决什么问题</h1><blockquote><p>virtual memory: A technique that uses main memory as a “cache” for secondary storage.</p></blockquote><p>通俗的说，将一个整体的存储结构包装起来，让外部的使用者只将其视为main memory，至于内部是不是真实的main memory，则并不关心。为了区分于virtual memory，真实的main memory称为<code>physical memory</code>。</p><p>那，virtual memory这种技术提出，是要解决什么问题呢？</p><ol><li>在多个程序之间实现对内存高效、安全地共享；<blockquote><p>最早是为了解决time-sharing systems中共享资源的问题。</p></blockquote><ul><li>我们希望每个程序只能使用分配给它的内存，不能访问别的程序的内存；</li><li>但是，程序在运行时才能知道访问哪些内存空间，因此，我们需要在compile的时候就确定，每个程序只能在自己的<code>address space</code>中活动，这个space别的程序也无法访问；</li><li>virtual memory将每个程序的<code>address space</code>映射到真实的<code>physical address</code>；</li></ul></li><li>当面对小容量的内存时，解放开发人员，提高生产力；<ul><li>早期，内存很小，程序需要使用的内存甚至超过总的内存容量，这时需要开发人员小心应对，保证程序中对不同内存的访问不会冲突；</li></ul></li></ol><p>虽然技术的进步，内存容量越来越大，显然第2个问题不再是问题，那virtual memory主要是为了解决第1个问题而发展至今的。</p><h1 id="如何解决"><a href="#如何解决" class="headerlink" title="如何解决"></a>如何解决</h1><h2 id="关键概念"><a href="#关键概念" class="headerlink" title="关键概念"></a>关键概念</h2><p>virtual memory中提到的概念与cache中概念的含义差不多，但是有不同的叫法。</p><p>由于virtual memory是用main memory作为cache，那么cache中存在的一些术语在virtual memory也会存在。如在cache中有<code>cache line</code>或者<code>block</code>，但是在virtual memory中则称为<code>page</code>，当出现miss之后，称为<code>page fault</code>。</p><h2 id="address-mapping概述"><a href="#address-mapping概述" class="headerlink" title="address mapping概述"></a>address mapping概述</h2><p>在virtual memory中，CPU等处理器发出的指令中使用的都是<code>virtual address</code>，为了实际执行操作，需要将其转换为对应的<code>physical address</code>，来访问对应的内存，这个过程称为<code>address mapping</code> 或者 <code>address translation</code>。</p><p>在virtual memory被采用之前，各个程序（进程）之间为了避免访问的内存空间出现冲突，需要约定好每个程序访问内存的位置，最好是一段连续的内存空间，以避免冲突，方便管理。</p><p>但是，当出现了virtual memory之后，每个程序不一定要占据一段连续内存，只要virtual address看起来连续就行。这是通过<code>relocation</code>技术解决的。</p><p>这里举个不恰当的例子，你要一台服务器训练模型，在没有云服务器之前，你要自己买各种设备组件，然后搭建使用，还要满足内存和硬盘的要求。但是，现在有了云服务器，直接使用云服务器就行，你的那些要求可以满足，但是不是一直满足，比如当你不用服务器的时候，可能内存就不满足你的要求了，但是自己搭建的会一直满足要求。</p><p>virtual memory将CPU发出的指令用到的内存，relocate到一系列固定大小的<code>page</code>，在使用者看来，这满足了他的要求，但是实际上分配的<code>physical address</code>可以散落在<code>physical memory</code>上的各处。而现在的核心问题不是找到连续的内存空间，而是找到足够的<code>page</code>。</p><h2 id="实现address-mapping"><a href="#实现address-mapping" class="headerlink" title="实现address mapping"></a>实现address mapping</h2><p>virtual address包含2个部分：</p><ul><li>virtual page number：组成virtual address的高位</li><li>page offset：组成virtual address的低位，其位数代表main memory中每个page的大小；</li></ul><p>那么如何将virtual address映射为physical address呢？</p><ul><li>首先，virtual page number映射为physical page number，这两者可以不同，而且一般都不同。<ul><li>并且，virtual pages一般多于physical pages，这会导致出现多对一的情况，即多个virtual address映射到一个physical address，这不是冲突了吗？有什么用？如果你学过操作系统，可能会知道进程之间的通信方法，其中有一个共享内存，就是这一原理。  <img src="/images/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/Virtual-Memory%EF%BC%881%EF%BC%89%EF%BC%9A%E7%AE%80%E4%BB%8B/1.png" alt="共享内存"><blockquote><p>在学习计算机组成原理的过程中，发现一些知识不断和之前了解的内容有联系，这种感觉很爽！</p></blockquote></li><li>由于virtual pages更多，不能完全映射到physical pages，这时怎么办？根据上述的概念，此时出现了<code>page fault</code>，即对page的访问发现不在main memory中，那么就需要映射到更下一层的硬盘中。</li></ul><blockquote><p>有一个问题，现在计算机地址至少都有32位，除去page offset可能有4KiB(12 bits)，可以有4GiB的虚拟内存，但是现在物理内存动辄16GiB或者32GiB，这种从虚拟地址到物理地址的映射是不是没有意义了？对于一个程序或者一个进程来说，意义确实不大了，但是当成千上万个程序同时运行时，仍然需要virtual memory来管理这些程序对内存的共享。想想一个chrome就有多少个进程！</p></blockquote></li><li>之后，映射page offset，这一项是完全相同的，因为是用于定位一个page内的数据项；</li></ul><p>总结，address mapping如下：</p><p><img src="/images/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/Virtual-Memory%EF%BC%881%EF%BC%89%EF%BC%9A%E7%AE%80%E4%BB%8B/2.png" alt="Address mapping示意图"></p><p><img src="/images/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/Virtual-Memory%EF%BC%881%EF%BC%89%EF%BC%9A%E7%AE%80%E4%BB%8B/3.png" alt="具体address mapping过程"></p><p>在上述的mapping中：</p><ul><li>每个page是 $2^{12}$=4KiB；</li><li>virtual memory中共有$2^{20}$个pages = 4GiB；</li><li>physical memory中共有$2^{18}$个pages = 1GiB；</li></ul><h1 id="virtual-memory的设计原则"><a href="#virtual-memory的设计原则" class="headerlink" title="virtual memory的设计原则"></a>virtual memory的设计原则</h1><p>virtual memory作为下一层存储器的“cache”，核心问题和cache的一样，尽力避免<code>page fault(miss)</code>。因为不同于cache与main memory之间只差几十倍，在main memory和disk之间的访问时间可以相差几十万倍，毕竟一个是机械运动。</p><p>考虑到page fault的问题，有几个设计原则：</p><ul><li>page最好设计的大一点；<ul><li>利用空间局部性，减少访问次数，以避免过高的访问时间，与增加cache中的block size的作用是一样的。</li></ul></li><li>使用的placement schema需要减少page fault；<ul><li>在之前提到的最能减少page fault(miss)的placement schema是fully associative。</li></ul></li><li>设计软件减少page fault虽然也会带来负担，但是相比于对disk的访问，还是可以接受的。</li><li>对于virtual memory，write-through不适合，而是用write-back；<ul><li>因为对disk的写入太耗时间了；</li></ul></li></ul><h1 id="page-vs-segment"><a href="#page-vs-segment" class="headerlink" title="page vs. segment"></a>page vs. segment</h1><p>到目前为止，不管是在cache还是在virtual memory中使用的block还是page，都是固定大小的。但是，还是有block（page）长度可变的scheme——segmentation。它是一种可变长度的address mapping scheme。</p><p>在segmentation中：</p><ul><li>由<code>segment number</code>和<code>segment offset</code>组成；</li><li><code>segment number</code>映射到physical address；</li><li><code>segment offset</code>映射到地址内的更具体的位置；</li></ul><p>由于长度不固定，因此需要进行bounds check，保证segment offset在segment内；而且这种划分在逻辑上将address space分成了2部分，使得开发人员和compiler处理起来很麻烦。不像paging，对于开发人员和compiler几乎透明，不用考虑。</p><p>segment的使用场景包括：支持对address space的protection。</p><blockquote><p>这里说的protection指的是一系列的机制，可以保证多个进程对于main memory共享没有问题，不会因为读写的冲突而相互干扰。</p></blockquote><h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ol><li>Computer Organization and Design - 5.7</li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> 计算机基础 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> virtual memory </tag>
+            
+            <tag> physical memory </tag>
+            
+            <tag> address mapping </tag>
+            
+            <tag> page </tag>
+            
+            <tag> page fault </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Cache的性能调优（3）：减少miss penalty-multilevel cache</title>
       <link href="/2022/10/27/ji-suan-ji-ji-chu/cache-de-xing-neng-diao-you-3-multilevel-cache/"/>
       <url>/2022/10/27/ji-suan-ji-ji-chu/cache-de-xing-neng-diao-you-3-multilevel-cache/</url>

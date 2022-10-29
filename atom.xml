@@ -6,7 +6,7 @@
   <link href="https://limeya.github.io/atom.xml" rel="self"/>
   
   <link href="https://limeya.github.io/"/>
-  <updated>2022-10-27T15:44:52.964Z</updated>
+  <updated>2022-10-29T16:53:11.750Z</updated>
   <id>https://limeya.github.io/</id>
   
   <author>
@@ -15,6 +15,40 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Virtual Memory（1）：简介</title>
+    <link href="https://limeya.github.io/2022/10/29/ji-suan-ji-ji-chu/virtual-memory-1-jian-jie/"/>
+    <id>https://limeya.github.io/2022/10/29/ji-suan-ji-ji-chu/virtual-memory-1-jian-jie/</id>
+    <published>2022-10-28T16:00:00.000Z</published>
+    <updated>2022-10-29T16:53:11.750Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;解决什么问题&quot;&gt;&lt;a href=&quot;#解决什么问题&quot; class=&quot;headerlink&quot; title=&quot;解决什么问题&quot;&gt;&lt;/a&gt;解决什么问题&lt;/h1&gt;&lt;blockquote&gt;
+&lt;p&gt;virtual memory: A technique that uses</summary>
+        
+      
+    
+    
+    
+    <category term="计算机基础" scheme="https://limeya.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/"/>
+    
+    
+    <category term="virtual memory" scheme="https://limeya.github.io/tags/virtual-memory/"/>
+    
+    <category term="physical memory" scheme="https://limeya.github.io/tags/physical-memory/"/>
+    
+    <category term="address mapping" scheme="https://limeya.github.io/tags/address-mapping/"/>
+    
+    <category term="page" scheme="https://limeya.github.io/tags/page/"/>
+    
+    <category term="page fault" scheme="https://limeya.github.io/tags/page-fault/"/>
+    
+  </entry>
   
   <entry>
     <title>Cache的性能调优（3）：减少miss penalty-multilevel cache</title>
@@ -606,39 +640,6 @@
     <category term="Notion" scheme="https://limeya.github.io/tags/Notion/"/>
     
     <category term="Github Actions" scheme="https://limeya.github.io/tags/Github-Actions/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>GAMES101：Rasterization - Shadow Mapping</title>
-    <link href="https://limeya.github.io/2022/05/06/ji-suan-ji-tu-xing-xue/games/games101-rasterization-shadow-mapping/"/>
-    <id>https://limeya.github.io/2022/05/06/ji-suan-ji-tu-xing-xue/games/games101-rasterization-shadow-mapping/</id>
-    <published>2022-05-06T08:00:00.000Z</published>
-    <updated>2022-09-17T16:36:08.551Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;问题&quot;&gt;&lt;a href=&quot;#问题&quot; class=&quot;headerlink&quot; title=&quot;问题&quot;&gt;&lt;/a&gt;问题&lt;/h1&gt;&lt;ul&gt;
-&lt;li&gt;着色是局部的，这种方便但不对；&lt;/li&gt;
-&lt;li&gt;shading中无法解决阴影问题；&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;那么：How</summary>
-        
-      
-    
-    
-    
-    <category term="计算机图形学" scheme="https://limeya.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/"/>
-    
-    
-    <category term="光栅化" scheme="https://limeya.github.io/tags/%E5%85%89%E6%A0%85%E5%8C%96/"/>
-    
-    <category term="Rasterization" scheme="https://limeya.github.io/tags/Rasterization/"/>
-    
-    <category term="Shadow Mapping" scheme="https://limeya.github.io/tags/Shadow-Mapping/"/>
     
   </entry>
   
