@@ -4,6 +4,68 @@
   
     
     <entry>
+      <title>Virtual Memory（3）：Page fault</title>
+      <link href="/2022/10/30/ji-suan-ji-ji-chu/virtual-memory-3-page-fault/"/>
+      <url>/2022/10/30/ji-suan-ji-ji-chu/virtual-memory-3-page-fault/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Page-fault的基本内容"><a href="#Page-fault的基本内容" class="headerlink" title="Page fault的基本内容"></a>Page fault的基本内容</h1><h2 id="是什么"><a href="#是什么" class="headerlink" title="是什么"></a>是什么</h2><p>回顾cache中的miss，page fault表示的是同样的含义，只不过page fault一般是在main memory中miss，从而需要访问disk。这其中的时间差远远高于cache和main memory之间的时间差。</p><h2 id="如何判断发生了page-fault"><a href="#如何判断发生了page-fault" class="headerlink" title="如何判断发生了page fault"></a>如何判断发生了page fault</h2><p>在page table中有一个valid bit，当GPU发出的指令中，使用的virtual address中的virtual page number，用来定位page table中的一个entry时，检查该entry的valid bit，如果为1，则发生了page fault。</p><h1 id="Page-fault时发生了啥"><a href="#Page-fault时发生了啥" class="headerlink" title="Page fault时发生了啥"></a>Page fault时发生了啥</h1><h2 id="如何处理page-fault"><a href="#如何处理page-fault" class="headerlink" title="如何处理page fault"></a>如何处理page fault</h2><p>发生page fault后，virtual page number找不到对应的physical page number，此时触发异常。操作系统接过控制权，需要完成两件事：</p><ol><li>到memory的下层存储disk中找到对应于virtual page number的page；</li><li>将来自disk的page放到main memory中；</li></ol><h2 id="2个问题"><a href="#2个问题" class="headerlink" title="2个问题"></a>2个问题</h2><p>这里自然遇到了2个问题？</p><ol><li>如何找到virtual page number在disk中对应的page？</li><li>如何替换physical memory中的page以放置来自disk的page？</li></ol><h3 id="针对问题1"><a href="#针对问题1" class="headerlink" title="针对问题1"></a>针对问题1</h3><p>到目前为止，不管是virtual address与physical address直接映射，还是通过page table加快映射，都不涉及disk。但是现在出现了page fault，<strong>为了找到virtual page number对应的来自disk的page，因此需要记录两者之间的映射关系</strong>，如下图所示。</p><p><img src="images/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/Virtual-Memory%EF%BC%883%EF%BC%89%EF%BC%9APage-fault/1.png" alt="Virtual address同时映射到Physical address和Disk"></p><p>这里通过page table分别维护了两种映射关系：</p><ul><li>virtual page number 到 physical page number；</li><li>virtual page number 到page address in disk；</li></ul><blockquote><p>有时，这两种映射关系是两个数据结构分别维护的，但是逻辑上看是一张表。</p></blockquote><p>在这里要澄清一个问题，在page table中，如果不出现page fault(valid bit=1)时，是否不需要维护virtual page number到page address in disk的关系？仍然需要，<strong>即需要对于所有的virtual page维护一个page address in disk的映射关系，无论它们当时是否page fault</strong>，因为我们不知道后续的执行中，哪个virtual page又会出现page fault（比如别的程序把main memory都占满了）。</p><p>这种操作通过操作系统在创建process时，同时在disk中创建<code>swap space</code>实现。此时，把virtual page number映射到disk的关系也全部记录下来。</p><h3 id="针对问题2"><a href="#针对问题2" class="headerlink" title="针对问题2"></a>针对问题2</h3><p>我们知道在memory hierarchy中，只有相邻的两个level之间才能传递数据，因此，即便virtual page number映射到page address in disk，也不能访问，需要将disk中的page放到physical memory中，进行访问。</p><p>前面介绍page table时提到，为了减少page fault，我们允许将virtual page映射到任意的physical page。当需要将disk中的page加载到physical memory时，有两种情况：</p><ol><li>physical memory未满，可以直接将disk中的page选择一个放入其中，因为是fully associative；</li><li>physical memory已满（很多程序同时运行时），操作系统需要在physical memory中选择一个page进行替换。</li></ol><p>第一种情况很简单，直接将disk中的page写入即可。</p><p>第二种情况则比较复杂，为了最大程度上减少page fault的发生，应该尽量保证替换的physical page后续不会被访问，这里又用到了之前replacement policy中提到的LRU。因此，在这个过程中发生两步：</p><ol><li>操作系统基于replacement policy（如LRU）替换虚选择的physical page；</li><li>同时，这个选择的physical page中的数据也要写回到disk中对应的swap space，以保证数据不会丢失；</li></ol><h3 id="virtual-memory中的replacement-policy"><a href="#virtual-memory中的replacement-policy" class="headerlink" title="virtual memory中的replacement policy"></a>virtual memory中的replacement policy</h3><p>前面也提到过，实现LRU很昂贵，因为每访问一次memory，都需要更新一次数据结构。面对这种问题，这里使用一种近似的方法来解决。</p><p>在physical page中设置一个reference bit(use bit)，当该physical page被访问，这个标识被设置为1。但是，操作系统在固定的时间段内不断地清除该bit，之后继续记录每个page的reference bit。</p><p>这种操作有什么用？举例说明，当第一次访问该page时，reference bit=1，之后被操作系统清0，之后在替换page时，发现该page的reference bit还是1，说明该page最近被访问了，它最好不要替换。这里边对于清0的时间间隔决定该page被访问的“有多近”。</p><h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ol><li>Computer Organization and Design - 5.7 - Page faults</li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> 计算机基础 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> virtual memory </tag>
+            
+            <tag> page fault </tag>
+            
+            <tag> page table </tag>
+            
+            <tag> LRU </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Virtual Memory（2）：使用page table加快page的查找</title>
+      <link href="/2022/10/30/ji-suan-ji-ji-chu/virtual-memory-2-shi-yong-page-table-jia-kuai-page-de-cha-zhao/"/>
+      <url>/2022/10/30/ji-suan-ji-ji-chu/virtual-memory-2-shi-yong-page-table-jia-kuai-page-de-cha-zhao/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Review"><a href="#Review" class="headerlink" title="Review"></a>Review</h1><p>回顾在cache中，我们是如何降低miss rate的——<a href="https://lifehit.cn/2022/10/26/ji-suan-ji-ji-chu/cache-de-xing-neng-diao-you-2-set-associative/">set associative</a>。核心在于设计一个合理的placement schema。在virtual memory中则遇到了相同的问题，如何减少<code>page fault</code>？简单来说，就是保证virtual address都能映射到physical address，而不是到disk中。</p><h1 id="Page-table的提出"><a href="#Page-table的提出" class="headerlink" title="Page table的提出"></a>Page table的提出</h1><p>为了减少page fault，这里想到的最极端的方式，就是之前的<code>fully associative</code>，当出现<code>page fault</code>时，可以将virtual page替换为任意的physical page。但是，前面也说到这种方法虽然可以很大程度上减少miss或page fault，但是当进行查找时，效率低下，需要比较cache中的每一个line，或者physical memory中的每一个page。</p><p>为了解决这个问题，在virtual memory中使用——page table：</p><ul><li>该table通过virtual page number进行索引；</li><li>它保存virtual page和physical page的映射信息，将virtual page number映射到physical page number；</li><li>page table中的virtual page number不一定存在对应的physical page number，这时发生了page fault；</li><li>作为索引，这个table存储在memory中；<blockquote><p>这里先假设，这个table存储在memory中的一段固定且连续的区域（其实实际上不是这样）。</p></blockquote></li><li>每个程序（或者进程）有自己的page table；</li><li>为了定位page table中的数据，硬件中还有一个register来指向每个程序page table的起始位置，称为<code>page table register</code>。</li></ul><p>到这里，我们解决了fully associative在查找时的问题，通过建立一个索引结构，从而可以减低page fault。</p><h1 id="Page-Table的组成"><a href="#Page-Table的组成" class="headerlink" title="Page Table的组成"></a>Page Table的组成</h1><p>page table的组成示意图如下所示：</p><p><img src="/images/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/Virtual-Memory%EF%BC%882%EF%BC%89%EF%BC%9A%E4%BD%BF%E7%94%A8page-table%E5%8A%A0%E5%BF%ABpage%E7%9A%84%E6%9F%A5%E6%89%BE/1.png" alt="Page table的结构示意图"></p><ul><li>首先看一下page table register，直接指向page table的首地址，因此一个register可以直接确定page table的位置；</li><li>不同于fully associative中，需要使用virtual page number与physical page number直接对比，来确定是否page fault，这里在page table中存在一一映射关系；</li><li>与cache结构的异同：<ul><li>也有valid bit，可以帮助快速判断是否存在page fault；<ul><li>当bit=1，virtual page有对应的physical page，无page fault；</li><li>bit=0，出现page fault；</li></ul><blockquote><p>这里与cache有一点不同，在page table中，只要你找到virtual page number对应的entry，之后只需验证该valid bit就能知道有无page fault。但是，在cache中，当知道index对应的cache line时，即便验证了valid bit，还不能确定是否hit，还需要继续验证tag field，如果匹配，则hit，否则miss，因为cache中将memory的地址拆成了index和tag两个部分。</p></blockquote></li><li>没有tag field，因为不同于cache中，一个cache line可以对应多个memory block（direct mapped cache），因此使用tag代表高位地址。在page table中，每个virtual page与physical page是一对一的，甚至是多对一的，因此不需要tag字段；</li><li>在page table中充当index的也不是memory的低位地址，而是直接使用virtual page number；</li></ul></li><li>在上图中，page table中的entry共有 $2^{19}$ 个。即 virtual page number的位数减去valid bit的位数，但是实际中一般设计为32位。</li></ul><h1 id="进程之间的切换"><a href="#进程之间的切换" class="headerlink" title="进程之间的切换"></a>进程之间的切换</h1><p>多任务执行一直是一个吸引人的目标，在早期的单核时代，为了并行执行，需要将CPU的时钟切成小段的时间片，分配给不同的程序使用。这里就存在一个问题，当一个程序使用的时间片结束后，如何切换到另一个程序执行呢？</p><p>程序的执行需要指令和数据，当切换到另一个程序继续执行时，核心就是要找到该程序的指令和数据存储位置。在virtual memory中，我们知道CPU提出的指令中都是virtual address，因此切换程序中需要找到该程序对应的virtual address，来映射到physical address，也就是page table。</p><p><code>page table</code>、<code>program counter</code>和相关的寄存器，指定了一个<code>state</code>，这个状态可以在切换程序执行时，用于恢复原来<code>process</code>的运行状态。操作系统通过加载该process对应的state，可以使该process变成active，从而继续执行。</p><p>操作系统不会加载process的完整的page table，而是加载page table register即可，就能定位整个page table，节省空间。</p><p>每个process都有自己的page table，因此不同的process可以用相同的virtual address。这些virtual address与physical address的映射，由操作系统来分配和更新，这样使得不同的process之间不会冲突。这样，page table的加入使得对于多个程序同时执行任务更加方便，而不会在访问内存时出现冲突。</p><h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ol><li>Computer Organization and Design - 5.7 - Placing a Page and Finding It Again</li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> 计算机基础 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> fully associative </tag>
+            
+            <tag> virtual memory </tag>
+            
+            <tag> page fault </tag>
+            
+            <tag> page table </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Virtual Memory（1）：简介</title>
       <link href="/2022/10/29/ji-suan-ji-ji-chu/virtual-memory-1-jian-jie/"/>
       <url>/2022/10/29/ji-suan-ji-ji-chu/virtual-memory-1-jian-jie/</url>

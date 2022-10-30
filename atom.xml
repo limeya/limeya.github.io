@@ -6,7 +6,7 @@
   <link href="https://limeya.github.io/atom.xml" rel="self"/>
   
   <link href="https://limeya.github.io/"/>
-  <updated>2022-10-29T16:53:11.750Z</updated>
+  <updated>2022-10-30T15:01:38.868Z</updated>
   <id>https://limeya.github.io/</id>
   
   <author>
@@ -15,6 +15,68 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Virtual Memory（3）：Page fault</title>
+    <link href="https://limeya.github.io/2022/10/30/ji-suan-ji-ji-chu/virtual-memory-3-page-fault/"/>
+    <id>https://limeya.github.io/2022/10/30/ji-suan-ji-ji-chu/virtual-memory-3-page-fault/</id>
+    <published>2022-10-30T08:00:00.000Z</published>
+    <updated>2022-10-30T15:01:38.868Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;Page-fault的基本内容&quot;&gt;&lt;a href=&quot;#Page-fault的基本内容&quot; class=&quot;headerlink&quot; title=&quot;Page fault的基本内容&quot;&gt;&lt;/a&gt;Page fault的基本内容&lt;/h1&gt;&lt;h2 id=&quot;是什么&quot;&gt;&lt;a</summary>
+        
+      
+    
+    
+    
+    <category term="计算机基础" scheme="https://limeya.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/"/>
+    
+    
+    <category term="virtual memory" scheme="https://limeya.github.io/tags/virtual-memory/"/>
+    
+    <category term="page fault" scheme="https://limeya.github.io/tags/page-fault/"/>
+    
+    <category term="page table" scheme="https://limeya.github.io/tags/page-table/"/>
+    
+    <category term="LRU" scheme="https://limeya.github.io/tags/LRU/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Virtual Memory（2）：使用page table加快page的查找</title>
+    <link href="https://limeya.github.io/2022/10/30/ji-suan-ji-ji-chu/virtual-memory-2-shi-yong-page-table-jia-kuai-page-de-cha-zhao/"/>
+    <id>https://limeya.github.io/2022/10/30/ji-suan-ji-ji-chu/virtual-memory-2-shi-yong-page-table-jia-kuai-page-de-cha-zhao/</id>
+    <published>2022-10-30T07:00:00.000Z</published>
+    <updated>2022-10-30T15:00:19.415Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;Review&quot;&gt;&lt;a href=&quot;#Review&quot; class=&quot;headerlink&quot; title=&quot;Review&quot;&gt;&lt;/a&gt;Review&lt;/h1&gt;&lt;p&gt;回顾在cache中，我们是如何降低miss rate的——&lt;a</summary>
+        
+      
+    
+    
+    
+    <category term="计算机基础" scheme="https://limeya.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/"/>
+    
+    
+    <category term="fully associative" scheme="https://limeya.github.io/tags/fully-associative/"/>
+    
+    <category term="virtual memory" scheme="https://limeya.github.io/tags/virtual-memory/"/>
+    
+    <category term="page fault" scheme="https://limeya.github.io/tags/page-fault/"/>
+    
+    <category term="page table" scheme="https://limeya.github.io/tags/page-table/"/>
+    
+  </entry>
   
   <entry>
     <title>Virtual Memory（1）：简介</title>
@@ -584,62 +646,6 @@
     <category term="Ray Tracing" scheme="https://limeya.github.io/tags/Ray-Tracing/"/>
     
     <category term="Recursive Ray Tracing" scheme="https://limeya.github.io/tags/Recursive-Ray-Tracing/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>日本出了问题：《东京贫困女子》呈现的社会现象</title>
-    <link href="https://limeya.github.io/2022/07/15/du-shu-gan-wu/ri-ben-chu-liao-wen-ti-dong-jing-pin-kun-nu-zi-cheng-xian-de-she-hui-xian-xiang/"/>
-    <id>https://limeya.github.io/2022/07/15/du-shu-gan-wu/ri-ben-chu-liao-wen-ti-dong-jing-pin-kun-nu-zi-cheng-xian-de-she-hui-xian-xiang/</id>
-    <published>2022-07-14T16:00:00.000Z</published>
-    <updated>2022-09-17T16:50:21.719Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;p&gt;这本书我是去年开始读的，读这本书的契机是因为之前看过一个我个人觉得很有意思的日剧——《暗金丑岛君》。但是影视总有一些虚构的成分，所以想了解一些真实的事件，恰好发现这本书。去年刚开始读的时候，觉得有点压抑，一度读不下去，恰好又赶上毕业的事情，耽搁了，现在毕业了又重新拿起来继续</summary>
-        
-      
-    
-    
-    
-    <category term="读书感悟" scheme="https://limeya.github.io/categories/%E8%AF%BB%E4%B9%A6%E6%84%9F%E6%82%9F/"/>
-    
-    
-    <category term="经济" scheme="https://limeya.github.io/tags/%E7%BB%8F%E6%B5%8E/"/>
-    
-    <category term="社会" scheme="https://limeya.github.io/tags/%E7%A4%BE%E4%BC%9A/"/>
-    
-    <category term="贫困" scheme="https://limeya.github.io/tags/%E8%B4%AB%E5%9B%B0/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>利用Notion API+Github Actions回顾阅读的文章</title>
-    <link href="https://limeya.github.io/2022/05/22/xiao-lu-sheng-huo/li-yong-notion-api-github-actions-hui-gu-yue-du-de-wen-zhang/"/>
-    <id>https://limeya.github.io/2022/05/22/xiao-lu-sheng-huo/li-yong-notion-api-github-actions-hui-gu-yue-du-de-wen-zhang/</id>
-    <published>2022-05-22T06:19:30.000Z</published>
-    <updated>2022-09-17T16:31:46.183Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;每天看着不断推送的手机消息，明知道其中有价值的并不多，但是又怕错过有价值的信息，这种心态在当今是一种很普遍的心态。因此，面对这种局面，&lt;a</summary>
-        
-      
-    
-    
-    
-    <category term="效率生活" scheme="https://limeya.github.io/categories/%E6%95%88%E7%8E%87%E7%94%9F%E6%B4%BB/"/>
-    
-    
-    <category term="Notion" scheme="https://limeya.github.io/tags/Notion/"/>
-    
-    <category term="Github Actions" scheme="https://limeya.github.io/tags/Github-Actions/"/>
     
   </entry>
   
