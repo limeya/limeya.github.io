@@ -6,7 +6,7 @@
   <link href="https://limeya.github.io/atom.xml" rel="self"/>
   
   <link href="https://limeya.github.io/"/>
-  <updated>2022-10-31T14:57:12.512Z</updated>
+  <updated>2022-11-03T15:22:41.984Z</updated>
   <id>https://limeya.github.io/</id>
   
   <author>
@@ -15,6 +15,39 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>C++中的函数参数传递</title>
+    <link href="https://limeya.github.io/2022/11/02/bian-cheng-zhi-dao/c-zhong-de-han-shu-can-shu-chuan-di/"/>
+    <id>https://limeya.github.io/2022/11/02/bian-cheng-zhi-dao/c-zhong-de-han-shu-can-shu-chuan-di/</id>
+    <published>2022-11-01T16:00:00.000Z</published>
+    <updated>2022-11-03T15:22:41.984Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;在函数调用的时候，parameters被创建和初始化，初始化操作使用传递来的arguments完成。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Arguments are the initializers for a function’s</summary>
+        
+      
+    
+    
+    
+    <category term="编程之道" scheme="https://limeya.github.io/categories/%E7%BC%96%E7%A8%8B%E4%B9%8B%E9%81%93/"/>
+    
+    
+    <category term="pointer" scheme="https://limeya.github.io/tags/pointer/"/>
+    
+    <category term="按值传递" scheme="https://limeya.github.io/tags/%E6%8C%89%E5%80%BC%E4%BC%A0%E9%80%92/"/>
+    
+    <category term="按引用传递" scheme="https://limeya.github.io/tags/%E6%8C%89%E5%BC%95%E7%94%A8%E4%BC%A0%E9%80%92/"/>
+    
+    <category term="argument passing" scheme="https://limeya.github.io/tags/argument-passing/"/>
+    
+  </entry>
   
   <entry>
     <title>C++中的字符串</title>
@@ -619,35 +652,6 @@
     <category term="string" scheme="https://limeya.github.io/tags/string/"/>
     
     <category term="pointer" scheme="https://limeya.github.io/tags/pointer/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>《邻家的百万富翁》如何生活？</title>
-    <link href="https://limeya.github.io/2022/09/25/du-shu-gan-wu/lin-jia-de-bai-wan-fu-weng-ru-he-sheng-huo/"/>
-    <id>https://limeya.github.io/2022/09/25/du-shu-gan-wu/lin-jia-de-bai-wan-fu-weng-ru-he-sheng-huo/</id>
-    <published>2022-09-24T16:00:00.000Z</published>
-    <updated>2022-10-16T11:12:17.883Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;阅读思考&quot;&gt;&lt;a href=&quot;#阅读思考&quot; class=&quot;headerlink&quot; title=&quot;阅读思考&quot;&gt;&lt;/a&gt;阅读思考&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;📌</summary>
-        
-      
-    
-    
-    
-    <category term="读书感悟" scheme="https://limeya.github.io/categories/%E8%AF%BB%E4%B9%A6%E6%84%9F%E6%82%9F/"/>
-    
-    
-    <category term="致富" scheme="https://limeya.github.io/tags/%E8%87%B4%E5%AF%8C/"/>
-    
-    <category term="投资" scheme="https://limeya.github.io/tags/%E6%8A%95%E8%B5%84/"/>
-    
-    <category term="计划" scheme="https://limeya.github.io/tags/%E8%AE%A1%E5%88%92/"/>
     
   </entry>
   
