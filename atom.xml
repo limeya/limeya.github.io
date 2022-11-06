@@ -6,7 +6,7 @@
   <link href="https://limeya.github.io/atom.xml" rel="self"/>
   
   <link href="https://limeya.github.io/"/>
-  <updated>2022-11-06T08:17:25.479Z</updated>
+  <updated>2022-11-06T10:45:38.985Z</updated>
   <id>https://limeya.github.io/</id>
   
   <author>
@@ -15,6 +15,38 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Python中的参数传递方式</title>
+    <link href="https://limeya.github.io/2022/11/06/bian-cheng-zhi-dao/python-zhong-de-can-shu-chuan-di-fang-shi/"/>
+    <id>https://limeya.github.io/2022/11/06/bian-cheng-zhi-dao/python-zhong-de-can-shu-chuan-di-fang-shi/</id>
+    <published>2022-11-06T11:00:00.000Z</published>
+    <updated>2022-11-06T10:45:38.985Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;工作写Python脚本时，对于python中函数参数传递有疑惑，在加上最近在学习C++，恰好复习了C++中参数传递的传递方法，于是想把这两类对比一下。&lt;/p&gt;
+&lt;h1 id=&quot;Review：C-中的参数传递方式&quot;&gt;&lt;a href=&quot;#Review：C-中的参数传递方式&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="编程之道" scheme="https://limeya.github.io/categories/%E7%BC%96%E7%A8%8B%E4%B9%8B%E9%81%93/"/>
+    
+    
+    <category term="按值传递" scheme="https://limeya.github.io/tags/%E6%8C%89%E5%80%BC%E4%BC%A0%E9%80%92/"/>
+    
+    <category term="按引用传递" scheme="https://limeya.github.io/tags/%E6%8C%89%E5%BC%95%E7%94%A8%E4%BC%A0%E9%80%92/"/>
+    
+    <category term="argument passing" scheme="https://limeya.github.io/tags/argument-passing/"/>
+    
+    <category term="pass by object" scheme="https://limeya.github.io/tags/pass-by-object/"/>
+    
+  </entry>
   
   <entry>
     <title>Virtual Memory（4）：page table过大如何解决？</title>
@@ -46,38 +78,6 @@
     <category term="inverted page table" scheme="https://limeya.github.io/tags/inverted-page-table/"/>
     
     <category term="virtualized page tables" scheme="https://limeya.github.io/tags/virtualized-page-tables/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Python中的参数传递方式</title>
-    <link href="https://limeya.github.io/2022/11/06/bian-cheng-zhi-dao/python-zhong-de-can-shu-chuan-di-fang-shi/"/>
-    <id>https://limeya.github.io/2022/11/06/bian-cheng-zhi-dao/python-zhong-de-can-shu-chuan-di-fang-shi/</id>
-    <published>2022-11-05T16:00:00.000Z</published>
-    <updated>2022-11-06T10:44:47.891Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;p&gt;工作写Python脚本时，对于python中函数参数传递有疑惑，在加上最近在学习C++，恰好复习了C++中参数传递的传递方法，于是想把这两类对比一下。&lt;/p&gt;
-&lt;h1 id=&quot;Review：C-中的参数传递方式&quot;&gt;&lt;a href=&quot;#Review：C-中的参数传递方式&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="编程之道" scheme="https://limeya.github.io/categories/%E7%BC%96%E7%A8%8B%E4%B9%8B%E9%81%93/"/>
-    
-    
-    <category term="按值传递" scheme="https://limeya.github.io/tags/%E6%8C%89%E5%80%BC%E4%BC%A0%E9%80%92/"/>
-    
-    <category term="按引用传递" scheme="https://limeya.github.io/tags/%E6%8C%89%E5%BC%95%E7%94%A8%E4%BC%A0%E9%80%92/"/>
-    
-    <category term="argument passing" scheme="https://limeya.github.io/tags/argument-passing/"/>
-    
-    <category term="pass by object" scheme="https://limeya.github.io/tags/pass-by-object/"/>
     
   </entry>
   
