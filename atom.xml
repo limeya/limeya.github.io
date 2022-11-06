@@ -50,6 +50,38 @@
   </entry>
   
   <entry>
+    <title>Python中的参数传递方式</title>
+    <link href="https://limeya.github.io/2022/11/06/bian-cheng-zhi-dao/python-zhong-de-can-shu-chuan-di-fang-shi/"/>
+    <id>https://limeya.github.io/2022/11/06/bian-cheng-zhi-dao/python-zhong-de-can-shu-chuan-di-fang-shi/</id>
+    <published>2022-11-05T16:00:00.000Z</published>
+    <updated>2022-11-06T10:44:47.891Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;工作写Python脚本时，对于python中函数参数传递有疑惑，在加上最近在学习C++，恰好复习了C++中参数传递的传递方法，于是想把这两类对比一下。&lt;/p&gt;
+&lt;h1 id=&quot;Review：C-中的参数传递方式&quot;&gt;&lt;a href=&quot;#Review：C-中的参数传递方式&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="编程之道" scheme="https://limeya.github.io/categories/%E7%BC%96%E7%A8%8B%E4%B9%8B%E9%81%93/"/>
+    
+    
+    <category term="按值传递" scheme="https://limeya.github.io/tags/%E6%8C%89%E5%80%BC%E4%BC%A0%E9%80%92/"/>
+    
+    <category term="按引用传递" scheme="https://limeya.github.io/tags/%E6%8C%89%E5%BC%95%E7%94%A8%E4%BC%A0%E9%80%92/"/>
+    
+    <category term="argument passing" scheme="https://limeya.github.io/tags/argument-passing/"/>
+    
+    <category term="pass by object" scheme="https://limeya.github.io/tags/pass-by-object/"/>
+    
+  </entry>
+  
+  <entry>
     <title>C++中的可变参数使用总结</title>
     <link href="https://limeya.github.io/2022/11/03/bian-cheng-zhi-dao/c-zhong-de-ke-bian-can-shu-shi-yong-zong-jie/"/>
     <id>https://limeya.github.io/2022/11/03/bian-cheng-zhi-dao/c-zhong-de-ke-bian-can-shu-shi-yong-zong-jie/</id>
@@ -612,38 +644,6 @@
     <category term="typedef" scheme="https://limeya.github.io/tags/typedef/"/>
     
     <category term="表达式类型" scheme="https://limeya.github.io/tags/%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%B1%BB%E5%9E%8B/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>C++:数组作为参数进行传递</title>
-    <link href="https://limeya.github.io/2022/10/11/bian-cheng-zhi-dao/c-shu-zu-zuo-wei-can-shu-jin-xing-chuan-di/"/>
-    <id>https://limeya.github.io/2022/10/11/bian-cheng-zhi-dao/c-shu-zu-zuo-wei-can-shu-jin-xing-chuan-di/</id>
-    <published>2022-10-10T16:00:00.000Z</published>
-    <updated>2022-10-11T11:02:40.472Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;blockquote&gt;
-&lt;p&gt;📌 来自C++ primer中的6.2.4部分&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h1 id=&quot;数组的特性&quot;&gt;&lt;a href=&quot;#数组的特性&quot; class=&quot;headerlink&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="编程之道" scheme="https://limeya.github.io/categories/%E7%BC%96%E7%A8%8B%E4%B9%8B%E9%81%93/"/>
-    
-    
-    <category term="数组" scheme="https://limeya.github.io/tags/%E6%95%B0%E7%BB%84/"/>
-    
-    <category term="函数" scheme="https://limeya.github.io/tags/%E5%87%BD%E6%95%B0/"/>
-    
-    <category term="参数传递" scheme="https://limeya.github.io/tags/%E5%8F%82%E6%95%B0%E4%BC%A0%E9%80%92/"/>
     
   </entry>
   
