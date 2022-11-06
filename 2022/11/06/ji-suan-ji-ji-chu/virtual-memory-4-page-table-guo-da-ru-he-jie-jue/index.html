@@ -1,0 +1,1279 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="Virtual Memory（4）：page table过大如何解决？, LifeHit">
+    <meta name="description" content="介绍virtual memory中如何处理page table过大的问题，比如多级page table。">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0V4SV7JK5F"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+    gtag('config', 'G-0V4SV7JK5F');
+</script>
+
+
+    <title>Virtual Memory（4）：page table过大如何解决？ | LifeHit</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="LifeHit" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">LifeHit</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">LifeHit</div>
+        <div class="logo-desc">
+            
+            世界上只有一种真正的英雄主义，就是认清了生活的真相后还依然热爱它
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/20.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">Virtual Memory（4）：page table过大如何解决？</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/virtual-memory/">
+                                <span class="chip bg-color">virtual memory</span>
+                            </a>
+                        
+                            <a href="/tags/page-table/">
+                                <span class="chip bg-color">page table</span>
+                            </a>
+                        
+                            <a href="/tags/multilevel-page-table/">
+                                <span class="chip bg-color">multilevel page table</span>
+                            </a>
+                        
+                            <a href="/tags/inverted-page-table/">
+                                <span class="chip bg-color">inverted page table</span>
+                            </a>
+                        
+                            <a href="/tags/virtualized-page-tables/">
+                                <span class="chip bg-color">virtualized page tables</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" class="post-category">
+                                计算机基础
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2022-11-06
+                </div>
+                
+
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    2.2k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    8 分
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="问题：page-table过大"><a href="#问题：page-table过大" class="headerlink" title="问题：page table过大"></a>问题：page table过大</h1><p>前面说到，每个程序（或者进程）都有一个page table，以此来区分它和其他的进程，彼此之间互不干扰。而且，每个page table都保存在内存中。但是随着程序或者多进程程序的增多，内存的容量入不敷出。</p>
+<h2 id="举例：page-table占据的空间"><a href="#举例：page-table占据的空间" class="headerlink" title="举例：page table占据的空间"></a>举例：page table占据的空间</h2><p>举例说明，对于32位的virtual address，4KiB的page size（12bits），page table中共有 $2^{20}$ 个entry，如果每个entry共4个bytes，则一个page table需要占据 $2^{22}$ 个bytes，共4MiB。</p>
+<p>因此，一个process对应4MiB的page table，成百上千的process需要的内存空间非常大。更不用说，现在的地址均为64位的，则需要的内存空间更大。</p>
+<h1 id="一些解决办法"><a href="#一些解决办法" class="headerlink" title="一些解决办法"></a>一些解决办法</h1><p>那么如何减少page table占据的内存空间呢？一般来说，有5种方法。</p>
+<h2 id="dynamic-page-table-with-a-single-direction"><a href="#dynamic-page-table-with-a-single-direction" class="headerlink" title="dynamic page table with a single direction"></a>dynamic page table with a single direction</h2><p><strong>前面的page table的问题</strong>：容量的大小在初始阶段已经确定，但是一个process可能用不了那么大的page table。</p>
+<p><strong>解决思路</strong>：最简单的方式是让page table的大小随着process使用的内存增多而逐渐增多。</p>
+<p><strong>解决方式</strong>：这种方法可以通过设置一个limit register来解决，给每个process一个固定的初始page table容量，当超过该容量时，就随着process占据的virtual address space的增多而增加。</p>
+<p><strong>方法的不足</strong>：这种方法，要求address space只能向一个方向扩展。</p>
+<h2 id="dynamic-page-table-with-both-directions"><a href="#dynamic-page-table-with-both-directions" class="headerlink" title="dynamic page table with both directions"></a>dynamic page table with both directions</h2><p><strong>上述方法的问题</strong>：address space只能向一个方向扩展，<a target="_blank" rel="noopener" href="https://juejin.cn/post/6844904099889020935">受到一些编程语言的限制</a>，比如C++：</p>
+<ul>
+<li>stack的内存地址向下增长；</li>
+<li>heap的内存地址向上增长；</li>
+</ul>
+<p>解决思路：将address space划分，同时支持向两个方向扩展。</p>
+<p>解决方法：与上述方法相同。此时，需要两个单独的page tables和对应的limit registers。对于virtual address也要进行划分，用来指定去哪个page table完成映射，如下所示，<strong>通过提供一个bit进行标识</strong>。</p>
+<p><img src="/images/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/Virtual-Memory%EF%BC%884%EF%BC%89%EF%BC%9APage-table%E8%BF%87%E5%A4%A7%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%EF%BC%9F/1.png" alt="使用一个bit划分两个page table"></p>
+<ul>
+<li>其中，通过hight-order bit决定去哪个page table完成映射；</li>
+<li>每个分开的page table的大小最多是原来的一半；最小是limit register指定的数量；</li>
+<li>这种划分，对于上层的应用来说完全感知不到，可以像往常一样操作；</li>
+<li>此时，每个page table的大小取决于程序中使用的stack空间多还是heap 空间多。</li>
+</ul>
+<p>这种方法的主要缺点是<strong>当address space以稀疏sparse的方式使用，而不是以连续的virtual address的方式使用时，工作地并不好</strong>。</p>
+<blockquote>
+<p>这里效果不好的原因（包括上一个方法），我的理解是这样的，因为page table的初始大小受到limit register的限制，当地址扩展时，page table的容量也会扩展，但是地址的扩展有两种方式：</p>
+<ol>
+<li>一是稳定地扩展，这样page table的容量也会稳定的增长，方法在这种场景下表现很好；</li>
+<li>二是不稳定扩展，例如，第一次访问内存的virtual page number是page table的第一个，而第二次访问的virtual page number是最后一个，则会导致，page table的容量一下子从初始大小扩展到最大的容量，这种稀疏的内存地址扩展方式，使得这种方法效果不好。</li>
+</ol>
+</blockquote>
+<h2 id="inverted-page-table"><a href="#inverted-page-table" class="headerlink" title="inverted page table"></a>inverted page table</h2><p>通过对virtual address 使用<code>hashing function</code>，可以减少page table的size。因为，此时page table中的entry的数量是physical  pages的数量，不是virtual pages的数量（两者之间，相差2个bit，则相差4倍）。这样的结构称为<code>inverted page table</code>。</p>
+<p>但是这种结构中，对于page table的查找很复杂，因为不能通过virtual page number索引整个page table。</p>
+<p>关于inverted page table的内容，可以继续参考如下材料：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://web.eecs.umich.edu/~akamil/teaching/sp04/040104.pdf">https://web.eecs.umich.edu/~akamil/teaching/sp04/040104.pdf</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.educative.io/answers/what-is-an-inverted-page-table-in-operating-systems">https://www.educative.io/answers/what-is-an-inverted-page-table-in-operating-systems</a></li>
+<li><a target="_blank" rel="noopener" href="http://gauss.ececs.uc.edu/Courses/c4029/code/memory/inv_pt.pdf">http://gauss.ececs.uc.edu/Courses/c4029/code/memory/inv_pt.pdf</a></li>
+</ul>
+<h2 id="multilevel-page-table"><a href="#multilevel-page-table" class="headerlink" title="multilevel page table"></a>multilevel page table</h2><p>通过多级page table可以减少page table占据的空间。这种方式可以忽略一些不需要内存page的地址，也就不需要进行地址转换，即，<strong>核心在于，我们只需要存储那些需要访问的内存地址的映射关系即可</strong>。</p>
+<p>上述的方法中，不管内存地址是否会被使用，只要后续的地址被访问，其前面的内存映射关系就会占据page table存储空间，举例说明：当process访问地址0x00020000对应的内存时，那么在page table中一定会为0x00010000保存了映射关系需要的存储空间。</p>
+<p>多级页表可以有效解决这个问题，首先先看一下多级页表的结构，本质上是一个多叉树，如下：</p>
+<p><img src="/images/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/Virtual-Memory%EF%BC%884%EF%BC%89%EF%BC%9APage-table%E8%BF%87%E5%A4%A7%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%EF%BC%9F/2.png" alt="多级页表的结构"></p>
+<p>对于一个virtual address分成两个部分：</p>
+<ul>
+<li>对应multilevel page table的索引；</li>
+<li>page offset</li>
+</ul>
+<p>一个对应multilevel page table的索引又分为了4个部分，分别对应不同level的page table的索引，每个索引占据5个bits。</p>
+<ul>
+<li>对于第4级索引，对应一个page table，该索引能找到该table中的一个entry，整个表共有 $2^5 = 32$个entries，每个entry中存储的并不是physical page number，而是下一级page table的地址，因此一个4th page table可以对应32个3rd page tables。对于一个32位的地址来说，每个entry需要占据4KiB的空间，因此4th page table需要占据 32*4 = 128KiB的空间。</li>
+<li>当通过4th entry中的地址找到对应的3rd page table时，就可以通过3rd level的索引在该page table中找到2nd page table的地址。同样的，每个3rd page table也有32个entries，占据了128KiB的空间。</li>
+<li>找到2nd page table后，可以通过2nd level的索引找到1rt page table，之后在该page table中找到对应的physical page number，其与page offset结合，共同组成真实的physical address。</li>
+</ul>
+<p>这就是整个virtual address被划分为多级索引，从而在多级page table中映射physical address的过程。前面我们说了multilevel page table能够减少存储空间，下面分析一下上述的结构共占据多少空间。</p>
+<p><img src="/images/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/Virtual-Memory%EF%BC%884%EF%BC%89%EF%BC%9APage-table%E8%BF%87%E5%A4%A7%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%EF%BC%9F/3.png" alt="多级页表占据的存储空间"></p>
+<p>整个结构为一个多叉树：</p>
+<table>
+<thead>
+<tr>
+<th>level</th>
+<th>page table数量</th>
+<th>每个page table的entry数量</th>
+<th>每个entry的大小</th>
+<th>占据的总空间</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>4</td>
+<td>1</td>
+<td>32</td>
+<td>4KiB</td>
+<td>128KiB</td>
+</tr>
+<tr>
+<td>3</td>
+<td>32</td>
+<td>32</td>
+<td>4KiB</td>
+<td>4096KiB</td>
+</tr>
+<tr>
+<td>2</td>
+<td>32 * 32=1024</td>
+<td>32</td>
+<td>4KiB</td>
+<td>131072KiB</td>
+</tr>
+<tr>
+<td>1</td>
+<td>32 * 32 * 32=32768</td>
+<td>32</td>
+<td>4KiB</td>
+<td>4194304KiB</td>
+</tr>
+</tbody></table>
+<p>将所有的占据空间加和得到：</p>
+<p>$$<br>128 + 4096 + 131072 + 4194304 = 4329600 \text{KiB} = 4.129\text{GB}<br>$$</p>
+<p>WTF？用了多级页表后，怎么page table占据的空间更大了？注意，这只是理论上的，实际当中，基本不会需要这么大的存储空间。这是因为局部性原理，程序运行时，stack是从上向下增长的，heap是从下向上增长的，也就是说内存地址的空间趋向于连续，这是<strong>空间局部性原理</strong>产生的效果。</p>
+<p>这会造成什么影响？在多级页表中进行查询时，只会沿着特定的路径完成地址映射，如上图中的红色框图，也就是说，对于一个process而言，其使用的4th pt和3rd pt，甚至是2nd pt可能一直是同一个，这种情况下，只需要一级page table保持32个（占满，实际也有可能不会满），则占据的存储空间为：</p>
+<p>$$<br>4 + 4 + 4 + 128 = 140 \text{KiB}<br>$$</p>
+<p>相比于之前的4MB存储空间，大大减少了。</p>
+<p>除了减少了存储空间，这种方法还有一个好处，尤其是相比上述的dynamic page table，即支持address space以稀疏sparse的方式使用，即便再稀疏，只会保存使用的page的地址映射关系，对于不需要的，则不会保存，这种支持特别有利于以非连续的方式分配address space的软件程序。</p>
+<p>但是这种方法也有缺点：前面说过page table是驻留在内存中的，在之前的方法中，一个virtual page number对应一个physical page number，只需要访问一次内存就可以完成地址转换。现在分成了4个level的page tables，需要访问4次内存，理论上需要的地址转换时间是之前的4倍，不仅更复杂了，而且还需要更多的时间。这是典型的以时间换空间的策略。</p>
+<h2 id="Make-page-tables-paged"><a href="#Make-page-tables-paged" class="headerlink" title="Make page tables paged"></a>Make page tables paged</h2><p>这种方法有时也称为virtualized page tables，核心思想在于将page table视为普通的内存。因此，也可以将page table放到virtual address space，但是这种方法会有严重的问题——never-ending series of page faults，详细内容可以参考以下资料：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/50321686/how-virtualized-page-table-works">https://stackoverflow.com/questions/50321686/how-virtualized-page-table-works</a></li>
+</ul>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ol>
+<li>Computer Organization and Design - 5.7</li>
+</ol>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">alex Li</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://limeya.github.io/2022/11/06/ji-suan-ji-ji-chu/virtual-memory-4-page-table-guo-da-ru-he-jie-jue/">https://limeya.github.io/2022/11/06/ji-suan-ji-ji-chu/virtual-memory-4-page-table-guo-da-ru-he-jie-jue/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">alex Li</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/virtual-memory/">
+                                    <span class="chip bg-color">virtual memory</span>
+                                </a>
+                            
+                                <a href="/tags/page-table/">
+                                    <span class="chip bg-color">page table</span>
+                                </a>
+                            
+                                <a href="/tags/multilevel-page-table/">
+                                    <span class="chip bg-color">multilevel page table</span>
+                                </a>
+                            
+                                <a href="/tags/inverted-page-table/">
+                                    <span class="chip bg-color">inverted page table</span>
+                                </a>
+                            
+                                <a href="/tags/virtualized-page-tables/">
+                                    <span class="chip bg-color">virtualized page tables</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
+            <div class="card">
+                <a href="/2022/11/06/ji-suan-ji-ji-chu/virtual-memory-4-page-table-guo-da-ru-he-jie-jue/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/20.jpg" class="responsive-img" alt="Virtual Memory（4）：page table过大如何解决？">
+                        
+                        <span class="card-title">Virtual Memory（4）：page table过大如何解决？</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            介绍virtual memory中如何处理page table过大的问题，比如多级page table。
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-11-06
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" class="post-category">
+                                    计算机基础
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/virtual-memory/">
+                        <span class="chip bg-color">virtual memory</span>
+                    </a>
+                    
+                    <a href="/tags/page-table/">
+                        <span class="chip bg-color">page table</span>
+                    </a>
+                    
+                    <a href="/tags/multilevel-page-table/">
+                        <span class="chip bg-color">multilevel page table</span>
+                    </a>
+                    
+                    <a href="/tags/inverted-page-table/">
+                        <span class="chip bg-color">inverted page table</span>
+                    </a>
+                    
+                    <a href="/tags/virtualized-page-tables/">
+                        <span class="chip bg-color">virtualized page tables</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2022/11/03/bian-cheng-zhi-dao/c-zhong-de-ke-bian-can-shu-shi-yong-zong-jie/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/22.jpg" class="responsive-img" alt="C++中的可变参数使用总结">
+                        
+                        <span class="card-title">C++中的可变参数使用总结</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            总结C++中可变参数使用的几种方式以及它们的特点。
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-11-03
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E7%BC%96%E7%A8%8B%E4%B9%8B%E9%81%93/" class="post-category">
+                                    编程之道
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/ellipsis/">
+                        <span class="chip bg-color">ellipsis</span>
+                    </a>
+                    
+                    <a href="/tags/initializer-list/">
+                        <span class="chip bg-color">initializer_list</span>
+                    </a>
+                    
+                    <a href="/tags/variadic-template/">
+                        <span class="chip bg-color">variadic template</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h1, h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h1, h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script>
+    MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+    });
+</script>
+
+
+
+    <footer class="page-footer bg-color">
+    
+        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
+<style>
+    .aplayer .aplayer-lrc p {
+        
+        display: none;
+        
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
+
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        
+        display: none;
+        
+        font-size: 15px;
+        color: #42b983;
+    }
+
+    
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
+        left: -66px !important;
+    }
+
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
+        left: 0px !important;
+    }
+
+    
+</style>
+<div class="">
+    
+    <div class="row">
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="netease"
+                   type="playlist"
+                   id="503838841"
+                   fixed='true'
+                   autoplay='false'
+                   theme='#42b983'
+                   loop='all'
+                   order='random'
+                   preload='auto'
+                   volume='0.7'
+                   list-folded='true'
+        >
+        </meting-js>
+    </div>
+</div>
+
+<script src="/libs/aplayer/APlayer.min.js"></script>
+<script src="/libs/aplayer/Meting.min.js"></script>
+
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 15px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2021-2022</span>
+            
+            <a href="/about" target="_blank">alex Li</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+                &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                        class="white-color">85.3k</span>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+                <span id="sitetime"> Loading ...</span>
+                <script>
+                    var calcSiteTime = function () {
+                        var seconds = 1000;
+                        var minutes = seconds * 60;
+                        var hours = minutes * 60;
+                        var days = hours * 24;
+                        var years = days * 365;
+                        var today = new Date();
+                        var startYear = "2021";
+                        var startMonth = "11";
+                        var startDate = "13";
+                        var startHour = "20";
+                        var startMinute = "0";
+                        var startSecond = "0";
+                        var todayYear = today.getFullYear();
+                        var todayMonth = today.getMonth() + 1;
+                        var todayDate = today.getDate();
+                        var todayHour = today.getHours();
+                        var todayMinute = today.getMinutes();
+                        var todaySecond = today.getSeconds();
+                        var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                        var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                        var diff = t2 - t1;
+                        var diffYears = Math.floor(diff / years);
+                        var diffDays = Math.floor((diff / days) - diffYears * 365);
+
+                        // 区分是否有年份.
+                        var language = 'zh-CN';
+                        if (startYear === String(todayYear)) {
+                            document.getElementById("year").innerHTML = todayYear;
+                            var daysTip = 'This site has been running for ' + diffDays + ' days';
+                            if (language === 'zh-CN') {
+                                daysTip = '本站已运行 ' + diffDays + ' 天';
+                            } else if (language === 'zh-HK') {
+                                daysTip = '本站已運行 ' + diffDays + ' 天';
+                            }
+                            document.getElementById("sitetime").innerHTML = daysTip;
+                        } else {
+                            document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                            var yearsAndDaysTip = 'This site has been running for ' + diffYears + ' years and '
+                                + diffDays + ' days';
+                            if (language === 'zh-CN') {
+                                yearsAndDaysTip = '本站已运行 ' + diffYears + ' 年 ' + diffDays + ' 天';
+                            } else if (language === 'zh-HK') {
+                                yearsAndDaysTip = '本站已運行 ' + diffYears + ' 年 ' + diffDays + ' 天';
+                            }
+                            document.getElementById("sitetime").innerHTML = yearsAndDaysTip;
+                        }
+                    }
+
+                    calcSiteTime();
+                </script>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/limeya" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:lmy86263@gmail.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1215869909" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1215869909" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+
+
+    <a href="https://blog.csdn.net/lmy86263" class="tooltipped" target="_blank" data-tooltip="访问csdn" data-position="top" data-delay="50">
+		<i class="fab fa-blogger"></i>
+    </a>
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    
+
+    
+
+    <!-- 雪花特效 -->
+    
+
+    <!-- 鼠标星星特效 -->
+    
+
+     
+        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+        <script src="/libs/others/TencentCaptcha.js"></script>
+        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
+    
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

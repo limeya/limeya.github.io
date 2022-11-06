@@ -6,7 +6,7 @@
   <link href="https://limeya.github.io/atom.xml" rel="self"/>
   
   <link href="https://limeya.github.io/"/>
-  <updated>2022-11-03T15:29:08.596Z</updated>
+  <updated>2022-11-06T08:17:25.479Z</updated>
   <id>https://limeya.github.io/</id>
   
   <author>
@@ -15,6 +15,39 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Virtual Memory（4）：page table过大如何解决？</title>
+    <link href="https://limeya.github.io/2022/11/06/ji-suan-ji-ji-chu/virtual-memory-4-page-table-guo-da-ru-he-jie-jue/"/>
+    <id>https://limeya.github.io/2022/11/06/ji-suan-ji-ji-chu/virtual-memory-4-page-table-guo-da-ru-he-jie-jue/</id>
+    <published>2022-11-06T08:00:00.000Z</published>
+    <updated>2022-11-06T08:17:25.479Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;问题：page-table过大&quot;&gt;&lt;a href=&quot;#问题：page-table过大&quot; class=&quot;headerlink&quot; title=&quot;问题：page table过大&quot;&gt;&lt;/a&gt;问题：page</summary>
+        
+      
+    
+    
+    
+    <category term="计算机基础" scheme="https://limeya.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/"/>
+    
+    
+    <category term="virtual memory" scheme="https://limeya.github.io/tags/virtual-memory/"/>
+    
+    <category term="page table" scheme="https://limeya.github.io/tags/page-table/"/>
+    
+    <category term="multilevel page table" scheme="https://limeya.github.io/tags/multilevel-page-table/"/>
+    
+    <category term="inverted page table" scheme="https://limeya.github.io/tags/inverted-page-table/"/>
+    
+    <category term="virtualized page tables" scheme="https://limeya.github.io/tags/virtualized-page-tables/"/>
+    
+  </entry>
   
   <entry>
     <title>C++中的可变参数使用总结</title>
@@ -611,38 +644,6 @@
     <category term="函数" scheme="https://limeya.github.io/tags/%E5%87%BD%E6%95%B0/"/>
     
     <category term="参数传递" scheme="https://limeya.github.io/tags/%E5%8F%82%E6%95%B0%E4%BC%A0%E9%80%92/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>C++:const关键字</title>
-    <link href="https://limeya.github.io/2022/10/07/bian-cheng-zhi-dao/c-const-guan-jian-zi/"/>
-    <id>https://limeya.github.io/2022/10/07/bian-cheng-zhi-dao/c-const-guan-jian-zi/</id>
-    <published>2022-10-06T16:00:00.000Z</published>
-    <updated>2022-10-11T11:11:48.087Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;blockquote&gt;
-&lt;p&gt;💡 本篇的内容来自C++ Primer中的2.4节&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h1 id=&quot;基本内容&quot;&gt;&lt;a href=&quot;#基本内容&quot; class=&quot;headerlink&quot; title=&quot;基本内容&quot;&gt;&lt;/a&gt;基本内容&lt;/h1&gt;&lt;h2</summary>
-        
-      
-    
-    
-    
-    <category term="编程之道" scheme="https://limeya.github.io/categories/%E7%BC%96%E7%A8%8B%E4%B9%8B%E9%81%93/"/>
-    
-    
-    <category term="常量" scheme="https://limeya.github.io/tags/%E5%B8%B8%E9%87%8F/"/>
-    
-    <category term="const" scheme="https://limeya.github.io/tags/const/"/>
-    
-    <category term="constexpr" scheme="https://limeya.github.io/tags/constexpr/"/>
     
   </entry>
   
