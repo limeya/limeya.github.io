@@ -46,6 +46,35 @@
   </entry>
   
   <entry>
+    <title>C++内存管理：智能指针与unique_ptr</title>
+    <link href="https://limeya.github.io/2022/11/12/bian-cheng-zhi-dao/c-nei-cun-guan-li-zhi-neng-zhi-zhen-yu-unique-ptr/"/>
+    <id>https://limeya.github.io/2022/11/12/bian-cheng-zhi-dao/c-nei-cun-guan-li-zhi-neng-zhi-zhen-yu-unique-ptr/</id>
+    <published>2022-11-11T16:00:00.000Z</published>
+    <updated>2022-11-16T13:57:43.861Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;smart-pointers&quot;&gt;&lt;a href=&quot;#smart-pointers&quot; class=&quot;headerlink&quot; title=&quot;smart pointers&quot;&gt;&lt;/a&gt;smart</summary>
+        
+      
+    
+    
+    
+    <category term="编程之道" scheme="https://limeya.github.io/categories/%E7%BC%96%E7%A8%8B%E4%B9%8B%E9%81%93/"/>
+    
+    
+    <category term="smart pointers" scheme="https://limeya.github.io/tags/smart-pointers/"/>
+    
+    <category term="shared_ptr" scheme="https://limeya.github.io/tags/shared-ptr/"/>
+    
+    <category term="unique_ptr" scheme="https://limeya.github.io/tags/unique-ptr/"/>
+    
+  </entry>
+  
+  <entry>
     <title>C++的变量及其初始化</title>
     <link href="https://limeya.github.io/2022/11/09/bian-cheng-zhi-dao/c-de-bian-liang-ji-qi-chu-shi-hua/"/>
     <id>https://limeya.github.io/2022/11/09/bian-cheng-zhi-dao/c-de-bian-liang-ji-qi-chu-shi-hua/</id>
@@ -610,36 +639,6 @@
     <category term="cache" scheme="https://limeya.github.io/tags/cache/"/>
     
     <category term="disk" scheme="https://limeya.github.io/tags/disk/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>述说Vulkan的历史及特点</title>
-    <link href="https://limeya.github.io/2022/10/14/ji-suan-ji-tu-xing-xue/vulkan/vulkan-de-li-shi-ji-te-dian/"/>
-    <id>https://limeya.github.io/2022/10/14/ji-suan-ji-tu-xing-xue/vulkan/vulkan-de-li-shi-ji-te-dian/</id>
-    <published>2022-10-13T16:00:00.000Z</published>
-    <updated>2022-10-14T15:49:23.658Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;blockquote&gt;
-&lt;p&gt;📌 由于工作的原因，开始进入计算机图形学的领域，开始研究Vulkan，后面会有一系列的学习总结文章，在此挖坑为证。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h1 id=&quot;Vulkan的来源&quot;&gt;&lt;a href=&quot;#Vulkan的来源&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="计算机图形学" scheme="https://limeya.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/"/>
-    
-    
-    <category term="Vulkan" scheme="https://limeya.github.io/tags/Vulkan/"/>
-    
-    <category term="OpenGL" scheme="https://limeya.github.io/tags/OpenGL/"/>
     
   </entry>
   
