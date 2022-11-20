@@ -6,7 +6,7 @@
   <link href="https://limeya.github.io/atom.xml" rel="self"/>
   
   <link href="https://limeya.github.io/"/>
-  <updated>2022-11-20T07:38:58.652Z</updated>
+  <updated>2022-11-20T07:57:50.411Z</updated>
   <id>https://limeya.github.io/</id>
   
   <author>
@@ -15,6 +15,40 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>C++内存管理：shared_ptr</title>
+    <link href="https://limeya.github.io/2022/11/20/bian-cheng-zhi-dao/c-nei-cun-guan-li-shared-ptr/"/>
+    <id>https://limeya.github.io/2022/11/20/bian-cheng-zhi-dao/c-nei-cun-guan-li-shared-ptr/</id>
+    <published>2022-11-19T16:00:00.000Z</published>
+    <updated>2022-11-20T07:57:50.411Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;智能指针&lt;code&gt;shared_ptr&lt;/code&gt;，与&lt;code&gt;unique_ptr&lt;/code&gt;和&lt;code&gt;weak_ptr&lt;/code&gt;不同：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;不像&lt;code&gt;unique_ptr&lt;/code&gt;那么独断专制；&lt;/li&gt;
+&lt;li&gt;也不像&lt;</summary>
+        
+      
+    
+    
+    
+    <category term="编程之道" scheme="https://limeya.github.io/categories/%E7%BC%96%E7%A8%8B%E4%B9%8B%E9%81%93/"/>
+    
+    
+    <category term="smart pointers" scheme="https://limeya.github.io/tags/smart-pointers/"/>
+    
+    <category term="weak_ptr" scheme="https://limeya.github.io/tags/weak-ptr/"/>
+    
+    <category term="shared_ptr" scheme="https://limeya.github.io/tags/shared-ptr/"/>
+    
+    <category term="unique_ptr" scheme="https://limeya.github.io/tags/unique-ptr/"/>
+    
+  </entry>
   
   <entry>
     <title>C++内存管理：基本知识与new-delete的使用</title>
@@ -603,38 +637,6 @@
     <category term="memory" scheme="https://limeya.github.io/tags/memory/"/>
     
     <category term="cache" scheme="https://limeya.github.io/tags/cache/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>《邻家的百万富翁》们如何《财富自由》的？</title>
-    <link href="https://limeya.github.io/2022/10/16/du-shu-gan-wu/lin-jia-de-bai-wan-fu-weng-men-ru-he-cai-fu-zi-you-de/"/>
-    <id>https://limeya.github.io/2022/10/16/du-shu-gan-wu/lin-jia-de-bai-wan-fu-weng-men-ru-he-cai-fu-zi-you-de/</id>
-    <published>2022-10-15T16:00:00.000Z</published>
-    <updated>2022-10-16T11:04:21.588Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;p&gt;这本书是《邻家的百万富翁》的作者搜集的材料，他的儿子写的，因为在刚要写这本书时，因为车祸去世了，人生总有一些遗憾，所幸这本书还出版了。&lt;/p&gt;
-&lt;p&gt;当我读完了《邻家的百万富翁》后，按照作者找也发现了这本书，从名字来看，这本书显然比之前的书的鸡汤味还要浓，尤其是在当今的社会</summary>
-        
-      
-    
-    
-    
-    <category term="读书感悟" scheme="https://limeya.github.io/categories/%E8%AF%BB%E4%B9%A6%E6%84%9F%E6%82%9F/"/>
-    
-    
-    <category term="致富" scheme="https://limeya.github.io/tags/%E8%87%B4%E5%AF%8C/"/>
-    
-    <category term="投资" scheme="https://limeya.github.io/tags/%E6%8A%95%E8%B5%84/"/>
-    
-    <category term="计划" scheme="https://limeya.github.io/tags/%E8%AE%A1%E5%88%92/"/>
-    
-    <category term="自由" scheme="https://limeya.github.io/tags/%E8%87%AA%E7%94%B1/"/>
     
   </entry>
   
