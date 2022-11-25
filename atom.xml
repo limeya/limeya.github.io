@@ -6,7 +6,7 @@
   <link href="https://limeya.github.io/atom.xml" rel="self"/>
   
   <link href="https://limeya.github.io/"/>
-  <updated>2022-11-24T15:09:41.049Z</updated>
+  <updated>2022-11-25T15:57:07.145Z</updated>
   <id>https://limeya.github.io/</id>
   
   <author>
@@ -15,6 +15,42 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>C++内存管理：使用new和智能指针操作dynamic array</title>
+    <link href="https://limeya.github.io/2022/11/25/bian-cheng-zhi-dao/c-nei-cun-guan-li-shi-yong-new-he-zhi-neng-zhi-zhen-cao-zuo-dynamic-array/"/>
+    <id>https://limeya.github.io/2022/11/25/bian-cheng-zhi-dao/c-nei-cun-guan-li-shi-yong-new-he-zhi-neng-zhi-zhen-cao-zuo-dynamic-array/</id>
+    <published>2022-11-24T16:00:00.000Z</published>
+    <updated>2022-11-25T15:57:07.145Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;在之前的动态内存管理中，涉及的多为单一对象，但是在应用中也有这样的需求，在一次内存申请中需要一个连续的内存空间，为了满足这种需求，有两种解决方法：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;使用各种类型的container&lt;/p&gt;
+&lt;p&gt; </summary>
+        
+      
+    
+    
+    
+    <category term="编程之道" scheme="https://limeya.github.io/categories/%E7%BC%96%E7%A8%8B%E4%B9%8B%E9%81%93/"/>
+    
+    
+    <category term="shared_ptr" scheme="https://limeya.github.io/tags/shared-ptr/"/>
+    
+    <category term="unique_ptr" scheme="https://limeya.github.io/tags/unique-ptr/"/>
+    
+    <category term="new" scheme="https://limeya.github.io/tags/new/"/>
+    
+    <category term="delete" scheme="https://limeya.github.io/tags/delete/"/>
+    
+    <category term="dynamic array" scheme="https://limeya.github.io/tags/dynamic-array/"/>
+    
+  </entry>
   
   <entry>
     <title>C++内存管理：智能指针、异常与自定义deleter的关系</title>
@@ -607,46 +643,6 @@
     <category term="内存对齐" scheme="https://limeya.github.io/tags/%E5%86%85%E5%AD%98%E5%AF%B9%E9%BD%90/"/>
     
     <category term="cache capacity" scheme="https://limeya.github.io/tags/cache-capacity/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Cache的工作原理（3）：写数据</title>
-    <link href="https://limeya.github.io/2022/10/23/ji-suan-ji-ji-chu/cache-de-gong-zuo-yuan-li-3-xie-shu-ju/"/>
-    <id>https://limeya.github.io/2022/10/23/ji-suan-ji-ji-chu/cache-de-gong-zuo-yuan-li-3-xie-shu-ju/</id>
-    <published>2022-10-22T16:00:00.000Z</published>
-    <updated>2022-10-23T09:45:48.661Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;p&gt;cache在CPU读取数据时扮演着重要的角色，同样的，虽然，在CPU写数据时，没有发挥直接作用，但是可以发挥间接作用，比如将数据写的地方离自己近一点，这样有利于下次的读取。&lt;/p&gt;
-&lt;p&gt;但是，写数据与读数据不太一样，主要有两个方面的问题：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;hit</summary>
-        
-      
-    
-    
-    
-    <category term="计算机基础" scheme="https://limeya.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/"/>
-    
-    
-    <category term="memory" scheme="https://limeya.github.io/tags/memory/"/>
-    
-    <category term="cache" scheme="https://limeya.github.io/tags/cache/"/>
-    
-    <category term="write allocation" scheme="https://limeya.github.io/tags/write-allocation/"/>
-    
-    <category term="no write allocation" scheme="https://limeya.github.io/tags/no-write-allocation/"/>
-    
-    <category term="write through" scheme="https://limeya.github.io/tags/write-through/"/>
-    
-    <category term="write back" scheme="https://limeya.github.io/tags/write-back/"/>
-    
-    <category term="write policy" scheme="https://limeya.github.io/tags/write-policy/"/>
     
   </entry>
   
