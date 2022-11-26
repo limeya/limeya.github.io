@@ -6,7 +6,7 @@
   <link href="https://limeya.github.io/atom.xml" rel="self"/>
   
   <link href="https://limeya.github.io/"/>
-  <updated>2022-11-25T15:57:07.145Z</updated>
+  <updated>2022-11-26T16:53:41.954Z</updated>
   <id>https://limeya.github.io/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>C++内存管理：使用allocator管理dynamic array</title>
+    <link href="https://limeya.github.io/2022/11/27/bian-cheng-zhi-dao/c-nei-cun-guan-li-shi-yong-allocator-guan-li-dynamic-array/"/>
+    <id>https://limeya.github.io/2022/11/27/bian-cheng-zhi-dao/c-nei-cun-guan-li-shi-yong-allocator-guan-li-dynamic-array/</id>
+    <published>2022-11-26T16:00:00.000Z</published>
+    <updated>2022-11-26T16:53:41.954Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;动态内存申请中的问题&quot;&gt;&lt;a href=&quot;#动态内存申请中的问题&quot; class=&quot;headerlink&quot; title=&quot;动态内存申请中的问题&quot;&gt;&lt;/a&gt;动态内存申请中的问题&lt;/h1&gt;&lt;p&gt;在之前的动态内存分配中，不管是单个对象还是dynamic</summary>
+        
+      
+    
+    
+    
+    <category term="编程之道" scheme="https://limeya.github.io/categories/%E7%BC%96%E7%A8%8B%E4%B9%8B%E9%81%93/"/>
+    
+    
+    <category term="dynamic array" scheme="https://limeya.github.io/tags/dynamic-array/"/>
+    
+    <category term="allocator" scheme="https://limeya.github.io/tags/allocator/"/>
+    
+  </entry>
   
   <entry>
     <title>C++内存管理：使用new和智能指针操作dynamic array</title>
@@ -612,37 +639,6 @@
     <category term="cache" scheme="https://limeya.github.io/tags/cache/"/>
     
     <category term="平均访存时间" scheme="https://limeya.github.io/tags/%E5%B9%B3%E5%9D%87%E8%AE%BF%E5%AD%98%E6%97%B6%E9%97%B4/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Cache的工作原理（2）：读数据</title>
-    <link href="https://limeya.github.io/2022/10/23/ji-suan-ji-ji-chu/cache-de-gong-zuo-yuan-li-2-du-shu-ju/"/>
-    <id>https://limeya.github.io/2022/10/23/ji-suan-ji-ji-chu/cache-de-gong-zuo-yuan-li-2-du-shu-ju/</id>
-    <published>2022-10-22T16:00:00.000Z</published>
-    <updated>2022-10-23T07:36:19.426Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;Cache内部的逻辑结构&quot;&gt;&lt;a href=&quot;#Cache内部的逻辑结构&quot; class=&quot;headerlink&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="计算机基础" scheme="https://limeya.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/"/>
-    
-    
-    <category term="memory" scheme="https://limeya.github.io/tags/memory/"/>
-    
-    <category term="cache" scheme="https://limeya.github.io/tags/cache/"/>
-    
-    <category term="内存对齐" scheme="https://limeya.github.io/tags/%E5%86%85%E5%AD%98%E5%AF%B9%E9%BD%90/"/>
-    
-    <category term="cache capacity" scheme="https://limeya.github.io/tags/cache-capacity/"/>
     
   </entry>
   
