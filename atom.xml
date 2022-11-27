@@ -6,7 +6,7 @@
   <link href="https://limeya.github.io/atom.xml" rel="self"/>
   
   <link href="https://limeya.github.io/"/>
-  <updated>2022-11-26T16:53:41.954Z</updated>
+  <updated>2022-11-27T07:13:28.776Z</updated>
   <id>https://limeya.github.io/</id>
   
   <author>
@@ -17,11 +17,43 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Vulkan的programming model</title>
+    <link href="https://limeya.github.io/2022/11/27/ji-suan-ji-tu-xing-xue/vulkan/vulkan-de-programming-model/"/>
+    <id>https://limeya.github.io/2022/11/27/ji-suan-ji-tu-xing-xue/vulkan/vulkan-de-programming-model/</id>
+    <published>2022-11-27T07:00:00.000Z</published>
+    <updated>2022-11-27T07:13:28.776Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;hr&gt;
+&lt;h1 id=&quot;vulkan-application都需要什么&quot;&gt;&lt;a href=&quot;#vulkan-application都需要什么&quot; class=&quot;headerlink&quot; title=&quot;vulkan application都需要什么&quot;&gt;&lt;/a&gt;vulkan</summary>
+        
+      
+    
+    
+    
+    <category term="计算机图形学" scheme="https://limeya.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/"/>
+    
+    
+    <category term="Vulkan" scheme="https://limeya.github.io/tags/Vulkan/"/>
+    
+    <category term="pipeline" scheme="https://limeya.github.io/tags/pipeline/"/>
+    
+    <category term="driver" scheme="https://limeya.github.io/tags/driver/"/>
+    
+    <category term="loader" scheme="https://limeya.github.io/tags/loader/"/>
+    
+  </entry>
+  
+  <entry>
     <title>C++内存管理：使用allocator管理dynamic array</title>
     <link href="https://limeya.github.io/2022/11/27/bian-cheng-zhi-dao/c-nei-cun-guan-li-shi-yong-allocator-guan-li-dynamic-array/"/>
     <id>https://limeya.github.io/2022/11/27/bian-cheng-zhi-dao/c-nei-cun-guan-li-shi-yong-allocator-guan-li-dynamic-array/</id>
-    <published>2022-11-26T16:00:00.000Z</published>
-    <updated>2022-11-26T16:53:41.954Z</updated>
+    <published>2022-11-26T17:00:00.000Z</published>
+    <updated>2022-11-27T07:13:47.329Z</updated>
     
     
       
@@ -611,34 +643,6 @@
     <category term="fully associative" scheme="https://limeya.github.io/tags/fully-associative/"/>
     
     <category term="direct mapped cache" scheme="https://limeya.github.io/tags/direct-mapped-cache/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Cache的性能调优（1）：性能量化</title>
-    <link href="https://limeya.github.io/2022/10/24/ji-suan-ji-ji-chu/cache-de-xing-neng-diao-you-1-xing-neng-liang-hua/"/>
-    <id>https://limeya.github.io/2022/10/24/ji-suan-ji-ji-chu/cache-de-xing-neng-diao-you-1-xing-neng-liang-hua/</id>
-    <published>2022-10-23T16:00:00.000Z</published>
-    <updated>2022-10-24T16:56:58.373Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;p&gt;cache能够有效提升对存储器的访问速度，因此利用好这一组件，能够大大提升系统的整体性能，但是对cache的性能调优的第一步是如何量化对cache的访问性能。只有给出量化的方法，才能提出不同的策略，来改进策略。&lt;/p&gt;
-&lt;h1</summary>
-        
-      
-    
-    
-    
-    <category term="计算机基础" scheme="https://limeya.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/"/>
-    
-    
-    <category term="cache" scheme="https://limeya.github.io/tags/cache/"/>
-    
-    <category term="平均访存时间" scheme="https://limeya.github.io/tags/%E5%B9%B3%E5%9D%87%E8%AE%BF%E5%AD%98%E6%97%B6%E9%97%B4/"/>
     
   </entry>
   
