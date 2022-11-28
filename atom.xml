@@ -6,7 +6,7 @@
   <link href="https://limeya.github.io/atom.xml" rel="self"/>
   
   <link href="https://limeya.github.io/"/>
-  <updated>2022-11-27T07:13:28.776Z</updated>
+  <updated>2022-11-28T15:47:53.916Z</updated>
   <id>https://limeya.github.io/</id>
   
   <author>
@@ -15,6 +15,38 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>C++线程：thread的基本使用方式</title>
+    <link href="https://limeya.github.io/2022/11/28/bian-cheng-zhi-dao/c-xian-cheng-thread-de-ji-ben-shi-yong-fang-shi/"/>
+    <id>https://limeya.github.io/2022/11/28/bian-cheng-zhi-dao/c-xian-cheng-thread-de-ji-ben-shi-yong-fang-shi/</id>
+    <published>2022-11-27T16:00:00.000Z</published>
+    <updated>2022-11-28T15:47:53.916Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;基本使用样例&quot;&gt;&lt;a href=&quot;#基本使用样例&quot; class=&quot;headerlink&quot; title=&quot;基本使用样例&quot;&gt;&lt;/a&gt;基本使用样例&lt;/h1&gt;&lt;p&gt;这里使用一个基本的使用模版来说明thread的使用方式。&lt;/p&gt;
+&lt;pre class=&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="编程之道" scheme="https://limeya.github.io/categories/%E7%BC%96%E7%A8%8B%E4%B9%8B%E9%81%93/"/>
+    
+    
+    <category term="线程" scheme="https://limeya.github.io/tags/%E7%BA%BF%E7%A8%8B/"/>
+    
+    <category term="thread" scheme="https://limeya.github.io/tags/thread/"/>
+    
+    <category term="join" scheme="https://limeya.github.io/tags/join/"/>
+    
+    <category term="detach" scheme="https://limeya.github.io/tags/detach/"/>
+    
+  </entry>
   
   <entry>
     <title>Vulkan的programming model</title>
@@ -613,36 +645,6 @@
     <category term="L1 cache" scheme="https://limeya.github.io/tags/L1-cache/"/>
     
     <category term="L2 cache" scheme="https://limeya.github.io/tags/L2-cache/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Cache的性能调优（2）：减少miss rate-set associative</title>
-    <link href="https://limeya.github.io/2022/10/26/ji-suan-ji-ji-chu/cache-de-xing-neng-diao-you-2-set-associative/"/>
-    <id>https://limeya.github.io/2022/10/26/ji-suan-ji-ji-chu/cache-de-xing-neng-diao-you-2-set-associative/</id>
-    <published>2022-10-25T16:00:00.000Z</published>
-    <updated>2022-10-27T15:46:07.336Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;p&gt;在cache性能量化的文章中，提到使用平均访存时间在衡量cache的性能。由于miss cache是cache 访问的核心瓶颈之一，因此为了提升性能，可以通过有效减少miss rate来实现。&lt;/p&gt;
-&lt;h1 id=&quot;不同的miss类型&quot;&gt;&lt;a</summary>
-        
-      
-    
-    
-    
-    <category term="计算机基础" scheme="https://limeya.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/"/>
-    
-    
-    <category term="set associative" scheme="https://limeya.github.io/tags/set-associative/"/>
-    
-    <category term="fully associative" scheme="https://limeya.github.io/tags/fully-associative/"/>
-    
-    <category term="direct mapped cache" scheme="https://limeya.github.io/tags/direct-mapped-cache/"/>
     
   </entry>
   
