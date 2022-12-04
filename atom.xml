@@ -6,7 +6,7 @@
   <link href="https://limeya.github.io/atom.xml" rel="self"/>
   
   <link href="https://limeya.github.io/"/>
-  <updated>2022-11-29T16:48:54.633Z</updated>
+  <updated>2022-12-04T12:59:25.002Z</updated>
   <id>https://limeya.github.io/</id>
   
   <author>
@@ -15,6 +15,37 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>我们需要对《算法霸权》的威胁重视起来</title>
+    <link href="https://limeya.github.io/2022/12/04/du-shu-gan-wu/wo-men-xu-yao-dui-suan-fa-ba-quan-de-wei-xie-chong-shi-qi-lai/"/>
+    <id>https://limeya.github.io/2022/12/04/du-shu-gan-wu/wo-men-xu-yao-dui-suan-fa-ba-quan-de-wei-xie-chong-shi-qi-lai/</id>
+    <published>2022-12-03T16:00:00.000Z</published>
+    <updated>2022-12-04T12:59:25.002Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;我的经历&quot;&gt;&lt;a href=&quot;#我的经历&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="读书感悟" scheme="https://limeya.github.io/categories/%E8%AF%BB%E4%B9%A6%E6%84%9F%E6%82%9F/"/>
+    
+    
+    <category term="经济" scheme="https://limeya.github.io/tags/%E7%BB%8F%E6%B5%8E/"/>
+    
+    <category term="算法" scheme="https://limeya.github.io/tags/%E7%AE%97%E6%B3%95/"/>
+    
+    <category term="科技" scheme="https://limeya.github.io/tags/%E7%A7%91%E6%8A%80/"/>
+    
+    <category term="数学" scheme="https://limeya.github.io/tags/%E6%95%B0%E5%AD%A6/"/>
+    
+  </entry>
   
   <entry>
     <title>C++线程：thread中传递参数和所有权</title>
@@ -613,40 +644,6 @@
     <category term="page fault" scheme="https://limeya.github.io/tags/page-fault/"/>
     
     <category term="page table" scheme="https://limeya.github.io/tags/page-table/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Virtual Memory（1）：简介</title>
-    <link href="https://limeya.github.io/2022/10/29/ji-suan-ji-ji-chu/virtual-memory-1-jian-jie/"/>
-    <id>https://limeya.github.io/2022/10/29/ji-suan-ji-ji-chu/virtual-memory-1-jian-jie/</id>
-    <published>2022-10-28T16:00:00.000Z</published>
-    <updated>2022-10-29T16:53:11.750Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;解决什么问题&quot;&gt;&lt;a href=&quot;#解决什么问题&quot; class=&quot;headerlink&quot; title=&quot;解决什么问题&quot;&gt;&lt;/a&gt;解决什么问题&lt;/h1&gt;&lt;blockquote&gt;
-&lt;p&gt;virtual memory: A technique that uses</summary>
-        
-      
-    
-    
-    
-    <category term="计算机基础" scheme="https://limeya.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/"/>
-    
-    
-    <category term="virtual memory" scheme="https://limeya.github.io/tags/virtual-memory/"/>
-    
-    <category term="physical memory" scheme="https://limeya.github.io/tags/physical-memory/"/>
-    
-    <category term="address mapping" scheme="https://limeya.github.io/tags/address-mapping/"/>
-    
-    <category term="page" scheme="https://limeya.github.io/tags/page/"/>
-    
-    <category term="page fault" scheme="https://limeya.github.io/tags/page-fault/"/>
     
   </entry>
   
