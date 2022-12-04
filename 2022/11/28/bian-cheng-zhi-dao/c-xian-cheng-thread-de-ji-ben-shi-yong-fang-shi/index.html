@@ -475,6 +475,9 @@ call background task in operator ()
 <h1 id="thread对象析构时的问题"><a href="#thread对象析构时的问题" class="headerlink" title="thread对象析构时的问题"></a>thread对象析构时的问题</h1><p><strong>当构造完成thread对象后，必须调用join或者detach来执行，否则会报错</strong>，其原因在于创建的线程有两个状态，如果thread对象析构时，为nonjoinable时，则会直接终止，如<a target="_blank" rel="noopener" href="https://blog.51cto.com/liangchaoxi/4125187">文章</a>所述。</p>
 <p>如果没有使用join或者detach时，当main程序结束之后，线程对象被析构之前，如果发现线程对象是joinable时，就会直接调用std::terminate结束线程的运行，如下：</p>
 <p><img src="/images/%E7%BC%96%E7%A8%8B%E4%B9%8B%E9%81%93/C++%E7%BA%BF%E7%A8%8B%EF%BC%9Athread%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8%E6%96%B9%E5%BC%8F/2.png" alt="std::terminate结束线程运行"></p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/7381757/c-terminate-called-without-an-active-exception">When a thread object goes out of scope and it is in joinable state, the program is terminated.</a></p>
+</blockquote>
 <h2 id="join还是detach？"><a href="#join还是detach？" class="headerlink" title="join还是detach？"></a>join还是detach？</h2><p>两者之间有什么区别吗？</p>
 <ul>
 <li><p>join</p>
@@ -1041,7 +1044,7 @@ t<span class="token punctuation">.</span><span class="token function">join</span
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">117.1k</span>
+                        class="white-color">117.2k</span>
             
             
             
