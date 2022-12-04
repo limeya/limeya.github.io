@@ -6,7 +6,7 @@
   <link href="https://limeya.github.io/atom.xml" rel="self"/>
   
   <link href="https://limeya.github.io/"/>
-  <updated>2022-12-04T12:59:25.002Z</updated>
+  <updated>2022-12-04T14:59:39.922Z</updated>
   <id>https://limeya.github.io/</id>
   
   <author>
@@ -17,11 +17,38 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>C++线程：对于线程死锁的认识和理解</title>
+    <link href="https://limeya.github.io/2022/12/04/bian-cheng-zhi-dao/c-xian-cheng-dui-yu-xian-cheng-si-suo-de-ren-shi-he-li-jie/"/>
+    <id>https://limeya.github.io/2022/12/04/bian-cheng-zhi-dao/c-xian-cheng-dui-yu-xian-cheng-si-suo-de-ren-shi-he-li-jie/</id>
+    <published>2022-12-04T15:00:00.000Z</published>
+    <updated>2022-12-04T14:59:39.922Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;死锁的理解&quot;&gt;&lt;a href=&quot;#死锁的理解&quot; class=&quot;headerlink&quot; title=&quot;死锁的理解&quot;&gt;&lt;/a&gt;死锁的理解&lt;/h1&gt;&lt;h2 id=&quot;通俗的解释&quot;&gt;&lt;a href=&quot;#通俗的解释&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="编程之道" scheme="https://limeya.github.io/categories/%E7%BC%96%E7%A8%8B%E4%B9%8B%E9%81%93/"/>
+    
+    
+    <category term="mutex" scheme="https://limeya.github.io/tags/mutex/"/>
+    
+    <category term="死锁" scheme="https://limeya.github.io/tags/%E6%AD%BB%E9%94%81/"/>
+    
+  </entry>
+  
+  <entry>
     <title>我们需要对《算法霸权》的威胁重视起来</title>
     <link href="https://limeya.github.io/2022/12/04/du-shu-gan-wu/wo-men-xu-yao-dui-suan-fa-ba-quan-de-wei-xie-chong-shi-qi-lai/"/>
     <id>https://limeya.github.io/2022/12/04/du-shu-gan-wu/wo-men-xu-yao-dui-suan-fa-ba-quan-de-wei-xie-chong-shi-qi-lai/</id>
-    <published>2022-12-03T16:00:00.000Z</published>
-    <updated>2022-12-04T12:59:25.002Z</updated>
+    <published>2022-12-04T09:00:00.000Z</published>
+    <updated>2022-12-04T14:59:55.866Z</updated>
     
     
       
@@ -613,37 +640,6 @@
     <category term="Device" scheme="https://limeya.github.io/tags/Device/"/>
     
     <category term="Command buffer" scheme="https://limeya.github.io/tags/Command-buffer/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Virtual Memory（3）：Page fault</title>
-    <link href="https://limeya.github.io/2022/10/30/ji-suan-ji-ji-chu/virtual-memory-3-page-fault/"/>
-    <id>https://limeya.github.io/2022/10/30/ji-suan-ji-ji-chu/virtual-memory-3-page-fault/</id>
-    <published>2022-10-30T08:00:00.000Z</published>
-    <updated>2022-10-30T15:04:59.517Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;Page-fault的基本内容&quot;&gt;&lt;a href=&quot;#Page-fault的基本内容&quot; class=&quot;headerlink&quot; title=&quot;Page fault的基本内容&quot;&gt;&lt;/a&gt;Page fault的基本内容&lt;/h1&gt;&lt;h2 id=&quot;是什么&quot;&gt;&lt;a</summary>
-        
-      
-    
-    
-    
-    <category term="计算机基础" scheme="https://limeya.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/"/>
-    
-    
-    <category term="virtual memory" scheme="https://limeya.github.io/tags/virtual-memory/"/>
-    
-    <category term="page fault" scheme="https://limeya.github.io/tags/page-fault/"/>
-    
-    <category term="page table" scheme="https://limeya.github.io/tags/page-table/"/>
-    
-    <category term="LRU" scheme="https://limeya.github.io/tags/LRU/"/>
     
   </entry>
   
