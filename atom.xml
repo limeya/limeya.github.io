@@ -48,6 +48,37 @@
   </entry>
   
   <entry>
+    <title>C++线程：使用互斥量实现多线程数据共享</title>
+    <link href="https://limeya.github.io/2022/12/01/bian-cheng-zhi-dao/c-xian-cheng-shi-yong-hu-chi-liang-shi-xian-duo-xian-cheng-shu-ju-gong-xiang/"/>
+    <id>https://limeya.github.io/2022/12/01/bian-cheng-zhi-dao/c-xian-cheng-shi-yong-hu-chi-liang-shi-xian-duo-xian-cheng-shu-ju-gong-xiang/</id>
+    <published>2022-11-30T16:00:00.000Z</published>
+    <updated>2022-12-04T13:24:42.891Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;数据共享的需求和问题&quot;&gt;&lt;a href=&quot;#数据共享的需求和问题&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="编程之道" scheme="https://limeya.github.io/categories/%E7%BC%96%E7%A8%8B%E4%B9%8B%E9%81%93/"/>
+    
+    
+    <category term="thread" scheme="https://limeya.github.io/tags/thread/"/>
+    
+    <category term="mutex" scheme="https://limeya.github.io/tags/mutex/"/>
+    
+    <category term="lock_guard" scheme="https://limeya.github.io/tags/lock-guard/"/>
+    
+    <category term="RAII" scheme="https://limeya.github.io/tags/RAII/"/>
+    
+  </entry>
+  
+  <entry>
     <title>C++线程：thread中传递参数和所有权</title>
     <link href="https://limeya.github.io/2022/11/30/bian-cheng-zhi-dao/c-xian-cheng-thread-zhong-chuan-di-can-shu-he-suo-you-quan/"/>
     <id>https://limeya.github.io/2022/11/30/bian-cheng-zhi-dao/c-xian-cheng-thread-zhong-chuan-di-can-shu-he-suo-you-quan/</id>
@@ -613,37 +644,6 @@
     <category term="page table" scheme="https://limeya.github.io/tags/page-table/"/>
     
     <category term="LRU" scheme="https://limeya.github.io/tags/LRU/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Virtual Memory（2）：使用page table加快page的查找</title>
-    <link href="https://limeya.github.io/2022/10/30/ji-suan-ji-ji-chu/virtual-memory-2-shi-yong-page-table-jia-kuai-page-de-cha-zhao/"/>
-    <id>https://limeya.github.io/2022/10/30/ji-suan-ji-ji-chu/virtual-memory-2-shi-yong-page-table-jia-kuai-page-de-cha-zhao/</id>
-    <published>2022-10-30T07:00:00.000Z</published>
-    <updated>2022-10-30T15:00:19.415Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;Review&quot;&gt;&lt;a href=&quot;#Review&quot; class=&quot;headerlink&quot; title=&quot;Review&quot;&gt;&lt;/a&gt;Review&lt;/h1&gt;&lt;p&gt;回顾在cache中，我们是如何降低miss rate的——&lt;a</summary>
-        
-      
-    
-    
-    
-    <category term="计算机基础" scheme="https://limeya.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/"/>
-    
-    
-    <category term="fully associative" scheme="https://limeya.github.io/tags/fully-associative/"/>
-    
-    <category term="virtual memory" scheme="https://limeya.github.io/tags/virtual-memory/"/>
-    
-    <category term="page fault" scheme="https://limeya.github.io/tags/page-fault/"/>
-    
-    <category term="page table" scheme="https://limeya.github.io/tags/page-table/"/>
     
   </entry>
   
