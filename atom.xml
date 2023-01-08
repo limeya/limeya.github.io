@@ -6,7 +6,7 @@
   <link href="https://limeya.github.io/atom.xml" rel="self"/>
   
   <link href="https://limeya.github.io/"/>
-  <updated>2022-12-04T14:59:39.922Z</updated>
+  <updated>2023-01-08T08:24:20.505Z</updated>
   <id>https://limeya.github.io/</id>
   
   <author>
@@ -15,6 +15,39 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>《制造消费者》的社会带来的挑战</title>
+    <link href="https://limeya.github.io/2023/01/08/du-shu-gan-wu/zhi-zao-xiao-fei-zhe-de-she-hui-dai-lai-de-tiao-zhan/"/>
+    <id>https://limeya.github.io/2023/01/08/du-shu-gan-wu/zhi-zao-xiao-fei-zhe-de-she-hui-dai-lai-de-tiao-zhan/</id>
+    <published>2023-01-08T08:18:00.000Z</published>
+    <updated>2023-01-08T08:24:20.505Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;这本书刚出来的时候，我就在微信读书中看到了，我心里一直有一个问题：为啥一些人痴迷于消费不能自拔？恰好封面上也有一个问题：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;是我们占有了商品，还是商品奴役着我们？&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;</summary>
+        
+      
+    
+    
+    
+    <category term="读书感悟" scheme="https://limeya.github.io/categories/%E8%AF%BB%E4%B9%A6%E6%84%9F%E6%82%9F/"/>
+    
+    
+    <category term="经济" scheme="https://limeya.github.io/tags/%E7%BB%8F%E6%B5%8E/"/>
+    
+    <category term="社会" scheme="https://limeya.github.io/tags/%E7%A4%BE%E4%BC%9A/"/>
+    
+    <category term="消费" scheme="https://limeya.github.io/tags/%E6%B6%88%E8%B4%B9/"/>
+    
+  </entry>
   
   <entry>
     <title>C++线程：对于线程死锁的认识和理解</title>
@@ -607,39 +640,6 @@
     <category term="string" scheme="https://limeya.github.io/tags/string/"/>
     
     <category term="字符数组" scheme="https://limeya.github.io/tags/%E5%AD%97%E7%AC%A6%E6%95%B0%E7%BB%84/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Vulkan的Execution Model</title>
-    <link href="https://limeya.github.io/2022/10/30/ji-suan-ji-tu-xing-xue/vulkan/vulkan-de-execution-model/"/>
-    <id>https://limeya.github.io/2022/10/30/ji-suan-ji-tu-xing-xue/vulkan/vulkan-de-execution-model/</id>
-    <published>2022-10-30T09:00:00.000Z</published>
-    <updated>2022-10-30T15:17:09.422Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;vulkan执行中涉及的几个组件&quot;&gt;&lt;a href=&quot;#vulkan执行中涉及的几个组件&quot; class=&quot;headerlink&quot; title=&quot;vulkan执行中涉及的几个组件&quot;&gt;&lt;/a&gt;vulkan执行中涉及的几个组件&lt;/h1&gt;&lt;h2</summary>
-        
-      
-    
-    
-    
-    <category term="计算机图形学" scheme="https://limeya.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/"/>
-    
-    
-    <category term="Vulkan" scheme="https://limeya.github.io/tags/Vulkan/"/>
-    
-    <category term="Application" scheme="https://limeya.github.io/tags/Application/"/>
-    
-    <category term="Queue" scheme="https://limeya.github.io/tags/Queue/"/>
-    
-    <category term="Device" scheme="https://limeya.github.io/tags/Device/"/>
-    
-    <category term="Command buffer" scheme="https://limeya.github.io/tags/Command-buffer/"/>
     
   </entry>
   
