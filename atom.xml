@@ -6,7 +6,7 @@
   <link href="https://limeya.github.io/atom.xml" rel="self"/>
   
   <link href="https://limeya.github.io/"/>
-  <updated>2023-01-08T08:24:20.505Z</updated>
+  <updated>2023-02-12T07:40:53.360Z</updated>
   <id>https://limeya.github.io/</id>
   
   <author>
@@ -15,6 +15,40 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>使用vulkan绘制一个三角形</title>
+    <link href="https://limeya.github.io/2023/02/12/ji-suan-ji-tu-xing-xue/vulkan/shi-yong-vulkan-hui-zhi-yi-ge-san-jiao-xing/"/>
+    <id>https://limeya.github.io/2023/02/12/ji-suan-ji-tu-xing-xue/vulkan/shi-yong-vulkan-hui-zhi-yi-ge-san-jiao-xing/</id>
+    <published>2023-02-11T16:00:00.000Z</published>
+    <updated>2023-02-12T07:40:53.360Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;学习一门技术，总是从最简单的方式入手，逐步理解这门技术的基本组成和运行过程，对于Vulkan也不例外，但是由于Vulkan本身的特点，即所有的设置都需要显式给出，因此即便一个非常简单的hello world程序，在Vulkan中也颇为复杂。&lt;/p&gt;
+&lt;p&gt;Vulkan</summary>
+        
+      
+    
+    
+    
+    <category term="计算机图形学" scheme="https://limeya.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/"/>
+    
+    
+    <category term="Vulkan" scheme="https://limeya.github.io/tags/Vulkan/"/>
+    
+    <category term="三角形" scheme="https://limeya.github.io/tags/%E4%B8%89%E8%A7%92%E5%BD%A2/"/>
+    
+    <category term="device" scheme="https://limeya.github.io/tags/device/"/>
+    
+    <category term="queue" scheme="https://limeya.github.io/tags/queue/"/>
+    
+    <category term="swapchain" scheme="https://limeya.github.io/tags/swapchain/"/>
+    
+  </entry>
   
   <entry>
     <title>《制造消费者》的社会带来的挑战</title>
@@ -610,36 +644,6 @@
     <category term="按引用传递" scheme="https://limeya.github.io/tags/%E6%8C%89%E5%BC%95%E7%94%A8%E4%BC%A0%E9%80%92/"/>
     
     <category term="argument passing" scheme="https://limeya.github.io/tags/argument-passing/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>C++中的字符串</title>
-    <link href="https://limeya.github.io/2022/10/31/bian-cheng-zhi-dao/c-zhong-de-zi-fu-chuan/"/>
-    <id>https://limeya.github.io/2022/10/31/bian-cheng-zhi-dao/c-zhong-de-zi-fu-chuan/</id>
-    <published>2022-10-30T16:00:00.000Z</published>
-    <updated>2022-10-31T14:57:12.512Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;blockquote&gt;
-&lt;p&gt;A string is a variable-length sequence of</summary>
-        
-      
-    
-    
-    
-    <category term="编程之道" scheme="https://limeya.github.io/categories/%E7%BC%96%E7%A8%8B%E4%B9%8B%E9%81%93/"/>
-    
-    
-    <category term="字符串" scheme="https://limeya.github.io/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/"/>
-    
-    <category term="string" scheme="https://limeya.github.io/tags/string/"/>
-    
-    <category term="字符数组" scheme="https://limeya.github.io/tags/%E5%AD%97%E7%AC%A6%E6%95%B0%E7%BB%84/"/>
     
   </entry>
   
