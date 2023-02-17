@@ -588,8 +588,7 @@ VkImageViewCreateInfo createInfo<span class="token punctuation">{</span><span cl
 <span class="token function">vkCreateImageView</span><span class="token punctuation">(</span>device<span class="token punctuation">,</span> <span class="token operator">&amp;</span>createInfo<span class="token punctuation">,</span> <span class="token keyword">nullptr</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>imageView<span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre>
 <h2 id="总结-1"><a href="#总结-1" class="headerlink" title="总结"></a>总结</h2><p><img src="/images/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/Vulkan/%E4%BD%BF%E7%94%A8vulkan%E7%BB%98%E5%88%B6%E4%B8%80%E4%B8%AA%E4%B8%89%E8%A7%92%E5%BD%A2/2.png" alt="为渲染对象进行presentation的准备工作"></p>
-<h1 id="准备renderpass"><a href="#准备renderpass" class="headerlink" title="准备renderpass"></a>准备renderpass</h1><p>[[renderpass]]</p>
-<p>在之前，我们已经完成了初始化，并且知道要将最终的渲染结果显示到哪里去。但是在渲染过程中，涉及到很多的步骤，每个步骤都需要输出中间结果，这个中间结果可能被后续的步骤使用，那么如何设置这些中间结果呢？首先，要明确的是，这些中间结果都需要存储在内存中，以便被后续的步骤读取，Vulkan中提出了一个概念——<strong>renderpass</strong>，专门用来设置中间渲染结果的存储位置以及如何使用这些存储，它描述了整个渲染过程中数据的流向是怎样的。</p>
+<h1 id="准备renderpass"><a href="#准备renderpass" class="headerlink" title="准备renderpass"></a>准备renderpass</h1><p>在之前，我们已经完成了初始化，并且知道要将最终的渲染结果显示到哪里去。但是在渲染过程中，涉及到很多的步骤，每个步骤都需要输出中间结果，这个中间结果可能被后续的步骤使用，那么如何设置这些中间结果呢？首先，要明确的是，这些中间结果都需要存储在内存中，以便被后续的步骤读取，Vulkan中提出了一个概念——<strong>renderpass</strong>，专门用来设置中间渲染结果的存储位置以及如何使用这些存储，它描述了整个渲染过程中数据的流向是怎样的。</p>
 <p>renderpass的创建，完全依赖于<a target="_blank" rel="noopener" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkRenderPassCreateInfo.html">VkRenderPassCreateInfo</a>，其中需要三类信息，但是归根到底，涉及两类对象：</p>
 <ul>
 <li>subpass：出于优化的考虑，将renderpass可以划分为不同的subpass；</li>
@@ -671,14 +670,16 @@ framebufferInfo<span class="token punctuation">.</span>pAttachments <span class=
 <h2 id="设置descriptor-layout"><a href="#设置descriptor-layout" class="headerlink" title="设置descriptor layout"></a>设置descriptor layout</h2><p>这个过程，简单来说，就是为pipeline中的shaders要使用的内存资源，提供type信息，例如uniform buffer，可以直接访问buffer。</p>
 <p>创建descriptor layout的代码如下：</p>
 <pre class=" language-cpp"><code class="language-cpp">VkDescriptorSetLayoutBinding layoutBind<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">;</span> 
-layoutBind<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>descriptorType <span class="token operator">=</span> VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER<span class="token punctuation">;</span> layoutBind<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>binding <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> 
+layoutBind<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>descriptorType <span class="token operator">=</span> VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER<span class="token punctuation">;</span>
+layoutBind<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>binding <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> 
 layoutBind<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>stageFlags <span class="token operator">=</span> VK_SHADER_STAGE_VERTEX_BIT<span class="token punctuation">;</span>
 
 layoutBind<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">.</span>descriptorType <span class="token operator">=</span>VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER<span class="token punctuation">;</span> 
 layoutBind<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">.</span>binding <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
 layoutBind<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">.</span>stageFlags <span class="token operator">=</span> VK_SHADER_STAGE_FRAGMENT_BIT<span class="token punctuation">;</span>
 
-VkDescriptorSetLayoutCreateInfo descriptorLayout <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span> descriptorLayout<span class="token punctuation">.</span>pBindings <span class="token operator">=</span> layoutBind<span class="token punctuation">;</span>
+VkDescriptorSetLayoutCreateInfo descriptorLayout <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+descriptorLayout<span class="token punctuation">.</span>pBindings <span class="token operator">=</span> layoutBind<span class="token punctuation">;</span>
 VkDescriptorSetLayout descLayout<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
 <span class="token function">vkCreateDescriptorSetLayout</span> <span class="token punctuation">(</span>device<span class="token punctuation">,</span> <span class="token operator">&amp;</span>descriptorLayout<span class="token punctuation">,</span> <span class="token constant">NULL</span><span class="token punctuation">,</span> descLayout<span class="token punctuation">.</span><span class="token function">data</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre>
@@ -687,7 +688,8 @@ VkDescriptorSetLayout descLayout<span class="token punctuation">[</span><span cl
 
 <span class="token comment" spellcheck="true">// pool中有VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER类型的descriptors共10个</span>
 VkDescriptorPoolSize poolSize<span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span> 
-poolSize<span class="token punctuation">.</span>type <span class="token operator">=</span> VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER<span class="token punctuation">;</span> poolSize<span class="token punctuation">.</span>descriptorCount <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
+poolSize<span class="token punctuation">.</span>type <span class="token operator">=</span> VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER<span class="token punctuation">;</span> 
+poolSize<span class="token punctuation">.</span>descriptorCount <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
 
 VkDescriptorPoolCreateInfo poolInfo<span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span> 
 poolInfo<span class="token punctuation">.</span>pPoolSizes <span class="token operator">=</span> <span class="token operator">&amp;</span>poolSize<span class="token punctuation">;</span>
@@ -706,8 +708,7 @@ allocInfo<span class="token punctuation">.</span>pSetLayouts <span class="token 
 </code></pre>
 <p>之后就可以正常使用descriptor sets了。</p>
 <h2 id="总结-3"><a href="#总结-3" class="headerlink" title="总结"></a>总结</h2><p>descriptor sets的整个创建过程总结如下：<br><img src="/images/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/Vulkan/%E4%BD%BF%E7%94%A8vulkan%E7%BB%98%E5%88%B6%E4%B8%80%E4%B8%AA%E4%B8%89%E8%A7%92%E5%BD%A2/9.png" alt="descriptor sets的生成过程"></p>
-<h1 id="创建pipeline"><a href="#创建pipeline" class="headerlink" title="创建pipeline"></a>创建pipeline</h1><p>[[pipeline]]</p>
-<p>pipeline将渲染过程中的一系列操作打包在一起，从读取vertex和texture的数据，到最终将渲染的结果写到swapchain中。通过其中的每个步骤设置相关的states，使得渲染过程能够顺序进行。</p>
+<h1 id="创建pipeline"><a href="#创建pipeline" class="headerlink" title="创建pipeline"></a>创建pipeline</h1><p>pipeline将渲染过程中的一系列操作打包在一起，从读取vertex和texture的数据，到最终将渲染的结果写到swapchain中。通过其中的每个步骤设置相关的states，使得渲染过程能够顺序进行。</p>
 <p>Vulkan spec中将pipeline划分为以下几个阶段：</p>
 <p><img src="/images/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/Vulkan/%E4%BD%BF%E7%94%A8vulkan%E7%BB%98%E5%88%B6%E4%B8%80%E4%B8%AA%E4%B8%89%E8%A7%92%E5%BD%A2/5.png" alt="Vulkan Spec中的pipeline"></p>
 <p>其中，pipeline中的stages具体可以分为两种类型：</p>
@@ -760,7 +761,8 @@ VkPipelineDynamicStateCreateInfo dynamicState<span class="token punctuation">{</
 </blockquote>
 <p>简单来讲，在pipeline中存在可编程的shader，那么这些shader在运行时如何处理输入和输出数据呢？即，shader需要访问对应的资源，而访问操作是通过descriptor set作为中介实现的。总结下来，shader要访问内存资源，需要通过descriptor set。而shader代码本身作为state信息被绑定到pipeline中，如果想要在pipeline中让shader访问内存资源，就需要将descriptor set与pipeline建立联系，pipeline layout就是联系的中介。</p>
 <p>在完成上文descriptor layout的设置后，就可以将其通过pipeline layout绑定到pipleine中，如下：</p>
-<pre class=" language-cpp"><code class="language-cpp">VkPipelineLayoutCreateInfo pipelineLayoutCI<span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span> pipelineLayoutCI<span class="token punctuation">.</span>pSetLayouts <span class="token operator">=</span> descLayout<span class="token punctuation">.</span><span class="token function">data</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<pre class=" language-cpp"><code class="language-cpp">VkPipelineLayoutCreateInfo pipelineLayoutCI<span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+pipelineLayoutCI<span class="token punctuation">.</span>pSetLayouts <span class="token operator">=</span> descLayout<span class="token punctuation">.</span><span class="token function">data</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token function">vkCreatePipelineLayout</span><span class="token punctuation">(</span>device<span class="token punctuation">,</span> <span class="token operator">&amp;</span>pipelineLayoutCI<span class="token punctuation">,</span> <span class="token constant">NULL</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>pipelineLayout<span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre>
 <h2 id="完成pipeline创建"><a href="#完成pipeline创建" class="headerlink" title="完成pipeline创建"></a>完成pipeline创建</h2><p>完成了各种state的设置之后，就需要将它们绑定到pipeline的创建信息中，如下所示：</p>
@@ -777,7 +779,7 @@ pipelineInfo<span class="token punctuation">.</span>pDynamicState <span class="t
 </code></pre>
 <p>为了完成pipeline的创建，还需要指定pipelinecache/renderpass/pipelinelayout：</p>
 <ul>
-<li><p>VkPipelineCache：因为pipeline的创建是expensive task，而且一般创建pipeline时，变化的state不会很多，因此完全从头开始创建是不划算的，因此可以利用之前创建好的pipeline，提高效率； </p>
+<li><p>VkPipelineCache：因为pipeline的创建是expensive task，而且一般创建pipeline时，变化的state不会很多，因此完全从头开始创建是不划算的，因此可以利用之前创建好的pipeline，提高效率；</p>
 <pre class=" language-cpp"><code class="language-cpp">VkPipelineCache pipelineCache<span class="token punctuation">;</span> 
 VkPipelineCacheCreateInfo pipelineCacheInfo<span class="token punctuation">;</span>
 <span class="token function">vkCreatePipelineCache</span><span class="token punctuation">(</span>device<span class="token punctuation">,</span> <span class="token operator">&amp;</span>pipelineCacheInfo<span class="token punctuation">,</span> <span class="token constant">NULL</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>pipelineCache<span class="token punctuation">)</span><span class="token punctuation">;</span>
