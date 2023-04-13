@@ -1,0 +1,1450 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="以libtinyxml为例了解C++的make使用, LifeHit">
+    <meta name="description" content="本文以libtinyxml为例，初步学习了makefile和静态链接库和动态链接库等内容">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0V4SV7JK5F"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+    gtag('config', 'G-0V4SV7JK5F');
+</script>
+
+
+    <title>以libtinyxml为例了解C++的make使用 | LifeHit</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="LifeHit" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">LifeHit</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">LifeHit</div>
+        <div class="logo-desc">
+            
+            世界上只有一种真正的英雄主义，就是认清了生活的真相后还依然热爱它
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/19.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">以libtinyxml为例了解C++的make使用</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/make/">
+                                <span class="chip bg-color">make</span>
+                            </a>
+                        
+                            <a href="/tags/makefile/">
+                                <span class="chip bg-color">makefile</span>
+                            </a>
+                        
+                            <a href="/tags/%E9%9D%99%E6%80%81%E9%93%BE%E6%8E%A5%E5%BA%93/">
+                                <span class="chip bg-color">静态链接库</span>
+                            </a>
+                        
+                            <a href="/tags/%E5%8A%A8%E6%80%81%E9%93%BE%E6%8E%A5%E5%BA%93/">
+                                <span class="chip bg-color">动态链接库</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E7%BC%96%E7%A8%8B%E4%B9%8B%E9%81%93/" class="post-category">
+                                编程之道
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2023-04-13
+                </div>
+                
+
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    2.8k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    11 分
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <p>最近想在C/C++中解析xml文件，本来开始的时候xml的模式比较简单，通过一些C语言中的字符串处理API就可以了，但是后续因为一些原因需要解析整个xml文档，考虑到代码库中已有的xml解析模块，有：</p>
+<ul>
+<li>libtinyxml：c++编写；</li>
+<li>libxml：C语言编写；</li>
+</ul>
+<p>考虑到后续的发展，决定使用C++的xml解析库——libtinyxml。在开发代码的过程中，发现自己对C++的理解有漏洞，趁此机会查缺补漏一下。</p>
+<h1 id="如何编译libtinyxml库？"><a href="#如何编译libtinyxml库？" class="headerlink" title="如何编译libtinyxml库？"></a>如何编译libtinyxml库？</h1><p>因为之前从未使用C++进行开发，因此对于C++的编译和构建过程极为模糊，而libtinyxml下载源码后，需要自己来编译，我简单看了一下，发现其代码不多，且makefile很短，可以帮助理解makefile。</p>
+<h2 id="认识makefile"><a href="#认识makefile" class="headerlink" title="认识makefile"></a>认识makefile</h2><p>开发人员使用的多数都是高级语言，这些高级语言可以分为两种：</p>
+<ul>
+<li>编译型语言：典型如C和C++；</li>
+<li>解释型语言：如Python等；</li>
+</ul>
+<p>如果让这些高级语言可运行的话，需要将它们转换为机器语言，这个过程称为编译（compile）。不同的文件之间存在着各种依赖关系，在进行编译时，如何安排不同文件之间的编译依赖顺序，称为一个构建（build）过程。</p>
+<p>不同编程语言都有自己的构建工具，比如Java中的Maven和Gradle等，这些工具可以根据特定的场景、文件类型、依赖关系等等，设置不同的profile，来满足开发者的需求。而在C/C++语言中，常用的是用make工具。</p>
+<p>make简单来说是一个命令，在linux/MacOS中，make如果不加以说明的话，指的是GNU make utility。</p>
+<blockquote>
+<p>make - GNU make utility to maintain groups of programs.</p>
+</blockquote>
+<p>该工具不仅可以用来进行构建工程的，<strong>其规定，当指定文件发生变化时，可以运行特定的指令</strong>。</p>
+<blockquote>
+<p>按照<a target="_blank" rel="noopener" href="https://makefiletutorial.com/">theicfire</a>的说法，Make can also be used beyond compilation too, when you need a series of instructions to run depending on what files have changed.</p>
+</blockquote>
+<p>如果要执行make命令，需要一个makefile，这里会有点概念上的混乱，make指什么？</p>
+<ul>
+<li>狭义上，指的是GNU make utility；</li>
+<li>广义上，针对C/C++语言的make构建工具有很多，如QT的qmake ，微软的MS nmake等，它们都可以叫make；</li>
+</ul>
+<p>但是，它们都需要一个makefile，make本身不会执行编译，而是执行编译规则，通过写在makefile中编译命令，所以make更多的可以理解为一个makefile解析器，解析该文件并执行对应的命令。</p>
+<blockquote>
+<p>与make类似的工具有Google的Ninja，在Android和Chrome的开发中有使用，相比make而言，ninja功能没有那么强大，但是正因为功能有限，所以启动编译的速度很快！</p>
+</blockquote>
+<p>本文不会对make进行详述，因为这样的文章太多了，之后在后续的libtinyxml例子中说明，可以参考如下资料：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.ruanyifeng.com/blog/2015/02/make.html">Make命令教程</a></li>
+<li><a target="_blank" rel="noopener" href="https://makefiletutorial.com/">Learn Makefiles</a></li>
+<li><a target="_blank" rel="noopener" href="https://seisman.github.io/how-to-write-makefile/introduction.html">跟我一起写Makefile</a></li>
+</ul>
+<p>不同的make工具支持的makefile格式可能略有差别。因此，我们自己编写的makefile可能移植性不高，这也是一些跨平台的构建工具的目的，比如CMake和SCons，它们产生可移植的makefile，并简化动手写makefile时的巨大工作量，它们都是make的上层工具，可以用来产生makefile，与make等不冲突。</p>
+<h2 id="了解libtinyxml的makefile"><a href="#了解libtinyxml的makefile" class="headerlink" title="了解libtinyxml的makefile"></a>了解libtinyxml的makefile</h2><p>根据libtinyxml中的makefile可以了解一下行常用的规则。</p>
+<pre class=" language-makefile"><code class="language-makefile"><span class="token comment" spellcheck="true"># 用':='定义变量</span>
+DEBUG          <span class="token operator">:=</span> NO
+PROFILE        <span class="token operator">:=</span> NO
+TINYXML_USE_STL <span class="token operator">:=</span> NO
+
+CC     <span class="token operator">:=</span> gcc
+CXX    <span class="token operator">:=</span> g++
+LD     <span class="token operator">:=</span> g++
+AR     <span class="token operator">:=</span> ar rc
+RANLIB <span class="token operator">:=</span> ranlib
+
+DEBUG_CFLAGS     <span class="token operator">:=</span> -Wall -Wno-format -g -DDEBUG
+RELEASE_CFLAGS   <span class="token operator">:=</span> -Wall -Wno-unknown-pragmas -Wno-format -O3
+
+LIBS         <span class="token operator">:=</span>
+
+<span class="token comment" spellcheck="true"># 用${}调用变量</span>
+DEBUG_CXXFLAGS   <span class="token operator">:=</span> <span class="token variable">$</span><span class="token punctuation">{</span>DEBUG_CFLAGS<span class="token punctuation">}</span> 
+RELEASE_CXXFLAGS <span class="token operator">:=</span> <span class="token variable">$</span><span class="token punctuation">{</span>RELEASE_CFLAGS<span class="token punctuation">}</span>
+
+DEBUG_LDFLAGS    <span class="token operator">:=</span> -g
+RELEASE_LDFLAGS  <span class="token operator">:=</span>
+
+<span class="token comment" spellcheck="true"># 使用判断语句</span>
+<span class="token keyword">ifeq</span> <span class="token punctuation">(</span>YES, <span class="token variable">$</span><span class="token punctuation">{</span>DEBUG<span class="token punctuation">}</span><span class="token punctuation">)</span>
+   CFLAGS       <span class="token operator">:=</span> <span class="token variable">$</span><span class="token punctuation">{</span>DEBUG_CFLAGS<span class="token punctuation">}</span>
+   CXXFLAGS     <span class="token operator">:=</span> <span class="token variable">$</span><span class="token punctuation">{</span>DEBUG_CXXFLAGS<span class="token punctuation">}</span>
+   LDFLAGS      <span class="token operator">:=</span> <span class="token variable">$</span><span class="token punctuation">{</span>DEBUG_LDFLAGS<span class="token punctuation">}</span>
+<span class="token keyword">else</span>
+   CFLAGS       <span class="token operator">:=</span> <span class="token variable">$</span><span class="token punctuation">{</span>RELEASE_CFLAGS<span class="token punctuation">}</span>
+   CXXFLAGS     <span class="token operator">:=</span> <span class="token variable">$</span><span class="token punctuation">{</span>RELEASE_CXXFLAGS<span class="token punctuation">}</span>
+   LDFLAGS      <span class="token operator">:=</span> <span class="token variable">$</span><span class="token punctuation">{</span>RELEASE_LDFLAGS<span class="token punctuation">}</span>
+<span class="token keyword">endif</span>
+
+<span class="token keyword">ifeq</span> <span class="token punctuation">(</span>YES, <span class="token variable">$</span><span class="token punctuation">{</span>PROFILE<span class="token punctuation">}</span><span class="token punctuation">)</span>
+   CFLAGS   <span class="token operator">:=</span> <span class="token variable">$</span><span class="token punctuation">{</span>CFLAGS<span class="token punctuation">}</span> -pg -O3
+   CXXFLAGS <span class="token operator">:=</span> <span class="token variable">$</span><span class="token punctuation">{</span>CXXFLAGS<span class="token punctuation">}</span> -pg -O3
+   LDFLAGS  <span class="token operator">:=</span> <span class="token variable">$</span><span class="token punctuation">{</span>LDFLAGS<span class="token punctuation">}</span> -pg
+<span class="token keyword">endif</span>
+
+<span class="token keyword">ifeq</span> <span class="token punctuation">(</span>YES, <span class="token variable">$</span><span class="token punctuation">{</span>TINYXML_USE_STL<span class="token punctuation">}</span><span class="token punctuation">)</span>
+  DEFS <span class="token operator">:=</span> -DTIXML_USE_STL
+<span class="token keyword">else</span>
+  DEFS <span class="token operator">:=</span>
+<span class="token keyword">endif</span>
+
+INCS <span class="token operator">:=</span>
+
+CFLAGS   <span class="token operator">:=</span> <span class="token variable">$</span><span class="token punctuation">{</span>CFLAGS<span class="token punctuation">}</span>   <span class="token variable">$</span><span class="token punctuation">{</span>DEFS<span class="token punctuation">}</span>
+CXXFLAGS <span class="token operator">:=</span> <span class="token variable">$</span><span class="token punctuation">{</span>CXXFLAGS<span class="token punctuation">}</span> <span class="token variable">$</span><span class="token punctuation">{</span>DEFS<span class="token punctuation">}</span>
+
+OUTPUT <span class="token operator">:=</span> xmltest
+
+<span class="token comment" spellcheck="true"># 声明第一个target为all，其含义在于：如果要构建all，必须执行${OUTPUT}</span>
+<span class="token comment" spellcheck="true"># 默认情况下，make会找第一个target执行</span>
+<span class="token symbol">all</span><span class="token punctuation">:</span> <span class="token variable">$</span><span class="token punctuation">{</span>OUTPUT<span class="token punctuation">}</span>
+
+SRCS <span class="token operator">:=</span> tinyxml.cpp tinyxmlparser.cpp xmltest.cpp tinyxmlerror.cpp tinystr.cpp
+SRCS <span class="token operator">:=</span> <span class="token variable">$</span><span class="token punctuation">{</span>SRCS<span class="token punctuation">}</span>
+
+<span class="token comment" spellcheck="true"># 使用函数addsuffix将所有源文件的后缀名变为.o</span>
+OBJS <span class="token operator">:=</span> <span class="token variable">$</span><span class="token punctuation">(</span><span class="token keyword">addsuffix</span> .o,<span class="token variable">$</span><span class="token punctuation">(</span><span class="token keyword">basename</span> <span class="token variable">$</span><span class="token punctuation">{</span>SRCS<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token comment" spellcheck="true"># 声明第二个目标${OUTPUT}，这个是一个对变量的调用；</span>
+<span class="token comment" spellcheck="true"># 当${OBJS}发生变化后（包括开始没有这些文件），会触发${OUTPUT}下的commands的执行，即重新进行编译。</span>
+<span class="token comment" spellcheck="true"># 如果此时${OBJS}中的文件不存在，则会找到对应的target执行，如下下边%.o所示。</span>
+<span class="token comment" spellcheck="true"># 这里用到了$@，其代表target ${OUTPUT}自身。</span>
+<span class="token symbol"><span class="token variable">$</span>{OUTPUT}</span><span class="token punctuation">:</span> <span class="token variable">$</span><span class="token punctuation">{</span>OBJS<span class="token punctuation">}</span>
+    <span class="token variable">$</span><span class="token punctuation">{</span>LD<span class="token punctuation">}</span> -o <span class="token variable">$@</span> <span class="token variable">$</span><span class="token punctuation">{</span>LDFLAGS<span class="token punctuation">}</span> <span class="token variable">$</span><span class="token punctuation">{</span>OBJS<span class="token punctuation">}</span> <span class="token variable">$</span><span class="token punctuation">{</span>LIBS<span class="token punctuation">}</span> <span class="token variable">$</span><span class="token punctuation">{</span>EXTRA_LIBS<span class="token punctuation">}</span>
+
+<span class="token comment" spellcheck="true"># 使用模式匹配，确定了所有的.c/.cpp生成相应的.o文件的规则</span>
+<span class="token comment" spellcheck="true"># $&lt; 指定target的前置条件中的第一个</span>
+<span class="token symbol">%.o </span><span class="token punctuation">:</span> %.cpp
+    <span class="token variable">$</span><span class="token punctuation">{</span>CXX<span class="token punctuation">}</span> -c <span class="token variable">$</span><span class="token punctuation">{</span>CXXFLAGS<span class="token punctuation">}</span> <span class="token variable">$</span><span class="token punctuation">{</span>INCS<span class="token punctuation">}</span> <span class="token variable">$&lt;</span> -o <span class="token variable">$@</span>
+
+<span class="token symbol">%.o </span><span class="token punctuation">:</span> %.c
+    <span class="token variable">$</span><span class="token punctuation">{</span>CC<span class="token punctuation">}</span> -c <span class="token variable">$</span><span class="token punctuation">{</span>CFLAGS<span class="token punctuation">}</span> <span class="token variable">$</span><span class="token punctuation">{</span>INCS<span class="token punctuation">}</span> <span class="token variable">$&lt;</span> -o <span class="token variable">$@</span>
+
+<span class="token symbol">dist</span><span class="token punctuation">:</span>
+    bash makedistlinux
+
+<span class="token comment" spellcheck="true"># 这是一个伪目标，即目标本身不是文件</span>
+<span class="token symbol">clean</span><span class="token punctuation">:</span>
+    -rm -f core <span class="token variable">$</span><span class="token punctuation">{</span>OBJS<span class="token punctuation">}</span> <span class="token variable">$</span><span class="token punctuation">{</span>OUTPUT<span class="token punctuation">}</span>
+
+<span class="token symbol">depend</span><span class="token punctuation">:</span>
+    <span class="token comment" spellcheck="true">#makedepend ${INCS} ${SRCS}</span>
+
+<span class="token comment" spellcheck="true"># 说明下面4个target分别需要两个前提条件才能运行，没有这些也是可以编译的</span>
+<span class="token symbol">tinyxml.o</span><span class="token punctuation">:</span> tinyxml.h tinystr.h
+<span class="token symbol">tinyxmlparser.o</span><span class="token punctuation">:</span> tinyxml.h tinystr.h
+<span class="token symbol">xmltest.o</span><span class="token punctuation">:</span> tinyxml.h tinystr.h
+<span class="token symbol">tinyxmlerror.o</span><span class="token punctuation">:</span> tinyxml.h tinystr.h
+</code></pre>
+<p>简单总结一下：</p>
+<p>makefile的核心是一个构建规则，包括3个组件：</p>
+<ul>
+<li><p>target：构建的目标</p>
+<ul>
+<li>可以是文件；也可以是伪目标，即一个label；</li>
+<li>默认，make执行第一个target all；</li>
+</ul>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/2514903/what-does-all-stand-for-in-a-makefile">What does “all” stand for in a makefile? </a>专门针对all进行了解释。</p>
+</blockquote>
+</li>
+<li><p>prerequisites</p>
+<ul>
+<li>设置一组条件，用来判断是否重新构建target；</li>
+<li>只要有一个前置条件不存在或者时间比target新，就会触发重新构建；</li>
+<li>如果一个前置条件（文件）不存在，需要写一个新的构建规则，生成该文件；</li>
+<li>一个target没有任何前置条件，说明其独立于任何条件；</li>
+</ul>
+</li>
+<li><p>commands：表明如何更新目标文件，是构建目标的指令；</p>
+<ul>
+<li>与prerequisites两者之间，必须有一个；</li>
+</ul>
+</li>
+</ul>
+<h2 id="编译libtinyxml"><a href="#编译libtinyxml" class="headerlink" title="编译libtinyxml"></a>编译libtinyxml</h2><p>如果理解了makefile运行的逻辑，执行libtinyxml编译的过程也能大概了解了：</p>
+<ul>
+<li>执行make或者make all；</li>
+<li>all依赖OUTPUT，发现OUTPUT不存在，执行该target；</li>
+<li>OUTPUT依赖OBJS，发现OBJS不存在，执行对应的target，得到.o文件；</li>
+<li>然后再回头执行OUTPUT</li>
+</ul>
+<p>运行过程也如预期一样：</p>
+<pre class=" language-shell"><code class="language-shell">g++ -c -Wall -Wno-unknown-pragmas -Wno-format -O3   tinyxml.cpp -o tinyxml.o
+g++ -c -Wall -Wno-unknown-pragmas -Wno-format -O3   tinyxmlparser.cpp -o tinyxmlparser.o
+g++ -c -Wall -Wno-unknown-pragmas -Wno-format -O3   tinyxmlerror.cpp -o tinyxmlerror.o
+g++ -c -Wall -Wno-unknown-pragmas -Wno-format -O3   tinystr.cpp -o tinystr.o
+ar rc -o libtinyxml.a  tinyxml.o tinyxmlparser.o tinyxmlerror.o tinystr.o
+</code></pre>
+<p>tinyxml的使用可以分为静态链接库和动态链接库，对这两个部分的说明超出了本文的范围，下面简单说一下如何更改makefile进行编译。</p>
+<blockquote>
+<p>如果不需要xmltest.cpp，可以在SRCS中删除。</p>
+</blockquote>
+<h3 id="编译静态链接库"><a href="#编译静态链接库" class="headerlink" title="编译静态链接库"></a>编译静态链接库</h3><p>在这种模式下，只需修改两处即可：</p>
+<pre class=" language-makefile"><code class="language-makefile">OUTPUT <span class="token operator">:=</span> libtinyxml.a
+
+<span class="token symbol"><span class="token variable">$</span>{OUTPUT}</span><span class="token punctuation">:</span> <span class="token variable">$</span><span class="token punctuation">{</span>OBJS<span class="token punctuation">}</span>
+    <span class="token variable">$</span><span class="token punctuation">{</span>AR<span class="token punctuation">}</span> -o <span class="token variable">$@</span> <span class="token variable">$</span><span class="token punctuation">{</span>LDFLAGS<span class="token punctuation">}</span> <span class="token variable">$</span><span class="token punctuation">{</span>OBJS<span class="token punctuation">}</span> <span class="token variable">$</span><span class="token punctuation">{</span>LIBS<span class="token punctuation">}</span> <span class="token variable">$</span><span class="token punctuation">{</span>EXTRA_LIBS<span class="token punctuation">}</span>
+</code></pre>
+<p>这里需要注意：</p>
+<ul>
+<li><p>库的命名：libXXX.a</p>
+</li>
+<li><p>静态链接库的链接：使用ar命令，该命令在Ubuntu和MacOS中是不同的</p>
+<ul>
+<li>这里是将之前编译得到的.o文件链接为静态链接库libtinyxml.a。</li>
+</ul>
+</li>
+</ul>
+<h3 id="编译动态链接库"><a href="#编译动态链接库" class="headerlink" title="编译动态链接库"></a>编译动态链接库</h3><p>编译动态链接库相比于静态的方式要复杂一些。</p>
+<pre class=" language-makefile"><code class="language-makefile"><span class="token comment" spellcheck="true"># 加-fPIC</span>
+DEBUG_CFLAGS     <span class="token operator">:=</span> -Wall -Wno-format -g -DDEBUG -fPIC
+RELEASE_CFLAGS   <span class="token operator">:=</span> -Wall -Wno-unknown-pragmas -Wno-format -O3 -fPIC
+
+OUTPUT <span class="token operator">:=</span> libtinyxml.so
+
+<span class="token comment" spellcheck="true"># 加 -shared和-fPIC</span>
+<span class="token symbol"><span class="token variable">$</span>{OUTPUT}</span><span class="token punctuation">:</span> <span class="token variable">$</span><span class="token punctuation">{</span>OBJS<span class="token punctuation">}</span>
+    <span class="token variable">$</span><span class="token punctuation">{</span>LD<span class="token punctuation">}</span> -shared -o <span class="token variable">$@</span> <span class="token variable">$</span><span class="token punctuation">{</span>LDFLAGS<span class="token punctuation">}</span> <span class="token variable">$</span><span class="token punctuation">{</span>OBJS<span class="token punctuation">}</span> <span class="token variable">$</span><span class="token punctuation">{</span>LIBS<span class="token punctuation">}</span> <span class="token variable">$</span><span class="token punctuation">{</span>EXTRA_LIBS<span class="token punctuation">}</span> -fPIC
+</code></pre>
+<blockquote>
+<p>这里还有一个趣事，我在添加-shared的时候出现了问题，误用了短横线，导致命令一直执行错误，没想到这个短横线还有不同，如<a target="_blank" rel="noopener" href="https://www.thetype.com/2019/03/14918/">文章</a>所示，这些Unicode符号看起来真的很像。</p>
+</blockquote>
+<h1 id="如何使用静态链接库和动态链接库？"><a href="#如何使用静态链接库和动态链接库？" class="headerlink" title="如何使用静态链接库和动态链接库？"></a>如何使用静态链接库和动态链接库？</h1><p>完成静态连接和动态连接库的构建后，如何使用它们呢？两者的区别是链接的方式不同。</p>
+<p>这准备一个小的demo演示一下如何使用tinyxml。</p>
+<pre class=" language-cpp"><code class="language-cpp"><span class="token comment" spellcheck="true">// demo.cpp</span>
+<span class="token macro property">#<span class="token directive keyword">define</span> TIXML_USE_STL</span>
+
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"tinyxml.h"</span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;iostream></span></span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    TiXmlDocument doc<span class="token punctuation">;</span>
+    <span class="token keyword">bool</span> loadOkay <span class="token operator">=</span> doc<span class="token punctuation">.</span><span class="token function">LoadFile</span><span class="token punctuation">(</span><span class="token string">"utf8test.xml"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span>loadOkay<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"load error"</span> <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    doc<span class="token punctuation">.</span><span class="token function">Print</span><span class="token punctuation">(</span><span class="token constant">stdout</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>另外一些需要主要的地方是，保证<code>#define TIXML_USE_STL</code>，如果没有这个宏会出现如下错误：</p>
+<blockquote>
+<p>.text._ZN11TiXmlString4quitEv[<em>ZN11TiXmlString4quitEv]+0x16): undefined reference to `TiXmlString::nullrep</em>‘</p>
+</blockquote>
+<p>源文件的目录结构如下：</p>
+<pre class=" language-makedown"><code class="language-makedown">|——tinyxml
+|   |——tinyxml.h
+|   |——libtinyxml.so
+|   |——libtinyxml.a
+|   |——demo.cpp
+</code></pre>
+<h2 id="使用静态链接库"><a href="#使用静态链接库" class="headerlink" title="使用静态链接库"></a>使用静态链接库</h2><p>为了通过静态链接来使用tinyxml，可以有两种方式：</p>
+<ul>
+<li><p>第一种：直接指定静态链接库libtinyxml.a</p>
+<pre class=" language-shell"><code class="language-shell">g++ -static demo.cpp libtinyxml.a -o demo
+</code></pre>
+</li>
+<li><p>第二种</p>
+<pre class=" language-shell"><code class="language-shell">g++ -static demo.cpp -L . -ltinyxml -o demo
+</code></pre>
+<p>  这种是通过指定库的加载位置和库的名称实现的：</p>
+<ul>
+<li><code>-L .</code>：表明会在当前目录搜索静态链接库；</li>
+<li><code>-ltinyxml</code>：表示加载名称为libtinyxml.a的静态链接库，这里加载的是静态链接库还是动态链接库取决于是否有<code>-static</code>参数；</li>
+</ul>
+</li>
+</ul>
+<p>对于生成的可执行文件，如何判断是静态链接还是动态链接，这里可以使用两个命令：</p>
+<ul>
+<li><p><code>file demo</code>：判断是否为静态链接；</p>
+<blockquote>
+<p>demo: ELF 64-bit LSB executable, x86-64, version 1 (GNU/Linux), statically linked, for GNU/Linux 3.2.0, BuildID[sha1]=8319f8bcb8d2217e10d165b27c402fa5470a61ba, not stripped</p>
+</blockquote>
+</li>
+<li><p><code>ldd demo</code>：通过分析动态链接库的依赖关系，判断是否是动态链接；</p>
+<blockquote>
+<p>not a dynamic executable.</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="使用动态链接库"><a href="#使用动态链接库" class="headerlink" title="使用动态链接库"></a>使用动态链接库</h2><p>使用动态链接库进行编译时，使用如下命令：</p>
+<pre class=" language-shell"><code class="language-shell">g++ demo.cpp -L . -ltinyxml  -o demo
+</code></pre>
+<p>但是实际运行时会报出如下错误：</p>
+<blockquote>
+<p>./demo: error while loading shared libraries: libtinyxml.so: cannot open shared object file: No such file or directory.</p>
+</blockquote>
+<p>根据错误信息发现，缺少对应的so库，可以通过<code>ldd</code>查看少了哪些so：</p>
+<pre class=" language-ini"><code class="language-ini">linux-vdso.so.1 (0x00007ffc2c7c7000)
+<span class="token constant">libtinyxml.so</span> <span class="token attr-value"><span class="token punctuation">=</span>> not found</span>
+<span class="token constant">libstdc++.so.6</span> <span class="token attr-value"><span class="token punctuation">=</span>> /usr/lib/x86_64-linux-gnu/libstdc++.so.6 (0x00007f365757f000)</span>
+<span class="token constant">libgcc_s.so.1</span> <span class="token attr-value"><span class="token punctuation">=</span>> /lib/x86_64-linux-gnu/libgcc_s.so.1 (0x00007f3657367000)</span>
+<span class="token constant">libc.so.6</span> <span class="token attr-value"><span class="token punctuation">=</span>> /lib/x86_64-linux-gnu/libc.so.6 (0x00007f3656f76000)</span>
+<span class="token constant">libm.so.6</span> <span class="token attr-value"><span class="token punctuation">=</span>> /lib/x86_64-linux-gnu/libm.so.6 (0x00007f3656bd8000)</span>
+/lib64/ld-linux-x86-64.so.2 (0x00007f3657b0b000)
+</code></pre>
+<p>明显是libtinyxml.so找不到，说明在编译demo可执行文件的时候，找到了对应的so，但是在demo可执行文件中并没有保存该so的路径信息，因此在运行时会找不到，这里可以通过设置一个环境变量来解决：</p>
+<pre class=" language-shell"><code class="language-shell"># 将当前目录添加到动态链接库的搜索路径中
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:.
+</code></pre>
+<p>此时重新执行./demo就发现正常运行了。这个环境变量说明的是在运行中dynamic link loader如何链接该动态链接库，如<a target="_blank" rel="noopener" href="https://linuxhint.com/what-is-ld-library-path/">文章</a>所述，当然解决这个问题的不止一种方法，甚至该方法只能算是临时方法，不是最推荐的方法，但是本文不打算详述所有方法，那是另一个话题了。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>本文的内容主要包括以下内容：</p>
+<ul>
+<li>初步认识&amp;了解make和makefile；</li>
+<li>完成了libtinyxml的编译；</li>
+<li>学习了如何编译和使用静态链接库和动态链接库；</li>
+</ul>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">alex Li</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://limeya.github.io/2023/04/13/bian-cheng-zhi-dao/yi-libtinyxml-wei-li-liao-jie-c-de-make-shi-yong/">https://limeya.github.io/2023/04/13/bian-cheng-zhi-dao/yi-libtinyxml-wei-li-liao-jie-c-de-make-shi-yong/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">alex Li</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/make/">
+                                    <span class="chip bg-color">make</span>
+                                </a>
+                            
+                                <a href="/tags/makefile/">
+                                    <span class="chip bg-color">makefile</span>
+                                </a>
+                            
+                                <a href="/tags/%E9%9D%99%E6%80%81%E9%93%BE%E6%8E%A5%E5%BA%93/">
+                                    <span class="chip bg-color">静态链接库</span>
+                                </a>
+                            
+                                <a href="/tags/%E5%8A%A8%E6%80%81%E9%93%BE%E6%8E%A5%E5%BA%93/">
+                                    <span class="chip bg-color">动态链接库</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
+            <div class="card">
+                <a href="/2023/04/13/bian-cheng-zhi-dao/yi-libtinyxml-wei-li-liao-jie-c-de-make-shi-yong/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="以libtinyxml为例了解C++的make使用">
+                        
+                        <span class="card-title">以libtinyxml为例了解C++的make使用</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            本文以libtinyxml为例，初步学习了makefile和静态链接库和动态链接库等内容
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-04-13
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E7%BC%96%E7%A8%8B%E4%B9%8B%E9%81%93/" class="post-category">
+                                    编程之道
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/make/">
+                        <span class="chip bg-color">make</span>
+                    </a>
+                    
+                    <a href="/tags/makefile/">
+                        <span class="chip bg-color">makefile</span>
+                    </a>
+                    
+                    <a href="/tags/%E9%9D%99%E6%80%81%E9%93%BE%E6%8E%A5%E5%BA%93/">
+                        <span class="chip bg-color">静态链接库</span>
+                    </a>
+                    
+                    <a href="/tags/%E5%8A%A8%E6%80%81%E9%93%BE%E6%8E%A5%E5%BA%93/">
+                        <span class="chip bg-color">动态链接库</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2023/02/12/ji-suan-ji-tu-xing-xue/vulkan/shi-yong-vulkan-hui-zhi-yi-ge-san-jiao-xing/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="使用vulkan绘制一个三角形">
+                        
+                        <span class="card-title">使用vulkan绘制一个三角形</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            通过vulkan绘制一个三角形，完整地梳理了该过程中的具体步骤和相关概念。
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-02-12
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/" class="post-category">
+                                    计算机图形学
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Vulkan/">
+                        <span class="chip bg-color">Vulkan</span>
+                    </a>
+                    
+                    <a href="/tags/%E4%B8%89%E8%A7%92%E5%BD%A2/">
+                        <span class="chip bg-color">三角形</span>
+                    </a>
+                    
+                    <a href="/tags/device/">
+                        <span class="chip bg-color">device</span>
+                    </a>
+                    
+                    <a href="/tags/queue/">
+                        <span class="chip bg-color">queue</span>
+                    </a>
+                    
+                    <a href="/tags/swapchain/">
+                        <span class="chip bg-color">swapchain</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h1, h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h1, h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
+<style>
+    .aplayer .aplayer-lrc p {
+        
+        display: none;
+        
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
+
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        
+        display: none;
+        
+        font-size: 15px;
+        color: #42b983;
+    }
+
+    
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
+        left: -66px !important;
+    }
+
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
+        left: 0px !important;
+    }
+
+    
+</style>
+<div class="">
+    
+    <div class="row">
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="netease"
+                   type="playlist"
+                   id="503838841"
+                   fixed='true'
+                   autoplay='false'
+                   theme='#42b983'
+                   loop='all'
+                   order='random'
+                   preload='auto'
+                   volume='0.7'
+                   list-folded='true'
+        >
+        </meting-js>
+    </div>
+</div>
+
+<script src="/libs/aplayer/APlayer.min.js"></script>
+<script src="/libs/aplayer/Meting.min.js"></script>
+
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 15px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2021-2023</span>
+            
+            <a href="/about" target="_blank">alex Li</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+                &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                        class="white-color">131.9k</span>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+                <span id="sitetime"> Loading ...</span>
+                <script>
+                    var calcSiteTime = function () {
+                        var seconds = 1000;
+                        var minutes = seconds * 60;
+                        var hours = minutes * 60;
+                        var days = hours * 24;
+                        var years = days * 365;
+                        var today = new Date();
+                        var startYear = "2021";
+                        var startMonth = "11";
+                        var startDate = "13";
+                        var startHour = "20";
+                        var startMinute = "0";
+                        var startSecond = "0";
+                        var todayYear = today.getFullYear();
+                        var todayMonth = today.getMonth() + 1;
+                        var todayDate = today.getDate();
+                        var todayHour = today.getHours();
+                        var todayMinute = today.getMinutes();
+                        var todaySecond = today.getSeconds();
+                        var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                        var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                        var diff = t2 - t1;
+                        var diffYears = Math.floor(diff / years);
+                        var diffDays = Math.floor((diff / days) - diffYears * 365);
+
+                        // 区分是否有年份.
+                        var language = 'zh-CN';
+                        if (startYear === String(todayYear)) {
+                            document.getElementById("year").innerHTML = todayYear;
+                            var daysTip = 'This site has been running for ' + diffDays + ' days';
+                            if (language === 'zh-CN') {
+                                daysTip = '本站已运行 ' + diffDays + ' 天';
+                            } else if (language === 'zh-HK') {
+                                daysTip = '本站已運行 ' + diffDays + ' 天';
+                            }
+                            document.getElementById("sitetime").innerHTML = daysTip;
+                        } else {
+                            document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                            var yearsAndDaysTip = 'This site has been running for ' + diffYears + ' years and '
+                                + diffDays + ' days';
+                            if (language === 'zh-CN') {
+                                yearsAndDaysTip = '本站已运行 ' + diffYears + ' 年 ' + diffDays + ' 天';
+                            } else if (language === 'zh-HK') {
+                                yearsAndDaysTip = '本站已運行 ' + diffYears + ' 年 ' + diffDays + ' 天';
+                            }
+                            document.getElementById("sitetime").innerHTML = yearsAndDaysTip;
+                        }
+                    }
+
+                    calcSiteTime();
+                </script>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/limeya" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:lmy86263@gmail.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1215869909" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1215869909" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+
+
+    <a href="https://blog.csdn.net/lmy86263" class="tooltipped" target="_blank" data-tooltip="访问csdn" data-position="top" data-delay="50">
+		<i class="fab fa-blogger"></i>
+    </a>
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    
+
+    
+
+    <!-- 雪花特效 -->
+    
+
+    <!-- 鼠标星星特效 -->
+    
+
+     
+        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+        <script src="/libs/others/TencentCaptcha.js"></script>
+        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
+    
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

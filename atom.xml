@@ -6,7 +6,7 @@
   <link href="https://limeya.github.io/atom.xml" rel="self"/>
   
   <link href="https://limeya.github.io/"/>
-  <updated>2023-02-17T14:32:44.077Z</updated>
+  <updated>2023-04-13T14:12:30.689Z</updated>
   <id>https://limeya.github.io/</id>
   
   <author>
@@ -15,6 +15,40 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>以libtinyxml为例了解C++的make使用</title>
+    <link href="https://limeya.github.io/2023/04/13/bian-cheng-zhi-dao/yi-libtinyxml-wei-li-liao-jie-c-de-make-shi-yong/"/>
+    <id>https://limeya.github.io/2023/04/13/bian-cheng-zhi-dao/yi-libtinyxml-wei-li-liao-jie-c-de-make-shi-yong/</id>
+    <published>2023-04-12T16:00:00.000Z</published>
+    <updated>2023-04-13T14:12:30.689Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;最近想在C/C++中解析xml文件，本来开始的时候xml的模式比较简单，通过一些C语言中的字符串处理API就可以了，但是后续因为一些原因需要解析整个xml文档，考虑到代码库中已有的xml解析模块，有：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;libtinyxml：c++编写；&lt;/li&gt;
+</summary>
+        
+      
+    
+    
+    
+    <category term="编程之道" scheme="https://limeya.github.io/categories/%E7%BC%96%E7%A8%8B%E4%B9%8B%E9%81%93/"/>
+    
+    
+    <category term="make" scheme="https://limeya.github.io/tags/make/"/>
+    
+    <category term="makefile" scheme="https://limeya.github.io/tags/makefile/"/>
+    
+    <category term="静态链接库" scheme="https://limeya.github.io/tags/%E9%9D%99%E6%80%81%E9%93%BE%E6%8E%A5%E5%BA%93/"/>
+    
+    <category term="动态链接库" scheme="https://limeya.github.io/tags/%E5%8A%A8%E6%80%81%E9%93%BE%E6%8E%A5%E5%BA%93/"/>
+    
+  </entry>
   
   <entry>
     <title>使用vulkan绘制一个三角形</title>
@@ -611,39 +645,6 @@
     <category term="initializer_list" scheme="https://limeya.github.io/tags/initializer-list/"/>
     
     <category term="variadic template" scheme="https://limeya.github.io/tags/variadic-template/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>C++中的函数参数传递</title>
-    <link href="https://limeya.github.io/2022/11/02/bian-cheng-zhi-dao/c-zhong-de-han-shu-can-shu-chuan-di/"/>
-    <id>https://limeya.github.io/2022/11/02/bian-cheng-zhi-dao/c-zhong-de-han-shu-can-shu-chuan-di/</id>
-    <published>2022-11-01T16:00:00.000Z</published>
-    <updated>2022-11-03T15:23:34.856Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;p&gt;在函数调用的时候，parameters被创建和初始化，初始化操作使用传递来的arguments完成。&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Arguments are the initializers for a function’s</summary>
-        
-      
-    
-    
-    
-    <category term="编程之道" scheme="https://limeya.github.io/categories/%E7%BC%96%E7%A8%8B%E4%B9%8B%E9%81%93/"/>
-    
-    
-    <category term="pointer" scheme="https://limeya.github.io/tags/pointer/"/>
-    
-    <category term="按值传递" scheme="https://limeya.github.io/tags/%E6%8C%89%E5%80%BC%E4%BC%A0%E9%80%92/"/>
-    
-    <category term="按引用传递" scheme="https://limeya.github.io/tags/%E6%8C%89%E5%BC%95%E7%94%A8%E4%BC%A0%E9%80%92/"/>
-    
-    <category term="argument passing" scheme="https://limeya.github.io/tags/argument-passing/"/>
     
   </entry>
   
